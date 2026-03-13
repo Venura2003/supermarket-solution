@@ -1,0 +1,32 @@
+# Ignore git files
+.git/
+.gitignore
+
+# Ignore other apps
+supermarket_flutter_app/
+supermarket_desktop_app/
+
+# Ignore documentation and scripts
+DOCS/
+scripts/
+release/
+*.md
+*.pdf
+*.txt
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore build artifacts (just in case they aren't caught by gitignore)
+**/bin/
+**/obj/
+**/TestResults/
+
+# Ignore VS Code settings
+.vscode/
+
+# Ignore root level json files not needed for build
+products.json
+sale.json
+response.json
