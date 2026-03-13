@@ -1,0 +1,30 @@
+# .NET
+SupermarketAPI/bin/
+SupermarketAPI/obj/
+**/.vs/
+**/*.user
+**/*.pdb
+**/appsettings.Development.json
+**/appsettings.json
+
+# Flutter
+supermarket_flutter_app/build/
+supermarket_flutter_app/.dart_tool/
+supermarket_flutter_app/.flutter-plugins
+supermarket_flutter_app/.flutter-plugins-dependencies
+supermarket_flutter_app/.pub/
+
+# Desktop App (Just in case)
+supermarket_desktop_app/build/
+supermarket_desktop_app/.dart_tool/
+
+# Misc
+.DS_Store
+Thumbs.db
+*.log
+release/
+scripts/do_checkout.ps1
+products.json
+sale.json
+response.json
+check_employees_table.sql

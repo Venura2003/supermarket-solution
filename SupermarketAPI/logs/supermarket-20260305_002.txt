@@ -1,0 +1,235 @@
+2026-03-05 13:28:01.041 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-05 13:28:01.136 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-05 13:28:01.226 +05:30 [ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address http://127.0.0.1:5000: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+ ---> System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2026-03-05 13:31:05.781 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-05 13:31:05.862 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-05 13:32:23.412 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-05 13:32:23.498 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-05 13:33:20.639 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-03-05 13:33:20.847 +05:30 [ERR] Error during login for email: jagth
+System.UnauthorizedAccessException: Invalid credentials
+   at SupermarketAPI.Services.AuthService.LoginAsync(LoginRequest request) in E:\Flutter apps\SupermarketSolution\SupermarketAPI\Services\AuthService.cs:line 56
+2026-03-05 13:33:20.856 +05:30 [WRN] Failed login attempt for email: jagth - Invalid credentials
+2026-03-05 13:33:30.457 +05:30 [INF] User jagath@gmail.com logged in successfully
+2026-03-05 13:33:30.470 +05:30 [INF] JWT token generated for user: jagath@gmail.com
+2026-03-05 13:33:30.471 +05:30 [INF] User jagath successfully authenticated
+2026-03-05 13:33:57.643 +05:30 [INF] User admin@gmail.com logged in successfully
+2026-03-05 13:33:57.654 +05:30 [INF] JWT token generated for user: admin@gmail.com
+2026-03-05 13:33:57.664 +05:30 [INF] User admin successfully authenticated
+2026-03-05 13:36:56.148 +05:30 [INF] Employee created: Rumeth (rumeth@gmail.com)
+2026-03-05 13:37:15.725 +05:30 [INF] New user registered with email: rumeth@gmail.com, role: Employee
+2026-03-05 13:37:15.737 +05:30 [INF] New user registered with email: rumeth@gmail.com
+2026-03-05 13:37:15.904 +05:30 [INF] Employee updated: Rumeth (rumeth@gmail.com)
+2026-03-05 13:37:33.626 +05:30 [INF] Employee updated: Venura (adf@gmail.com)
+2026-03-05 13:37:41.004 +05:30 [INF] Employee updated: jagath (jagath@gmail.com)
+2026-03-05 13:37:47.666 +05:30 [INF] Employee updated: Sumal (sumal@gmail.com)
+2026-03-05 13:37:55.726 +05:30 [INF] Employee updated: Saman (saman@gmail.com)
+2026-03-05 13:43:20.754 +05:30 [INF] Product updated: 39
+2026-03-05 13:43:35.971 +05:30 [INF] Product updated: 13
+2026-03-05 13:45:04.667 +05:30 [INF] Product updated: 40
+2026-03-05 13:46:18.702 +05:30 [INF] Product updated: 41
+2026-03-05 13:46:28.565 +05:30 [INF] Product updated: 41
+2026-03-05 13:48:46.154 +05:30 [INF] Product updated: 29
+2026-03-05 13:49:28.365 +05:30 [INF] Product updated: 27
+2026-03-05 13:49:47.342 +05:30 [ERR] An exception occurred in the database while saving changes for context type 'SupermarketAPI.Data.AppDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The DELETE statement conflicted with the REFERENCE constraint "FK_InventoryLogs_Products_ProductId". The conflict occurred in database "SupermarketDB", table "dbo.InventoryLogs", column 'ProductId'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, SqlCommand command, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetWithRowsAffectedOnlyAsync(Int32 commandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:a98fc064-b6da-4d2e-9688-9c5860e4331d
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The DELETE statement conflicted with the REFERENCE constraint "FK_InventoryLogs_Products_ProductId". The conflict occurred in database "SupermarketDB", table "dbo.InventoryLogs", column 'ProductId'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, SqlCommand command, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetWithRowsAffectedOnlyAsync(Int32 commandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:a98fc064-b6da-4d2e-9688-9c5860e4331d
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2026-03-05 13:49:47.391 +05:30 [ERR] An unhandled exception occurred
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The DELETE statement conflicted with the REFERENCE constraint "FK_InventoryLogs_Products_ProductId". The conflict occurred in database "SupermarketDB", table "dbo.InventoryLogs", column 'ProductId'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, SqlCommand command, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetWithRowsAffectedOnlyAsync(Int32 commandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:a98fc064-b6da-4d2e-9688-9c5860e4331d
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at SupermarketAPI.Services.ProductService.DeleteAsync(Int32 id) in E:\Flutter apps\SupermarketSolution\SupermarketAPI\Services\ProductService.cs:line 90
+   at SupermarketAPI.Controllers.ProductsController.Delete(Int32 id) in E:\Flutter apps\SupermarketSolution\SupermarketAPI\Controllers\ProductsController.cs:line 102
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at SupermarketAPI.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in E:\Flutter apps\SupermarketSolution\SupermarketAPI\Middleware\ExceptionMiddleware.cs:line 22
+2026-03-05 13:51:22.870 +05:30 [INF] Product updated: 26
+2026-03-05 13:52:20.640 +05:30 [INF] Product updated: 24
+2026-03-05 14:49:47.011 +05:30 [INF] User admin@gmail.com logged in successfully
+2026-03-05 14:49:47.013 +05:30 [INF] JWT token generated for user: admin@gmail.com
+2026-03-05 14:49:47.014 +05:30 [INF] User admin successfully authenticated
+2026-03-05 14:51:11.040 +05:30 [INF] Product updated: 28
+2026-03-05 14:52:19.702 +05:30 [INF] Product updated: 30
+2026-03-05 14:54:29.789 +05:30 [INF] Product updated: 62
+2026-03-05 14:57:16.635 +05:30 [INF] Product updated: 55
+2026-03-05 14:58:13.753 +05:30 [INF] Product updated: 58
+2026-03-05 14:59:30.760 +05:30 [INF] Product updated: 59
+2026-03-05 15:01:38.840 +05:30 [INF] Product updated: 56
+2026-03-05 15:03:03.217 +05:30 [INF] Product updated: 60
+2026-03-05 15:04:24.657 +05:30 [INF] Product updated: 57
+2026-03-05 15:07:01.077 +05:30 [INF] Product updated: 69
+2026-03-05 15:08:07.526 +05:30 [INF] Product updated: 64
+2026-03-05 15:08:47.060 +05:30 [INF] Product updated: 68
+2026-03-05 15:09:53.375 +05:30 [INF] Product updated: 72
+2026-03-05 15:11:07.347 +05:30 [INF] Product updated: 70
+2026-03-05 15:12:02.198 +05:30 [INF] Product updated: 63
+2026-03-05 15:12:40.340 +05:30 [INF] Product updated: 22
+2026-03-05 15:13:34.379 +05:30 [INF] Product updated: 67
+2026-03-05 15:14:23.429 +05:30 [INF] Product updated: 71
+2026-03-05 15:15:18.097 +05:30 [INF] Product updated: 66
+2026-03-05 15:17:16.055 +05:30 [INF] POST /api/products received: {"Name":"Sri Lankan Arrack 750m","CategoryId":25,"Barcode":"15466464","ImageUrl":"C:\\Users\\Venura\\Documents/product_images/DCSL-Extra-Special-Arrack-75cl-1-Ceylon-Supermart.webp","Price":3800.0,"Stock":100,"LowStockThreshold":20,"$type":"CreateProductDto"}
+2026-03-05 15:17:16.119 +05:30 [INF] Product created: 77 Sri Lankan Arrack 750m
+2026-03-05 15:17:16.125 +05:30 [INF] Product saved to DB: {"Id":77,"Name":"Sri Lankan Arrack 750m","CategoryId":25,"Barcode":"15466464","ImageUrl":"C:\\Users\\Venura\\Documents/product_images/DCSL-Extra-Special-Arrack-75cl-1-Ceylon-Supermart.webp","Price":3800.0,"Stock":100,"LowStockThreshold":20,"CreatedAt":"2026-03-05T09:47:16.0825634Z","$type":"ProductDto"}
+2026-03-05 15:18:03.098 +05:30 [INF] POST /api/products received: {"Name":"Premium Arrack | IDL","CategoryId":null,"Barcode":"123545","ImageUrl":"C:\\Users\\Venura\\Documents/product_images/New-Project-8.webp","Price":4000.0,"Stock":100,"LowStockThreshold":20,"$type":"CreateProductDto"}
+2026-03-05 15:18:03.136 +05:30 [INF] Product created: 78 Premium Arrack | IDL
+2026-03-05 15:18:03.160 +05:30 [INF] Product saved to DB: {"Id":78,"Name":"Premium Arrack | IDL","CategoryId":null,"Barcode":"123545","ImageUrl":"C:\\Users\\Venura\\Documents/product_images/New-Project-8.webp","Price":4000.0,"Stock":100,"LowStockThreshold":20,"CreatedAt":"2026-03-05T09:48:03.1213433Z","$type":"ProductDto"}
+2026-03-05 15:18:24.264 +05:30 [INF] Product updated: 78
+2026-03-05 15:18:53.073 +05:30 [INF] Product updated: 78
+2026-03-05 15:20:02.408 +05:30 [INF] User admin@gmail.com logged in successfully
+2026-03-05 15:20:02.411 +05:30 [INF] JWT token generated for user: admin@gmail.com
+2026-03-05 15:20:02.412 +05:30 [INF] User admin successfully authenticated
+2026-03-05 15:22:40.302 +05:30 [INF] POST /api/products received: {"Name":"Premium Arrack | IDL","CategoryId":null,"Barcode":"1324435","ImageUrl":"C:\\Users\\Venura\\Documents/product_images/New-Project-8.webp","Price":3000.0,"Stock":100,"LowStockThreshold":20,"$type":"CreateProductDto"}
+2026-03-05 15:22:40.446 +05:30 [INF] Product created: 79 Premium Arrack | IDL
+2026-03-05 15:22:40.451 +05:30 [INF] Product saved to DB: {"Id":79,"Name":"Premium Arrack | IDL","CategoryId":null,"Barcode":"1324435","ImageUrl":"C:\\Users\\Venura\\Documents/product_images/New-Project-8.webp","Price":3000.0,"Stock":100,"LowStockThreshold":20,"CreatedAt":"2026-03-05T09:52:40.4145918Z","$type":"ProductDto"}
+2026-03-05 15:22:56.000 +05:30 [INF] Product deleted: 79
+2026-03-05 15:22:59.188 +05:30 [INF] Product deleted: 78
+2026-03-05 15:23:34.559 +05:30 [INF] POST /api/products received: {"Name":"Premium Arrack | IDL","CategoryId":25,"Barcode":"123455","ImageUrl":"C:\\Users\\Venura\\Documents/product_images/New-Project-8.webp","Price":3000.0,"Stock":100,"LowStockThreshold":20,"$type":"CreateProductDto"}
+2026-03-05 15:23:34.618 +05:30 [INF] Product created: 80 Premium Arrack | IDL
+2026-03-05 15:23:34.619 +05:30 [INF] Product saved to DB: {"Id":80,"Name":"Premium Arrack | IDL","CategoryId":25,"Barcode":"123455","ImageUrl":"C:\\Users\\Venura\\Documents/product_images/New-Project-8.webp","Price":3000.0,"Stock":100,"LowStockThreshold":20,"CreatedAt":"2026-03-05T09:53:34.6070406Z","$type":"ProductDto"}
+2026-03-05 15:24:54.236 +05:30 [INF] POST /api/products received: {"Name":"VA black 750ml","CategoryId":25,"Barcode":"1324566","ImageUrl":"C:\\Users\\Venura\\Documents/product_images/black-bottle.png","Price":3000.0,"Stock":100,"LowStockThreshold":20,"$type":"CreateProductDto"}
+2026-03-05 15:24:54.334 +05:30 [INF] Product created: 81 VA black 750ml
+2026-03-05 15:24:54.338 +05:30 [INF] Product saved to DB: {"Id":81,"Name":"VA black 750ml","CategoryId":25,"Barcode":"1324566","ImageUrl":"C:\\Users\\Venura\\Documents/product_images/black-bottle.png","Price":3000.0,"Stock":100,"LowStockThreshold":20,"CreatedAt":"2026-03-05T09:54:54.3140029Z","$type":"ProductDto"}
+2026-03-05 15:26:26.588 +05:30 [INF] POST /api/products received: {"Name":"VAT + 9 750ml","CategoryId":null,"Barcode":"14256","ImageUrl":"C:\\Users\\Venura\\Documents/product_images/Vat+9+Arrack-min.webp","Price":4000.0,"Stock":100,"LowStockThreshold":20,"$type":"CreateProductDto"}
+2026-03-05 15:26:26.659 +05:30 [INF] Product created: 82 VAT + 9 750ml
+2026-03-05 15:26:26.681 +05:30 [INF] Product saved to DB: {"Id":82,"Name":"VAT + 9 750ml","CategoryId":null,"Barcode":"14256","ImageUrl":"C:\\Users\\Venura\\Documents/product_images/Vat+9+Arrack-min.webp","Price":4000.0,"Stock":100,"LowStockThreshold":20,"CreatedAt":"2026-03-05T09:56:26.6296050Z","$type":"ProductDto"}
+2026-03-05 15:28:04.591 +05:30 [INF] POST /api/products received: {"Name":" 'Rockland Twist' English Apple Arrak","CategoryId":null,"Barcode":"2344566","ImageUrl":"C:\\Users\\Venura\\Documents/product_images/Vat+9+Arrack-min.webp","Price":5000.0,"Stock":100,"LowStockThreshold":20,"$type":"CreateProductDto"}
+2026-03-05 15:28:04.624 +05:30 [INF] Product created: 83 'Rockland Twist' English Apple Arrak
+2026-03-05 15:28:04.626 +05:30 [INF] Product saved to DB: {"Id":83,"Name":"'Rockland Twist' English Apple Arrak","CategoryId":null,"Barcode":"2344566","ImageUrl":"C:\\Users\\Venura\\Documents/product_images/Vat+9+Arrack-min.webp","Price":5000.0,"Stock":100,"LowStockThreshold":20,"CreatedAt":"2026-03-05T09:58:04.6110220Z","$type":"ProductDto"}
+2026-03-05 15:28:51.252 +05:30 [INF] Product updated: 83
+2026-03-05 15:29:28.841 +05:30 [INF] Product updated: 82
+2026-03-05 15:30:42.155 +05:30 [INF] POST /api/products received: {"Name":"Celebration Vodka 750ml","CategoryId":25,"Barcode":"134566","ImageUrl":"C:\\Users\\Venura\\Documents/product_images/CELEBRATION-VODKA.webp","Price":5000.0,"Stock":100,"LowStockThreshold":20,"$type":"CreateProductDto"}
+2026-03-05 15:30:42.226 +05:30 [INF] Product created: 84 Celebration Vodka 750ml
+2026-03-05 15:30:42.233 +05:30 [INF] Product saved to DB: {"Id":84,"Name":"Celebration Vodka 750ml","CategoryId":25,"Barcode":"134566","ImageUrl":"C:\\Users\\Venura\\Documents/product_images/CELEBRATION-VODKA.webp","Price":5000.0,"Stock":100,"LowStockThreshold":20,"CreatedAt":"2026-03-05T10:00:42.2063489Z","$type":"ProductDto"}
+2026-03-05 15:31:47.443 +05:30 [INF] POST /api/products received: {"Name":"Beluga Celebration 1000ml 40%","CategoryId":25,"Barcode":"24253666","ImageUrl":"C:\\Users\\Venura\\Documents/product_images/images (16).jpg","Price":10000.0,"Stock":30,"LowStockThreshold":5,"$type":"CreateProductDto"}
+2026-03-05 15:31:47.485 +05:30 [INF] Product created: 85 Beluga Celebration 1000ml 40%
+2026-03-05 15:31:47.497 +05:30 [INF] Product saved to DB: {"Id":85,"Name":"Beluga Celebration 1000ml 40%","CategoryId":25,"Barcode":"24253666","ImageUrl":"C:\\Users\\Venura\\Documents/product_images/images (16).jpg","Price":10000.0,"Stock":30,"LowStockThreshold":5,"CreatedAt":"2026-03-05T10:01:47.4643461Z","$type":"ProductDto"}
+2026-03-05 15:33:35.491 +05:30 [INF] POST /api/products received: {"Name":"London dry gin ","CategoryId":25,"Barcode":"123456","ImageUrl":"C:\\Users\\Venura\\Documents/product_images/dry-gin.png","Price":4900.0,"Stock":100,"LowStockThreshold":20,"$type":"CreateProductDto"}
+2026-03-05 15:33:35.521 +05:30 [INF] Product created: 86 London dry gin
+2026-03-05 15:33:35.527 +05:30 [INF] Product saved to DB: {"Id":86,"Name":"London dry gin","CategoryId":25,"Barcode":"123456","ImageUrl":"C:\\Users\\Venura\\Documents/product_images/dry-gin.png","Price":4900.0,"Stock":100,"LowStockThreshold":20,"CreatedAt":"2026-03-05T10:03:35.5091463Z","$type":"ProductDto"}
+2026-03-05 15:34:17.773 +05:30 [INF] POST /api/products received: {"Name":"Beefeater 24 London Dry Gin","CategoryId":25,"Barcode":"235566","ImageUrl":"C:\\Users\\Venura\\Documents/product_images/Beefeater-24.jpg","Price":7000.0,"Stock":100,"LowStockThreshold":20,"$type":"CreateProductDto"}
+2026-03-05 15:34:17.803 +05:30 [INF] Product created: 87 Beefeater 24 London Dry Gin
+2026-03-05 15:34:17.807 +05:30 [INF] Product saved to DB: {"Id":87,"Name":"Beefeater 24 London Dry Gin","CategoryId":25,"Barcode":"235566","ImageUrl":"C:\\Users\\Venura\\Documents/product_images/Beefeater-24.jpg","Price":7000.0,"Stock":100,"LowStockThreshold":20,"CreatedAt":"2026-03-05T10:04:17.7935087Z","$type":"ProductDto"}
+2026-03-05 15:36:00.470 +05:30 [INF] POST /api/products received: {"Name":"Lion Ceylon Lion Stout Beer","CategoryId":25,"Barcode":"21435","ImageUrl":"C:\\Users\\Venura\\Documents/product_images/10719474.webp","Price":700.0,"Stock":1000,"LowStockThreshold":20,"$type":"CreateProductDto"}
+2026-03-05 15:36:00.730 +05:30 [INF] Product created: 88 Lion Ceylon Lion Stout Beer
+2026-03-05 15:36:00.773 +05:30 [INF] Product saved to DB: {"Id":88,"Name":"Lion Ceylon Lion Stout Beer","CategoryId":25,"Barcode":"21435","ImageUrl":"C:\\Users\\Venura\\Documents/product_images/10719474.webp","Price":700.0,"Stock":1000,"LowStockThreshold":20,"CreatedAt":"2026-03-05T10:06:00.7127790Z","$type":"ProductDto"}
+2026-03-05 15:38:19.900 +05:30 [INF] Employee created: Bar (bar@gmail.com)
+2026-03-05 15:38:38.817 +05:30 [INF] New user registered with email: bar@gmail.com, role: Employee
+2026-03-05 15:38:38.823 +05:30 [INF] New user registered with email: bar@gmail.com
+2026-03-05 15:38:38.878 +05:30 [INF] Employee updated: Bar (bar@gmail.com)
+2026-03-05 15:55:26.913 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-05 15:55:26.996 +05:30 [INF] Default cashier user updated: cashier@gmail.com

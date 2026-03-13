@@ -1,0 +1,21 @@
+2026-03-06 09:28:08.153 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-06 09:28:08.261 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-06 09:34:56.780 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-06 09:34:56.917 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-06 09:36:41.607 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-06 09:36:41.755 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-06 09:57:04.107 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-06 09:57:04.255 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-06 09:57:04.344 +05:30 [INF] Starting web host...
+2026-03-06 10:02:53.419 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-06 10:02:53.619 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-06 10:08:12.369 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-06 10:08:12.645 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-06 10:16:19.417 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-06 10:16:19.495 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-06 10:19:13.878 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-06 10:19:13.975 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-06 10:21:23.405 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-06 10:21:23.476 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-06 10:23:11.067 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-06 10:23:11.139 +05:30 [INF] Default cashier user updated: cashier@gmail.com

@@ -1,0 +1,85 @@
+2026-03-05 09:28:00.467 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-05 09:28:00.570 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-05 09:28:17.077 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-03-05 09:28:20.588 +05:30 [INF] User admin@gmail.com logged in successfully
+2026-03-05 09:28:20.722 +05:30 [INF] JWT token generated for user: admin@gmail.com
+2026-03-05 09:28:20.725 +05:30 [INF] User admin successfully authenticated
+2026-03-05 09:29:52.217 +05:30 [INF] Order ORD-20260304151326-8681 refunded
+2026-03-05 09:36:15.528 +05:30 [INF] User cashier@gmail.com logged in successfully
+2026-03-05 09:36:15.533 +05:30 [INF] JWT token generated for user: cashier@gmail.com
+2026-03-05 09:36:15.536 +05:30 [INF] User cashier successfully authenticated
+2026-03-05 11:05:54.000 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-05 11:05:54.240 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-05 11:06:37.302 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-03-05 11:06:48.339 +05:30 [INF] User admin@gmail.com logged in successfully
+2026-03-05 11:06:48.930 +05:30 [INF] JWT token generated for user: admin@gmail.com
+2026-03-05 11:06:49.019 +05:30 [INF] User admin successfully authenticated
+2026-03-05 11:43:14.174 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-05 11:43:14.335 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-05 11:44:32.438 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-03-05 11:44:33.491 +05:30 [INF] User admin@gmail.com logged in successfully
+2026-03-05 11:44:33.547 +05:30 [INF] JWT token generated for user: admin@gmail.com
+2026-03-05 11:44:33.551 +05:30 [INF] User admin successfully authenticated
+2026-03-05 12:02:16.773 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-05 12:02:17.157 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-05 12:04:22.359 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-03-05 12:04:24.166 +05:30 [INF] User admin@gmail.com logged in successfully
+2026-03-05 12:04:24.355 +05:30 [INF] JWT token generated for user: admin@gmail.com
+2026-03-05 12:04:24.385 +05:30 [INF] User admin successfully authenticated
+2026-03-05 12:32:28.003 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-05 12:32:28.313 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-05 12:43:26.352 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-05 12:43:26.511 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-05 12:44:54.771 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-03-05 12:45:03.545 +05:30 [INF] User admin@gmail.com logged in successfully
+2026-03-05 12:45:03.872 +05:30 [INF] JWT token generated for user: admin@gmail.com
+2026-03-05 12:45:03.878 +05:30 [INF] User admin successfully authenticated
+2026-03-05 12:52:51.225 +05:30 [INF] Employee created: Venura (dads@gmail.com)
+2026-03-05 12:54:29.504 +05:30 [INF] New user registered with email: dads@gmail.com, role: Employee
+2026-03-05 12:54:29.510 +05:30 [INF] New user registered with email: dads@gmail.com
+2026-03-05 12:54:29.968 +05:30 [INF] Employee updated: Venura (dads@gmail.com)
+2026-03-05 13:03:49.873 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-05 13:03:50.145 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-05 13:04:59.299 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-03-05 13:05:00.285 +05:30 [INF] User admin@gmail.com logged in successfully
+2026-03-05 13:05:00.331 +05:30 [INF] JWT token generated for user: admin@gmail.com
+2026-03-05 13:05:00.336 +05:30 [INF] User admin successfully authenticated
+2026-03-05 13:05:17.030 +05:30 [INF] Employee updated: Venura (dads@gmail.com)
+2026-03-05 13:05:25.256 +05:30 [INF] Employee updated: Pawan (pawan@gmail.com)
+2026-03-05 13:05:32.575 +05:30 [INF] Employee updated: Nimal Perera (nimal@gmail.com)
+2026-03-05 13:05:36.381 +05:30 [INF] Employee updated: Kasun Silva (kasun@gmail.com)
+2026-03-05 13:05:39.580 +05:30 [INF] Employee updated: cashier@gmail.com (cashier@gmail.com)
+2026-03-05 13:06:17.916 +05:30 [INF] Employee created: Venura (adf@gmail.com)
+2026-03-05 13:06:47.503 +05:30 [INF] New user registered with email: adf@gmail.com, role: Employee
+2026-03-05 13:06:47.506 +05:30 [INF] New user registered with email: adf@gmail.com
+2026-03-05 13:06:47.542 +05:30 [INF] Employee updated: Venura (adf@gmail.com)
+2026-03-05 13:07:00.392 +05:30 [INF] Employee updated: Venura (adf@gmail.com)
+2026-03-05 13:07:38.270 +05:30 [INF] Employee created: Saman (saman@gmail.com)
+2026-03-05 13:08:04.847 +05:30 [INF] New user registered with email: saman@gmail.com, role: Admin
+2026-03-05 13:08:04.851 +05:30 [INF] New user registered with email: saman@gmail.com
+2026-03-05 13:08:04.903 +05:30 [INF] Employee updated: Saman (saman@gmail.com)
+2026-03-05 13:09:17.955 +05:30 [INF] Employee created: jagath (jagath@gmail.com)
+2026-03-05 13:09:36.866 +05:30 [INF] New user registered with email: jagath@gmail.com, role: Employee
+2026-03-05 13:09:36.870 +05:30 [INF] New user registered with email: jagath@gmail.com
+2026-03-05 13:09:36.953 +05:30 [INF] Employee updated: jagath (jagath@gmail.com)
+2026-03-05 13:10:12.001 +05:30 [INF] User jagath@gmail.com logged in successfully
+2026-03-05 13:10:12.003 +05:30 [INF] JWT token generated for user: jagath@gmail.com
+2026-03-05 13:10:12.005 +05:30 [INF] User jagath successfully authenticated
+2026-03-05 13:10:49.651 +05:30 [INF] User saman@gmail.com logged in successfully
+2026-03-05 13:10:49.654 +05:30 [INF] JWT token generated for user: saman@gmail.com
+2026-03-05 13:10:49.656 +05:30 [INF] User saman successfully authenticated
+2026-03-05 13:13:53.922 +05:30 [INF] Employee created: Sumal (sumal@gmail.com)
+2026-03-05 13:14:34.715 +05:30 [INF] New user registered with email: sumal@gmail.com, role: Admin
+2026-03-05 13:14:34.719 +05:30 [INF] New user registered with email: sumal@gmail.com
+2026-03-05 13:14:34.774 +05:30 [INF] Employee updated: Sumal (sumal@gmail.com)
+2026-03-05 13:20:02.968 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-05 13:20:03.222 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-05 13:21:36.902 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-03-05 13:21:37.294 +05:30 [INF] Product updated: 44
+2026-03-05 13:22:07.577 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-05 13:22:07.855 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-05 13:23:52.537 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-03-05 13:23:56.045 +05:30 [INF] Product updated: 45
+2026-03-05 13:23:56.045 +05:30 [INF] Product updated: 45
+2026-03-05 13:23:56.046 +05:30 [INF] Product updated: 45
+2026-03-05 13:23:56.047 +05:30 [INF] Product updated: 45

@@ -1,0 +1,566 @@
+2026-03-06 10:27:50.033 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-06 10:27:50.141 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-06 10:27:50.261 +05:30 [ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address http://127.0.0.1:5000: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+ ---> System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2026-03-06 10:29:39.872 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-06 10:29:40.062 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-06 10:29:57.784 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-06 10:29:57.899 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-06 10:31:39.631 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-06 10:31:39.923 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-06 10:33:07.827 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-06 10:33:08.334 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-06 10:34:53.038 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-06 10:34:53.160 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-06 10:37:28.641 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-03-06 10:37:28.675 +05:30 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-03-06 10:37:28.710 +05:30 [INF] Executed DbCommand (29ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_getapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session', @LockMode = 'Exclusive';
+SELECT @result
+2026-03-06 10:37:28.768 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+2026-03-06 10:37:28.783 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-03-06 10:37:28.787 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-03-06 10:37:28.795 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-03-06 10:37:28.804 +05:30 [INF] No migrations were applied. The database is already up to date.
+2026-03-06 10:37:28.809 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_releaseapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session';
+SELECT @result
+2026-03-06 10:37:28.958 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-03-06 10:37:29.011 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[Email], [u].[IsActive], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Email] = N'admin@gmail.com'
+2026-03-06 10:37:29.146 +05:30 [INF] Executed DbCommand (14ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Users] SET [PasswordHash] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-03-06 10:37:29.155 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-06 10:37:29.162 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[Email], [u].[IsActive], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Email] = N'cashier@gmail.com'
+2026-03-06 10:37:29.209 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Users] SET [PasswordHash] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-03-06 10:37:29.210 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-06 10:37:29.270 +05:30 [INF] User profile is available. Using 'C:\Users\Venura\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-03-06 10:37:29.311 +05:30 [INF] Now listening on: http://localhost:5000
+2026-03-06 10:37:29.312 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-06 10:37:29.313 +05:30 [INF] Hosting environment: Development
+2026-03-06 10:37:29.314 +05:30 [INF] Content root path: E:\Flutter apps\SupermarketSolution\SupermarketAPI
+2026-03-06 10:39:20.180 +05:30 [INF] Application is shutting down...
+2026-03-06 10:40:11.300 +05:30 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-03-06 10:40:11.356 +05:30 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-03-06 10:40:11.396 +05:30 [INF] Executed DbCommand (35ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_getapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session', @LockMode = 'Exclusive';
+SELECT @result
+2026-03-06 10:40:11.447 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+2026-03-06 10:40:11.459 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-03-06 10:40:11.462 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-03-06 10:40:11.472 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-03-06 10:40:11.481 +05:30 [INF] No migrations were applied. The database is already up to date.
+2026-03-06 10:40:11.487 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_releaseapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session';
+SELECT @result
+2026-03-06 10:40:11.614 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-03-06 10:40:11.666 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[Email], [u].[IsActive], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Email] = N'admin@gmail.com'
+2026-03-06 10:40:11.801 +05:30 [INF] Executed DbCommand (14ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Users] SET [PasswordHash] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-03-06 10:40:11.810 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-06 10:40:11.818 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[Email], [u].[IsActive], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Email] = N'cashier@gmail.com'
+2026-03-06 10:40:11.865 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Users] SET [PasswordHash] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-03-06 10:40:11.867 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-06 10:40:11.960 +05:30 [INF] User profile is available. Using 'C:\Users\Venura\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-03-06 10:40:12.006 +05:30 [INF] Now listening on: http://localhost:5000
+2026-03-06 10:40:12.008 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-06 10:40:12.009 +05:30 [INF] Hosting environment: Development
+2026-03-06 10:40:12.009 +05:30 [INF] Content root path: E:\Flutter apps\SupermarketSolution\SupermarketAPI
+2026-03-06 10:41:18.700 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/auth/login - application/json 37
+2026-03-06 10:41:18.756 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-03-06 10:41:20.322 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.AuthController.Login (SupermarketAPI)'
+2026-03-06 10:41:20.352 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[SupermarketAPI.Models.DTOs.TokenResponse]] Login(SupermarketAPI.Models.DTOs.LoginRequest) on controller SupermarketAPI.Controllers.AuthController (SupermarketAPI).
+2026-03-06 10:41:20.560 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@ToLower='?' (Size = 255), @ToLower0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[Email], [u].[IsActive], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE ([u].[Email] NOT LIKE N'' AND LOWER([u].[Email]) = @ToLower) OR ([u].[Username] IS NOT NULL AND [u].[Username] NOT LIKE N'' AND LOWER([u].[Username]) = @ToLower0)
+2026-03-06 10:41:20.611 +05:30 [INF] User admin@gmail.com logged in successfully
+2026-03-06 10:41:20.697 +05:30 [INF] JWT token generated for user: admin@gmail.com
+2026-03-06 10:41:20.699 +05:30 [INF] User admin successfully authenticated
+2026-03-06 10:41:20.705 +05:30 [INF] Executing OkObjectResult, writing value of type 'SupermarketAPI.Models.DTOs.TokenResponse'.
+2026-03-06 10:41:20.720 +05:30 [INF] Executed action SupermarketAPI.Controllers.AuthController.Login (SupermarketAPI) in 362.2416ms
+2026-03-06 10:41:20.723 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.AuthController.Login (SupermarketAPI)'
+2026-03-06 10:41:20.727 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/auth/login - 200 null application/json; charset=utf-8 2030.1736ms
+2026-03-06 10:41:21.059 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/reports/daily-sales? - application/json null
+2026-03-06 10:41:21.059 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/reports/monthly-sales? - application/json null
+2026-03-06 10:41:21.060 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/notifications - application/json null
+2026-03-06 10:41:21.060 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/products - application/json null
+2026-03-06 10:41:21.122 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-06 10:41:21.126 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ReportsController.GetMonthlySales (SupermarketAPI)'
+2026-03-06 10:41:21.126 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.NotificationsController.GetNotifications (SupermarketAPI)'
+2026-03-06 10:41:21.126 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ReportsController.GetDailySales (SupermarketAPI)'
+2026-03-06 10:41:21.132 +05:30 [INF] Route matched with {action = "GetAll", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.ProductsController (SupermarketAPI).
+2026-03-06 10:41:21.134 +05:30 [INF] Route matched with {action = "GetMonthlySales", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMonthlySales(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32]) on controller SupermarketAPI.Controllers.ReportsController (SupermarketAPI).
+2026-03-06 10:41:21.135 +05:30 [INF] Route matched with {action = "GetDailySales", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetDailySales(System.Nullable`1[System.DateTime]) on controller SupermarketAPI.Controllers.ReportsController (SupermarketAPI).
+2026-03-06 10:41:21.135 +05:30 [INF] Route matched with {action = "GetNotifications", controller = "Notifications"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetNotifications() on controller SupermarketAPI.Controllers.NotificationsController (SupermarketAPI).
+2026-03-06 10:41:21.141 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.Models.Notification, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-06 10:41:21.165 +05:30 [INF] Executed action SupermarketAPI.Controllers.NotificationsController.GetNotifications (SupermarketAPI) in 25.1625ms
+2026-03-06 10:41:21.166 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.NotificationsController.GetNotifications (SupermarketAPI)'
+2026-03-06 10:41:21.168 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/notifications - 200 null application/json; charset=utf-8 107.9947ms
+2026-03-06 10:41:21.226 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(SUM([o].[TotalAmount]), 0.0)
+FROM [Orders] AS [o]
+WHERE [o].[OrderDate] >= @start AND [o].[OrderDate] < @end
+2026-03-06 10:41:21.228 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(SUM([o].[TotalAmount]), 0.0)
+FROM [Orders] AS [o]
+WHERE [o].[OrderDate] >= @start AND [o].[OrderDate] < @end
+2026-03-06 10:41:21.235 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Name], [p].[CategoryId], [p].[Barcode], [p].[ImageUrl], [p].[Price], [p].[Stock], [p].[LowStockThreshold], [p].[CreatedAt]
+FROM [Products] AS [p]
+2026-03-06 10:41:21.244 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.ProductDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-06 10:41:21.256 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Orders] AS [o]
+WHERE [o].[OrderDate] >= @start AND [o].[OrderDate] < @end
+2026-03-06 10:41:21.256 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Orders] AS [o]
+WHERE [o].[OrderDate] >= @start AND [o].[OrderDate] < @end
+2026-03-06 10:41:21.257 +05:30 [INF] Executed action SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI) in 123.5004ms
+2026-03-06 10:41:21.260 +05:30 [INF] Executing OkObjectResult, writing value of type 'SupermarketAPI.DTOs.DailySalesReportDto'.
+2026-03-06 10:41:21.260 +05:30 [INF] Executing OkObjectResult, writing value of type 'SupermarketAPI.DTOs.MonthlySalesReportDto'.
+2026-03-06 10:41:21.262 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-06 10:41:21.265 +05:30 [INF] Executed action SupermarketAPI.Controllers.ReportsController.GetDailySales (SupermarketAPI) in 126.9705ms
+2026-03-06 10:41:21.265 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/products - 200 null application/json; charset=utf-8 205.1725ms
+2026-03-06 10:41:21.265 +05:30 [INF] Executed action SupermarketAPI.Controllers.ReportsController.GetMonthlySales (SupermarketAPI) in 129.498ms
+2026-03-06 10:41:21.266 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ReportsController.GetDailySales (SupermarketAPI)'
+2026-03-06 10:41:21.270 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ReportsController.GetMonthlySales (SupermarketAPI)'
+2026-03-06 10:41:21.272 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/reports/daily-sales? - 200 null application/json; charset=utf-8 212.9353ms
+2026-03-06 10:41:21.272 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/reports/monthly-sales? - 200 null application/json; charset=utf-8 213.2863ms
+2026-03-06 10:41:30.784 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/products? - application/json null
+2026-03-06 10:41:30.785 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/categories - application/json null
+2026-03-06 10:41:30.813 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-06 10:41:30.821 +05:30 [INF] Route matched with {action = "GetAll", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.ProductsController (SupermarketAPI).
+2026-03-06 10:41:30.833 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.CategoriesController.GetAll (SupermarketAPI)'
+2026-03-06 10:41:30.859 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Name], [p].[CategoryId], [p].[Barcode], [p].[ImageUrl], [p].[Price], [p].[Stock], [p].[LowStockThreshold], [p].[CreatedAt]
+FROM [Products] AS [p]
+2026-03-06 10:41:30.872 +05:30 [INF] Route matched with {action = "GetAll", controller = "Categories"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.CategoriesController (SupermarketAPI).
+2026-03-06 10:41:30.885 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.ProductDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-06 10:41:30.900 +05:30 [INF] Executed action SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI) in 65.6052ms
+2026-03-06 10:41:30.910 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-06 10:41:30.920 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/products? - 200 null application/json; charset=utf-8 135.3999ms
+2026-03-06 10:41:30.938 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Name]
+FROM [Categories] AS [c]
+ORDER BY [c].[Name]
+2026-03-06 10:41:30.956 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[SupermarketAPI.Models.Category, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[SupermarketAPI.DTOs.CategoryDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-06 10:41:30.979 +05:30 [INF] Executed action SupermarketAPI.Controllers.CategoriesController.GetAll (SupermarketAPI) in 90.7861ms
+2026-03-06 10:41:30.996 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.CategoriesController.GetAll (SupermarketAPI)'
+2026-03-06 10:41:31.008 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/categories - 200 null application/json; charset=utf-8 223.9385ms
+2026-03-06 10:41:35.051 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/products? - application/json null
+2026-03-06 10:41:35.067 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-06 10:41:35.071 +05:30 [INF] Route matched with {action = "GetAll", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.ProductsController (SupermarketAPI).
+2026-03-06 10:41:35.094 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Name], [p].[CategoryId], [p].[Barcode], [p].[ImageUrl], [p].[Price], [p].[Stock], [p].[LowStockThreshold], [p].[CreatedAt]
+FROM [Products] AS [p]
+2026-03-06 10:41:35.102 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.ProductDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-06 10:41:35.119 +05:30 [INF] Executed action SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI) in 34.7948ms
+2026-03-06 10:41:35.124 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-06 10:41:35.127 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/products? - 200 null application/json; charset=utf-8 76.2808ms
+2026-03-06 10:42:07.318 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/products? - application/json null
+2026-03-06 10:42:07.354 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-06 10:42:07.357 +05:30 [INF] Route matched with {action = "GetAll", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.ProductsController (SupermarketAPI).
+2026-03-06 10:42:07.383 +05:30 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Name], [p].[CategoryId], [p].[Barcode], [p].[ImageUrl], [p].[Price], [p].[Stock], [p].[LowStockThreshold], [p].[CreatedAt]
+FROM [Products] AS [p]
+2026-03-06 10:42:07.396 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.ProductDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-06 10:42:07.403 +05:30 [INF] Executed action SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI) in 39.915ms
+2026-03-06 10:42:07.410 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-06 10:42:07.412 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/products? - 200 null application/json; charset=utf-8 94.2506ms
+2026-03-06 10:42:08.368 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/employees - application/json null
+2026-03-06 10:42:08.376 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI)'
+2026-03-06 10:42:08.403 +05:30 [INF] Route matched with {action = "GetEmployees", controller = "Employees"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetEmployees(System.Nullable`1[System.Boolean], Int32, Int32) on controller SupermarketAPI.Controllers.EmployeesController (SupermarketAPI).
+2026-03-06 10:42:08.552 +05:30 [INF] Executed DbCommand (23ms) [Parameters=[@filter_IsActive='?' (DbType = Boolean), @p='?' (DbType = Int32), @p2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [e0].[Id], [e0].[CreatedAt], [e0].[Email], [e0].[HireDate], [e0].[IsActive], [e0].[Name], [e0].[Phone], [e0].[Position], [e0].[Salary], [e0].[UpdatedAt], [e0].[UserId], [u].[Id], [u].[CreatedAt], [u].[Email], [u].[IsActive], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM (
+    SELECT [e].[Id], [e].[CreatedAt], [e].[Email], [e].[HireDate], [e].[IsActive], [e].[Name], [e].[Phone], [e].[Position], [e].[Salary], [e].[UpdatedAt], [e].[UserId]
+    FROM [Employees] AS [e]
+    WHERE [e].[IsActive] = @filter_IsActive
+    ORDER BY [e].[Name]
+    OFFSET @p ROWS FETCH NEXT @p2 ROWS ONLY
+) AS [e0]
+LEFT JOIN [Users] AS [u] ON [e0].[UserId] = [u].[Id]
+ORDER BY [e0].[Name]
+2026-03-06 10:42:08.663 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[SupermarketAPI.Models.Employee, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[SupermarketAPI.DTOs.EmployeeDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-06 10:42:08.674 +05:30 [INF] Executed action SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI) in 257.7646ms
+2026-03-06 10:42:08.679 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI)'
+2026-03-06 10:42:08.682 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/employees - 200 null application/json; charset=utf-8 313.8578ms
+2026-03-06 10:42:09.779 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/reports/daily-sales?date=2026-03-06 - application/json null
+2026-03-06 10:42:09.827 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ReportsController.GetDailySales (SupermarketAPI)'
+2026-03-06 10:42:09.828 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/reports/top-products?limit=10 - application/json null
+2026-03-06 10:42:09.834 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/reports/monthly-sales?year=2026&month=3 - application/json null
+2026-03-06 10:42:09.837 +05:30 [INF] Route matched with {action = "GetDailySales", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetDailySales(System.Nullable`1[System.DateTime]) on controller SupermarketAPI.Controllers.ReportsController (SupermarketAPI).
+2026-03-06 10:42:09.846 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ReportsController.GetTopProducts (SupermarketAPI)'
+2026-03-06 10:42:09.857 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ReportsController.GetMonthlySales (SupermarketAPI)'
+2026-03-06 10:42:09.869 +05:30 [INF] Route matched with {action = "GetMonthlySales", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMonthlySales(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32]) on controller SupermarketAPI.Controllers.ReportsController (SupermarketAPI).
+2026-03-06 10:42:09.883 +05:30 [INF] Route matched with {action = "GetTopProducts", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTopProducts(Int32) on controller SupermarketAPI.Controllers.ReportsController (SupermarketAPI).
+2026-03-06 10:42:09.905 +05:30 [INF] Executed DbCommand (20ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(SUM([o].[TotalAmount]), 0.0)
+FROM [Orders] AS [o]
+WHERE [o].[OrderDate] >= @start AND [o].[OrderDate] < @end
+2026-03-06 10:42:09.906 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(SUM([o].[TotalAmount]), 0.0)
+FROM [Orders] AS [o]
+WHERE [o].[OrderDate] >= @start AND [o].[OrderDate] < @end
+2026-03-06 10:42:09.920 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Orders] AS [o]
+WHERE [o].[OrderDate] >= @start AND [o].[OrderDate] < @end
+2026-03-06 10:42:09.921 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Orders] AS [o]
+WHERE [o].[OrderDate] >= @start AND [o].[OrderDate] < @end
+2026-03-06 10:42:09.928 +05:30 [INF] Executing OkObjectResult, writing value of type 'SupermarketAPI.DTOs.DailySalesReportDto'.
+2026-03-06 10:42:09.937 +05:30 [INF] Executing OkObjectResult, writing value of type 'SupermarketAPI.DTOs.MonthlySalesReportDto'.
+2026-03-06 10:42:09.942 +05:30 [INF] Executed action SupermarketAPI.Controllers.ReportsController.GetDailySales (SupermarketAPI) in 77.8706ms
+2026-03-06 10:42:09.945 +05:30 [INF] Executed action SupermarketAPI.Controllers.ReportsController.GetMonthlySales (SupermarketAPI) in 59.7136ms
+2026-03-06 10:42:09.947 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ReportsController.GetDailySales (SupermarketAPI)'
+2026-03-06 10:42:09.952 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ReportsController.GetMonthlySales (SupermarketAPI)'
+2026-03-06 10:42:09.953 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/reports/daily-sales?date=2026-03-06 - 200 null application/json; charset=utf-8 174.5301ms
+2026-03-06 10:42:09.954 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/reports/monthly-sales?year=2026&month=3 - 200 null application/json; charset=utf-8 119.9764ms
+2026-03-06 10:42:10.042 +05:30 [INF] Executed DbCommand (32ms) [Parameters=[@p='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(@p) [s].[ProductId], [s].[Name0] AS [Name], COALESCE(SUM([s].[Quantity]), 0) AS [QuantitySold], COALESCE(SUM([s].[LineTotal]), 0.0) AS [Revenue]
+FROM (
+    SELECT [o].[LineTotal], [o].[ProductId], [o].[Quantity], [p].[Name] AS [Name0]
+    FROM [OrderItems] AS [o]
+    INNER JOIN [Products] AS [p] ON [o].[ProductId] = [p].[Id]
+) AS [s]
+GROUP BY [s].[ProductId], [s].[Name0]
+ORDER BY COALESCE(SUM([s].[Quantity]), 0) DESC
+2026-03-06 10:42:10.046 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.TopProductDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-06 10:42:10.053 +05:30 [INF] Executed action SupermarketAPI.Controllers.ReportsController.GetTopProducts (SupermarketAPI) in 156.2877ms
+2026-03-06 10:42:10.055 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ReportsController.GetTopProducts (SupermarketAPI)'
+2026-03-06 10:42:10.057 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/reports/top-products?limit=10 - 200 null application/json; charset=utf-8 228.7691ms
+2026-03-06 10:42:14.356 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/products? - application/json null
+2026-03-06 10:42:14.387 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-06 10:42:14.395 +05:30 [INF] Route matched with {action = "GetAll", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.ProductsController (SupermarketAPI).
+2026-03-06 10:42:14.405 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Name], [p].[CategoryId], [p].[Barcode], [p].[ImageUrl], [p].[Price], [p].[Stock], [p].[LowStockThreshold], [p].[CreatedAt]
+FROM [Products] AS [p]
+2026-03-06 10:42:14.410 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.ProductDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-06 10:42:14.413 +05:30 [INF] Executed action SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI) in 12.4087ms
+2026-03-06 10:42:14.416 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-06 10:42:14.418 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/products? - 200 null application/json; charset=utf-8 61.4621ms
+2026-03-06 10:42:15.788 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/orders?pageNumber=1&pageSize=50 - application/json null
+2026-03-06 10:42:15.798 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.OrdersController.GetOrders (SupermarketAPI)'
+2026-03-06 10:42:15.826 +05:30 [INF] Route matched with {action = "GetOrders", controller = "Orders"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetOrders(System.Nullable`1[System.DateTime], System.Nullable`1[System.DateTime], System.String, System.String, Int32, Int32) on controller SupermarketAPI.Controllers.OrdersController (SupermarketAPI).
+2026-03-06 10:42:15.999 +05:30 [INF] Executed DbCommand (35ms) [Parameters=[@p='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [o0].[Id], [o0].[CreatedAt], [o0].[DiscountAmount], [o0].[EmployeeId], [o0].[Notes], [o0].[OrderDate], [o0].[OrderNo], [o0].[PaymentMethod], [o0].[Status], [o0].[TotalAmount], [o0].[UpdatedAt], [e].[Id], [s].[Id], [s].[CreatedAt], [s].[Discount], [s].[LineTotal], [s].[OrderId], [s].[ProductId], [s].[Quantity], [s].[RefundedQuantity], [s].[UnitPrice], [s].[Id0], [s].[Barcode], [s].[CategoryId], [s].[CreatedAt0], [s].[ImageUrl], [s].[LowStockThreshold], [s].[Name], [s].[Price], [s].[Stock], [e].[CreatedAt], [e].[Email], [e].[HireDate], [e].[IsActive], [e].[Name], [e].[Phone], [e].[Position], [e].[Salary], [e].[UpdatedAt], [e].[UserId]
+FROM (
+    SELECT [o].[Id], [o].[CreatedAt], [o].[DiscountAmount], [o].[EmployeeId], [o].[Notes], [o].[OrderDate], [o].[OrderNo], [o].[PaymentMethod], [o].[Status], [o].[TotalAmount], [o].[UpdatedAt]
+    FROM [Orders] AS [o]
+    ORDER BY [o].[OrderDate] DESC
+    OFFSET @p ROWS FETCH NEXT @p1 ROWS ONLY
+) AS [o0]
+INNER JOIN [Employees] AS [e] ON [o0].[EmployeeId] = [e].[Id]
+LEFT JOIN (
+    SELECT [o1].[Id], [o1].[CreatedAt], [o1].[Discount], [o1].[LineTotal], [o1].[OrderId], [o1].[ProductId], [o1].[Quantity], [o1].[RefundedQuantity], [o1].[UnitPrice], [p].[Id] AS [Id0], [p].[Barcode], [p].[CategoryId], [p].[CreatedAt] AS [CreatedAt0], [p].[ImageUrl], [p].[LowStockThreshold], [p].[Name], [p].[Price], [p].[Stock]
+    FROM [OrderItems] AS [o1]
+    INNER JOIN [Products] AS [p] ON [o1].[ProductId] = [p].[Id]
+) AS [s] ON [o0].[Id] = [s].[OrderId]
+ORDER BY [o0].[OrderDate] DESC, [o0].[Id], [e].[Id], [s].[Id]
+2026-03-06 10:42:16.139 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[SupermarketAPI.Models.Order, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[SupermarketAPI.DTOs.OrderDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-06 10:42:16.154 +05:30 [INF] Executed action SupermarketAPI.Controllers.OrdersController.GetOrders (SupermarketAPI) in 311.3412ms
+2026-03-06 10:42:16.157 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.OrdersController.GetOrders (SupermarketAPI)'
+2026-03-06 10:42:16.161 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/orders?pageNumber=1&pageSize=50 - 200 null application/json; charset=utf-8 373.3812ms
+2026-03-06 10:42:22.559 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/products? - application/json null
+2026-03-06 10:42:22.586 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-06 10:42:22.609 +05:30 [INF] Route matched with {action = "GetAll", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.ProductsController (SupermarketAPI).
+2026-03-06 10:42:22.625 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Name], [p].[CategoryId], [p].[Barcode], [p].[ImageUrl], [p].[Price], [p].[Stock], [p].[LowStockThreshold], [p].[CreatedAt]
+FROM [Products] AS [p]
+2026-03-06 10:42:22.633 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.ProductDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-06 10:42:22.636 +05:30 [INF] Executed action SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI) in 19.1455ms
+2026-03-06 10:42:22.639 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-06 10:42:22.643 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/products? - 200 null application/json; charset=utf-8 83.9345ms
+2026-03-06 10:42:25.239 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/employees - application/json null
+2026-03-06 10:42:25.248 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI)'
+2026-03-06 10:42:25.251 +05:30 [INF] Route matched with {action = "GetEmployees", controller = "Employees"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetEmployees(System.Nullable`1[System.Boolean], Int32, Int32) on controller SupermarketAPI.Controllers.EmployeesController (SupermarketAPI).
+2026-03-06 10:42:25.267 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@filter_IsActive='?' (DbType = Boolean), @p='?' (DbType = Int32), @p2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [e0].[Id], [e0].[CreatedAt], [e0].[Email], [e0].[HireDate], [e0].[IsActive], [e0].[Name], [e0].[Phone], [e0].[Position], [e0].[Salary], [e0].[UpdatedAt], [e0].[UserId], [u].[Id], [u].[CreatedAt], [u].[Email], [u].[IsActive], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM (
+    SELECT [e].[Id], [e].[CreatedAt], [e].[Email], [e].[HireDate], [e].[IsActive], [e].[Name], [e].[Phone], [e].[Position], [e].[Salary], [e].[UpdatedAt], [e].[UserId]
+    FROM [Employees] AS [e]
+    WHERE [e].[IsActive] = @filter_IsActive
+    ORDER BY [e].[Name]
+    OFFSET @p ROWS FETCH NEXT @p2 ROWS ONLY
+) AS [e0]
+LEFT JOIN [Users] AS [u] ON [e0].[UserId] = [u].[Id]
+ORDER BY [e0].[Name]
+2026-03-06 10:42:25.285 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[SupermarketAPI.Models.Employee, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[SupermarketAPI.DTOs.EmployeeDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-06 10:42:25.292 +05:30 [INF] Executed action SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI) in 36.0854ms
+2026-03-06 10:42:25.295 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI)'
+2026-03-06 10:42:25.304 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/employees - 200 null application/json; charset=utf-8 64.8804ms
+2026-03-06 10:42:54.868 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/orders/24 - application/json null
+2026-03-06 10:42:54.878 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.OrdersController.GetOrder (SupermarketAPI)'
+2026-03-06 10:42:54.912 +05:30 [INF] Route matched with {action = "GetOrder", controller = "Orders"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetOrder(Int32) on controller SupermarketAPI.Controllers.OrdersController (SupermarketAPI).
+2026-03-06 10:42:55.020 +05:30 [INF] Executed DbCommand (23ms) [Parameters=[@id='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[Id], [s].[CreatedAt], [s].[DiscountAmount], [s].[EmployeeId], [s].[Notes], [s].[OrderDate], [s].[OrderNo], [s].[PaymentMethod], [s].[Status], [s].[TotalAmount], [s].[UpdatedAt], [s].[Id0], [s].[Id1], [s0].[Id], [s0].[CreatedAt], [s0].[Discount], [s0].[LineTotal], [s0].[OrderId], [s0].[ProductId], [s0].[Quantity], [s0].[RefundedQuantity], [s0].[UnitPrice], [s0].[Id0], [s0].[Barcode], [s0].[CategoryId], [s0].[CreatedAt0], [s0].[ImageUrl], [s0].[LowStockThreshold], [s0].[Name], [s0].[Price], [s0].[Stock], [s].[CreatedAt0], [s].[Email], [s].[HireDate], [s].[IsActive], [s].[Name], [s].[Phone], [s].[Position], [s].[Salary], [s].[UpdatedAt0], [s].[UserId], [s].[CreatedAt1], [s].[Email0], [s].[IsActive0], [s].[PasswordHash], [s].[Role], [s].[Username]
+FROM (
+    SELECT TOP(1) [o].[Id], [o].[CreatedAt], [o].[DiscountAmount], [o].[EmployeeId], [o].[Notes], [o].[OrderDate], [o].[OrderNo], [o].[PaymentMethod], [o].[Status], [o].[TotalAmount], [o].[UpdatedAt], [e].[Id] AS [Id0], [e].[CreatedAt] AS [CreatedAt0], [e].[Email], [e].[HireDate], [e].[IsActive], [e].[Name], [e].[Phone], [e].[Position], [e].[Salary], [e].[UpdatedAt] AS [UpdatedAt0], [e].[UserId], [u].[Id] AS [Id1], [u].[CreatedAt] AS [CreatedAt1], [u].[Email] AS [Email0], [u].[IsActive] AS [IsActive0], [u].[PasswordHash], [u].[Role], [u].[Username]
+    FROM [Orders] AS [o]
+    INNER JOIN [Employees] AS [e] ON [o].[EmployeeId] = [e].[Id]
+    LEFT JOIN [Users] AS [u] ON [e].[UserId] = [u].[Id]
+    WHERE [o].[Id] = @id
+) AS [s]
+LEFT JOIN (
+    SELECT [o0].[Id], [o0].[CreatedAt], [o0].[Discount], [o0].[LineTotal], [o0].[OrderId], [o0].[ProductId], [o0].[Quantity], [o0].[RefundedQuantity], [o0].[UnitPrice], [p].[Id] AS [Id0], [p].[Barcode], [p].[CategoryId], [p].[CreatedAt] AS [CreatedAt0], [p].[ImageUrl], [p].[LowStockThreshold], [p].[Name], [p].[Price], [p].[Stock]
+    FROM [OrderItems] AS [o0]
+    INNER JOIN [Products] AS [p] ON [o0].[ProductId] = [p].[Id]
+) AS [s0] ON [s].[Id] = [s0].[OrderId]
+ORDER BY [s].[Id], [s].[Id0], [s].[Id1], [s0].[Id]
+2026-03-06 10:42:55.036 +05:30 [INF] Executing OkObjectResult, writing value of type 'SupermarketAPI.DTOs.OrderDto'.
+2026-03-06 10:42:55.038 +05:30 [INF] Executed action SupermarketAPI.Controllers.OrdersController.GetOrder (SupermarketAPI) in 106.6495ms
+2026-03-06 10:42:55.041 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.OrdersController.GetOrder (SupermarketAPI)'
+2026-03-06 10:42:55.044 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/orders/24 - 200 null application/json; charset=utf-8 176.616ms
+2026-03-06 10:43:10.461 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/Suppliers - application/json null
+2026-03-06 10:43:10.462 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/Grn - application/json null
+2026-03-06 10:43:10.468 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.SuppliersController.GetSuppliers (SupermarketAPI)'
+2026-03-06 10:43:10.477 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.GrnController.GetGrns (SupermarketAPI)'
+2026-03-06 10:43:10.507 +05:30 [INF] Route matched with {action = "GetSuppliers", controller = "Suppliers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[SupermarketAPI.Models.Supplier]]] GetSuppliers() on controller SupermarketAPI.Controllers.SuppliersController (SupermarketAPI).
+2026-03-06 10:43:10.530 +05:30 [INF] Route matched with {action = "GetGrns", controller = "Grn"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.Object]]] GetGrns() on controller SupermarketAPI.Controllers.GrnController (SupermarketAPI).
+2026-03-06 10:43:10.554 +05:30 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[Id], [s].[Address], [s].[ContactNo], [s].[CreatedAt], [s].[IsActive], [s].[Name]
+FROM [Suppliers] AS [s]
+ORDER BY [s].[Name]
+2026-03-06 10:43:10.607 +05:30 [INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [g].[Id], [g].[ReceivedDate], [g].[TotalAmount], [s].[Name] AS [SupplierName], (
+    SELECT COUNT(*)
+    FROM [GoodsReceivedNoteItems] AS [g0]
+    WHERE [g].[Id] = [g0].[GoodsReceivedNoteId]) AS [ItemsCount]
+FROM [GoodsReceivedNotes] AS [g]
+INNER JOIN [Suppliers] AS [s] ON [g].[SupplierId] = [s].[Id]
+ORDER BY [g].[ReceivedDate] DESC
+2026-03-06 10:43:10.608 +05:30 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.Models.Supplier, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-06 10:43:10.617 +05:30 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[<>f__AnonymousType7`5[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.DateTime, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Decimal, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-06 10:43:10.628 +05:30 [INF] Executed action SupermarketAPI.Controllers.SuppliersController.GetSuppliers (SupermarketAPI) in 113.8246ms
+2026-03-06 10:43:10.628 +05:30 [INF] Executed action SupermarketAPI.Controllers.GrnController.GetGrns (SupermarketAPI) in 84.5111ms
+2026-03-06 10:43:10.634 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.SuppliersController.GetSuppliers (SupermarketAPI)'
+2026-03-06 10:43:10.637 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.GrnController.GetGrns (SupermarketAPI)'
+2026-03-06 10:43:10.638 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/Suppliers - 200 null application/json; charset=utf-8 177.0503ms
+2026-03-06 10:43:10.647 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/Grn - 200 null application/json; charset=utf-8 185.5042ms
+2026-03-06 10:52:41.854 +05:30 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-03-06 10:52:41.890 +05:30 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-03-06 10:52:41.923 +05:30 [INF] Executed DbCommand (29ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_getapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session', @LockMode = 'Exclusive';
+SELECT @result
+2026-03-06 10:52:41.994 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+2026-03-06 10:52:42.010 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-03-06 10:52:42.013 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-03-06 10:52:42.024 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-03-06 10:52:42.035 +05:30 [INF] No migrations were applied. The database is already up to date.
+2026-03-06 10:52:42.043 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_releaseapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session';
+SELECT @result
+2026-03-06 10:52:42.190 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-03-06 10:52:42.240 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[Email], [u].[IsActive], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Email] = N'admin@gmail.com'
+2026-03-06 10:52:42.378 +05:30 [INF] Executed DbCommand (14ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Users] SET [PasswordHash] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-03-06 10:52:42.387 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-06 10:52:42.395 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[Email], [u].[IsActive], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Email] = N'cashier@gmail.com'
+2026-03-06 10:52:42.447 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Users] SET [PasswordHash] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-03-06 10:52:42.449 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-06 10:52:42.511 +05:30 [INF] User profile is available. Using 'C:\Users\Venura\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-03-06 10:52:42.548 +05:30 [INF] Now listening on: http://localhost:5000
+2026-03-06 10:52:42.550 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-06 10:52:42.550 +05:30 [INF] Hosting environment: Development
+2026-03-06 10:52:42.551 +05:30 [INF] Content root path: E:\Flutter apps\SupermarketSolution\SupermarketAPI
+2026-03-06 10:54:04.733 +05:30 [INF] Application is shutting down...
+2026-03-06 10:54:39.959 +05:30 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-03-06 10:54:39.995 +05:30 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-03-06 10:54:40.027 +05:30 [INF] Executed DbCommand (29ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_getapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session', @LockMode = 'Exclusive';
+SELECT @result
+2026-03-06 10:54:40.086 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+2026-03-06 10:54:40.099 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-03-06 10:54:40.103 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-03-06 10:54:40.115 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-03-06 10:54:40.124 +05:30 [INF] No migrations were applied. The database is already up to date.
+2026-03-06 10:54:40.130 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_releaseapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session';
+SELECT @result
+2026-03-06 10:54:40.261 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-03-06 10:54:40.313 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[Email], [u].[IsActive], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Email] = N'admin@gmail.com'
+2026-03-06 10:54:40.447 +05:30 [INF] Executed DbCommand (14ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Users] SET [PasswordHash] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-03-06 10:54:40.456 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-06 10:54:40.464 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[Email], [u].[IsActive], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Email] = N'cashier@gmail.com'
+2026-03-06 10:54:40.509 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Users] SET [PasswordHash] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-03-06 10:54:40.511 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-06 10:54:40.563 +05:30 [INF] User profile is available. Using 'C:\Users\Venura\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-03-06 10:54:40.606 +05:30 [INF] Now listening on: http://localhost:5000
+2026-03-06 10:54:40.608 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-06 10:54:40.609 +05:30 [INF] Hosting environment: Development
+2026-03-06 10:54:40.609 +05:30 [INF] Content root path: E:\Flutter apps\SupermarketSolution\SupermarketAPI

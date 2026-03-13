@@ -1,0 +1,457 @@
+2026-03-02 11:57:33.875 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-02 11:57:33.996 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-02 11:57:48.467 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-03-02 11:57:52.753 +05:30 [INF] User admin@gmail.com logged in successfully
+2026-03-02 11:57:52.894 +05:30 [INF] JWT token generated for user: admin@gmail.com
+2026-03-02 11:57:52.898 +05:30 [INF] User admin@gmail.com successfully authenticated
+2026-03-02 11:58:13.530 +05:30 [ERR] Failed executing DbCommand (24ms) [Parameters=[@filter_IsActive='?' (DbType = Boolean), @p='?' (DbType = Int32), @p2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [e].[Id], [e].[CreatedAt], [e].[Email], [e].[HireDate], [e].[IsActive], [e].[Name], [e].[Phone], [e].[Position], [e].[Salary], [e].[UpdatedAt], [e].[UserId]
+FROM [Employees] AS [e]
+WHERE [e].[IsActive] = @filter_IsActive
+ORDER BY [e].[Name]
+OFFSET @p ROWS FETCH NEXT @p2 ROWS ONLY
+2026-03-02 11:58:13.602 +05:30 [ERR] An exception occurred while iterating over the results of a query for context type 'SupermarketAPI.Data.AppDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'IsActive'.
+Invalid column name 'CreatedAt'.
+Invalid column name 'HireDate'.
+Invalid column name 'IsActive'.
+Invalid column name 'Phone'.
+Invalid column name 'Position'.
+Invalid column name 'Salary'.
+Invalid column name 'UpdatedAt'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__195_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:7051dc9f-3753-4857-800a-90d19d19514f
+Error Number:207,State:1,Class:16
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'IsActive'.
+Invalid column name 'CreatedAt'.
+Invalid column name 'HireDate'.
+Invalid column name 'IsActive'.
+Invalid column name 'Phone'.
+Invalid column name 'Position'.
+Invalid column name 'Salary'.
+Invalid column name 'UpdatedAt'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__195_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:7051dc9f-3753-4857-800a-90d19d19514f
+Error Number:207,State:1,Class:16
+2026-03-02 11:58:13.692 +05:30 [ERR] An unhandled exception occurred
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'IsActive'.
+Invalid column name 'CreatedAt'.
+Invalid column name 'HireDate'.
+Invalid column name 'IsActive'.
+Invalid column name 'Phone'.
+Invalid column name 'Position'.
+Invalid column name 'Salary'.
+Invalid column name 'UpdatedAt'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__195_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at SupermarketAPI.Services.EmployeeService.GetEmployeesAsync(EmployeeFilterDto filter) in E:\Flutter apps\SupermarketSolution\SupermarketAPI\Services\EmployeeService.cs:line 109
+   at SupermarketAPI.Controllers.EmployeesController.GetEmployees(Nullable`1 isActive, Int32 pageNumber, Int32 pageSize) in E:\Flutter apps\SupermarketSolution\SupermarketAPI\Controllers\EmployeesController.cs:line 61
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at SupermarketAPI.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in E:\Flutter apps\SupermarketSolution\SupermarketAPI\Middleware\ExceptionMiddleware.cs:line 22
+ClientConnectionId:7051dc9f-3753-4857-800a-90d19d19514f
+Error Number:207,State:1,Class:16
+2026-03-02 11:58:20.679 +05:30 [INF] AddItem called with dto: {"ProductId":10,"Quantity":1,"$type":"AddCartItemDto"}
+2026-03-02 11:58:20.819 +05:30 [INF] Authenticated: true
+2026-03-02 11:58:20.826 +05:30 [INF] Claims: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier=2,http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress=admin@gmail.com,http://schemas.microsoft.com/ws/2008/06/identity/claims/role=Admin,exp=1772436472,iss=SupermarketAPI,aud=SupermarketAPIUsers
+2026-03-02 11:58:20.905 +05:30 [INF] AddItemAsync called for EmployeeId=9, ProductId=10, Quantity=1
+2026-03-02 11:58:21.083 +05:30 [INF] Cart created and saved for EmployeeId=9, CartId=10
+2026-03-02 11:58:21.161 +05:30 [INF] CartItem added: CartId=10, ProductId=10, Quantity=1, UnitPrice=250.00
+2026-03-02 11:58:21.213 +05:30 [INF] Cart and items saved for EmployeeId=9, CartId=10
+2026-03-02 11:58:21.474 +05:30 [INF] AddItem called with dto: {"ProductId":11,"Quantity":1,"$type":"AddCartItemDto"}
+2026-03-02 11:58:21.482 +05:30 [INF] Authenticated: true
+2026-03-02 11:58:21.485 +05:30 [INF] Claims: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier=2,http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress=admin@gmail.com,http://schemas.microsoft.com/ws/2008/06/identity/claims/role=Admin,exp=1772436472,iss=SupermarketAPI,aud=SupermarketAPIUsers
+2026-03-02 11:58:21.519 +05:30 [INF] AddItemAsync called for EmployeeId=9, ProductId=11, Quantity=1
+2026-03-02 11:58:21.596 +05:30 [INF] CartItem added: CartId=10, ProductId=11, Quantity=1, UnitPrice=220.00
+2026-03-02 11:58:21.653 +05:30 [INF] Cart and items saved for EmployeeId=9, CartId=10
+2026-03-02 11:58:26.343 +05:30 [INF] [Checkout] JWT Claims: UserId=2, Email=admin@gmail.com
+2026-03-02 11:58:26.360 +05:30 [INF] [Checkout] Resolved EmployeeId: 9 for UserId: 2
+2026-03-02 11:58:26.553 +05:30 [INF] [Checkout] CartDto for EmployeeId 9: {"Items":[{"ProductId":10,"Quantity":1,"UnitPrice":250.00,"Discount":0,"$type":"CartItemDto"},{"ProductId":11,"Quantity":1,"UnitPrice":220.00,"Discount":0,"$type":"CartItemDto"}],"Discount":0,"Subtotal":470.00,"Total":470.00,"$type":"CartDto"}
+2026-03-02 11:58:27.240 +05:30 [INF] Sale SAL-20260302-89E8B0D6 created successfully by employee 9
+2026-03-02 12:00:23.889 +05:30 [INF] User cashier@gmail.com logged in successfully
+2026-03-02 12:00:23.892 +05:30 [INF] JWT token generated for user: cashier@gmail.com
+2026-03-02 12:00:23.895 +05:30 [INF] User cashier@gmail.com successfully authenticated
+2026-03-02 12:00:34.022 +05:30 [INF] AddItem called with dto: {"ProductId":10,"Quantity":1,"$type":"AddCartItemDto"}
+2026-03-02 12:00:34.027 +05:30 [INF] Authenticated: true
+2026-03-02 12:00:34.031 +05:30 [INF] Claims: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier=3,http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress=cashier@gmail.com,http://schemas.microsoft.com/ws/2008/06/identity/claims/role=Employee,exp=1772436623,iss=SupermarketAPI,aud=SupermarketAPIUsers
+2026-03-02 12:00:34.047 +05:30 [INF] AddItemAsync called for EmployeeId=6, ProductId=10, Quantity=1
+2026-03-02 12:00:34.071 +05:30 [INF] CartItem updated: CartId=6, ProductId=10, NewQuantity=2, UnitPrice=250.00
+2026-03-02 12:00:34.086 +05:30 [INF] Cart and items saved for EmployeeId=6, CartId=6
+2026-03-02 12:00:35.058 +05:30 [INF] AddItem called with dto: {"ProductId":11,"Quantity":1,"$type":"AddCartItemDto"}
+2026-03-02 12:00:35.072 +05:30 [INF] Authenticated: true
+2026-03-02 12:00:35.079 +05:30 [INF] Claims: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier=3,http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress=cashier@gmail.com,http://schemas.microsoft.com/ws/2008/06/identity/claims/role=Employee,exp=1772436623,iss=SupermarketAPI,aud=SupermarketAPIUsers
+2026-03-02 12:00:35.095 +05:30 [INF] AddItemAsync called for EmployeeId=6, ProductId=11, Quantity=1
+2026-03-02 12:00:35.108 +05:30 [INF] CartItem updated: CartId=6, ProductId=11, NewQuantity=2, UnitPrice=220.00
+2026-03-02 12:00:35.121 +05:30 [INF] Cart and items saved for EmployeeId=6, CartId=6
+2026-03-02 12:00:37.538 +05:30 [INF] AddItem called with dto: {"ProductId":12,"Quantity":1,"$type":"AddCartItemDto"}
+2026-03-02 12:00:37.547 +05:30 [INF] Authenticated: true
+2026-03-02 12:00:37.554 +05:30 [INF] Claims: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier=3,http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress=cashier@gmail.com,http://schemas.microsoft.com/ws/2008/06/identity/claims/role=Employee,exp=1772436623,iss=SupermarketAPI,aud=SupermarketAPIUsers
+2026-03-02 12:00:37.578 +05:30 [INF] AddItemAsync called for EmployeeId=6, ProductId=12, Quantity=1
+2026-03-02 12:00:37.728 +05:30 [INF] CartItem added: CartId=6, ProductId=12, Quantity=1, UnitPrice=190.00
+2026-03-02 12:00:37.744 +05:30 [INF] Cart and items saved for EmployeeId=6, CartId=6
+2026-03-02 12:14:29.824 +05:30 [INF] AddItem called with dto: {"ProductId":10,"Quantity":1,"$type":"AddCartItemDto"}
+2026-03-02 12:14:29.830 +05:30 [INF] Authenticated: true
+2026-03-02 12:14:29.832 +05:30 [INF] Claims: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier=3,http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress=cashier@gmail.com,http://schemas.microsoft.com/ws/2008/06/identity/claims/role=Employee,exp=1772436623,iss=SupermarketAPI,aud=SupermarketAPIUsers
+2026-03-02 12:14:29.865 +05:30 [INF] AddItemAsync called for EmployeeId=6, ProductId=10, Quantity=1
+2026-03-02 12:14:29.880 +05:30 [INF] CartItem updated: CartId=6, ProductId=10, NewQuantity=3, UnitPrice=250.00
+2026-03-02 12:14:29.888 +05:30 [INF] Cart and items saved for EmployeeId=6, CartId=6
+2026-03-02 12:14:36.810 +05:30 [INF] AddItem called with dto: {"ProductId":11,"Quantity":1,"$type":"AddCartItemDto"}
+2026-03-02 12:14:36.826 +05:30 [INF] Authenticated: true
+2026-03-02 12:14:36.827 +05:30 [INF] Claims: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier=3,http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress=cashier@gmail.com,http://schemas.microsoft.com/ws/2008/06/identity/claims/role=Employee,exp=1772436623,iss=SupermarketAPI,aud=SupermarketAPIUsers
+2026-03-02 12:14:36.831 +05:30 [INF] AddItemAsync called for EmployeeId=6, ProductId=11, Quantity=1
+2026-03-02 12:14:36.834 +05:30 [INF] CartItem updated: CartId=6, ProductId=11, NewQuantity=3, UnitPrice=220.00
+2026-03-02 12:14:36.841 +05:30 [INF] Cart and items saved for EmployeeId=6, CartId=6
+2026-03-02 12:14:48.583 +05:30 [INF] AddItem called with dto: {"ProductId":12,"Quantity":1,"$type":"AddCartItemDto"}
+2026-03-02 12:14:48.594 +05:30 [INF] Authenticated: true
+2026-03-02 12:14:48.597 +05:30 [INF] Claims: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier=3,http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress=cashier@gmail.com,http://schemas.microsoft.com/ws/2008/06/identity/claims/role=Employee,exp=1772436623,iss=SupermarketAPI,aud=SupermarketAPIUsers
+2026-03-02 12:14:48.606 +05:30 [INF] AddItemAsync called for EmployeeId=6, ProductId=12, Quantity=1
+2026-03-02 12:14:48.614 +05:30 [INF] CartItem updated: CartId=6, ProductId=12, NewQuantity=2, UnitPrice=190.00
+2026-03-02 12:14:48.622 +05:30 [INF] Cart and items saved for EmployeeId=6, CartId=6
+2026-03-02 12:14:54.949 +05:30 [INF] AddItem called with dto: {"ProductId":12,"Quantity":1,"$type":"AddCartItemDto"}
+2026-03-02 12:14:54.966 +05:30 [INF] Authenticated: true
+2026-03-02 12:14:54.971 +05:30 [INF] Claims: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier=3,http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress=cashier@gmail.com,http://schemas.microsoft.com/ws/2008/06/identity/claims/role=Employee,exp=1772436623,iss=SupermarketAPI,aud=SupermarketAPIUsers
+2026-03-02 12:14:54.976 +05:30 [INF] AddItemAsync called for EmployeeId=6, ProductId=12, Quantity=1
+2026-03-02 12:14:54.985 +05:30 [INF] CartItem updated: CartId=6, ProductId=12, NewQuantity=3, UnitPrice=190.00
+2026-03-02 12:14:54.995 +05:30 [INF] Cart and items saved for EmployeeId=6, CartId=6
+2026-03-02 12:14:57.214 +05:30 [INF] AddItem called with dto: {"ProductId":14,"Quantity":1,"$type":"AddCartItemDto"}
+2026-03-02 12:14:57.379 +05:30 [INF] Authenticated: true
+2026-03-02 12:14:57.382 +05:30 [INF] Claims: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier=3,http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress=cashier@gmail.com,http://schemas.microsoft.com/ws/2008/06/identity/claims/role=Employee,exp=1772436623,iss=SupermarketAPI,aud=SupermarketAPIUsers
+2026-03-02 12:14:57.393 +05:30 [INF] AddItemAsync called for EmployeeId=6, ProductId=14, Quantity=1
+2026-03-02 12:14:57.402 +05:30 [INF] CartItem added: CartId=6, ProductId=14, Quantity=1, UnitPrice=120.00
+2026-03-02 12:14:57.417 +05:30 [INF] Cart and items saved for EmployeeId=6, CartId=6
+2026-03-02 12:15:00.546 +05:30 [INF] AddItem called with dto: {"ProductId":16,"Quantity":1,"$type":"AddCartItemDto"}
+2026-03-02 12:15:00.578 +05:30 [INF] Authenticated: true
+2026-03-02 12:15:00.581 +05:30 [INF] Claims: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier=3,http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress=cashier@gmail.com,http://schemas.microsoft.com/ws/2008/06/identity/claims/role=Employee,exp=1772436623,iss=SupermarketAPI,aud=SupermarketAPIUsers
+2026-03-02 12:15:00.614 +05:30 [INF] AddItemAsync called for EmployeeId=6, ProductId=16, Quantity=1
+2026-03-02 12:15:00.630 +05:30 [INF] CartItem added: CartId=6, ProductId=16, Quantity=1, UnitPrice=300.00
+2026-03-02 12:15:00.640 +05:30 [INF] Cart and items saved for EmployeeId=6, CartId=6
+2026-03-02 12:15:11.830 +05:30 [INF] AddItem called with dto: {"ProductId":16,"Quantity":1,"$type":"AddCartItemDto"}
+2026-03-02 12:15:11.836 +05:30 [INF] Authenticated: true
+2026-03-02 12:15:11.839 +05:30 [INF] Claims: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier=3,http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress=cashier@gmail.com,http://schemas.microsoft.com/ws/2008/06/identity/claims/role=Employee,exp=1772436623,iss=SupermarketAPI,aud=SupermarketAPIUsers
+2026-03-02 12:15:11.871 +05:30 [INF] AddItemAsync called for EmployeeId=6, ProductId=16, Quantity=1
+2026-03-02 12:15:11.887 +05:30 [INF] CartItem updated: CartId=6, ProductId=16, NewQuantity=2, UnitPrice=300.00
+2026-03-02 12:15:11.898 +05:30 [INF] Cart and items saved for EmployeeId=6, CartId=6
+2026-03-02 12:15:13.272 +05:30 [INF] AddItem called with dto: {"ProductId":17,"Quantity":1,"$type":"AddCartItemDto"}
+2026-03-02 12:15:13.735 +05:30 [INF] Authenticated: true
+2026-03-02 12:15:13.765 +05:30 [INF] Claims: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier=3,http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress=cashier@gmail.com,http://schemas.microsoft.com/ws/2008/06/identity/claims/role=Employee,exp=1772436623,iss=SupermarketAPI,aud=SupermarketAPIUsers
+2026-03-02 12:15:13.797 +05:30 [INF] AddItemAsync called for EmployeeId=6, ProductId=17, Quantity=1
+2026-03-02 12:15:13.822 +05:30 [INF] CartItem added: CartId=6, ProductId=17, Quantity=1, UnitPrice=180.00
+2026-03-02 12:15:13.839 +05:30 [INF] Cart and items saved for EmployeeId=6, CartId=6
+2026-03-02 12:15:22.542 +05:30 [INF] [Checkout] JWT Claims: UserId=3, Email=cashier@gmail.com
+2026-03-02 12:15:22.552 +05:30 [INF] [Checkout] Resolved EmployeeId: 6 for UserId: 3
+2026-03-02 12:15:22.562 +05:30 [INF] [Checkout] CartDto for EmployeeId 6: {"Items":[{"ProductId":10,"Quantity":3,"UnitPrice":250.00,"Discount":0,"$type":"CartItemDto"},{"ProductId":11,"Quantity":3,"UnitPrice":220.00,"Discount":0,"$type":"CartItemDto"},{"ProductId":24,"Quantity":1,"UnitPrice":1200.00,"Discount":0,"$type":"CartItemDto"},{"ProductId":12,"Quantity":3,"UnitPrice":190.00,"Discount":0,"$type":"CartItemDto"},{"ProductId":14,"Quantity":1,"UnitPrice":120.00,"Discount":0,"$type":"CartItemDto"},{"ProductId":16,"Quantity":2,"UnitPrice":300.00,"Discount":0,"$type":"CartItemDto"},{"ProductId":17,"Quantity":1,"UnitPrice":180.00,"Discount":0,"$type":"CartItemDto"}],"Discount":0,"Subtotal":4080.00,"Total":4080.00,"$type":"CartDto"}
+2026-03-02 12:15:22.793 +05:30 [INF] Sale SAL-20260302-C441C819 created successfully by employee 6
+2026-03-02 12:16:25.790 +05:30 [INF] User cashier@gmail.com logged in successfully
+2026-03-02 12:16:25.793 +05:30 [INF] JWT token generated for user: cashier@gmail.com
+2026-03-02 12:16:25.796 +05:30 [INF] User cashier@gmail.com successfully authenticated
+2026-03-02 12:16:32.635 +05:30 [INF] AddItem called with dto: {"ProductId":11,"Quantity":1,"$type":"AddCartItemDto"}
+2026-03-02 12:16:32.695 +05:30 [INF] Authenticated: true
+2026-03-02 12:16:32.806 +05:30 [INF] Claims: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier=3,http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress=cashier@gmail.com,http://schemas.microsoft.com/ws/2008/06/identity/claims/role=Employee,exp=1772437585,iss=SupermarketAPI,aud=SupermarketAPIUsers
+2026-03-02 12:16:32.864 +05:30 [INF] AddItemAsync called for EmployeeId=6, ProductId=11, Quantity=1
+2026-03-02 12:16:32.879 +05:30 [INF] Cart created and saved for EmployeeId=6, CartId=11
+2026-03-02 12:16:32.888 +05:30 [INF] CartItem added: CartId=11, ProductId=11, Quantity=1, UnitPrice=220.00
+2026-03-02 12:16:32.913 +05:30 [INF] Cart and items saved for EmployeeId=6, CartId=11
+2026-03-02 12:17:05.098 +05:30 [INF] User cashier@gmail.com logged in successfully
+2026-03-02 12:17:05.101 +05:30 [INF] JWT token generated for user: cashier@gmail.com
+2026-03-02 12:17:05.102 +05:30 [INF] User cashier@gmail.com successfully authenticated
+2026-03-02 12:17:23.742 +05:30 [INF] User admin@gmail.com logged in successfully
+2026-03-02 12:17:23.745 +05:30 [INF] JWT token generated for user: admin@gmail.com
+2026-03-02 12:17:23.746 +05:30 [INF] User admin@gmail.com successfully authenticated
+2026-03-02 12:17:33.211 +05:30 [ERR] Failed executing DbCommand (4ms) [Parameters=[@filter_IsActive='?' (DbType = Boolean), @p='?' (DbType = Int32), @p2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [e].[Id], [e].[CreatedAt], [e].[Email], [e].[HireDate], [e].[IsActive], [e].[Name], [e].[Phone], [e].[Position], [e].[Salary], [e].[UpdatedAt], [e].[UserId]
+FROM [Employees] AS [e]
+WHERE [e].[IsActive] = @filter_IsActive
+ORDER BY [e].[Name]
+OFFSET @p ROWS FETCH NEXT @p2 ROWS ONLY
+2026-03-02 12:17:33.240 +05:30 [ERR] An exception occurred while iterating over the results of a query for context type 'SupermarketAPI.Data.AppDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'IsActive'.
+Invalid column name 'CreatedAt'.
+Invalid column name 'HireDate'.
+Invalid column name 'IsActive'.
+Invalid column name 'Phone'.
+Invalid column name 'Position'.
+Invalid column name 'Salary'.
+Invalid column name 'UpdatedAt'.
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:4917a7b4-01a8-4c26-8003-fdecd5ae2d93
+Error Number:207,State:1,Class:16
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'IsActive'.
+Invalid column name 'CreatedAt'.
+Invalid column name 'HireDate'.
+Invalid column name 'IsActive'.
+Invalid column name 'Phone'.
+Invalid column name 'Position'.
+Invalid column name 'Salary'.
+Invalid column name 'UpdatedAt'.
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:4917a7b4-01a8-4c26-8003-fdecd5ae2d93
+Error Number:207,State:1,Class:16
+2026-03-02 12:17:33.268 +05:30 [ERR] An unhandled exception occurred
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'IsActive'.
+Invalid column name 'CreatedAt'.
+Invalid column name 'HireDate'.
+Invalid column name 'IsActive'.
+Invalid column name 'Phone'.
+Invalid column name 'Position'.
+Invalid column name 'Salary'.
+Invalid column name 'UpdatedAt'.
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at SupermarketAPI.Services.EmployeeService.GetEmployeesAsync(EmployeeFilterDto filter) in E:\Flutter apps\SupermarketSolution\SupermarketAPI\Services\EmployeeService.cs:line 109
+   at SupermarketAPI.Controllers.EmployeesController.GetEmployees(Nullable`1 isActive, Int32 pageNumber, Int32 pageSize) in E:\Flutter apps\SupermarketSolution\SupermarketAPI\Controllers\EmployeesController.cs:line 61
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at SupermarketAPI.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in E:\Flutter apps\SupermarketSolution\SupermarketAPI\Middleware\ExceptionMiddleware.cs:line 22
+ClientConnectionId:4917a7b4-01a8-4c26-8003-fdecd5ae2d93
+Error Number:207,State:1,Class:16
+2026-03-02 13:00:12.677 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-02 13:00:12.870 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-02 13:09:12.785 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-03-02 13:09:33.988 +05:30 [ERR] Error during login for email: cahier@gmail.com
+System.UnauthorizedAccessException: Invalid credentials
+   at SupermarketAPI.Services.AuthService.LoginAsync(LoginRequest request) in E:\Flutter apps\SupermarketSolution\SupermarketAPI\Services\AuthService.cs:line 56
+2026-03-02 13:09:34.001 +05:30 [WRN] Failed login attempt for email: cahier@gmail.com - Invalid credentials
+2026-03-02 13:09:35.695 +05:30 [ERR] Error during login for email: cahier@gmail.com
+System.UnauthorizedAccessException: Invalid credentials
+   at SupermarketAPI.Services.AuthService.LoginAsync(LoginRequest request) in E:\Flutter apps\SupermarketSolution\SupermarketAPI\Services\AuthService.cs:line 56
+2026-03-02 13:09:35.698 +05:30 [WRN] Failed login attempt for email: cahier@gmail.com - Invalid credentials
+2026-03-02 13:09:40.493 +05:30 [INF] User cashier@gmail.com logged in successfully
+2026-03-02 13:09:40.592 +05:30 [INF] JWT token generated for user: cashier@gmail.com
+2026-03-02 13:09:40.595 +05:30 [INF] User cashier@gmail.com successfully authenticated
+2026-03-02 13:09:46.201 +05:30 [INF] AddItem called with dto: {"ProductId":16,"Quantity":1,"$type":"AddCartItemDto"}
+2026-03-02 13:09:46.219 +05:30 [INF] Authenticated: true
+2026-03-02 13:09:46.225 +05:30 [INF] Claims: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier=3,http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress=cashier@gmail.com,http://schemas.microsoft.com/ws/2008/06/identity/claims/role=Employee,exp=1772440780,iss=SupermarketAPI,aud=SupermarketAPIUsers
+2026-03-02 13:09:46.303 +05:30 [INF] AddItemAsync called for EmployeeId=6, ProductId=16, Quantity=1
+2026-03-02 13:09:46.470 +05:30 [INF] CartItem added: CartId=11, ProductId=16, Quantity=1, UnitPrice=300.00
+2026-03-02 13:09:46.686 +05:30 [INF] Cart and items saved for EmployeeId=6, CartId=11
+2026-03-02 13:09:46.763 +05:30 [INF] AddItem called with dto: {"ProductId":17,"Quantity":1,"$type":"AddCartItemDto"}
+2026-03-02 13:09:46.770 +05:30 [INF] Authenticated: true
+2026-03-02 13:09:46.772 +05:30 [INF] Claims: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier=3,http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress=cashier@gmail.com,http://schemas.microsoft.com/ws/2008/06/identity/claims/role=Employee,exp=1772440780,iss=SupermarketAPI,aud=SupermarketAPIUsers
+2026-03-02 13:09:46.779 +05:30 [INF] AddItemAsync called for EmployeeId=6, ProductId=17, Quantity=1
+2026-03-02 13:09:46.790 +05:30 [INF] CartItem added: CartId=11, ProductId=17, Quantity=1, UnitPrice=180.00
+2026-03-02 13:09:46.801 +05:30 [INF] Cart and items saved for EmployeeId=6, CartId=11
+2026-03-02 13:09:47.988 +05:30 [INF] AddItem called with dto: {"ProductId":19,"Quantity":1,"$type":"AddCartItemDto"}
+2026-03-02 13:09:47.996 +05:30 [INF] Authenticated: true
+2026-03-02 13:09:48.003 +05:30 [INF] Claims: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier=3,http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress=cashier@gmail.com,http://schemas.microsoft.com/ws/2008/06/identity/claims/role=Employee,exp=1772440780,iss=SupermarketAPI,aud=SupermarketAPIUsers
+2026-03-02 13:09:48.025 +05:30 [INF] AddItemAsync called for EmployeeId=6, ProductId=19, Quantity=1
+2026-03-02 13:09:48.037 +05:30 [INF] CartItem added: CartId=11, ProductId=19, Quantity=1, UnitPrice=500.00
+2026-03-02 13:09:48.052 +05:30 [INF] Cart and items saved for EmployeeId=6, CartId=11
+2026-03-02 13:13:06.018 +05:30 [INF] User admin@gmail.com logged in successfully
+2026-03-02 13:13:06.021 +05:30 [INF] JWT token generated for user: admin@gmail.com
+2026-03-02 13:13:06.023 +05:30 [INF] User admin@gmail.com successfully authenticated
+2026-03-02 13:14:10.770 +05:30 [INF] User cashier@gmail.com logged in successfully
+2026-03-02 13:14:10.773 +05:30 [INF] JWT token generated for user: cashier@gmail.com
+2026-03-02 13:14:10.776 +05:30 [INF] User cashier@gmail.com successfully authenticated
+2026-03-02 13:14:15.124 +05:30 [INF] [Checkout] JWT Claims: UserId=3, Email=cashier@gmail.com
+2026-03-02 13:14:15.168 +05:30 [INF] [Checkout] Resolved EmployeeId: 6 for UserId: 3
+2026-03-02 13:14:15.219 +05:30 [INF] [Checkout] CartDto for EmployeeId 6: {"Items":[{"ProductId":11,"Quantity":1,"UnitPrice":220.00,"Discount":0,"$type":"CartItemDto"},{"ProductId":16,"Quantity":1,"UnitPrice":300.00,"Discount":0,"$type":"CartItemDto"},{"ProductId":17,"Quantity":1,"UnitPrice":180.00,"Discount":0,"$type":"CartItemDto"},{"ProductId":19,"Quantity":1,"UnitPrice":500.00,"Discount":0,"$type":"CartItemDto"}],"Discount":0,"Subtotal":1200.00,"Total":1200.00,"$type":"CartDto"}
+2026-03-02 13:14:15.744 +05:30 [INF] Sale SAL-20260302-4B3C3466 created successfully by employee 6
+2026-03-02 13:28:53.712 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-02 13:28:54.157 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-02 13:29:00.204 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-03-02 13:34:32.563 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-02 13:34:32.736 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-02 13:35:00.517 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-03-02 13:37:47.082 +05:30 [ERR] Error during login for email: admin
+System.UnauthorizedAccessException: Invalid credentials
+   at SupermarketAPI.Services.AuthService.LoginAsync(LoginRequest request) in E:\Flutter apps\SupermarketSolution\SupermarketAPI\Services\AuthService.cs:line 56
+2026-03-02 13:37:47.121 +05:30 [WRN] Failed login attempt for email: admin - Invalid credentials
+2026-03-02 13:40:25.073 +05:30 [ERR] Error during login for email: admin
+System.UnauthorizedAccessException: Invalid credentials
+   at SupermarketAPI.Services.AuthService.LoginAsync(LoginRequest request) in E:\Flutter apps\SupermarketSolution\SupermarketAPI\Services\AuthService.cs:line 56
+2026-03-02 13:40:25.078 +05:30 [WRN] Failed login attempt for email: admin - Invalid credentials
+2026-03-02 13:40:28.455 +05:30 [ERR] Error during login for email: admin
+System.UnauthorizedAccessException: Invalid credentials
+   at SupermarketAPI.Services.AuthService.LoginAsync(LoginRequest request) in E:\Flutter apps\SupermarketSolution\SupermarketAPI\Services\AuthService.cs:line 56
+2026-03-02 13:40:28.464 +05:30 [WRN] Failed login attempt for email: admin - Invalid credentials
+2026-03-02 13:44:01.153 +05:30 [ERR] Error during login for email: admin
+System.UnauthorizedAccessException: Invalid credentials
+   at SupermarketAPI.Services.AuthService.LoginAsync(LoginRequest request) in E:\Flutter apps\SupermarketSolution\SupermarketAPI\Services\AuthService.cs:line 56
+2026-03-02 13:44:01.159 +05:30 [WRN] Failed login attempt for email: admin - Invalid credentials
+2026-03-02 13:46:25.074 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-02 13:46:25.389 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-02 13:50:08.251 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-03-02 13:50:09.206 +05:30 [INF] User admin@gmail.com logged in successfully
+2026-03-02 13:50:09.374 +05:30 [INF] JWT token generated for user: admin@gmail.com
+2026-03-02 13:50:09.379 +05:30 [INF] User admin@gmail.com successfully authenticated
+2026-03-02 13:50:20.676 +05:30 [ERR] Failed executing DbCommand (22ms) [Parameters=[@filter_IsActive='?' (DbType = Boolean), @p='?' (DbType = Int32), @p2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [e].[Id], [e].[CreatedAt], [e].[Email], [e].[HireDate], [e].[IsActive], [e].[Name], [e].[Phone], [e].[Position], [e].[Salary], [e].[UpdatedAt], [e].[UserId]
+FROM [Employees] AS [e]
+WHERE [e].[IsActive] = @filter_IsActive
+ORDER BY [e].[Name]
+OFFSET @p ROWS FETCH NEXT @p2 ROWS ONLY
+2026-03-02 13:50:20.855 +05:30 [ERR] An exception occurred while iterating over the results of a query for context type 'SupermarketAPI.Data.AppDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'IsActive'.
+Invalid column name 'CreatedAt'.
+Invalid column name 'HireDate'.
+Invalid column name 'IsActive'.
+Invalid column name 'Phone'.
+Invalid column name 'Position'.
+Invalid column name 'Salary'.
+Invalid column name 'UpdatedAt'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__195_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:e1e03d71-ca2d-4bd9-a296-7385e32c4591
+Error Number:207,State:1,Class:16
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'IsActive'.
+Invalid column name 'CreatedAt'.
+Invalid column name 'HireDate'.
+Invalid column name 'IsActive'.
+Invalid column name 'Phone'.
+Invalid column name 'Position'.
+Invalid column name 'Salary'.
+Invalid column name 'UpdatedAt'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__195_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:e1e03d71-ca2d-4bd9-a296-7385e32c4591
+Error Number:207,State:1,Class:16
+2026-03-02 13:50:21.062 +05:30 [ERR] An unhandled exception occurred
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'IsActive'.
+Invalid column name 'CreatedAt'.
+Invalid column name 'HireDate'.
+Invalid column name 'IsActive'.
+Invalid column name 'Phone'.
+Invalid column name 'Position'.
+Invalid column name 'Salary'.
+Invalid column name 'UpdatedAt'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__195_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at SupermarketAPI.Services.EmployeeService.GetEmployeesAsync(EmployeeFilterDto filter) in E:\Flutter apps\SupermarketSolution\SupermarketAPI\Services\EmployeeService.cs:line 109
+   at SupermarketAPI.Controllers.EmployeesController.GetEmployees(Nullable`1 isActive, Int32 pageNumber, Int32 pageSize) in E:\Flutter apps\SupermarketSolution\SupermarketAPI\Controllers\EmployeesController.cs:line 61
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at SupermarketAPI.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in E:\Flutter apps\SupermarketSolution\SupermarketAPI\Middleware\ExceptionMiddleware.cs:line 22
+ClientConnectionId:e1e03d71-ca2d-4bd9-a296-7385e32c4591
+Error Number:207,State:1,Class:16
+2026-03-02 13:55:25.279 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-02 13:55:25.635 +05:30 [INF] Default cashier user updated: cashier@gmail.com
