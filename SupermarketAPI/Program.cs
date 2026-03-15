@@ -45,10 +45,12 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 
 builder.Host.UseSerilog();
 
-// Kestrel binding is controlled via configuration/ASPNETCORE_URLS or --urls.
-// Previously this app forced listen on port 5054 which caused conflicts when
-// running multiple instances. Use configuration or command-line `--urls` to
-// control which addresses Kestrel binds to.
+// On Render, the runtime provides the listening port via PORT.
+var renderPort = Environment.GetEnvironmentVariable("PORT");
+if (!string.IsNullOrWhiteSpace(renderPort))
+{
+    builder.WebHost.UseUrls($"http://0.0.0.0:{renderPort}");
+}
 
 // Configuration
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
@@ -175,17 +177,24 @@ var app = builder.Build();
 // Apply migrations and seed data
 using (var scope = app.Services.CreateScope())
 {
-    var services = scope.ServiceProvider;
-    var db = services.GetRequiredService<AppDbContext>();
-    // apply any pending migrations
-    await db.Database.MigrateAsync();
+    try
+    {
+        var services = scope.ServiceProvider;
+        var db = services.GetRequiredService<AppDbContext>();
+        // apply any pending migrations
+        await db.Database.MigrateAsync();
 
-    // seed categories (idempotent)
-    await SeedData.SeedCategories(db);
+        // seed categories (idempotent)
+        await SeedData.SeedCategories(db);
 
-    // seed default admin user
-    var authService = services.GetRequiredService<IAuthService>();
-    await authService.SeedDefaultAdminAsync();
+        // seed default admin user
+        var authService = services.GetRequiredService<IAuthService>();
+        await authService.SeedDefaultAdminAsync();
+    }
+    catch (Exception ex)
+    {
+        Log.Error(ex, "Database initialization failed during startup. API will keep running for diagnostics.");
+    }
 }
 
 // Middleware
@@ -217,6 +226,12 @@ app.UseCors("AllowAll");
 
 app.UseAuthentication(); // ⚠️ Must be before Authorization
 app.UseAuthorization();
+
+app.MapGet("/api/health", () => Results.Ok(new
+{
+    status = "ok",
+    timestamp = DateTime.UtcNow
+}));
 
 app.MapControllers();
 
