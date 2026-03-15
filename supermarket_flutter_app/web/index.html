@@ -18,6 +18,37 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  
+  <script>
+    // Global Error Handler for "Blank Page" detection
+    window.onerror = function(message, source, lineno, colno, error) {
+      var errorDiv = document.createElement('div');
+      errorDiv.id = 'error-display';
+      errorDiv.style.position = 'fixed';
+      errorDiv.style.top = '0';
+      errorDiv.style.left = '0';
+      errorDiv.style.width = '100%';
+      errorDiv.style.height = '100vh';
+      errorDiv.style.zIndex = '99999';
+      errorDiv.style.padding = '20px';
+      errorDiv.style.backgroundColor = 'white';
+      errorDiv.style.color = '#d32f2f'; // Error red
+      errorDiv.style.fontFamily = 'monospace';
+      errorDiv.style.overflow = 'auto';
+      errorDiv.style.whiteSpace = 'pre-wrap';
+
+      var header = document.createElement('h2');
+      header.textContent = 'Application Error (Please Share Screenshot)';
+      errorDiv.appendChild(header);
+
+      var content = document.createElement('p');
+      content.textContent = message + '\n\nLocation: ' + source + ':' + lineno + ':' + colno + '\nStack: ' + (error ? error.stack : 'No stack');
+      errorDiv.appendChild(content);
+
+      document.body.prepend(errorDiv); // Ensure it's on top and visible
+    };
+  </script>
+
   <meta name="description" content="A new Flutter project.">
 
   <!-- iOS meta tags & icons -->

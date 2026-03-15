@@ -1,5 +1,6 @@
 
 
+import 'dart:async'; // Add this import for TimeoutException
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
@@ -49,18 +50,27 @@ class ApiService {
     return response;
   }
 
-  static Future<http.Response> post(String endpoint, Map<String, dynamic> data) async {
+  static Future<http.Response> post(String endpoint, Map<String, dynamic> body) async {
     final token = await getToken();
-    final url = '${AppConstants.apiBaseUrl}$endpoint';
+    // Ensure URL is constructed correctly, handle slashes if needed
+    final baseUrl = AppConstants.apiBaseUrl.endsWith('/') 
+        ? AppConstants.apiBaseUrl.substring(0, AppConstants.apiBaseUrl.length - 1) 
+        : AppConstants.apiBaseUrl;
+    final finalEndpoint = endpoint.startsWith('/') ? endpoint : '/$endpoint';
+    
+    final url = '$baseUrl$finalEndpoint';
     final headers = _defaultHeaders(token);
-    final body = jsonEncode(data);
+    final jsonBody = jsonEncode(body);
+    
     if (kDebugMode) print('[ApiService] POST $url');
-    if (kDebugMode) print('[ApiService] Headers: $headers');
-    if (kDebugMode) print('[ApiService] Body: $body');
-    final response = await http.post(Uri.parse(url), headers: headers, body: body);
-    if (kDebugMode) print('[ApiService] Response status: ${response.statusCode}');
-    if (kDebugMode) print('[ApiService] Response body: ${response.body}');
-    return response;
+    // Using http.post directly
+    try {
+      final response = await http.post(Uri.parse(url), headers: headers, body: jsonBody)
+          .timeout(const Duration(seconds: 90)); // Increased timeout for Render cold start
+      return response;
+    } on TimeoutException catch (_) {
+      throw const SocketException('Connection timed out. The server might be waking up (Render free tier). Please try again in a minute.');
+    }
   }
 
   /// Safely decode JSON only if status is 200/201 and body is not empty

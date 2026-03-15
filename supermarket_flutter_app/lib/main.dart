@@ -3,6 +3,7 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart'; // Web support
 import 'package:provider/provider.dart';
 import 'features/auth/providers/auth_provider.dart';
 import 'features/products/providers/product_provider.dart';
@@ -39,6 +40,11 @@ void main() {
   if (!kIsWeb && (Platform.isWindows || Platform.isLinux || Platform.isMacOS)) {
     sqfliteFfiInit();
     databaseFactory = databaseFactoryFfi;
+  }
+
+  if (kIsWeb) {
+    // Initialize sqflite for web
+    databaseFactory = databaseFactoryFfiWeb;
   }
 
   runApp(const MyApp());

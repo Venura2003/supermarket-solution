@@ -16,7 +16,8 @@ class LoginRequest {
   }
 
   Map<String, dynamic> toJson() {
-    // The backend expects the identifier in the 'email' property
+    // Always send the identifier in the 'email' field — the API accepts
+    // either an email address or a username in this property.
     return {'email': email.isNotEmpty ? email : (username ?? ''), 'password': password};
   }
 

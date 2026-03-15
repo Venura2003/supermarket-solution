@@ -1,6 +1,7 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class LocalDb {
   static final LocalDb _instance = LocalDb._();
@@ -16,8 +17,13 @@ class LocalDb {
   }
 
   Future<Database> _initDb() async {
-    final dir = await getApplicationDocumentsDirectory();
-    final path = join(dir.path, 'supermarket_local.db');
+    String path;
+    if (kIsWeb) {
+      path = 'supermarket_local.db';
+    } else {
+      final dir = await getApplicationDocumentsDirectory();
+      path = join(dir.path, 'supermarket_local.db');
+    }
     return await openDatabase(path, version: 1, onCreate: _onCreate);
   }
 

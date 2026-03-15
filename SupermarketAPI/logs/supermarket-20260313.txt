@@ -6500,3 +6500,1280 @@ ORDER BY [e0].[Name]
 2026-03-13 15:23:37.351 +05:30 [INF] Executed action SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI) in 20.8494ms
 2026-03-13 15:23:37.352 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI)'
 2026-03-13 15:23:37.354 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/employees - 200 null application/json; charset=utf-8 30.4701ms
+2026-03-13 20:44:12.729 +05:30 [INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-03-13 20:44:12.802 +05:30 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2026-03-13 20:44:12.865 +05:30 [INF] Executed DbCommand (58ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_getapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session', @LockMode = 'Exclusive';
+SELECT @result
+2026-03-13 20:44:12.957 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+2026-03-13 20:44:12.982 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-03-13 20:44:12.988 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-03-13 20:44:13.014 +05:30 [INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-03-13 20:44:13.034 +05:30 [INF] No migrations were applied. The database is already up to date.
+2026-03-13 20:44:13.046 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_releaseapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session';
+SELECT @result
+2026-03-13 20:44:13.245 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-03-13 20:44:13.341 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[Email], [u].[IsActive], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Email] = N'admin@gmail.com'
+2026-03-13 20:44:13.577 +05:30 [INF] Executed DbCommand (45ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Users] SET [PasswordHash] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-03-13 20:44:13.591 +05:30 [INF] Default admin user updated: admin@gmail.com
+2026-03-13 20:44:13.601 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[Email], [u].[IsActive], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Email] = N'cashier@gmail.com'
+2026-03-13 20:44:13.679 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Users] SET [PasswordHash] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-03-13 20:44:13.682 +05:30 [INF] Default cashier user updated: cashier@gmail.com
+2026-03-13 20:44:13.806 +05:30 [INF] User profile is available. Using 'C:\Users\Venura\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-03-13 20:44:13.915 +05:30 [INF] Now listening on: http://localhost:5000
+2026-03-13 20:44:13.917 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-13 20:44:13.918 +05:30 [INF] Hosting environment: Development
+2026-03-13 20:44:13.919 +05:30 [INF] Content root path: E:\Flutter apps\SupermarketSolution\SupermarketAPI
+2026-03-13 20:44:20.695 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/auth/login - application/json 37
+2026-03-13 20:44:20.813 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-03-13 20:44:23.466 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.AuthController.Login (SupermarketAPI)'
+2026-03-13 20:44:23.506 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[SupermarketAPI.Models.DTOs.TokenResponse]] Login(SupermarketAPI.Models.DTOs.LoginRequest) on controller SupermarketAPI.Controllers.AuthController (SupermarketAPI).
+2026-03-13 20:44:23.915 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@ToLower='?' (Size = 255), @ToLower0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[Email], [u].[IsActive], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE ([u].[Email] NOT LIKE N'' AND LOWER([u].[Email]) = @ToLower) OR ([u].[Username] IS NOT NULL AND [u].[Username] NOT LIKE N'' AND LOWER([u].[Username]) = @ToLower0)
+2026-03-13 20:44:24.017 +05:30 [INF] User admin@gmail.com logged in successfully
+2026-03-13 20:44:24.194 +05:30 [INF] JWT token generated for user: admin@gmail.com
+2026-03-13 20:44:24.199 +05:30 [INF] User admin successfully authenticated
+2026-03-13 20:44:24.216 +05:30 [INF] Executing OkObjectResult, writing value of type 'SupermarketAPI.Models.DTOs.TokenResponse'.
+2026-03-13 20:44:24.258 +05:30 [INF] Executed action SupermarketAPI.Controllers.AuthController.Login (SupermarketAPI) in 739.3227ms
+2026-03-13 20:44:24.263 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.AuthController.Login (SupermarketAPI)'
+2026-03-13 20:44:24.271 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/auth/login - 200 null application/json; charset=utf-8 3578.5346ms
+2026-03-13 20:44:24.436 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/reports/daily-sales? - application/json null
+2026-03-13 20:44:24.437 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/reports/monthly-sales? - application/json null
+2026-03-13 20:44:24.437 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/products - application/json null
+2026-03-13 20:44:24.438 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/notifications - application/json null
+2026-03-13 20:44:24.567 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-13 20:44:24.576 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.NotificationsController.GetNotifications (SupermarketAPI)'
+2026-03-13 20:44:24.576 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ReportsController.GetMonthlySales (SupermarketAPI)'
+2026-03-13 20:44:24.576 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ReportsController.GetDailySales (SupermarketAPI)'
+2026-03-13 20:44:24.589 +05:30 [INF] Route matched with {action = "GetAll", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.ProductsController (SupermarketAPI).
+2026-03-13 20:44:24.592 +05:30 [INF] Route matched with {action = "GetNotifications", controller = "Notifications"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetNotifications() on controller SupermarketAPI.Controllers.NotificationsController (SupermarketAPI).
+2026-03-13 20:44:24.599 +05:30 [INF] Route matched with {action = "GetMonthlySales", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMonthlySales(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32]) on controller SupermarketAPI.Controllers.ReportsController (SupermarketAPI).
+2026-03-13 20:44:24.601 +05:30 [INF] Route matched with {action = "GetDailySales", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetDailySales(System.Nullable`1[System.DateTime]) on controller SupermarketAPI.Controllers.ReportsController (SupermarketAPI).
+2026-03-13 20:44:24.603 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.Models.Notification, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:44:24.687 +05:30 [INF] Executed action SupermarketAPI.Controllers.NotificationsController.GetNotifications (SupermarketAPI) in 87.4921ms
+2026-03-13 20:44:24.693 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.NotificationsController.GetNotifications (SupermarketAPI)'
+2026-03-13 20:44:24.698 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/notifications - 200 null application/json; charset=utf-8 259.3667ms
+2026-03-13 20:44:24.799 +05:30 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Name], [p].[CategoryId], [p].[Barcode], [p].[ImageUrl], [p].[Price], [p].[Stock], [p].[LowStockThreshold], [p].[CreatedAt]
+FROM [Products] AS [p]
+2026-03-13 20:44:24.810 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(SUM([o].[TotalAmount]), 0.0)
+FROM [Orders] AS [o]
+WHERE [o].[OrderDate] >= @start AND [o].[OrderDate] < @end
+2026-03-13 20:44:24.816 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(SUM([o].[TotalAmount]), 0.0)
+FROM [Orders] AS [o]
+WHERE [o].[OrderDate] >= @start AND [o].[OrderDate] < @end
+2026-03-13 20:44:24.818 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.ProductDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:44:24.856 +05:30 [INF] Executed action SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI) in 260.1934ms
+2026-03-13 20:44:24.862 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-13 20:44:24.866 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/products - 200 null application/json; charset=utf-8 428.9883ms
+2026-03-13 20:44:24.877 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Orders] AS [o]
+WHERE [o].[OrderDate] >= @start AND [o].[OrderDate] < @end
+2026-03-13 20:44:24.878 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Orders] AS [o]
+WHERE [o].[OrderDate] >= @start AND [o].[OrderDate] < @end
+2026-03-13 20:44:24.890 +05:30 [INF] Executing OkObjectResult, writing value of type 'SupermarketAPI.DTOs.MonthlySalesReportDto'.
+2026-03-13 20:44:24.894 +05:30 [INF] Executing OkObjectResult, writing value of type 'SupermarketAPI.DTOs.DailySalesReportDto'.
+2026-03-13 20:44:24.898 +05:30 [INF] Executed action SupermarketAPI.Controllers.ReportsController.GetMonthlySales (SupermarketAPI) in 293.8015ms
+2026-03-13 20:44:24.902 +05:30 [INF] Executed action SupermarketAPI.Controllers.ReportsController.GetDailySales (SupermarketAPI) in 287.2102ms
+2026-03-13 20:44:24.904 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ReportsController.GetMonthlySales (SupermarketAPI)'
+2026-03-13 20:44:24.908 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ReportsController.GetDailySales (SupermarketAPI)'
+2026-03-13 20:44:24.910 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/reports/monthly-sales? - 200 null application/json; charset=utf-8 473.2519ms
+2026-03-13 20:44:24.914 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/reports/daily-sales? - 200 null application/json; charset=utf-8 477.554ms
+2026-03-13 20:44:49.359 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/expenses?startDate=2026-02-11T20:44:49.227413&endDate=2026-03-13T20:44:49.227413& - application/json null
+2026-03-13 20:44:49.366 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ExpensesController.GetExpenses (SupermarketAPI)'
+2026-03-13 20:44:49.393 +05:30 [INF] Route matched with {action = "GetExpenses", controller = "Expenses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[SupermarketAPI.DTOs.ExpenseDto]]] GetExpenses(System.Nullable`1[System.DateTime], System.Nullable`1[System.DateTime], System.String) on controller SupermarketAPI.Controllers.ExpensesController (SupermarketAPI).
+2026-03-13 20:44:49.463 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@startDate_Value='?' (DbType = DateTime2), @endDate_Value='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [e].[Id], [e].[Description], [e].[Category], [e].[Amount], [e].[Date], [e].[CreatedBy]
+FROM [Expenses] AS [e]
+WHERE [e].[Date] >= @startDate_Value AND [e].[Date] <= @endDate_Value
+ORDER BY [e].[Date] DESC
+2026-03-13 20:44:49.470 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.ExpenseDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:44:49.476 +05:30 [INF] Executed action SupermarketAPI.Controllers.ExpensesController.GetExpenses (SupermarketAPI) in 75.191ms
+2026-03-13 20:44:49.479 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ExpensesController.GetExpenses (SupermarketAPI)'
+2026-03-13 20:44:49.483 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/expenses?startDate=2026-02-11T20:44:49.227413&endDate=2026-03-13T20:44:49.227413& - 200 null application/json; charset=utf-8 123.3241ms
+2026-03-13 20:44:49.493 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/sales - null null
+2026-03-13 20:44:49.500 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.SalesController.GetAll (SupermarketAPI)'
+2026-03-13 20:44:49.514 +05:30 [INF] Route matched with {action = "GetAll", controller = "Sales"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.SalesController (SupermarketAPI).
+2026-03-13 20:44:49.726 +05:30 [INF] Executed DbCommand (54ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[Id], [s].[CreatedAt], [s].[DiscountAmount], [s].[EmployeeId], [s].[Notes], [s].[PaymentMethod], [s].[SaleDate], [s].[SaleNo], [s].[Status], [s].[TotalAmount], [s].[UpdatedAt], [e].[Id], [e].[CreatedAt], [e].[Email], [e].[HireDate], [e].[IsActive], [e].[Name], [e].[Phone], [e].[Position], [e].[Salary], [e].[UpdatedAt], [e].[UserId], [s1].[Id], [s1].[CreatedAt], [s1].[Discount], [s1].[LineTotal], [s1].[ProductId], [s1].[Quantity], [s1].[SaleId], [s1].[UnitCost], [s1].[UnitPrice], [s1].[Id0], [s1].[Barcode], [s1].[CategoryId], [s1].[CostPrice], [s1].[CreatedAt0], [s1].[ImageUrl], [s1].[LowStockThreshold], [s1].[Name], [s1].[Price], [s1].[Stock]
+FROM [Sales] AS [s]
+INNER JOIN [Employees] AS [e] ON [s].[EmployeeId] = [e].[Id]
+LEFT JOIN (
+    SELECT [s0].[Id], [s0].[CreatedAt], [s0].[Discount], [s0].[LineTotal], [s0].[ProductId], [s0].[Quantity], [s0].[SaleId], [s0].[UnitCost], [s0].[UnitPrice], [p].[Id] AS [Id0], [p].[Barcode], [p].[CategoryId], [p].[CostPrice], [p].[CreatedAt] AS [CreatedAt0], [p].[ImageUrl], [p].[LowStockThreshold], [p].[Name], [p].[Price], [p].[Stock]
+    FROM [SaleItems] AS [s0]
+    INNER JOIN [Products] AS [p] ON [s0].[ProductId] = [p].[Id]
+) AS [s1] ON [s].[Id] = [s1].[SaleId]
+ORDER BY [s].[SaleDate] DESC, [s].[Id], [e].[Id], [s1].[Id]
+2026-03-13 20:44:49.926 +05:30 [INF] Executing OkObjectResult, writing value of type 'SupermarketAPI.DTOs.ApiResponse`1[[System.Collections.Generic.IEnumerable`1[[SupermarketAPI.DTOs.SaleDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-03-13 20:44:49.944 +05:30 [INF] Executed action SupermarketAPI.Controllers.SalesController.GetAll (SupermarketAPI) in 425.3258ms
+2026-03-13 20:44:49.953 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.SalesController.GetAll (SupermarketAPI)'
+2026-03-13 20:44:49.966 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/sales - 200 null application/json; charset=utf-8 470.8525ms
+2026-03-13 20:44:49.976 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/grn - null null
+2026-03-13 20:44:49.983 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.GrnController.GetGrns (SupermarketAPI)'
+2026-03-13 20:44:49.998 +05:30 [INF] Route matched with {action = "GetGrns", controller = "Grn"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.Object]]] GetGrns() on controller SupermarketAPI.Controllers.GrnController (SupermarketAPI).
+2026-03-13 20:44:50.075 +05:30 [INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [g].[Id], [g].[ReceivedDate], [g].[TotalAmount], [s].[Name] AS [SupplierName], (
+    SELECT COUNT(*)
+    FROM [GoodsReceivedNoteItems] AS [g0]
+    WHERE [g].[Id] = [g0].[GoodsReceivedNoteId]) AS [ItemsCount]
+FROM [GoodsReceivedNotes] AS [g]
+INNER JOIN [Suppliers] AS [s] ON [g].[SupplierId] = [s].[Id]
+ORDER BY [g].[ReceivedDate] DESC
+2026-03-13 20:44:50.080 +05:30 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[<>f__AnonymousType7`5[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.DateTime, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Decimal, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:44:50.091 +05:30 [INF] Executed action SupermarketAPI.Controllers.GrnController.GetGrns (SupermarketAPI) in 87.4762ms
+2026-03-13 20:44:50.095 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.GrnController.GetGrns (SupermarketAPI)'
+2026-03-13 20:44:50.098 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/grn - 200 null application/json; charset=utf-8 122.6543ms
+2026-03-13 20:52:27.980 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/auth/login - application/json 37
+2026-03-13 20:52:27.985 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.AuthController.Login (SupermarketAPI)'
+2026-03-13 20:52:27.987 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[SupermarketAPI.Models.DTOs.TokenResponse]] Login(SupermarketAPI.Models.DTOs.LoginRequest) on controller SupermarketAPI.Controllers.AuthController (SupermarketAPI).
+2026-03-13 20:52:28.034 +05:30 [INF] Executed DbCommand (14ms) [Parameters=[@ToLower='?' (Size = 255), @ToLower0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[Email], [u].[IsActive], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE ([u].[Email] NOT LIKE N'' AND LOWER([u].[Email]) = @ToLower) OR ([u].[Username] IS NOT NULL AND [u].[Username] NOT LIKE N'' AND LOWER([u].[Username]) = @ToLower0)
+2026-03-13 20:52:28.129 +05:30 [INF] User admin@gmail.com logged in successfully
+2026-03-13 20:52:28.132 +05:30 [INF] JWT token generated for user: admin@gmail.com
+2026-03-13 20:52:28.134 +05:30 [INF] User admin successfully authenticated
+2026-03-13 20:52:28.135 +05:30 [INF] Executing OkObjectResult, writing value of type 'SupermarketAPI.Models.DTOs.TokenResponse'.
+2026-03-13 20:52:28.138 +05:30 [INF] Executed action SupermarketAPI.Controllers.AuthController.Login (SupermarketAPI) in 147.3347ms
+2026-03-13 20:52:28.140 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.AuthController.Login (SupermarketAPI)'
+2026-03-13 20:52:28.143 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/auth/login - 200 null application/json; charset=utf-8 162.5311ms
+2026-03-13 20:52:28.265 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/reports/daily-sales? - application/json null
+2026-03-13 20:52:28.266 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/products - application/json null
+2026-03-13 20:52:28.267 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/notifications - application/json null
+2026-03-13 20:52:28.269 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ReportsController.GetDailySales (SupermarketAPI)'
+2026-03-13 20:52:28.270 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:28.273 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.NotificationsController.GetNotifications (SupermarketAPI)'
+2026-03-13 20:52:28.276 +05:30 [INF] Route matched with {action = "GetNotifications", controller = "Notifications"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetNotifications() on controller SupermarketAPI.Controllers.NotificationsController (SupermarketAPI).
+2026-03-13 20:52:28.275 +05:30 [INF] Route matched with {action = "GetAll", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.ProductsController (SupermarketAPI).
+2026-03-13 20:52:28.274 +05:30 [INF] Route matched with {action = "GetDailySales", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetDailySales(System.Nullable`1[System.DateTime]) on controller SupermarketAPI.Controllers.ReportsController (SupermarketAPI).
+2026-03-13 20:52:28.280 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.Models.Notification, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:52:28.285 +05:30 [INF] Executed action SupermarketAPI.Controllers.NotificationsController.GetNotifications (SupermarketAPI) in 5.8047ms
+2026-03-13 20:52:28.286 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Name], [p].[CategoryId], [p].[Barcode], [p].[ImageUrl], [p].[Price], [p].[Stock], [p].[LowStockThreshold], [p].[CreatedAt]
+FROM [Products] AS [p]
+2026-03-13 20:52:28.287 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.NotificationsController.GetNotifications (SupermarketAPI)'
+2026-03-13 20:52:28.287 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/reports/monthly-sales? - application/json null
+2026-03-13 20:52:28.290 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.ProductDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:52:28.291 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/notifications - 200 null application/json; charset=utf-8 24.0265ms
+2026-03-13 20:52:28.296 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ReportsController.GetMonthlySales (SupermarketAPI)'
+2026-03-13 20:52:28.299 +05:30 [INF] Executed action SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI) in 17.8449ms
+2026-03-13 20:52:28.300 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(SUM([o].[TotalAmount]), 0.0)
+FROM [Orders] AS [o]
+WHERE [o].[OrderDate] >= @start AND [o].[OrderDate] < @end
+2026-03-13 20:52:28.307 +05:30 [INF] Route matched with {action = "GetMonthlySales", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMonthlySales(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32]) on controller SupermarketAPI.Controllers.ReportsController (SupermarketAPI).
+2026-03-13 20:52:28.310 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:28.319 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Orders] AS [o]
+WHERE [o].[OrderDate] >= @start AND [o].[OrderDate] < @end
+2026-03-13 20:52:28.322 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/products - 200 null application/json; charset=utf-8 56.1936ms
+2026-03-13 20:52:28.323 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(SUM([o].[TotalAmount]), 0.0)
+FROM [Orders] AS [o]
+WHERE [o].[OrderDate] >= @start AND [o].[OrderDate] < @end
+2026-03-13 20:52:28.326 +05:30 [INF] Executing OkObjectResult, writing value of type 'SupermarketAPI.DTOs.DailySalesReportDto'.
+2026-03-13 20:52:28.336 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Orders] AS [o]
+WHERE [o].[OrderDate] >= @start AND [o].[OrderDate] < @end
+2026-03-13 20:52:28.338 +05:30 [INF] Executed action SupermarketAPI.Controllers.ReportsController.GetDailySales (SupermarketAPI) in 54.6433ms
+2026-03-13 20:52:28.342 +05:30 [INF] Executing OkObjectResult, writing value of type 'SupermarketAPI.DTOs.MonthlySalesReportDto'.
+2026-03-13 20:52:28.343 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ReportsController.GetDailySales (SupermarketAPI)'
+2026-03-13 20:52:28.346 +05:30 [INF] Executed action SupermarketAPI.Controllers.ReportsController.GetMonthlySales (SupermarketAPI) in 26.1652ms
+2026-03-13 20:52:28.348 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/reports/daily-sales? - 200 null application/json; charset=utf-8 82.9608ms
+2026-03-13 20:52:28.350 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ReportsController.GetMonthlySales (SupermarketAPI)'
+2026-03-13 20:52:28.358 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/reports/monthly-sales? - 200 null application/json; charset=utf-8 70.5624ms
+2026-03-13 20:52:42.669 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/products? - application/json null
+2026-03-13 20:52:42.669 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/categories - application/json null
+2026-03-13 20:52:42.672 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:42.673 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.CategoriesController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:42.674 +05:30 [INF] Route matched with {action = "GetAll", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.ProductsController (SupermarketAPI).
+2026-03-13 20:52:42.684 +05:30 [INF] Route matched with {action = "GetAll", controller = "Categories"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.CategoriesController (SupermarketAPI).
+2026-03-13 20:52:42.685 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/products? - application/json null
+2026-03-13 20:52:42.686 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/categories - application/json null
+2026-03-13 20:52:42.688 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Name], [p].[CategoryId], [p].[Barcode], [p].[ImageUrl], [p].[Price], [p].[Stock], [p].[LowStockThreshold], [p].[CreatedAt]
+FROM [Products] AS [p]
+2026-03-13 20:52:42.691 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:42.694 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.CategoriesController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:42.697 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.ProductDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:52:42.697 +05:30 [INF] Route matched with {action = "GetAll", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.ProductsController (SupermarketAPI).
+2026-03-13 20:52:42.698 +05:30 [INF] Route matched with {action = "GetAll", controller = "Categories"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.CategoriesController (SupermarketAPI).
+2026-03-13 20:52:42.700 +05:30 [INF] Executed action SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI) in 21.9613ms
+2026-03-13 20:52:42.704 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Name], [p].[CategoryId], [p].[Barcode], [p].[ImageUrl], [p].[Price], [p].[Stock], [p].[LowStockThreshold], [p].[CreatedAt]
+FROM [Products] AS [p]
+2026-03-13 20:52:42.705 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/categories - application/json null
+2026-03-13 20:52:42.706 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Name]
+FROM [Categories] AS [c]
+ORDER BY [c].[Name]
+2026-03-13 20:52:42.706 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/products? - application/json null
+2026-03-13 20:52:42.707 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:42.711 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.ProductDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:52:42.714 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.CategoriesController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:42.717 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Name]
+FROM [Categories] AS [c]
+ORDER BY [c].[Name]
+2026-03-13 20:52:42.718 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[SupermarketAPI.Models.Category, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[SupermarketAPI.DTOs.CategoryDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:52:42.720 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/products? - application/json null
+2026-03-13 20:52:42.721 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/categories - application/json null
+2026-03-13 20:52:42.722 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:42.724 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/products? - 200 null application/json; charset=utf-8 55.0843ms
+2026-03-13 20:52:42.726 +05:30 [INF] Executed action SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI) in 23.9145ms
+2026-03-13 20:52:42.728 +05:30 [INF] Route matched with {action = "GetAll", controller = "Categories"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.CategoriesController (SupermarketAPI).
+2026-03-13 20:52:42.731 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[SupermarketAPI.Models.Category, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[SupermarketAPI.DTOs.CategoryDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:52:42.738 +05:30 [INF] Executed action SupermarketAPI.Controllers.CategoriesController.GetAll (SupermarketAPI) in 50.5449ms
+2026-03-13 20:52:42.739 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:42.742 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.CategoriesController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:42.743 +05:30 [INF] Route matched with {action = "GetAll", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.ProductsController (SupermarketAPI).
+2026-03-13 20:52:42.749 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:42.755 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Name]
+FROM [Categories] AS [c]
+ORDER BY [c].[Name]
+2026-03-13 20:52:42.755 +05:30 [INF] Executed action SupermarketAPI.Controllers.CategoriesController.GetAll (SupermarketAPI) in 50.1463ms
+2026-03-13 20:52:42.757 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.CategoriesController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:42.760 +05:30 [INF] Route matched with {action = "GetAll", controller = "Categories"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.CategoriesController (SupermarketAPI).
+2026-03-13 20:52:42.759 +05:30 [INF] Route matched with {action = "GetAll", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.ProductsController (SupermarketAPI).
+2026-03-13 20:52:42.765 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Name], [p].[CategoryId], [p].[Barcode], [p].[ImageUrl], [p].[Price], [p].[Stock], [p].[LowStockThreshold], [p].[CreatedAt]
+FROM [Products] AS [p]
+2026-03-13 20:52:42.766 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/products? - 200 null application/json; charset=utf-8 80.551ms
+2026-03-13 20:52:42.767 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/products? - application/json null
+2026-03-13 20:52:42.769 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/categories - application/json null
+2026-03-13 20:52:42.769 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[SupermarketAPI.Models.Category, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[SupermarketAPI.DTOs.CategoryDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:52:42.771 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.CategoriesController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:42.772 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/categories - 200 null application/json; charset=utf-8 102.9461ms
+2026-03-13 20:52:42.776 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Name]
+FROM [Categories] AS [c]
+ORDER BY [c].[Name]
+2026-03-13 20:52:42.778 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Name], [p].[CategoryId], [p].[Barcode], [p].[ImageUrl], [p].[Price], [p].[Stock], [p].[LowStockThreshold], [p].[CreatedAt]
+FROM [Products] AS [p]
+2026-03-13 20:52:42.780 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.ProductDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:52:42.788 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:42.791 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.CategoriesController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:42.793 +05:30 [INF] Executed action SupermarketAPI.Controllers.CategoriesController.GetAll (SupermarketAPI) in 40.492ms
+2026-03-13 20:52:42.794 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/categories - 200 null application/json; charset=utf-8 108.2004ms
+2026-03-13 20:52:42.801 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[SupermarketAPI.Models.Category, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[SupermarketAPI.DTOs.CategoryDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:52:42.804 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.ProductDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:52:42.805 +05:30 [INF] Executed action SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI) in 42.2793ms
+2026-03-13 20:52:42.806 +05:30 [INF] Route matched with {action = "GetAll", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.ProductsController (SupermarketAPI).
+2026-03-13 20:52:42.808 +05:30 [INF] Route matched with {action = "GetAll", controller = "Categories"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.CategoriesController (SupermarketAPI).
+2026-03-13 20:52:42.810 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.CategoriesController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:42.816 +05:30 [INF] Executed action SupermarketAPI.Controllers.CategoriesController.GetAll (SupermarketAPI) in 41.8569ms
+2026-03-13 20:52:42.820 +05:30 [INF] Executed action SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI) in 42.7879ms
+2026-03-13 20:52:42.821 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:42.826 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Name], [p].[CategoryId], [p].[Barcode], [p].[ImageUrl], [p].[Price], [p].[Stock], [p].[LowStockThreshold], [p].[CreatedAt]
+FROM [Products] AS [p]
+2026-03-13 20:52:42.828 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Name]
+FROM [Categories] AS [c]
+ORDER BY [c].[Name]
+2026-03-13 20:52:42.829 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/categories - 200 null application/json; charset=utf-8 123.7479ms
+2026-03-13 20:52:42.830 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.CategoriesController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:42.832 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:42.833 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/products? - 200 null application/json; charset=utf-8 126.8235ms
+2026-03-13 20:52:42.836 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.ProductDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:52:42.838 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[SupermarketAPI.Models.Category, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[SupermarketAPI.DTOs.CategoryDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:52:42.843 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/categories - 200 null application/json; charset=utf-8 122.5627ms
+2026-03-13 20:52:42.844 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/products? - 200 null application/json; charset=utf-8 124.2964ms
+2026-03-13 20:52:42.850 +05:30 [INF] Executed action SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI) in 26.4974ms
+2026-03-13 20:52:42.852 +05:30 [INF] Executed action SupermarketAPI.Controllers.CategoriesController.GetAll (SupermarketAPI) in 25.5749ms
+2026-03-13 20:52:42.859 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:42.861 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.CategoriesController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:42.863 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/products? - 200 null application/json; charset=utf-8 95.7412ms
+2026-03-13 20:52:42.864 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/categories - 200 null application/json; charset=utf-8 94.662ms
+2026-03-13 20:52:42.942 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/categories - application/json null
+2026-03-13 20:52:42.946 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.CategoriesController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:42.947 +05:30 [INF] Route matched with {action = "GetAll", controller = "Categories"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.CategoriesController (SupermarketAPI).
+2026-03-13 20:52:42.951 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Name]
+FROM [Categories] AS [c]
+ORDER BY [c].[Name]
+2026-03-13 20:52:42.953 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[SupermarketAPI.Models.Category, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[SupermarketAPI.DTOs.CategoryDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:52:42.957 +05:30 [INF] Executed action SupermarketAPI.Controllers.CategoriesController.GetAll (SupermarketAPI) in 7.4807ms
+2026-03-13 20:52:42.958 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.CategoriesController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:42.959 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/categories - 200 null application/json; charset=utf-8 16.5575ms
+2026-03-13 20:52:47.919 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/products? - application/json null
+2026-03-13 20:52:47.923 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:47.925 +05:30 [INF] Route matched with {action = "GetAll", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.ProductsController (SupermarketAPI).
+2026-03-13 20:52:47.931 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Name], [p].[CategoryId], [p].[Barcode], [p].[ImageUrl], [p].[Price], [p].[Stock], [p].[LowStockThreshold], [p].[CreatedAt]
+FROM [Products] AS [p]
+2026-03-13 20:52:47.937 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.ProductDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:52:47.941 +05:30 [INF] Executed action SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI) in 12.6449ms
+2026-03-13 20:52:47.944 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:47.947 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/products? - 200 null application/json; charset=utf-8 28.802ms
+2026-03-13 20:52:49.609 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/purchaseorders - application/json null
+2026-03-13 20:52:49.611 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/Suppliers - application/json null
+2026-03-13 20:52:49.614 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.PurchaseOrdersController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:49.618 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.SuppliersController.GetSuppliers (SupermarketAPI)'
+2026-03-13 20:52:49.627 +05:30 [INF] Route matched with {action = "GetAll", controller = "PurchaseOrders"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.PurchaseOrdersController (SupermarketAPI).
+2026-03-13 20:52:49.631 +05:30 [INF] Route matched with {action = "GetSuppliers", controller = "Suppliers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[SupermarketAPI.Models.Supplier]]] GetSuppliers() on controller SupermarketAPI.Controllers.SuppliersController (SupermarketAPI).
+2026-03-13 20:52:49.662 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[Id], [s].[Address], [s].[ContactNo], [s].[CreatedAt], [s].[IsActive], [s].[Name]
+FROM [Suppliers] AS [s]
+ORDER BY [s].[Name]
+2026-03-13 20:52:49.685 +05:30 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.Models.Supplier, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:52:49.691 +05:30 [INF] Executed action SupermarketAPI.Controllers.SuppliersController.GetSuppliers (SupermarketAPI) in 55.3778ms
+2026-03-13 20:52:49.694 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.SuppliersController.GetSuppliers (SupermarketAPI)'
+2026-03-13 20:52:49.697 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/Suppliers - 200 null application/json; charset=utf-8 86.668ms
+2026-03-13 20:52:49.712 +05:30 [INF] Executed DbCommand (27ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[SupplierId], [s].[Name], [p].[OrderDate], [p].[Status], [p].[TotalAmount], [s].[Id], [s0].[Id], [s0].[ProductId], [s0].[ProductName], [s0].[Quantity], [s0].[UnitCost], [s0].[Id0]
+FROM [PurchaseOrders] AS [p]
+INNER JOIN [Suppliers] AS [s] ON [p].[SupplierId] = [s].[Id]
+LEFT JOIN (
+    SELECT [p0].[Id], [p0].[ProductId], [p1].[Name] AS [ProductName], [p0].[Quantity], [p0].[UnitCost], [p1].[Id] AS [Id0], [p0].[PurchaseOrderId]
+    FROM [PurchaseOrderItems] AS [p0]
+    INNER JOIN [Products] AS [p1] ON [p0].[ProductId] = [p1].[Id]
+) AS [s0] ON [p].[Id] = [s0].[PurchaseOrderId]
+ORDER BY [p].[Id], [s].[Id], [s0].[Id]
+2026-03-13 20:52:49.717 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.PurchaseOrderDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:52:49.723 +05:30 [INF] Executed action SupermarketAPI.Controllers.PurchaseOrdersController.GetAll (SupermarketAPI) in 90.5798ms
+2026-03-13 20:52:49.726 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.PurchaseOrdersController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:49.729 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/purchaseorders - 200 null application/json; charset=utf-8 119.3525ms
+2026-03-13 20:52:52.027 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/products? - application/json null
+2026-03-13 20:52:52.027 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/Suppliers - application/json null
+2026-03-13 20:52:52.030 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:52.032 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.SuppliersController.GetSuppliers (SupermarketAPI)'
+2026-03-13 20:52:52.032 +05:30 [INF] Route matched with {action = "GetAll", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.ProductsController (SupermarketAPI).
+2026-03-13 20:52:52.033 +05:30 [INF] Route matched with {action = "GetSuppliers", controller = "Suppliers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[SupermarketAPI.Models.Supplier]]] GetSuppliers() on controller SupermarketAPI.Controllers.SuppliersController (SupermarketAPI).
+2026-03-13 20:52:52.037 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Name], [p].[CategoryId], [p].[Barcode], [p].[ImageUrl], [p].[Price], [p].[Stock], [p].[LowStockThreshold], [p].[CreatedAt]
+FROM [Products] AS [p]
+2026-03-13 20:52:52.039 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[Id], [s].[Address], [s].[ContactNo], [s].[CreatedAt], [s].[IsActive], [s].[Name]
+FROM [Suppliers] AS [s]
+ORDER BY [s].[Name]
+2026-03-13 20:52:52.041 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.ProductDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:52:52.044 +05:30 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.Models.Supplier, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:52:52.048 +05:30 [INF] Executed action SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI) in 12.8992ms
+2026-03-13 20:52:52.049 +05:30 [INF] Executed action SupermarketAPI.Controllers.SuppliersController.GetSuppliers (SupermarketAPI) in 12.7004ms
+2026-03-13 20:52:52.051 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-13 20:52:52.053 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.SuppliersController.GetSuppliers (SupermarketAPI)'
+2026-03-13 20:52:52.055 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/products? - 200 null application/json; charset=utf-8 28.3852ms
+2026-03-13 20:52:52.057 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/Suppliers - 200 null application/json; charset=utf-8 29.7916ms
+2026-03-13 20:54:07.971 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/purchaseorders - application/json 126
+2026-03-13 20:54:07.978 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.PurchaseOrdersController.Create (SupermarketAPI)'
+2026-03-13 20:54:07.989 +05:30 [INF] Route matched with {action = "Create", controller = "PurchaseOrders"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(SupermarketAPI.DTOs.CreatePurchaseOrderDto) on controller SupermarketAPI.Controllers.PurchaseOrdersController (SupermarketAPI).
+2026-03-13 20:54:08.149 +05:30 [INF] Executed DbCommand (42ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 50), @p2='?' (DbType = Int32), @p3='?' (Precision = 18) (Scale = 2) (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [PurchaseOrders] ([OrderDate], [Status], [SupplierId], [TotalAmount])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+2026-03-13 20:54:08.178 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@p4='?' (DbType = Int32), @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (Precision = 18) (Scale = 2) (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [PurchaseOrderItems] ([ProductId], [PurchaseOrderId], [Quantity], [UnitCost])
+OUTPUT INSERTED.[Id]
+VALUES (@p4, @p5, @p6, @p7);
+2026-03-13 20:54:08.266 +05:30 [INF] Executed DbCommand (39ms) [Parameters=[@id='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [s0].[Id], [s0].[OrderDate], [s0].[Status], [s0].[SupplierId], [s0].[TotalAmount], [s0].[Id0], [s0].[Address], [s0].[ContactNo], [s0].[CreatedAt], [s0].[IsActive], [s0].[Name], [s1].[Id], [s1].[ProductId], [s1].[PurchaseOrderId], [s1].[Quantity], [s1].[UnitCost], [s1].[Id0], [s1].[Barcode], [s1].[CategoryId], [s1].[CostPrice], [s1].[CreatedAt], [s1].[ImageUrl], [s1].[LowStockThreshold], [s1].[Name], [s1].[Price], [s1].[Stock]
+FROM (
+    SELECT TOP(1) [p].[Id], [p].[OrderDate], [p].[Status], [p].[SupplierId], [p].[TotalAmount], [s].[Id] AS [Id0], [s].[Address], [s].[ContactNo], [s].[CreatedAt], [s].[IsActive], [s].[Name]
+    FROM [PurchaseOrders] AS [p]
+    INNER JOIN [Suppliers] AS [s] ON [p].[SupplierId] = [s].[Id]
+    WHERE [p].[Id] = @id
+) AS [s0]
+LEFT JOIN (
+    SELECT [p0].[Id], [p0].[ProductId], [p0].[PurchaseOrderId], [p0].[Quantity], [p0].[UnitCost], [p1].[Id] AS [Id0], [p1].[Barcode], [p1].[CategoryId], [p1].[CostPrice], [p1].[CreatedAt], [p1].[ImageUrl], [p1].[LowStockThreshold], [p1].[Name], [p1].[Price], [p1].[Stock]
+    FROM [PurchaseOrderItems] AS [p0]
+    INNER JOIN [Products] AS [p1] ON [p0].[ProductId] = [p1].[Id]
+) AS [s1] ON [s0].[Id] = [s1].[PurchaseOrderId]
+ORDER BY [s0].[Id], [s0].[Id0], [s1].[Id]
+2026-03-13 20:54:08.280 +05:30 [INF] Executing CreatedAtActionResult, writing value of type 'SupermarketAPI.DTOs.PurchaseOrderDto'.
+2026-03-13 20:54:08.305 +05:30 [INF] Executed action SupermarketAPI.Controllers.PurchaseOrdersController.Create (SupermarketAPI) in 311.6908ms
+2026-03-13 20:54:08.307 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.PurchaseOrdersController.Create (SupermarketAPI)'
+2026-03-13 20:54:08.310 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/purchaseorders - 201 null application/json; charset=utf-8 338.8503ms
+2026-03-13 20:54:08.322 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/purchaseorders - application/json null
+2026-03-13 20:54:08.327 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.PurchaseOrdersController.GetAll (SupermarketAPI)'
+2026-03-13 20:54:08.329 +05:30 [INF] Route matched with {action = "GetAll", controller = "PurchaseOrders"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.PurchaseOrdersController (SupermarketAPI).
+2026-03-13 20:54:08.350 +05:30 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[SupplierId], [s].[Name], [p].[OrderDate], [p].[Status], [p].[TotalAmount], [s].[Id], [s0].[Id], [s0].[ProductId], [s0].[ProductName], [s0].[Quantity], [s0].[UnitCost], [s0].[Id0]
+FROM [PurchaseOrders] AS [p]
+INNER JOIN [Suppliers] AS [s] ON [p].[SupplierId] = [s].[Id]
+LEFT JOIN (
+    SELECT [p0].[Id], [p0].[ProductId], [p1].[Name] AS [ProductName], [p0].[Quantity], [p0].[UnitCost], [p1].[Id] AS [Id0], [p0].[PurchaseOrderId]
+    FROM [PurchaseOrderItems] AS [p0]
+    INNER JOIN [Products] AS [p1] ON [p0].[ProductId] = [p1].[Id]
+) AS [s0] ON [p].[Id] = [s0].[PurchaseOrderId]
+ORDER BY [p].[Id], [s].[Id], [s0].[Id]
+2026-03-13 20:54:08.355 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.PurchaseOrderDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:54:08.356 +05:30 [INF] Executed action SupermarketAPI.Controllers.PurchaseOrdersController.GetAll (SupermarketAPI) in 23.9529ms
+2026-03-13 20:54:08.358 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.PurchaseOrdersController.GetAll (SupermarketAPI)'
+2026-03-13 20:54:08.360 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/purchaseorders - 200 null application/json; charset=utf-8 37.8628ms
+2026-03-13 20:54:20.218 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/Suppliers - application/json null
+2026-03-13 20:54:20.219 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/Grn - application/json null
+2026-03-13 20:54:20.223 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.SuppliersController.GetSuppliers (SupermarketAPI)'
+2026-03-13 20:54:20.226 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.GrnController.GetGrns (SupermarketAPI)'
+2026-03-13 20:54:20.228 +05:30 [INF] Route matched with {action = "GetSuppliers", controller = "Suppliers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[SupermarketAPI.Models.Supplier]]] GetSuppliers() on controller SupermarketAPI.Controllers.SuppliersController (SupermarketAPI).
+2026-03-13 20:54:20.230 +05:30 [INF] Route matched with {action = "GetGrns", controller = "Grn"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.Object]]] GetGrns() on controller SupermarketAPI.Controllers.GrnController (SupermarketAPI).
+2026-03-13 20:54:20.236 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[Id], [s].[Address], [s].[ContactNo], [s].[CreatedAt], [s].[IsActive], [s].[Name]
+FROM [Suppliers] AS [s]
+ORDER BY [s].[Name]
+2026-03-13 20:54:20.241 +05:30 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.Models.Supplier, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:54:20.245 +05:30 [INF] Executed action SupermarketAPI.Controllers.SuppliersController.GetSuppliers (SupermarketAPI) in 12.3477ms
+2026-03-13 20:54:20.246 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [g].[Id], [g].[ReceivedDate], [g].[TotalAmount], [s].[Name] AS [SupplierName], (
+    SELECT COUNT(*)
+    FROM [GoodsReceivedNoteItems] AS [g0]
+    WHERE [g].[Id] = [g0].[GoodsReceivedNoteId]) AS [ItemsCount]
+FROM [GoodsReceivedNotes] AS [g]
+INNER JOIN [Suppliers] AS [s] ON [g].[SupplierId] = [s].[Id]
+ORDER BY [g].[ReceivedDate] DESC
+2026-03-13 20:54:20.247 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.SuppliersController.GetSuppliers (SupermarketAPI)'
+2026-03-13 20:54:20.250 +05:30 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[<>f__AnonymousType7`5[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.DateTime, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Decimal, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:54:20.253 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/Suppliers - 200 null application/json; charset=utf-8 35.1072ms
+2026-03-13 20:54:20.256 +05:30 [INF] Executed action SupermarketAPI.Controllers.GrnController.GetGrns (SupermarketAPI) in 20.9706ms
+2026-03-13 20:54:20.262 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.GrnController.GetGrns (SupermarketAPI)'
+2026-03-13 20:54:20.264 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/Grn - 200 null application/json; charset=utf-8 45.6127ms
+2026-03-13 20:54:36.398 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/purchaseorders - application/json null
+2026-03-13 20:54:36.398 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/Suppliers - application/json null
+2026-03-13 20:54:36.401 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.PurchaseOrdersController.GetAll (SupermarketAPI)'
+2026-03-13 20:54:36.403 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.SuppliersController.GetSuppliers (SupermarketAPI)'
+2026-03-13 20:54:36.404 +05:30 [INF] Route matched with {action = "GetAll", controller = "PurchaseOrders"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.PurchaseOrdersController (SupermarketAPI).
+2026-03-13 20:54:36.404 +05:30 [INF] Route matched with {action = "GetSuppliers", controller = "Suppliers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[SupermarketAPI.Models.Supplier]]] GetSuppliers() on controller SupermarketAPI.Controllers.SuppliersController (SupermarketAPI).
+2026-03-13 20:54:36.410 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[SupplierId], [s].[Name], [p].[OrderDate], [p].[Status], [p].[TotalAmount], [s].[Id], [s0].[Id], [s0].[ProductId], [s0].[ProductName], [s0].[Quantity], [s0].[UnitCost], [s0].[Id0]
+FROM [PurchaseOrders] AS [p]
+INNER JOIN [Suppliers] AS [s] ON [p].[SupplierId] = [s].[Id]
+LEFT JOIN (
+    SELECT [p0].[Id], [p0].[ProductId], [p1].[Name] AS [ProductName], [p0].[Quantity], [p0].[UnitCost], [p1].[Id] AS [Id0], [p0].[PurchaseOrderId]
+    FROM [PurchaseOrderItems] AS [p0]
+    INNER JOIN [Products] AS [p1] ON [p0].[ProductId] = [p1].[Id]
+) AS [s0] ON [p].[Id] = [s0].[PurchaseOrderId]
+ORDER BY [p].[Id], [s].[Id], [s0].[Id]
+2026-03-13 20:54:36.412 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[Id], [s].[Address], [s].[ContactNo], [s].[CreatedAt], [s].[IsActive], [s].[Name]
+FROM [Suppliers] AS [s]
+ORDER BY [s].[Name]
+2026-03-13 20:54:36.413 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.PurchaseOrderDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:54:36.417 +05:30 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.Models.Supplier, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:54:36.418 +05:30 [INF] Executed action SupermarketAPI.Controllers.PurchaseOrdersController.GetAll (SupermarketAPI) in 11.598ms
+2026-03-13 20:54:36.420 +05:30 [INF] Executed action SupermarketAPI.Controllers.SuppliersController.GetSuppliers (SupermarketAPI) in 10.2889ms
+2026-03-13 20:54:36.423 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.PurchaseOrdersController.GetAll (SupermarketAPI)'
+2026-03-13 20:54:36.425 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.SuppliersController.GetSuppliers (SupermarketAPI)'
+2026-03-13 20:54:36.426 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/purchaseorders - 200 null application/json; charset=utf-8 28.0949ms
+2026-03-13 20:54:36.427 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/Suppliers - 200 null application/json; charset=utf-8 28.7003ms
+2026-03-13 20:54:47.052 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/Suppliers - application/json null
+2026-03-13 20:54:47.052 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/Grn - application/json null
+2026-03-13 20:54:47.055 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.SuppliersController.GetSuppliers (SupermarketAPI)'
+2026-03-13 20:54:47.058 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.GrnController.GetGrns (SupermarketAPI)'
+2026-03-13 20:54:47.059 +05:30 [INF] Route matched with {action = "GetSuppliers", controller = "Suppliers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[SupermarketAPI.Models.Supplier]]] GetSuppliers() on controller SupermarketAPI.Controllers.SuppliersController (SupermarketAPI).
+2026-03-13 20:54:47.060 +05:30 [INF] Route matched with {action = "GetGrns", controller = "Grn"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.Object]]] GetGrns() on controller SupermarketAPI.Controllers.GrnController (SupermarketAPI).
+2026-03-13 20:54:47.066 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[Id], [s].[Address], [s].[ContactNo], [s].[CreatedAt], [s].[IsActive], [s].[Name]
+FROM [Suppliers] AS [s]
+ORDER BY [s].[Name]
+2026-03-13 20:54:47.071 +05:30 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.Models.Supplier, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:54:47.073 +05:30 [INF] Executed action SupermarketAPI.Controllers.SuppliersController.GetSuppliers (SupermarketAPI) in 10.8828ms
+2026-03-13 20:54:47.074 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [g].[Id], [g].[ReceivedDate], [g].[TotalAmount], [s].[Name] AS [SupplierName], (
+    SELECT COUNT(*)
+    FROM [GoodsReceivedNoteItems] AS [g0]
+    WHERE [g].[Id] = [g0].[GoodsReceivedNoteId]) AS [ItemsCount]
+FROM [GoodsReceivedNotes] AS [g]
+INNER JOIN [Suppliers] AS [s] ON [g].[SupplierId] = [s].[Id]
+ORDER BY [g].[ReceivedDate] DESC
+2026-03-13 20:54:47.076 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.SuppliersController.GetSuppliers (SupermarketAPI)'
+2026-03-13 20:54:47.079 +05:30 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[<>f__AnonymousType7`5[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.DateTime, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Decimal, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:54:47.080 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/Suppliers - 200 null application/json; charset=utf-8 28.1304ms
+2026-03-13 20:54:47.082 +05:30 [INF] Executed action SupermarketAPI.Controllers.GrnController.GetGrns (SupermarketAPI) in 18.3802ms
+2026-03-13 20:54:47.087 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.GrnController.GetGrns (SupermarketAPI)'
+2026-03-13 20:54:47.088 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/Grn - 200 null application/json; charset=utf-8 36.5088ms
+2026-03-13 20:56:20.583 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/expenses?startDate=2026-02-11T20:56:20.546172&endDate=2026-03-13T20:56:20.546172& - application/json null
+2026-03-13 20:56:20.589 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ExpensesController.GetExpenses (SupermarketAPI)'
+2026-03-13 20:56:20.590 +05:30 [INF] Route matched with {action = "GetExpenses", controller = "Expenses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[SupermarketAPI.DTOs.ExpenseDto]]] GetExpenses(System.Nullable`1[System.DateTime], System.Nullable`1[System.DateTime], System.String) on controller SupermarketAPI.Controllers.ExpensesController (SupermarketAPI).
+2026-03-13 20:56:20.604 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@startDate_Value='?' (DbType = DateTime2), @endDate_Value='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [e].[Id], [e].[Description], [e].[Category], [e].[Amount], [e].[Date], [e].[CreatedBy]
+FROM [Expenses] AS [e]
+WHERE [e].[Date] >= @startDate_Value AND [e].[Date] <= @endDate_Value
+ORDER BY [e].[Date] DESC
+2026-03-13 20:56:20.608 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.ExpenseDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:56:20.610 +05:30 [INF] Executed action SupermarketAPI.Controllers.ExpensesController.GetExpenses (SupermarketAPI) in 18.9336ms
+2026-03-13 20:56:20.613 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ExpensesController.GetExpenses (SupermarketAPI)'
+2026-03-13 20:56:20.616 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/expenses?startDate=2026-02-11T20:56:20.546172&endDate=2026-03-13T20:56:20.546172& - 200 null application/json; charset=utf-8 32.4619ms
+2026-03-13 20:56:20.623 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/sales - null null
+2026-03-13 20:56:20.629 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.SalesController.GetAll (SupermarketAPI)'
+2026-03-13 20:56:20.633 +05:30 [INF] Route matched with {action = "GetAll", controller = "Sales"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.SalesController (SupermarketAPI).
+2026-03-13 20:56:20.685 +05:30 [INF] Executed DbCommand (42ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[Id], [s].[CreatedAt], [s].[DiscountAmount], [s].[EmployeeId], [s].[Notes], [s].[PaymentMethod], [s].[SaleDate], [s].[SaleNo], [s].[Status], [s].[TotalAmount], [s].[UpdatedAt], [e].[Id], [e].[CreatedAt], [e].[Email], [e].[HireDate], [e].[IsActive], [e].[Name], [e].[Phone], [e].[Position], [e].[Salary], [e].[UpdatedAt], [e].[UserId], [s1].[Id], [s1].[CreatedAt], [s1].[Discount], [s1].[LineTotal], [s1].[ProductId], [s1].[Quantity], [s1].[SaleId], [s1].[UnitCost], [s1].[UnitPrice], [s1].[Id0], [s1].[Barcode], [s1].[CategoryId], [s1].[CostPrice], [s1].[CreatedAt0], [s1].[ImageUrl], [s1].[LowStockThreshold], [s1].[Name], [s1].[Price], [s1].[Stock]
+FROM [Sales] AS [s]
+INNER JOIN [Employees] AS [e] ON [s].[EmployeeId] = [e].[Id]
+LEFT JOIN (
+    SELECT [s0].[Id], [s0].[CreatedAt], [s0].[Discount], [s0].[LineTotal], [s0].[ProductId], [s0].[Quantity], [s0].[SaleId], [s0].[UnitCost], [s0].[UnitPrice], [p].[Id] AS [Id0], [p].[Barcode], [p].[CategoryId], [p].[CostPrice], [p].[CreatedAt] AS [CreatedAt0], [p].[ImageUrl], [p].[LowStockThreshold], [p].[Name], [p].[Price], [p].[Stock]
+    FROM [SaleItems] AS [s0]
+    INNER JOIN [Products] AS [p] ON [s0].[ProductId] = [p].[Id]
+) AS [s1] ON [s].[Id] = [s1].[SaleId]
+ORDER BY [s].[SaleDate] DESC, [s].[Id], [e].[Id], [s1].[Id]
+2026-03-13 20:56:20.696 +05:30 [INF] Executing OkObjectResult, writing value of type 'SupermarketAPI.DTOs.ApiResponse`1[[System.Collections.Generic.IEnumerable`1[[SupermarketAPI.DTOs.SaleDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-03-13 20:56:20.700 +05:30 [INF] Executed action SupermarketAPI.Controllers.SalesController.GetAll (SupermarketAPI) in 60.5224ms
+2026-03-13 20:56:20.705 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.SalesController.GetAll (SupermarketAPI)'
+2026-03-13 20:56:20.707 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/sales - 200 null application/json; charset=utf-8 84.5472ms
+2026-03-13 20:56:20.714 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/grn - null null
+2026-03-13 20:56:20.722 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.GrnController.GetGrns (SupermarketAPI)'
+2026-03-13 20:56:20.726 +05:30 [INF] Route matched with {action = "GetGrns", controller = "Grn"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.Object]]] GetGrns() on controller SupermarketAPI.Controllers.GrnController (SupermarketAPI).
+2026-03-13 20:56:20.744 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [g].[Id], [g].[ReceivedDate], [g].[TotalAmount], [s].[Name] AS [SupplierName], (
+    SELECT COUNT(*)
+    FROM [GoodsReceivedNoteItems] AS [g0]
+    WHERE [g].[Id] = [g0].[GoodsReceivedNoteId]) AS [ItemsCount]
+FROM [GoodsReceivedNotes] AS [g]
+INNER JOIN [Suppliers] AS [s] ON [g].[SupplierId] = [s].[Id]
+ORDER BY [g].[ReceivedDate] DESC
+2026-03-13 20:56:20.750 +05:30 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[<>f__AnonymousType7`5[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.DateTime, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Decimal, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:56:20.755 +05:30 [INF] Executed action SupermarketAPI.Controllers.GrnController.GetGrns (SupermarketAPI) in 24.4546ms
+2026-03-13 20:56:20.759 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.GrnController.GetGrns (SupermarketAPI)'
+2026-03-13 20:56:20.762 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/grn - 200 null application/json; charset=utf-8 47.1856ms
+2026-03-13 20:56:53.836 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/reports/daily-sales?date=2026-03-13 - application/json null
+2026-03-13 20:56:53.836 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/reports/top-products?limit=10 - application/json null
+2026-03-13 20:56:53.839 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ReportsController.GetDailySales (SupermarketAPI)'
+2026-03-13 20:56:53.841 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ReportsController.GetTopProducts (SupermarketAPI)'
+2026-03-13 20:56:53.841 +05:30 [INF] Route matched with {action = "GetDailySales", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetDailySales(System.Nullable`1[System.DateTime]) on controller SupermarketAPI.Controllers.ReportsController (SupermarketAPI).
+2026-03-13 20:56:53.850 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(SUM([o].[TotalAmount]), 0.0)
+FROM [Orders] AS [o]
+WHERE [o].[OrderDate] >= @start AND [o].[OrderDate] < @end
+2026-03-13 20:56:53.851 +05:30 [INF] Route matched with {action = "GetTopProducts", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTopProducts(Int32) on controller SupermarketAPI.Controllers.ReportsController (SupermarketAPI).
+2026-03-13 20:56:53.856 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Orders] AS [o]
+WHERE [o].[OrderDate] >= @start AND [o].[OrderDate] < @end
+2026-03-13 20:56:53.862 +05:30 [INF] Executing OkObjectResult, writing value of type 'SupermarketAPI.DTOs.DailySalesReportDto'.
+2026-03-13 20:56:53.865 +05:30 [INF] Executed action SupermarketAPI.Controllers.ReportsController.GetDailySales (SupermarketAPI) in 21.8268ms
+2026-03-13 20:56:53.867 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ReportsController.GetDailySales (SupermarketAPI)'
+2026-03-13 20:56:53.868 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/reports/daily-sales?date=2026-03-13 - 200 null application/json; charset=utf-8 32.2007ms
+2026-03-13 20:56:53.875 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/reports/profit-summary?period=Monthly&startDate=2026-03-01T00%3A00%3A00.000&endDate=2026-03-31T00%3A00%3A00.000 - application/json null
+2026-03-13 20:56:53.879 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ReportsController.GetProfitSummary (SupermarketAPI)'
+2026-03-13 20:56:53.883 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/reports/monthly-sales?year=2026&month=3 - application/json null
+2026-03-13 20:56:53.888 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ReportsController.GetMonthlySales (SupermarketAPI)'
+2026-03-13 20:56:53.890 +05:30 [INF] Route matched with {action = "GetMonthlySales", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMonthlySales(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32]) on controller SupermarketAPI.Controllers.ReportsController (SupermarketAPI).
+2026-03-13 20:56:53.890 +05:30 [INF] Route matched with {action = "GetProfitSummary", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProfitSummary(System.Nullable`1[System.DateTime], System.Nullable`1[System.DateTime]) on controller SupermarketAPI.Controllers.ReportsController (SupermarketAPI).
+2026-03-13 20:56:53.895 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(SUM([o].[TotalAmount]), 0.0)
+FROM [Orders] AS [o]
+WHERE [o].[OrderDate] >= @start AND [o].[OrderDate] < @end
+2026-03-13 20:56:53.904 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Orders] AS [o]
+WHERE [o].[OrderDate] >= @start AND [o].[OrderDate] < @end
+2026-03-13 20:56:53.909 +05:30 [INF] Executing OkObjectResult, writing value of type 'SupermarketAPI.DTOs.MonthlySalesReportDto'.
+2026-03-13 20:56:53.912 +05:30 [INF] Executed action SupermarketAPI.Controllers.ReportsController.GetMonthlySales (SupermarketAPI) in 19.5973ms
+2026-03-13 20:56:53.915 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ReportsController.GetMonthlySales (SupermarketAPI)'
+2026-03-13 20:56:53.917 +05:30 [INF] Executed DbCommand (20ms) [Parameters=[@p='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(@p) [s].[ProductId], [s].[Name0] AS [Name], COALESCE(SUM([s].[Quantity]), 0) AS [QuantitySold], COALESCE(SUM([s].[LineTotal]), 0.0) AS [Revenue]
+FROM (
+    SELECT [o].[LineTotal], [o].[ProductId], [o].[Quantity], [p].[Name] AS [Name0]
+    FROM [OrderItems] AS [o]
+    INNER JOIN [Products] AS [p] ON [o].[ProductId] = [p].[Id]
+) AS [s]
+GROUP BY [s].[ProductId], [s].[Name0]
+ORDER BY COALESCE(SUM([s].[Quantity]), 0) DESC
+2026-03-13 20:56:53.918 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/reports/monthly-sales?year=2026&month=3 - 200 null application/json; charset=utf-8 34.7271ms
+2026-03-13 20:56:53.919 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(SUM([o].[TotalAmount]), 0.0)
+FROM [Orders] AS [o]
+WHERE [o].[OrderDate] >= @start AND [o].[OrderDate] <= @end
+2026-03-13 20:56:53.923 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.TopProductDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:56:53.933 +05:30 [INF] Executed action SupermarketAPI.Controllers.ReportsController.GetTopProducts (SupermarketAPI) in 79.0843ms
+2026-03-13 20:56:53.935 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ReportsController.GetTopProducts (SupermarketAPI)'
+2026-03-13 20:56:53.936 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/reports/top-products?limit=10 - 200 null application/json; charset=utf-8 99.7585ms
+2026-03-13 20:56:53.959 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(SUM(CAST([o].[Quantity] AS decimal(18,2)) * [p].[CostPrice]), 0.0)
+FROM [OrderItems] AS [o]
+INNER JOIN [Orders] AS [o0] ON [o].[OrderId] = [o0].[Id]
+INNER JOIN [Products] AS [p] ON [o].[ProductId] = [p].[Id]
+WHERE [o0].[OrderDate] >= @start AND [o0].[OrderDate] <= @end
+2026-03-13 20:56:53.972 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(SUM([e].[Amount]), 0.0)
+FROM [Expenses] AS [e]
+WHERE [e].[Date] >= @start AND [e].[Date] <= @end
+2026-03-13 20:56:53.975 +05:30 [INF] Executing OkObjectResult, writing value of type 'SupermarketAPI.DTOs.ProfitSummaryDto'.
+2026-03-13 20:56:53.977 +05:30 [INF] Executed action SupermarketAPI.Controllers.ReportsController.GetProfitSummary (SupermarketAPI) in 79.9086ms
+2026-03-13 20:56:53.979 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ReportsController.GetProfitSummary (SupermarketAPI)'
+2026-03-13 20:56:53.980 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/reports/profit-summary?period=Monthly&startDate=2026-03-01T00%3A00%3A00.000&endDate=2026-03-31T00%3A00%3A00.000 - 200 null application/json; charset=utf-8 105.3086ms
+2026-03-13 20:57:16.644 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/reports/profit-summary?period=Custom&startDate=2026-03-01T00%3A00%3A00.000&endDate=2026-03-31T00%3A00%3A00.000 - application/json null
+2026-03-13 20:57:16.649 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ReportsController.GetProfitSummary (SupermarketAPI)'
+2026-03-13 20:57:16.651 +05:30 [INF] Route matched with {action = "GetProfitSummary", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProfitSummary(System.Nullable`1[System.DateTime], System.Nullable`1[System.DateTime]) on controller SupermarketAPI.Controllers.ReportsController (SupermarketAPI).
+2026-03-13 20:57:16.662 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(SUM([o].[TotalAmount]), 0.0)
+FROM [Orders] AS [o]
+WHERE [o].[OrderDate] >= @start AND [o].[OrderDate] <= @end
+2026-03-13 20:57:16.683 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(SUM(CAST([o].[Quantity] AS decimal(18,2)) * [p].[CostPrice]), 0.0)
+FROM [OrderItems] AS [o]
+INNER JOIN [Orders] AS [o0] ON [o].[OrderId] = [o0].[Id]
+INNER JOIN [Products] AS [p] ON [o].[ProductId] = [p].[Id]
+WHERE [o0].[OrderDate] >= @start AND [o0].[OrderDate] <= @end
+2026-03-13 20:57:16.692 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(SUM([e].[Amount]), 0.0)
+FROM [Expenses] AS [e]
+WHERE [e].[Date] >= @start AND [e].[Date] <= @end
+2026-03-13 20:57:16.696 +05:30 [INF] Executing OkObjectResult, writing value of type 'SupermarketAPI.DTOs.ProfitSummaryDto'.
+2026-03-13 20:57:16.698 +05:30 [INF] Executed action SupermarketAPI.Controllers.ReportsController.GetProfitSummary (SupermarketAPI) in 44.742ms
+2026-03-13 20:57:16.701 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ReportsController.GetProfitSummary (SupermarketAPI)'
+2026-03-13 20:57:16.703 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/reports/profit-summary?period=Custom&startDate=2026-03-01T00%3A00%3A00.000&endDate=2026-03-31T00%3A00%3A00.000 - 200 null application/json; charset=utf-8 58.4254ms
+2026-03-13 20:57:49.692 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/employees - application/json null
+2026-03-13 20:57:49.696 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI)'
+2026-03-13 20:57:49.707 +05:30 [INF] Route matched with {action = "GetEmployees", controller = "Employees"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetEmployees(System.Nullable`1[System.Boolean], Int32, Int32) on controller SupermarketAPI.Controllers.EmployeesController (SupermarketAPI).
+2026-03-13 20:57:49.752 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[@filter_IsActive='?' (DbType = Boolean), @p='?' (DbType = Int32), @p2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [e0].[Id], [e0].[CreatedAt], [e0].[Email], [e0].[HireDate], [e0].[IsActive], [e0].[Name], [e0].[Phone], [e0].[Position], [e0].[Salary], [e0].[UpdatedAt], [e0].[UserId], [u].[Id], [u].[CreatedAt], [u].[Email], [u].[IsActive], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM (
+    SELECT [e].[Id], [e].[CreatedAt], [e].[Email], [e].[HireDate], [e].[IsActive], [e].[Name], [e].[Phone], [e].[Position], [e].[Salary], [e].[UpdatedAt], [e].[UserId]
+    FROM [Employees] AS [e]
+    WHERE [e].[IsActive] = @filter_IsActive
+    ORDER BY [e].[Name]
+    OFFSET @p ROWS FETCH NEXT @p2 ROWS ONLY
+) AS [e0]
+LEFT JOIN [Users] AS [u] ON [e0].[UserId] = [u].[Id]
+ORDER BY [e0].[Name]
+2026-03-13 20:57:49.764 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[SupermarketAPI.Models.Employee, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[SupermarketAPI.DTOs.EmployeeDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:57:49.773 +05:30 [INF] Executed action SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI) in 63.2204ms
+2026-03-13 20:57:49.776 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI)'
+2026-03-13 20:57:49.778 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/employees - 200 null application/json; charset=utf-8 86.4255ms
+2026-03-13 20:57:52.134 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/payroll/history - application/json null
+2026-03-13 20:57:52.139 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.PayrollController.GetPayrollHistory (SupermarketAPI)'
+2026-03-13 20:57:52.145 +05:30 [INF] Route matched with {action = "GetPayrollHistory", controller = "Payroll"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPayrollHistory() on controller SupermarketAPI.Controllers.PayrollController (SupermarketAPI).
+2026-03-13 20:57:52.154 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/employees - application/json null
+2026-03-13 20:57:52.160 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI)'
+2026-03-13 20:57:52.164 +05:30 [INF] Route matched with {action = "GetEmployees", controller = "Employees"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetEmployees(System.Nullable`1[System.Boolean], Int32, Int32) on controller SupermarketAPI.Controllers.EmployeesController (SupermarketAPI).
+2026-03-13 20:57:52.172 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@filter_IsActive='?' (DbType = Boolean), @p='?' (DbType = Int32), @p2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [e0].[Id], [e0].[CreatedAt], [e0].[Email], [e0].[HireDate], [e0].[IsActive], [e0].[Name], [e0].[Phone], [e0].[Position], [e0].[Salary], [e0].[UpdatedAt], [e0].[UserId], [u].[Id], [u].[CreatedAt], [u].[Email], [u].[IsActive], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM (
+    SELECT [e].[Id], [e].[CreatedAt], [e].[Email], [e].[HireDate], [e].[IsActive], [e].[Name], [e].[Phone], [e].[Position], [e].[Salary], [e].[UpdatedAt], [e].[UserId]
+    FROM [Employees] AS [e]
+    WHERE [e].[IsActive] = @filter_IsActive
+    ORDER BY [e].[Name]
+    OFFSET @p ROWS FETCH NEXT @p2 ROWS ONLY
+) AS [e0]
+LEFT JOIN [Users] AS [u] ON [e0].[UserId] = [u].[Id]
+ORDER BY [e0].[Name]
+2026-03-13 20:57:52.180 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[SupermarketAPI.Models.Employee, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[SupermarketAPI.DTOs.EmployeeDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:57:52.183 +05:30 [INF] Executed action SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI) in 16.5527ms
+2026-03-13 20:57:52.189 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI)'
+2026-03-13 20:57:52.193 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/employees - 200 null application/json; charset=utf-8 39.1011ms
+2026-03-13 20:57:52.195 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[EmployeeId], [e].[Name] AS [EmployeeName], [p].[MonthYear], [p].[PeriodStart], [p].[PeriodEnd], [p].[BasicSalary], [p].[WorkedDays], [p].[OvertimeHours], [p].[OvertimeRate], [p].[Bonuses], [p].[Advances], [p].[OtherDeductions], [p].[Epf8], [p].[Tax], [p].[Epf12], [p].[Etf3], [p].[NetSalary], CASE [p].[Status]
+    WHEN 0 THEN N'Draft'
+    WHEN 1 THEN N'Approved'
+    WHEN 2 THEN N'Paid'
+    ELSE CAST([p].[Status] AS nvarchar(max))
+END AS [Status], [p].[GeneratedDate]
+FROM [Payrolls] AS [p]
+INNER JOIN [Employees] AS [e] ON [p].[EmployeeId] = [e].[Id]
+ORDER BY [p].[GeneratedDate] DESC
+2026-03-13 20:57:52.223 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.PayrollDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:57:52.247 +05:30 [INF] Executed action SupermarketAPI.Controllers.PayrollController.GetPayrollHistory (SupermarketAPI) in 97.0993ms
+2026-03-13 20:57:52.252 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.PayrollController.GetPayrollHistory (SupermarketAPI)'
+2026-03-13 20:57:52.260 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/payroll/history - 200 null application/json; charset=utf-8 125.2937ms
+2026-03-13 20:57:54.374 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/employees - application/json null
+2026-03-13 20:57:54.376 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI)'
+2026-03-13 20:57:54.377 +05:30 [INF] Route matched with {action = "GetEmployees", controller = "Employees"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetEmployees(System.Nullable`1[System.Boolean], Int32, Int32) on controller SupermarketAPI.Controllers.EmployeesController (SupermarketAPI).
+2026-03-13 20:57:54.381 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@filter_IsActive='?' (DbType = Boolean), @p='?' (DbType = Int32), @p2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [e0].[Id], [e0].[CreatedAt], [e0].[Email], [e0].[HireDate], [e0].[IsActive], [e0].[Name], [e0].[Phone], [e0].[Position], [e0].[Salary], [e0].[UpdatedAt], [e0].[UserId], [u].[Id], [u].[CreatedAt], [u].[Email], [u].[IsActive], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM (
+    SELECT [e].[Id], [e].[CreatedAt], [e].[Email], [e].[HireDate], [e].[IsActive], [e].[Name], [e].[Phone], [e].[Position], [e].[Salary], [e].[UpdatedAt], [e].[UserId]
+    FROM [Employees] AS [e]
+    WHERE [e].[IsActive] = @filter_IsActive
+    ORDER BY [e].[Name]
+    OFFSET @p ROWS FETCH NEXT @p2 ROWS ONLY
+) AS [e0]
+LEFT JOIN [Users] AS [u] ON [e0].[UserId] = [u].[Id]
+ORDER BY [e0].[Name]
+2026-03-13 20:57:54.385 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[SupermarketAPI.Models.Employee, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[SupermarketAPI.DTOs.EmployeeDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:57:54.387 +05:30 [INF] Executed action SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI) in 8.1427ms
+2026-03-13 20:57:54.389 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI)'
+2026-03-13 20:57:54.390 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/employees - 200 null application/json; charset=utf-8 15.8875ms
+2026-03-13 20:58:26.589 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/employees - application/json null
+2026-03-13 20:58:26.593 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI)'
+2026-03-13 20:58:26.594 +05:30 [INF] Route matched with {action = "GetEmployees", controller = "Employees"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetEmployees(System.Nullable`1[System.Boolean], Int32, Int32) on controller SupermarketAPI.Controllers.EmployeesController (SupermarketAPI).
+2026-03-13 20:58:26.596 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/payroll/history - application/json null
+2026-03-13 20:58:26.599 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.PayrollController.GetPayrollHistory (SupermarketAPI)'
+2026-03-13 20:58:26.602 +05:30 [INF] Route matched with {action = "GetPayrollHistory", controller = "Payroll"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPayrollHistory() on controller SupermarketAPI.Controllers.PayrollController (SupermarketAPI).
+2026-03-13 20:58:26.607 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@filter_IsActive='?' (DbType = Boolean), @p='?' (DbType = Int32), @p2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [e0].[Id], [e0].[CreatedAt], [e0].[Email], [e0].[HireDate], [e0].[IsActive], [e0].[Name], [e0].[Phone], [e0].[Position], [e0].[Salary], [e0].[UpdatedAt], [e0].[UserId], [u].[Id], [u].[CreatedAt], [u].[Email], [u].[IsActive], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM (
+    SELECT [e].[Id], [e].[CreatedAt], [e].[Email], [e].[HireDate], [e].[IsActive], [e].[Name], [e].[Phone], [e].[Position], [e].[Salary], [e].[UpdatedAt], [e].[UserId]
+    FROM [Employees] AS [e]
+    WHERE [e].[IsActive] = @filter_IsActive
+    ORDER BY [e].[Name]
+    OFFSET @p ROWS FETCH NEXT @p2 ROWS ONLY
+) AS [e0]
+LEFT JOIN [Users] AS [u] ON [e0].[UserId] = [u].[Id]
+ORDER BY [e0].[Name]
+2026-03-13 20:58:26.613 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[SupermarketAPI.Models.Employee, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[SupermarketAPI.DTOs.EmployeeDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:58:26.614 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[EmployeeId], [e].[Name] AS [EmployeeName], [p].[MonthYear], [p].[PeriodStart], [p].[PeriodEnd], [p].[BasicSalary], [p].[WorkedDays], [p].[OvertimeHours], [p].[OvertimeRate], [p].[Bonuses], [p].[Advances], [p].[OtherDeductions], [p].[Epf8], [p].[Tax], [p].[Epf12], [p].[Etf3], [p].[NetSalary], CASE [p].[Status]
+    WHEN 0 THEN N'Draft'
+    WHEN 1 THEN N'Approved'
+    WHEN 2 THEN N'Paid'
+    ELSE CAST([p].[Status] AS nvarchar(max))
+END AS [Status], [p].[GeneratedDate]
+FROM [Payrolls] AS [p]
+INNER JOIN [Employees] AS [e] ON [p].[EmployeeId] = [e].[Id]
+ORDER BY [p].[GeneratedDate] DESC
+2026-03-13 20:58:26.615 +05:30 [INF] Executed action SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI) in 19.5215ms
+2026-03-13 20:58:26.622 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.PayrollDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:58:26.624 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI)'
+2026-03-13 20:58:26.626 +05:30 [INF] Executed action SupermarketAPI.Controllers.PayrollController.GetPayrollHistory (SupermarketAPI) in 21.1274ms
+2026-03-13 20:58:26.629 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/employees - 200 null application/json; charset=utf-8 39.5287ms
+2026-03-13 20:58:26.631 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.PayrollController.GetPayrollHistory (SupermarketAPI)'
+2026-03-13 20:58:26.637 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/payroll/history - 200 null application/json; charset=utf-8 41.1411ms
+2026-03-13 20:58:28.222 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/employees - application/json null
+2026-03-13 20:58:28.224 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI)'
+2026-03-13 20:58:28.226 +05:30 [INF] Route matched with {action = "GetEmployees", controller = "Employees"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetEmployees(System.Nullable`1[System.Boolean], Int32, Int32) on controller SupermarketAPI.Controllers.EmployeesController (SupermarketAPI).
+2026-03-13 20:58:28.231 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@filter_IsActive='?' (DbType = Boolean), @p='?' (DbType = Int32), @p2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [e0].[Id], [e0].[CreatedAt], [e0].[Email], [e0].[HireDate], [e0].[IsActive], [e0].[Name], [e0].[Phone], [e0].[Position], [e0].[Salary], [e0].[UpdatedAt], [e0].[UserId], [u].[Id], [u].[CreatedAt], [u].[Email], [u].[IsActive], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM (
+    SELECT [e].[Id], [e].[CreatedAt], [e].[Email], [e].[HireDate], [e].[IsActive], [e].[Name], [e].[Phone], [e].[Position], [e].[Salary], [e].[UpdatedAt], [e].[UserId]
+    FROM [Employees] AS [e]
+    WHERE [e].[IsActive] = @filter_IsActive
+    ORDER BY [e].[Name]
+    OFFSET @p ROWS FETCH NEXT @p2 ROWS ONLY
+) AS [e0]
+LEFT JOIN [Users] AS [u] ON [e0].[UserId] = [u].[Id]
+ORDER BY [e0].[Name]
+2026-03-13 20:58:28.235 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[SupermarketAPI.Models.Employee, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[SupermarketAPI.DTOs.EmployeeDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:58:28.236 +05:30 [INF] Executed action SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI) in 8.1006ms
+2026-03-13 20:58:28.238 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI)'
+2026-03-13 20:58:28.239 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/employees - 200 null application/json; charset=utf-8 17.4864ms
+2026-03-13 20:59:00.539 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/employees - application/json 188
+2026-03-13 20:59:00.543 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.EmployeesController.CreateEmployee (SupermarketAPI)'
+2026-03-13 20:59:00.552 +05:30 [INF] Route matched with {action = "CreateEmployee", controller = "Employees"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] CreateEmployee(SupermarketAPI.DTOs.CreateEmployeeDto) on controller SupermarketAPI.Controllers.EmployeesController (SupermarketAPI).
+2026-03-13 20:59:00.586 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@ToLower='?' (Size = 255)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[CreatedAt], [e].[Email], [e].[HireDate], [e].[IsActive], [e].[Name], [e].[Phone], [e].[Position], [e].[Salary], [e].[UpdatedAt], [e].[UserId]
+FROM [Employees] AS [e]
+WHERE LOWER([e].[Email]) = @ToLower
+2026-03-13 20:59:00.644 +05:30 [INF] Executed DbCommand (14ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 255), @p2='?' (DbType = DateTime2), @p3='?' (DbType = Boolean), @p4='?' (Size = 255), @p5='?' (Size = 20), @p6='?' (Size = 100), @p7='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p8='?' (DbType = DateTime2), @p9='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Employees] ([CreatedAt], [Email], [HireDate], [IsActive], [Name], [Phone], [Position], [Salary], [UpdatedAt], [UserId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+2026-03-13 20:59:00.653 +05:30 [INF] Employee created: Achala (achala@gmail.com)
+2026-03-13 20:59:00.655 +05:30 [INF] Executing CreatedAtActionResult, writing value of type 'SupermarketAPI.DTOs.EmployeeDto'.
+2026-03-13 20:59:00.659 +05:30 [INF] Executed action SupermarketAPI.Controllers.EmployeesController.CreateEmployee (SupermarketAPI) in 103.8663ms
+2026-03-13 20:59:00.661 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.EmployeesController.CreateEmployee (SupermarketAPI)'
+2026-03-13 20:59:00.664 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/employees - 201 null application/json; charset=utf-8 125.044ms
+2026-03-13 20:59:00.679 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/employees - application/json null
+2026-03-13 20:59:00.681 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI)'
+2026-03-13 20:59:00.682 +05:30 [INF] Route matched with {action = "GetEmployees", controller = "Employees"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetEmployees(System.Nullable`1[System.Boolean], Int32, Int32) on controller SupermarketAPI.Controllers.EmployeesController (SupermarketAPI).
+2026-03-13 20:59:00.687 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@filter_IsActive='?' (DbType = Boolean), @p='?' (DbType = Int32), @p2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [e0].[Id], [e0].[CreatedAt], [e0].[Email], [e0].[HireDate], [e0].[IsActive], [e0].[Name], [e0].[Phone], [e0].[Position], [e0].[Salary], [e0].[UpdatedAt], [e0].[UserId], [u].[Id], [u].[CreatedAt], [u].[Email], [u].[IsActive], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM (
+    SELECT [e].[Id], [e].[CreatedAt], [e].[Email], [e].[HireDate], [e].[IsActive], [e].[Name], [e].[Phone], [e].[Position], [e].[Salary], [e].[UpdatedAt], [e].[UserId]
+    FROM [Employees] AS [e]
+    WHERE [e].[IsActive] = @filter_IsActive
+    ORDER BY [e].[Name]
+    OFFSET @p ROWS FETCH NEXT @p2 ROWS ONLY
+) AS [e0]
+LEFT JOIN [Users] AS [u] ON [e0].[UserId] = [u].[Id]
+ORDER BY [e0].[Name]
+2026-03-13 20:59:00.692 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[SupermarketAPI.Models.Employee, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[SupermarketAPI.DTOs.EmployeeDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:59:00.693 +05:30 [INF] Executed action SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI) in 8.1121ms
+2026-03-13 20:59:00.695 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI)'
+2026-03-13 20:59:00.697 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/employees - 200 null application/json; charset=utf-8 18.3614ms
+2026-03-13 20:59:03.521 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/payroll/history - application/json null
+2026-03-13 20:59:03.522 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/employees - application/json null
+2026-03-13 20:59:03.525 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.PayrollController.GetPayrollHistory (SupermarketAPI)'
+2026-03-13 20:59:03.529 +05:30 [INF] Route matched with {action = "GetPayrollHistory", controller = "Payroll"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPayrollHistory() on controller SupermarketAPI.Controllers.PayrollController (SupermarketAPI).
+2026-03-13 20:59:03.528 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI)'
+2026-03-13 20:59:03.531 +05:30 [INF] Route matched with {action = "GetEmployees", controller = "Employees"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetEmployees(System.Nullable`1[System.Boolean], Int32, Int32) on controller SupermarketAPI.Controllers.EmployeesController (SupermarketAPI).
+2026-03-13 20:59:03.537 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@filter_IsActive='?' (DbType = Boolean), @p='?' (DbType = Int32), @p2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [e0].[Id], [e0].[CreatedAt], [e0].[Email], [e0].[HireDate], [e0].[IsActive], [e0].[Name], [e0].[Phone], [e0].[Position], [e0].[Salary], [e0].[UpdatedAt], [e0].[UserId], [u].[Id], [u].[CreatedAt], [u].[Email], [u].[IsActive], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM (
+    SELECT [e].[Id], [e].[CreatedAt], [e].[Email], [e].[HireDate], [e].[IsActive], [e].[Name], [e].[Phone], [e].[Position], [e].[Salary], [e].[UpdatedAt], [e].[UserId]
+    FROM [Employees] AS [e]
+    WHERE [e].[IsActive] = @filter_IsActive
+    ORDER BY [e].[Name]
+    OFFSET @p ROWS FETCH NEXT @p2 ROWS ONLY
+) AS [e0]
+LEFT JOIN [Users] AS [u] ON [e0].[UserId] = [u].[Id]
+ORDER BY [e0].[Name]
+2026-03-13 20:59:03.537 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[EmployeeId], [e].[Name] AS [EmployeeName], [p].[MonthYear], [p].[PeriodStart], [p].[PeriodEnd], [p].[BasicSalary], [p].[WorkedDays], [p].[OvertimeHours], [p].[OvertimeRate], [p].[Bonuses], [p].[Advances], [p].[OtherDeductions], [p].[Epf8], [p].[Tax], [p].[Epf12], [p].[Etf3], [p].[NetSalary], CASE [p].[Status]
+    WHEN 0 THEN N'Draft'
+    WHEN 1 THEN N'Approved'
+    WHEN 2 THEN N'Paid'
+    ELSE CAST([p].[Status] AS nvarchar(max))
+END AS [Status], [p].[GeneratedDate]
+FROM [Payrolls] AS [p]
+INNER JOIN [Employees] AS [e] ON [p].[EmployeeId] = [e].[Id]
+ORDER BY [p].[GeneratedDate] DESC
+2026-03-13 20:59:03.541 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[SupermarketAPI.Models.Employee, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[SupermarketAPI.DTOs.EmployeeDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:59:03.545 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.PayrollDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:59:03.547 +05:30 [INF] Executed action SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI) in 12.6962ms
+2026-03-13 20:59:03.548 +05:30 [INF] Executed action SupermarketAPI.Controllers.PayrollController.GetPayrollHistory (SupermarketAPI) in 17.433ms
+2026-03-13 20:59:03.551 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.EmployeesController.GetEmployees (SupermarketAPI)'
+2026-03-13 20:59:03.554 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.PayrollController.GetPayrollHistory (SupermarketAPI)'
+2026-03-13 20:59:03.555 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/employees - 200 null application/json; charset=utf-8 33.7001ms
+2026-03-13 20:59:03.557 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/payroll/history - 200 null application/json; charset=utf-8 35.3678ms
+2026-03-13 20:59:18.505 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/payroll/advances/pending/20 - application/json null
+2026-03-13 20:59:18.509 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.PayrollController.GetPendingAdvances (SupermarketAPI)'
+2026-03-13 20:59:18.519 +05:30 [INF] Route matched with {action = "GetPendingAdvances", controller = "Payroll"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPendingAdvances(Int32) on controller SupermarketAPI.Controllers.PayrollController (SupermarketAPI).
+2026-03-13 20:59:18.546 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@employeeId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[Id], [s].[EmployeeId], [s].[Amount], [s].[Date], [s].[Note], [s].[IsDeducted]
+FROM [SalaryAdvances] AS [s]
+WHERE [s].[EmployeeId] = @employeeId AND [s].[IsDeducted] = CAST(0 AS bit)
+2026-03-13 20:59:18.552 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.SalaryAdvanceDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:59:18.556 +05:30 [INF] Executed action SupermarketAPI.Controllers.PayrollController.GetPendingAdvances (SupermarketAPI) in 32.3144ms
+2026-03-13 20:59:18.559 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.PayrollController.GetPendingAdvances (SupermarketAPI)'
+2026-03-13 20:59:18.561 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/payroll/advances/pending/20 - 200 null application/json; charset=utf-8 56.1402ms
+2026-03-13 20:59:18.566 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/payroll - application/json 361
+2026-03-13 20:59:18.573 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.PayrollController.CreatePayroll (SupermarketAPI)'
+2026-03-13 20:59:18.584 +05:30 [INF] Route matched with {action = "CreatePayroll", controller = "Payroll"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] CreatePayroll(SupermarketAPI.DTOs.CreatePayrollDto) on controller SupermarketAPI.Controllers.PayrollController (SupermarketAPI).
+2026-03-13 20:59:18.641 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@dto_EmployeeId='?' (DbType = Int32), @dto_PeriodEnd='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[Id], [s].[Amount], [s].[Date], [s].[EmployeeId], [s].[IsDeducted], [s].[Note], [s].[PayrollId]
+FROM [SalaryAdvances] AS [s]
+WHERE [s].[EmployeeId] = @dto_EmployeeId AND [s].[IsDeducted] = CAST(0 AS bit) AND [s].[Date] <= @dto_PeriodEnd
+2026-03-13 20:59:18.686 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@p0='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p1='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p2='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p3='?' (DbType = Int32), @p4='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p5='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p6='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p7='?' (DbType = DateTime2), @p8='?' (Size = 4000), @p9='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p10='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p11='?' (DbType = Double), @p12='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p13='?' (DbType = DateTime2), @p14='?' (DbType = DateTime2), @p15='?' (DbType = Int32), @p16='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p17='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Payrolls] ([Advances], [BasicSalary], [Bonuses], [EmployeeId], [Epf12], [Epf8], [Etf3], [GeneratedDate], [MonthYear], [NetSalary], [OtherDeductions], [OvertimeHours], [OvertimeRate], [PeriodEnd], [PeriodStart], [Status], [Tax], [WorkedDays])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17);
+2026-03-13 20:59:18.693 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType12`2[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-03-13 20:59:18.698 +05:30 [INF] Executed action SupermarketAPI.Controllers.PayrollController.CreatePayroll (SupermarketAPI) in 110.7689ms
+2026-03-13 20:59:18.700 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.PayrollController.CreatePayroll (SupermarketAPI)'
+2026-03-13 20:59:18.702 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/payroll - 200 null application/json; charset=utf-8 135.8629ms
+2026-03-13 20:59:18.714 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/payroll/history - application/json null
+2026-03-13 20:59:18.717 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.PayrollController.GetPayrollHistory (SupermarketAPI)'
+2026-03-13 20:59:18.719 +05:30 [INF] Route matched with {action = "GetPayrollHistory", controller = "Payroll"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPayrollHistory() on controller SupermarketAPI.Controllers.PayrollController (SupermarketAPI).
+2026-03-13 20:59:18.730 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[EmployeeId], [e].[Name] AS [EmployeeName], [p].[MonthYear], [p].[PeriodStart], [p].[PeriodEnd], [p].[BasicSalary], [p].[WorkedDays], [p].[OvertimeHours], [p].[OvertimeRate], [p].[Bonuses], [p].[Advances], [p].[OtherDeductions], [p].[Epf8], [p].[Tax], [p].[Epf12], [p].[Etf3], [p].[NetSalary], CASE [p].[Status]
+    WHEN 0 THEN N'Draft'
+    WHEN 1 THEN N'Approved'
+    WHEN 2 THEN N'Paid'
+    ELSE CAST([p].[Status] AS nvarchar(max))
+END AS [Status], [p].[GeneratedDate]
+FROM [Payrolls] AS [p]
+INNER JOIN [Employees] AS [e] ON [p].[EmployeeId] = [e].[Id]
+ORDER BY [p].[GeneratedDate] DESC
+2026-03-13 20:59:18.734 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.PayrollDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 20:59:18.735 +05:30 [INF] Executed action SupermarketAPI.Controllers.PayrollController.GetPayrollHistory (SupermarketAPI) in 14.1252ms
+2026-03-13 20:59:18.737 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.PayrollController.GetPayrollHistory (SupermarketAPI)'
+2026-03-13 20:59:18.739 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/payroll/history - 200 null application/json; charset=utf-8 24.8046ms
+2026-03-13 21:00:56.454 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/auth/login - application/json 39
+2026-03-13 21:00:56.458 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.AuthController.Login (SupermarketAPI)'
+2026-03-13 21:00:56.459 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[SupermarketAPI.Models.DTOs.TokenResponse]] Login(SupermarketAPI.Models.DTOs.LoginRequest) on controller SupermarketAPI.Controllers.AuthController (SupermarketAPI).
+2026-03-13 21:00:56.471 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@ToLower='?' (Size = 255), @ToLower0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[Email], [u].[IsActive], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE ([u].[Email] NOT LIKE N'' AND LOWER([u].[Email]) = @ToLower) OR ([u].[Username] IS NOT NULL AND [u].[Username] NOT LIKE N'' AND LOWER([u].[Username]) = @ToLower0)
+2026-03-13 21:00:56.541 +05:30 [INF] User cashier@gmail.com logged in successfully
+2026-03-13 21:00:56.543 +05:30 [INF] JWT token generated for user: cashier@gmail.com
+2026-03-13 21:00:56.544 +05:30 [INF] User cashier successfully authenticated
+2026-03-13 21:00:56.545 +05:30 [INF] Executing OkObjectResult, writing value of type 'SupermarketAPI.Models.DTOs.TokenResponse'.
+2026-03-13 21:00:56.547 +05:30 [INF] Executed action SupermarketAPI.Controllers.AuthController.Login (SupermarketAPI) in 85.1746ms
+2026-03-13 21:00:56.550 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.AuthController.Login (SupermarketAPI)'
+2026-03-13 21:00:56.551 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/auth/login - 200 null application/json; charset=utf-8 97.4405ms
+2026-03-13 21:01:00.236 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/products/63 - application/json null
+2026-03-13 21:01:00.242 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ProductsController.Get (SupermarketAPI)'
+2026-03-13 21:01:00.254 +05:30 [INF] Route matched with {action = "Get", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(Int32) on controller SupermarketAPI.Controllers.ProductsController (SupermarketAPI).
+2026-03-13 21:01:00.276 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@id='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[Barcode], [p].[CategoryId], [p].[CostPrice], [p].[CreatedAt], [p].[ImageUrl], [p].[LowStockThreshold], [p].[Name], [p].[Price], [p].[Stock]
+FROM [Products] AS [p]
+WHERE [p].[Id] = @id
+2026-03-13 21:01:00.281 +05:30 [INF] Executing OkObjectResult, writing value of type 'SupermarketAPI.DTOs.ProductDto'.
+2026-03-13 21:01:00.289 +05:30 [INF] Executed action SupermarketAPI.Controllers.ProductsController.Get (SupermarketAPI) in 31.6532ms
+2026-03-13 21:01:00.292 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ProductsController.Get (SupermarketAPI)'
+2026-03-13 21:01:00.294 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/products/63 - 200 null application/json; charset=utf-8 57.4752ms
+2026-03-13 21:01:00.324 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/cart/add - application/json 29
+2026-03-13 21:01:00.329 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.CartController.AddItem (SupermarketAPI)'
+2026-03-13 21:01:00.332 +05:30 [INF] Route matched with {action = "AddItem", controller = "Cart"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult AddItem(SupermarketAPI.DTOs.AddCartItemDto) on controller SupermarketAPI.Controllers.CartController (SupermarketAPI).
+2026-03-13 21:01:00.346 +05:30 [INF] AddItem called with dto: {"ProductId":63,"Quantity":1,"$type":"AddCartItemDto"}
+2026-03-13 21:01:00.354 +05:30 [INF] Authenticated: true
+2026-03-13 21:01:00.357 +05:30 [INF] Claims: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier=3,http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress=cashier@gmail.com,http://schemas.microsoft.com/ws/2008/06/identity/claims/role=Employee,exp=1773419456,iss=SupermarketAPI,aud=SupermarketAPIUsers
+2026-03-13 21:01:00.374 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@id='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[Barcode], [p].[CategoryId], [p].[CostPrice], [p].[CreatedAt], [p].[ImageUrl], [p].[LowStockThreshold], [p].[Name], [p].[Price], [p].[Stock]
+FROM [Products] AS [p]
+WHERE [p].[Id] = @id
+2026-03-13 21:01:00.380 +05:30 [INF] AddItemAsync called for EmployeeId=6, ProductId=63, Quantity=1
+2026-03-13 21:01:00.400 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@employeeId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[EmployeeId]
+FROM [Carts] AS [c]
+WHERE [c].[EmployeeId] = @employeeId
+2026-03-13 21:01:00.435 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Carts] ([CreatedAt], [EmployeeId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1);
+2026-03-13 21:01:00.442 +05:30 [INF] Cart created and saved for EmployeeId=6, CartId=51
+2026-03-13 21:01:00.463 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@cart_Id='?' (DbType = Int32), @item_ProductId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[CartId], [c].[ProductId], [c].[Quantity], [c].[UnitPrice]
+FROM [CartItems] AS [c]
+WHERE [c].[CartId] = @cart_Id AND [c].[ProductId] = @item_ProductId
+2026-03-13 21:01:00.480 +05:30 [INF] CartItem added: CartId=51, ProductId=63, Quantity=1, UnitPrice=650.00
+2026-03-13 21:01:00.496 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (Precision = 18) (Scale = 2) (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [CartItems] ([CartId], [ProductId], [Quantity], [UnitPrice])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+2026-03-13 21:01:00.503 +05:30 [INF] Cart and items saved for EmployeeId=6, CartId=51
+2026-03-13 21:01:00.507 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@employeeId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[EmployeeId]
+FROM [Carts] AS [c]
+WHERE [c].[EmployeeId] = @employeeId
+2026-03-13 21:01:00.521 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@cart_Id='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[CartId], [c].[ProductId], [c].[Quantity], [c].[UnitPrice]
+FROM [CartItems] AS [c]
+WHERE [c].[CartId] = @cart_Id
+2026-03-13 21:01:00.528 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType5`1[[System.Boolean, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-03-13 21:01:00.532 +05:30 [INF] Executed action SupermarketAPI.Controllers.CartController.AddItem (SupermarketAPI) in 197.5826ms
+2026-03-13 21:01:00.535 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.CartController.AddItem (SupermarketAPI)'
+2026-03-13 21:01:00.538 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/cart/add - 200 null application/json; charset=utf-8 214.1393ms
+2026-03-13 21:01:00.954 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/products/58 - application/json null
+2026-03-13 21:01:00.957 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ProductsController.Get (SupermarketAPI)'
+2026-03-13 21:01:00.959 +05:30 [INF] Route matched with {action = "Get", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(Int32) on controller SupermarketAPI.Controllers.ProductsController (SupermarketAPI).
+2026-03-13 21:01:00.965 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@id='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[Barcode], [p].[CategoryId], [p].[CostPrice], [p].[CreatedAt], [p].[ImageUrl], [p].[LowStockThreshold], [p].[Name], [p].[Price], [p].[Stock]
+FROM [Products] AS [p]
+WHERE [p].[Id] = @id
+2026-03-13 21:01:00.968 +05:30 [INF] Executing OkObjectResult, writing value of type 'SupermarketAPI.DTOs.ProductDto'.
+2026-03-13 21:01:00.972 +05:30 [INF] Executed action SupermarketAPI.Controllers.ProductsController.Get (SupermarketAPI) in 9.4275ms
+2026-03-13 21:01:00.975 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ProductsController.Get (SupermarketAPI)'
+2026-03-13 21:01:00.978 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/products/58 - 200 null application/json; charset=utf-8 23.9403ms
+2026-03-13 21:01:00.986 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/cart/add - application/json 29
+2026-03-13 21:01:00.993 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.CartController.AddItem (SupermarketAPI)'
+2026-03-13 21:01:00.994 +05:30 [INF] Route matched with {action = "AddItem", controller = "Cart"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult AddItem(SupermarketAPI.DTOs.AddCartItemDto) on controller SupermarketAPI.Controllers.CartController (SupermarketAPI).
+2026-03-13 21:01:01.002 +05:30 [INF] AddItem called with dto: {"ProductId":58,"Quantity":1,"$type":"AddCartItemDto"}
+2026-03-13 21:01:01.007 +05:30 [INF] Authenticated: true
+2026-03-13 21:01:01.009 +05:30 [INF] Claims: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier=3,http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress=cashier@gmail.com,http://schemas.microsoft.com/ws/2008/06/identity/claims/role=Employee,exp=1773419456,iss=SupermarketAPI,aud=SupermarketAPIUsers
+2026-03-13 21:01:01.013 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@id='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[Barcode], [p].[CategoryId], [p].[CostPrice], [p].[CreatedAt], [p].[ImageUrl], [p].[LowStockThreshold], [p].[Name], [p].[Price], [p].[Stock]
+FROM [Products] AS [p]
+WHERE [p].[Id] = @id
+2026-03-13 21:01:01.018 +05:30 [INF] AddItemAsync called for EmployeeId=6, ProductId=58, Quantity=1
+2026-03-13 21:01:01.021 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@employeeId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[EmployeeId]
+FROM [Carts] AS [c]
+WHERE [c].[EmployeeId] = @employeeId
+2026-03-13 21:01:01.026 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@cart_Id='?' (DbType = Int32), @item_ProductId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[CartId], [c].[ProductId], [c].[Quantity], [c].[UnitPrice]
+FROM [CartItems] AS [c]
+WHERE [c].[CartId] = @cart_Id AND [c].[ProductId] = @item_ProductId
+2026-03-13 21:01:01.033 +05:30 [INF] CartItem added: CartId=51, ProductId=58, Quantity=1, UnitPrice=600.00
+2026-03-13 21:01:01.040 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (Precision = 18) (Scale = 2) (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [CartItems] ([CartId], [ProductId], [Quantity], [UnitPrice])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+2026-03-13 21:01:01.045 +05:30 [INF] Cart and items saved for EmployeeId=6, CartId=51
+2026-03-13 21:01:01.048 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@employeeId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[EmployeeId]
+FROM [Carts] AS [c]
+WHERE [c].[EmployeeId] = @employeeId
+2026-03-13 21:01:01.053 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@cart_Id='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[CartId], [c].[ProductId], [c].[Quantity], [c].[UnitPrice]
+FROM [CartItems] AS [c]
+WHERE [c].[CartId] = @cart_Id
+2026-03-13 21:01:01.056 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType5`1[[System.Boolean, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-03-13 21:01:01.058 +05:30 [INF] Executed action SupermarketAPI.Controllers.CartController.AddItem (SupermarketAPI) in 61.3163ms
+2026-03-13 21:01:01.060 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.CartController.AddItem (SupermarketAPI)'
+2026-03-13 21:01:01.062 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/cart/add - 200 null application/json; charset=utf-8 76.1386ms
+2026-03-13 21:01:29.205 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/sales/checkout - application/json 160
+2026-03-13 21:01:29.212 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.SalesController.Checkout (SupermarketAPI)'
+2026-03-13 21:01:29.222 +05:30 [INF] Route matched with {action = "Checkout", controller = "Sales"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Checkout(SupermarketAPI.DTOs.CreateOrderDto) on controller SupermarketAPI.Controllers.SalesController (SupermarketAPI).
+2026-03-13 21:01:29.254 +05:30 [INF] [Checkout] User: 3, Email: cashier@gmail.com, Items: 2
+2026-03-13 21:01:29.286 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@userId_Value='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[CreatedAt], [e].[Email], [e].[HireDate], [e].[IsActive], [e].[Name], [e].[Phone], [e].[Position], [e].[Salary], [e].[UpdatedAt], [e].[UserId], [u].[Id], [u].[CreatedAt], [u].[Email], [u].[IsActive], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Employees] AS [e]
+LEFT JOIN [Users] AS [u] ON [e].[UserId] = [u].[Id]
+WHERE [e].[UserId] = @userId_Value
+2026-03-13 21:01:29.353 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@productIds1='?' (DbType = Int32), @productIds2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Barcode], [p].[CategoryId], [p].[CostPrice], [p].[CreatedAt], [p].[ImageUrl], [p].[LowStockThreshold], [p].[Name], [p].[Price], [p].[Stock]
+FROM [Products] AS [p]
+WHERE [p].[Id] IN (@productIds1, @productIds2)
+2026-03-13 21:01:29.538 +05:30 [INF] Executed DbCommand (69ms) [Parameters=[@p0='?' (Size = 50), @p1='?' (DbType = Int32), @p2='?' (Size = 500), @p3='?' (DbType = Int32), @p4='?' (DbType = Int32), @p5='?' (Size = 50), @p6='?' (DbType = DateTime2), @p7='?' (Size = 50), @p8='?' (DbType = Int32), @p9='?' (Size = 500), @p10='?' (DbType = Int32), @p11='?' (DbType = Int32), @p12='?' (Size = 50), @p13='?' (DbType = DateTime2), @p14='?' (DbType = DateTime2), @p15='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p16='?' (DbType = Int32), @p17='?' (Size = 4000), @p18='?' (DbType = DateTime2), @p19='?' (Size = 50), @p20='?' (Size = 4000), @p21='?' (Size = 4000), @p22='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p23='?' (DbType = DateTime2), @p25='?' (DbType = Int32), @p24='?' (DbType = Int32), @p27='?' (DbType = Int32), @p26='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+MERGE [InventoryLogs] USING (
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, 0),
+(@p7, @p8, @p9, @p10, @p11, @p12, @p13, 1)) AS i ([Action], [EmployeeId], [Notes], [ProductId], [Quantity], [Reason], [Timestamp], _Position) ON 1=0
+WHEN NOT MATCHED THEN
+INSERT ([Action], [EmployeeId], [Notes], [ProductId], [Quantity], [Reason], [Timestamp])
+VALUES (i.[Action], i.[EmployeeId], i.[Notes], i.[ProductId], i.[Quantity], i.[Reason], i.[Timestamp])
+OUTPUT INSERTED.[Id], i._Position;
+INSERT INTO [Orders] ([CreatedAt], [DiscountAmount], [EmployeeId], [Notes], [OrderDate], [OrderNo], [PaymentMethod], [Status], [TotalAmount], [UpdatedAt])
+OUTPUT INSERTED.[Id]
+VALUES (@p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23);
+UPDATE [Products] SET [Stock] = @p24
+OUTPUT 1
+WHERE [Id] = @p25;
+UPDATE [Products] SET [Stock] = @p26
+OUTPUT 1
+WHERE [Id] = @p27;
+2026-03-13 21:01:29.567 +05:30 [INF] Executed DbCommand (21ms) [Parameters=[@p28='?' (DbType = DateTime2), @p29='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p30='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p31='?' (DbType = Int32), @p32='?' (DbType = Int32), @p33='?' (DbType = Int32), @p34='?' (DbType = Int32), @p35='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p36='?' (DbType = DateTime2), @p37='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p38='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p39='?' (DbType = Int32), @p40='?' (DbType = Int32), @p41='?' (DbType = Int32), @p42='?' (DbType = Int32), @p43='?' (Precision = 18) (Scale = 2) (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+MERGE [OrderItems] USING (
+VALUES (@p28, @p29, @p30, @p31, @p32, @p33, @p34, @p35, 0),
+(@p36, @p37, @p38, @p39, @p40, @p41, @p42, @p43, 1)) AS i ([CreatedAt], [Discount], [LineTotal], [OrderId], [ProductId], [Quantity], [RefundedQuantity], [UnitPrice], _Position) ON 1=0
+WHEN NOT MATCHED THEN
+INSERT ([CreatedAt], [Discount], [LineTotal], [OrderId], [ProductId], [Quantity], [RefundedQuantity], [UnitPrice])
+VALUES (i.[CreatedAt], i.[Discount], i.[LineTotal], i.[OrderId], i.[ProductId], i.[Quantity], i.[RefundedQuantity], i.[UnitPrice])
+OUTPUT INSERTED.[Id], i._Position;
+2026-03-13 21:01:29.577 +05:30 [INF] Order ORD-20260313153129-3338 created. Items: 2, Total: 1400.0000, Employee: 6
+2026-03-13 21:01:29.589 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Barcode], [p].[CategoryId], [p].[CostPrice], [p].[CreatedAt], [p].[ImageUrl], [p].[LowStockThreshold], [p].[Name], [p].[Price], [p].[Stock]
+FROM [Products] AS [p]
+WHERE [p].[Stock] <= [p].[LowStockThreshold]
+2026-03-13 21:01:29.644 +05:30 [INF] Executed DbCommand (20ms) [Parameters=[@id='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[Id], [s].[CreatedAt], [s].[DiscountAmount], [s].[EmployeeId], [s].[Notes], [s].[OrderDate], [s].[OrderNo], [s].[PaymentMethod], [s].[Status], [s].[TotalAmount], [s].[UpdatedAt], [s].[Id0], [s].[Id1], [s0].[Id], [s0].[CreatedAt], [s0].[Discount], [s0].[LineTotal], [s0].[OrderId], [s0].[ProductId], [s0].[Quantity], [s0].[RefundedQuantity], [s0].[UnitPrice], [s0].[Id0], [s0].[Barcode], [s0].[CategoryId], [s0].[CostPrice], [s0].[CreatedAt0], [s0].[ImageUrl], [s0].[LowStockThreshold], [s0].[Name], [s0].[Price], [s0].[Stock], [s].[CreatedAt0], [s].[Email], [s].[HireDate], [s].[IsActive], [s].[Name], [s].[Phone], [s].[Position], [s].[Salary], [s].[UpdatedAt0], [s].[UserId], [s].[CreatedAt1], [s].[Email0], [s].[IsActive0], [s].[PasswordHash], [s].[Role], [s].[Username]
+FROM (
+    SELECT TOP(1) [o].[Id], [o].[CreatedAt], [o].[DiscountAmount], [o].[EmployeeId], [o].[Notes], [o].[OrderDate], [o].[OrderNo], [o].[PaymentMethod], [o].[Status], [o].[TotalAmount], [o].[UpdatedAt], [e].[Id] AS [Id0], [e].[CreatedAt] AS [CreatedAt0], [e].[Email], [e].[HireDate], [e].[IsActive], [e].[Name], [e].[Phone], [e].[Position], [e].[Salary], [e].[UpdatedAt] AS [UpdatedAt0], [e].[UserId], [u].[Id] AS [Id1], [u].[CreatedAt] AS [CreatedAt1], [u].[Email] AS [Email0], [u].[IsActive] AS [IsActive0], [u].[PasswordHash], [u].[Role], [u].[Username]
+    FROM [Orders] AS [o]
+    INNER JOIN [Employees] AS [e] ON [o].[EmployeeId] = [e].[Id]
+    LEFT JOIN [Users] AS [u] ON [e].[UserId] = [u].[Id]
+    WHERE [o].[Id] = @id
+) AS [s]
+LEFT JOIN (
+    SELECT [o0].[Id], [o0].[CreatedAt], [o0].[Discount], [o0].[LineTotal], [o0].[OrderId], [o0].[ProductId], [o0].[Quantity], [o0].[RefundedQuantity], [o0].[UnitPrice], [p].[Id] AS [Id0], [p].[Barcode], [p].[CategoryId], [p].[CostPrice], [p].[CreatedAt] AS [CreatedAt0], [p].[ImageUrl], [p].[LowStockThreshold], [p].[Name], [p].[Price], [p].[Stock]
+    FROM [OrderItems] AS [o0]
+    INNER JOIN [Products] AS [p] ON [o0].[ProductId] = [p].[Id]
+) AS [s0] ON [s].[Id] = [s0].[OrderId]
+ORDER BY [s].[Id], [s].[Id0], [s].[Id1], [s0].[Id]
+2026-03-13 21:01:29.658 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@employeeId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[EmployeeId]
+FROM [Carts] AS [c]
+WHERE [c].[EmployeeId] = @employeeId
+2026-03-13 21:01:29.670 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@cart_Id='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[CartId], [c].[ProductId], [c].[Quantity], [c].[UnitPrice]
+FROM [CartItems] AS [c]
+WHERE [c].[CartId] = @cart_Id
+2026-03-13 21:01:29.703 +05:30 [INF] Executed DbCommand (22ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+DELETE FROM [CartItems]
+OUTPUT 1
+WHERE [Id] = @p0;
+DELETE FROM [CartItems]
+OUTPUT 1
+WHERE [Id] = @p1;
+DELETE FROM [Carts]
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-03-13 21:01:29.765 +05:30 [INF] Executed DbCommand (18ms) [Parameters=[@orderId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[Id], [s].[CreatedAt], [s].[DiscountAmount], [s].[EmployeeId], [s].[Notes], [s].[OrderDate], [s].[OrderNo], [s].[PaymentMethod], [s].[Status], [s].[TotalAmount], [s].[UpdatedAt], [s].[Id0], [s0].[Id], [s0].[CreatedAt], [s0].[Discount], [s0].[LineTotal], [s0].[OrderId], [s0].[ProductId], [s0].[Quantity], [s0].[RefundedQuantity], [s0].[UnitPrice], [s0].[Id0], [s0].[Barcode], [s0].[CategoryId], [s0].[CostPrice], [s0].[CreatedAt0], [s0].[ImageUrl], [s0].[LowStockThreshold], [s0].[Name], [s0].[Price], [s0].[Stock], [s].[CreatedAt0], [s].[Email], [s].[HireDate], [s].[IsActive], [s].[Name], [s].[Phone], [s].[Position], [s].[Salary], [s].[UpdatedAt0], [s].[UserId]
+FROM (
+    SELECT TOP(1) [o].[Id], [o].[CreatedAt], [o].[DiscountAmount], [o].[EmployeeId], [o].[Notes], [o].[OrderDate], [o].[OrderNo], [o].[PaymentMethod], [o].[Status], [o].[TotalAmount], [o].[UpdatedAt], [e].[Id] AS [Id0], [e].[CreatedAt] AS [CreatedAt0], [e].[Email], [e].[HireDate], [e].[IsActive], [e].[Name], [e].[Phone], [e].[Position], [e].[Salary], [e].[UpdatedAt] AS [UpdatedAt0], [e].[UserId]
+    FROM [Orders] AS [o]
+    INNER JOIN [Employees] AS [e] ON [o].[EmployeeId] = [e].[Id]
+    WHERE [o].[Id] = @orderId
+) AS [s]
+LEFT JOIN (
+    SELECT [o0].[Id], [o0].[CreatedAt], [o0].[Discount], [o0].[LineTotal], [o0].[OrderId], [o0].[ProductId], [o0].[Quantity], [o0].[RefundedQuantity], [o0].[UnitPrice], [p].[Id] AS [Id0], [p].[Barcode], [p].[CategoryId], [p].[CostPrice], [p].[CreatedAt] AS [CreatedAt0], [p].[ImageUrl], [p].[LowStockThreshold], [p].[Name], [p].[Price], [p].[Stock]
+    FROM [OrderItems] AS [o0]
+    INNER JOIN [Products] AS [p] ON [o0].[ProductId] = [p].[Id]
+) AS [s0] ON [s].[Id] = [s0].[OrderId]
+ORDER BY [s].[Id], [s].[Id0], [s0].[Id]
+2026-03-13 21:01:30.495 +05:30 [INF] Executing OkObjectResult, writing value of type 'SupermarketAPI.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-03-13 21:01:30.506 +05:30 [INF] Executed action SupermarketAPI.Controllers.SalesController.Checkout (SupermarketAPI) in 1278.9436ms
+2026-03-13 21:01:30.509 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.SalesController.Checkout (SupermarketAPI)'
+2026-03-13 21:01:30.511 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/sales/checkout - 200 null application/json; charset=utf-8 1306.5183ms
+2026-03-13 21:01:30.557 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/products? - application/json null
+2026-03-13 21:01:30.562 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-13 21:01:30.564 +05:30 [INF] Route matched with {action = "GetAll", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.ProductsController (SupermarketAPI).
+2026-03-13 21:01:30.570 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Name], [p].[CategoryId], [p].[Barcode], [p].[ImageUrl], [p].[Price], [p].[Stock], [p].[LowStockThreshold], [p].[CreatedAt]
+FROM [Products] AS [p]
+2026-03-13 21:01:30.574 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.ProductDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 21:01:30.577 +05:30 [INF] Executed action SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI) in 10.4228ms
+2026-03-13 21:01:30.580 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-13 21:01:30.582 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/products? - 200 null application/json; charset=utf-8 24.4817ms
+2026-03-13 21:01:31.031 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/sales/receipts/receipt_ORD-20260313153129-3338.pdf - application/json null
+2026-03-13 21:01:31.036 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.SalesController.DownloadReceiptFile (SupermarketAPI)'
+2026-03-13 21:01:31.042 +05:30 [INF] Route matched with {action = "DownloadReceiptFile", controller = "Sales"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult DownloadReceiptFile(System.String) on controller SupermarketAPI.Controllers.SalesController (SupermarketAPI).
+2026-03-13 21:01:31.048 +05:30 [INF] Executing FileContentResult, sending file with download name 'receipt_ORD-20260313153129-3338.pdf' ...
+2026-03-13 21:01:31.059 +05:30 [INF] Executed action SupermarketAPI.Controllers.SalesController.DownloadReceiptFile (SupermarketAPI) in 13.4772ms
+2026-03-13 21:01:31.061 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.SalesController.DownloadReceiptFile (SupermarketAPI)'
+2026-03-13 21:01:31.062 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/sales/receipts/receipt_ORD-20260313153129-3338.pdf - 200 50993 application/pdf 31.234ms
+2026-03-13 21:01:39.453 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/sales/receipts/receipt_ORD-20260313153129-3338.pdf - application/json null
+2026-03-13 21:01:39.459 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.SalesController.DownloadReceiptFile (SupermarketAPI)'
+2026-03-13 21:01:39.462 +05:30 [INF] Route matched with {action = "DownloadReceiptFile", controller = "Sales"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult DownloadReceiptFile(System.String) on controller SupermarketAPI.Controllers.SalesController (SupermarketAPI).
+2026-03-13 21:01:39.466 +05:30 [INF] Executing FileContentResult, sending file with download name 'receipt_ORD-20260313153129-3338.pdf' ...
+2026-03-13 21:01:39.470 +05:30 [INF] Executed action SupermarketAPI.Controllers.SalesController.DownloadReceiptFile (SupermarketAPI) in 5.2925ms
+2026-03-13 21:01:39.472 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.SalesController.DownloadReceiptFile (SupermarketAPI)'
+2026-03-13 21:01:39.476 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/sales/receipts/receipt_ORD-20260313153129-3338.pdf - 200 50993 application/pdf 22.7052ms
+2026-03-13 21:02:02.891 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/orders?pageNumber=1&pageSize=50 - application/json null
+2026-03-13 21:02:02.894 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.OrdersController.GetOrders (SupermarketAPI)'
+2026-03-13 21:02:02.907 +05:30 [INF] Route matched with {action = "GetOrders", controller = "Orders"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetOrders(System.Nullable`1[System.DateTime], System.Nullable`1[System.DateTime], System.String, System.String, Int32, Int32) on controller SupermarketAPI.Controllers.OrdersController (SupermarketAPI).
+2026-03-13 21:02:02.988 +05:30 [INF] Executed DbCommand (32ms) [Parameters=[@p='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [o0].[Id], [o0].[CreatedAt], [o0].[DiscountAmount], [o0].[EmployeeId], [o0].[Notes], [o0].[OrderDate], [o0].[OrderNo], [o0].[PaymentMethod], [o0].[Status], [o0].[TotalAmount], [o0].[UpdatedAt], [e].[Id], [s].[Id], [s].[CreatedAt], [s].[Discount], [s].[LineTotal], [s].[OrderId], [s].[ProductId], [s].[Quantity], [s].[RefundedQuantity], [s].[UnitPrice], [s].[Id0], [s].[Barcode], [s].[CategoryId], [s].[CostPrice], [s].[CreatedAt0], [s].[ImageUrl], [s].[LowStockThreshold], [s].[Name], [s].[Price], [s].[Stock], [e].[CreatedAt], [e].[Email], [e].[HireDate], [e].[IsActive], [e].[Name], [e].[Phone], [e].[Position], [e].[Salary], [e].[UpdatedAt], [e].[UserId]
+FROM (
+    SELECT [o].[Id], [o].[CreatedAt], [o].[DiscountAmount], [o].[EmployeeId], [o].[Notes], [o].[OrderDate], [o].[OrderNo], [o].[PaymentMethod], [o].[Status], [o].[TotalAmount], [o].[UpdatedAt]
+    FROM [Orders] AS [o]
+    ORDER BY [o].[OrderDate] DESC
+    OFFSET @p ROWS FETCH NEXT @p1 ROWS ONLY
+) AS [o0]
+INNER JOIN [Employees] AS [e] ON [o0].[EmployeeId] = [e].[Id]
+LEFT JOIN (
+    SELECT [o1].[Id], [o1].[CreatedAt], [o1].[Discount], [o1].[LineTotal], [o1].[OrderId], [o1].[ProductId], [o1].[Quantity], [o1].[RefundedQuantity], [o1].[UnitPrice], [p].[Id] AS [Id0], [p].[Barcode], [p].[CategoryId], [p].[CostPrice], [p].[CreatedAt] AS [CreatedAt0], [p].[ImageUrl], [p].[LowStockThreshold], [p].[Name], [p].[Price], [p].[Stock]
+    FROM [OrderItems] AS [o1]
+    INNER JOIN [Products] AS [p] ON [o1].[ProductId] = [p].[Id]
+) AS [s] ON [o0].[Id] = [s].[OrderId]
+ORDER BY [o0].[OrderDate] DESC, [o0].[Id], [e].[Id], [s].[Id]
+2026-03-13 21:02:03.001 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[SupermarketAPI.Models.Order, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[SupermarketAPI.DTOs.OrderDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 21:02:03.005 +05:30 [INF] Executed action SupermarketAPI.Controllers.OrdersController.GetOrders (SupermarketAPI) in 94.9686ms
+2026-03-13 21:02:03.007 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.OrdersController.GetOrders (SupermarketAPI)'
+2026-03-13 21:02:03.008 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/orders?pageNumber=1&pageSize=50 - 200 null application/json; charset=utf-8 117.009ms
+2026-03-13 21:02:04.609 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/orders?pageNumber=1&pageSize=50 - application/json null
+2026-03-13 21:02:04.613 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.OrdersController.GetOrders (SupermarketAPI)'
+2026-03-13 21:02:04.615 +05:30 [INF] Route matched with {action = "GetOrders", controller = "Orders"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetOrders(System.Nullable`1[System.DateTime], System.Nullable`1[System.DateTime], System.String, System.String, Int32, Int32) on controller SupermarketAPI.Controllers.OrdersController (SupermarketAPI).
+2026-03-13 21:02:04.623 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [o0].[Id], [o0].[CreatedAt], [o0].[DiscountAmount], [o0].[EmployeeId], [o0].[Notes], [o0].[OrderDate], [o0].[OrderNo], [o0].[PaymentMethod], [o0].[Status], [o0].[TotalAmount], [o0].[UpdatedAt], [e].[Id], [s].[Id], [s].[CreatedAt], [s].[Discount], [s].[LineTotal], [s].[OrderId], [s].[ProductId], [s].[Quantity], [s].[RefundedQuantity], [s].[UnitPrice], [s].[Id0], [s].[Barcode], [s].[CategoryId], [s].[CostPrice], [s].[CreatedAt0], [s].[ImageUrl], [s].[LowStockThreshold], [s].[Name], [s].[Price], [s].[Stock], [e].[CreatedAt], [e].[Email], [e].[HireDate], [e].[IsActive], [e].[Name], [e].[Phone], [e].[Position], [e].[Salary], [e].[UpdatedAt], [e].[UserId]
+FROM (
+    SELECT [o].[Id], [o].[CreatedAt], [o].[DiscountAmount], [o].[EmployeeId], [o].[Notes], [o].[OrderDate], [o].[OrderNo], [o].[PaymentMethod], [o].[Status], [o].[TotalAmount], [o].[UpdatedAt]
+    FROM [Orders] AS [o]
+    ORDER BY [o].[OrderDate] DESC
+    OFFSET @p ROWS FETCH NEXT @p1 ROWS ONLY
+) AS [o0]
+INNER JOIN [Employees] AS [e] ON [o0].[EmployeeId] = [e].[Id]
+LEFT JOIN (
+    SELECT [o1].[Id], [o1].[CreatedAt], [o1].[Discount], [o1].[LineTotal], [o1].[OrderId], [o1].[ProductId], [o1].[Quantity], [o1].[RefundedQuantity], [o1].[UnitPrice], [p].[Id] AS [Id0], [p].[Barcode], [p].[CategoryId], [p].[CostPrice], [p].[CreatedAt] AS [CreatedAt0], [p].[ImageUrl], [p].[LowStockThreshold], [p].[Name], [p].[Price], [p].[Stock]
+    FROM [OrderItems] AS [o1]
+    INNER JOIN [Products] AS [p] ON [o1].[ProductId] = [p].[Id]
+) AS [s] ON [o0].[Id] = [s].[OrderId]
+ORDER BY [o0].[OrderDate] DESC, [o0].[Id], [e].[Id], [s].[Id]
+2026-03-13 21:02:04.630 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[SupermarketAPI.Models.Order, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[SupermarketAPI.DTOs.OrderDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 21:02:04.635 +05:30 [INF] Executed action SupermarketAPI.Controllers.OrdersController.GetOrders (SupermarketAPI) in 15.9568ms
+2026-03-13 21:02:04.638 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.OrdersController.GetOrders (SupermarketAPI)'
+2026-03-13 21:02:04.641 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/orders?pageNumber=1&pageSize=50 - 200 null application/json; charset=utf-8 31.9171ms
+2026-03-13 21:02:07.241 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/orders/32 - application/json null
+2026-03-13 21:02:07.246 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.OrdersController.GetOrder (SupermarketAPI)'
+2026-03-13 21:02:07.255 +05:30 [INF] Route matched with {action = "GetOrder", controller = "Orders"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetOrder(Int32) on controller SupermarketAPI.Controllers.OrdersController (SupermarketAPI).
+2026-03-13 21:02:07.263 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@id='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[Id], [s].[CreatedAt], [s].[DiscountAmount], [s].[EmployeeId], [s].[Notes], [s].[OrderDate], [s].[OrderNo], [s].[PaymentMethod], [s].[Status], [s].[TotalAmount], [s].[UpdatedAt], [s].[Id0], [s].[Id1], [s0].[Id], [s0].[CreatedAt], [s0].[Discount], [s0].[LineTotal], [s0].[OrderId], [s0].[ProductId], [s0].[Quantity], [s0].[RefundedQuantity], [s0].[UnitPrice], [s0].[Id0], [s0].[Barcode], [s0].[CategoryId], [s0].[CostPrice], [s0].[CreatedAt0], [s0].[ImageUrl], [s0].[LowStockThreshold], [s0].[Name], [s0].[Price], [s0].[Stock], [s].[CreatedAt0], [s].[Email], [s].[HireDate], [s].[IsActive], [s].[Name], [s].[Phone], [s].[Position], [s].[Salary], [s].[UpdatedAt0], [s].[UserId], [s].[CreatedAt1], [s].[Email0], [s].[IsActive0], [s].[PasswordHash], [s].[Role], [s].[Username]
+FROM (
+    SELECT TOP(1) [o].[Id], [o].[CreatedAt], [o].[DiscountAmount], [o].[EmployeeId], [o].[Notes], [o].[OrderDate], [o].[OrderNo], [o].[PaymentMethod], [o].[Status], [o].[TotalAmount], [o].[UpdatedAt], [e].[Id] AS [Id0], [e].[CreatedAt] AS [CreatedAt0], [e].[Email], [e].[HireDate], [e].[IsActive], [e].[Name], [e].[Phone], [e].[Position], [e].[Salary], [e].[UpdatedAt] AS [UpdatedAt0], [e].[UserId], [u].[Id] AS [Id1], [u].[CreatedAt] AS [CreatedAt1], [u].[Email] AS [Email0], [u].[IsActive] AS [IsActive0], [u].[PasswordHash], [u].[Role], [u].[Username]
+    FROM [Orders] AS [o]
+    INNER JOIN [Employees] AS [e] ON [o].[EmployeeId] = [e].[Id]
+    LEFT JOIN [Users] AS [u] ON [e].[UserId] = [u].[Id]
+    WHERE [o].[Id] = @id
+) AS [s]
+LEFT JOIN (
+    SELECT [o0].[Id], [o0].[CreatedAt], [o0].[Discount], [o0].[LineTotal], [o0].[OrderId], [o0].[ProductId], [o0].[Quantity], [o0].[RefundedQuantity], [o0].[UnitPrice], [p].[Id] AS [Id0], [p].[Barcode], [p].[CategoryId], [p].[CostPrice], [p].[CreatedAt] AS [CreatedAt0], [p].[ImageUrl], [p].[LowStockThreshold], [p].[Name], [p].[Price], [p].[Stock]
+    FROM [OrderItems] AS [o0]
+    INNER JOIN [Products] AS [p] ON [o0].[ProductId] = [p].[Id]
+) AS [s0] ON [s].[Id] = [s0].[OrderId]
+ORDER BY [s].[Id], [s].[Id0], [s].[Id1], [s0].[Id]
+2026-03-13 21:02:07.268 +05:30 [INF] Executing OkObjectResult, writing value of type 'SupermarketAPI.DTOs.OrderDto'.
+2026-03-13 21:02:07.271 +05:30 [INF] Executed action SupermarketAPI.Controllers.OrdersController.GetOrder (SupermarketAPI) in 12.1101ms
+2026-03-13 21:02:07.274 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.OrdersController.GetOrder (SupermarketAPI)'
+2026-03-13 21:02:07.278 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/orders/32 - 200 null application/json; charset=utf-8 36.4171ms
+2026-03-13 21:08:02.211 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/auth/login - application/json 37
+2026-03-13 21:08:02.214 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.AuthController.Login (SupermarketAPI)'
+2026-03-13 21:08:02.216 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[SupermarketAPI.Models.DTOs.TokenResponse]] Login(SupermarketAPI.Models.DTOs.LoginRequest) on controller SupermarketAPI.Controllers.AuthController (SupermarketAPI).
+2026-03-13 21:08:02.265 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@ToLower='?' (Size = 255), @ToLower0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[Email], [u].[IsActive], [u].[PasswordHash], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE ([u].[Email] NOT LIKE N'' AND LOWER([u].[Email]) = @ToLower) OR ([u].[Username] IS NOT NULL AND [u].[Username] NOT LIKE N'' AND LOWER([u].[Username]) = @ToLower0)
+2026-03-13 21:08:02.342 +05:30 [INF] User admin@gmail.com logged in successfully
+2026-03-13 21:08:02.343 +05:30 [INF] JWT token generated for user: admin@gmail.com
+2026-03-13 21:08:02.346 +05:30 [INF] User admin successfully authenticated
+2026-03-13 21:08:02.348 +05:30 [INF] Executing OkObjectResult, writing value of type 'SupermarketAPI.Models.DTOs.TokenResponse'.
+2026-03-13 21:08:02.349 +05:30 [INF] Executed action SupermarketAPI.Controllers.AuthController.Login (SupermarketAPI) in 130.6614ms
+2026-03-13 21:08:02.351 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.AuthController.Login (SupermarketAPI)'
+2026-03-13 21:08:02.353 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/auth/login - 200 null application/json; charset=utf-8 141.6538ms
+2026-03-13 21:08:02.425 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/reports/daily-sales? - application/json null
+2026-03-13 21:08:02.426 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/reports/monthly-sales? - application/json null
+2026-03-13 21:08:02.426 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/products - application/json null
+2026-03-13 21:08:02.426 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/notifications - application/json null
+2026-03-13 21:08:02.428 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ReportsController.GetDailySales (SupermarketAPI)'
+2026-03-13 21:08:02.430 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ReportsController.GetMonthlySales (SupermarketAPI)'
+2026-03-13 21:08:02.433 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-13 21:08:02.436 +05:30 [INF] Executing endpoint 'SupermarketAPI.Controllers.NotificationsController.GetNotifications (SupermarketAPI)'
+2026-03-13 21:08:02.436 +05:30 [INF] Route matched with {action = "GetDailySales", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetDailySales(System.Nullable`1[System.DateTime]) on controller SupermarketAPI.Controllers.ReportsController (SupermarketAPI).
+2026-03-13 21:08:02.437 +05:30 [INF] Route matched with {action = "GetMonthlySales", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMonthlySales(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32]) on controller SupermarketAPI.Controllers.ReportsController (SupermarketAPI).
+2026-03-13 21:08:02.439 +05:30 [INF] Route matched with {action = "GetAll", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller SupermarketAPI.Controllers.ProductsController (SupermarketAPI).
+2026-03-13 21:08:02.440 +05:30 [INF] Route matched with {action = "GetNotifications", controller = "Notifications"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetNotifications() on controller SupermarketAPI.Controllers.NotificationsController (SupermarketAPI).
+2026-03-13 21:08:02.448 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(SUM([o].[TotalAmount]), 0.0)
+FROM [Orders] AS [o]
+WHERE [o].[OrderDate] >= @start AND [o].[OrderDate] < @end
+2026-03-13 21:08:02.450 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.Models.Notification, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 21:08:02.454 +05:30 [INF] Executed action SupermarketAPI.Controllers.NotificationsController.GetNotifications (SupermarketAPI) in 6.491ms
+2026-03-13 21:08:02.456 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Orders] AS [o]
+WHERE [o].[OrderDate] >= @start AND [o].[OrderDate] < @end
+2026-03-13 21:08:02.457 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.NotificationsController.GetNotifications (SupermarketAPI)'
+2026-03-13 21:08:02.460 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COALESCE(SUM([o].[TotalAmount]), 0.0)
+FROM [Orders] AS [o]
+WHERE [o].[OrderDate] >= @start AND [o].[OrderDate] < @end
+2026-03-13 21:08:02.460 +05:30 [INF] Executing OkObjectResult, writing value of type 'SupermarketAPI.DTOs.DailySalesReportDto'.
+2026-03-13 21:08:02.462 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/notifications - 200 null application/json; charset=utf-8 36.1656ms
+2026-03-13 21:08:02.466 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@start='?' (DbType = DateTime2), @end='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Orders] AS [o]
+WHERE [o].[OrderDate] >= @start AND [o].[OrderDate] < @end
+2026-03-13 21:08:02.467 +05:30 [INF] Executed action SupermarketAPI.Controllers.ReportsController.GetDailySales (SupermarketAPI) in 25.8026ms
+2026-03-13 21:08:02.471 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Name], [p].[CategoryId], [p].[Barcode], [p].[ImageUrl], [p].[Price], [p].[Stock], [p].[LowStockThreshold], [p].[CreatedAt]
+FROM [Products] AS [p]
+2026-03-13 21:08:02.474 +05:30 [INF] Executing OkObjectResult, writing value of type 'SupermarketAPI.DTOs.MonthlySalesReportDto'.
+2026-03-13 21:08:02.477 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ReportsController.GetDailySales (SupermarketAPI)'
+2026-03-13 21:08:02.480 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[SupermarketAPI.DTOs.ProductDto, SupermarketAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-13 21:08:02.483 +05:30 [INF] Executed action SupermarketAPI.Controllers.ReportsController.GetMonthlySales (SupermarketAPI) in 40.4377ms
+2026-03-13 21:08:02.484 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/reports/daily-sales? - 200 null application/json; charset=utf-8 59.53ms
+2026-03-13 21:08:02.486 +05:30 [INF] Executed action SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI) in 40.541ms
+2026-03-13 21:08:02.488 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ReportsController.GetMonthlySales (SupermarketAPI)'
+2026-03-13 21:08:02.494 +05:30 [INF] Executed endpoint 'SupermarketAPI.Controllers.ProductsController.GetAll (SupermarketAPI)'
+2026-03-13 21:08:02.497 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/reports/monthly-sales? - 200 null application/json; charset=utf-8 71.7677ms
+2026-03-13 21:08:02.498 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/products - 200 null application/json; charset=utf-8 72.5688ms

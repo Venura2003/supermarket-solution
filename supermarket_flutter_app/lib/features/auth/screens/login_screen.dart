@@ -44,11 +44,31 @@ class _LoginScreenState extends State<LoginScreen> {
         }
       } else {
          if (mounted) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(authProvider.error ?? 'Login failed')),
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: const Text('Login Error'),
+                content: Text(authProvider.error ?? 'Unknown Login failure. Please check your internet or API URL.'),
+                actions: [
+                  TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK')),
+                ],
+              ),
             );
          }
       }
+    } catch (e) {
+       if (mounted) {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Text('Unexpected Error'),
+              content: Text('An error occurred: $e'),
+              actions: [
+                TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK')),
+              ],
+            ),
+          );
+       }
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
