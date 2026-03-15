@@ -58,7 +58,17 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 var secretKey = jwtSettings["SecretKey"] ??
+    builder.Configuration["JwtSettings__SecretKey"] ??
+    builder.Configuration["Jwt__Key"] ??
     throw new InvalidOperationException("JWT secret key not configured.");
+var jwtIssuer = jwtSettings["Issuer"] ??
+    builder.Configuration["JwtSettings__Issuer"] ??
+    builder.Configuration["Jwt__Issuer"] ??
+    "SupermarketAPI";
+var jwtAudience = jwtSettings["Audience"] ??
+    builder.Configuration["JwtSettings__Audience"] ??
+    builder.Configuration["Jwt__Audience"] ??
+    "SupermarketAPIUsers";
 
 // Database
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -78,8 +88,8 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = jwtSettings["Issuer"],
-        ValidAudience = jwtSettings["Audience"],
+        ValidIssuer = jwtIssuer,
+        ValidAudience = jwtAudience,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
     };
 });

@@ -122,11 +122,29 @@ namespace SupermarketAPI.Services
             try
             {
                 var jwtSettings = _configuration.GetSection("JwtSettings");
-                var secretKey = jwtSettings["SecretKey"] ?? throw new InvalidOperationException("JWT secret key not configured");
+                var secretKey = jwtSettings["SecretKey"]
+                    ?? _configuration["JwtSettings__SecretKey"]
+                    ?? _configuration["Jwt__Key"]
+                    ?? throw new InvalidOperationException("JWT secret key not configured");
+                var issuer = jwtSettings["Issuer"]
+                    ?? _configuration["JwtSettings__Issuer"]
+                    ?? _configuration["Jwt__Issuer"]
+                    ?? "SupermarketAPI";
+                var audience = jwtSettings["Audience"]
+                    ?? _configuration["JwtSettings__Audience"]
+                    ?? _configuration["Jwt__Audience"]
+                    ?? "SupermarketAPIUsers";
                 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
                 var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-                var expirationMinutes = int.Parse(jwtSettings["ExpirationMinutes"] ?? "60");
+                var expirationRaw = jwtSettings["ExpirationMinutes"]
+                    ?? _configuration["JwtSettings__ExpirationMinutes"]
+                    ?? _configuration["Jwt__ExpirationMinutes"]
+                    ?? "60";
+                if (!int.TryParse(expirationRaw, out var expirationMinutes))
+                {
+                    expirationMinutes = 60;
+                }
                 var expiresAt = DateTime.UtcNow.AddMinutes(expirationMinutes);
 
                 var claims = new List<System.Security.Claims.Claim>
@@ -137,8 +155,8 @@ namespace SupermarketAPI.Services
                 };
 
                 var token = new JwtSecurityToken(
-                    issuer: jwtSettings["Issuer"],
-                    audience: jwtSettings["Audience"],
+                    issuer: issuer,
+                    audience: audience,
                     claims: claims,
                     expires: expiresAt,
                     signingCredentials: credentials
