@@ -58,15 +58,21 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 var secretKey = jwtSettings["SecretKey"] ??
+    builder.Configuration["JwtSettings:SecretKey"] ??
     builder.Configuration["JwtSettings__SecretKey"] ??
+    builder.Configuration["Jwt:Key"] ??
     builder.Configuration["Jwt__Key"] ??
     throw new InvalidOperationException("JWT secret key not configured.");
 var jwtIssuer = jwtSettings["Issuer"] ??
+    builder.Configuration["JwtSettings:Issuer"] ??
     builder.Configuration["JwtSettings__Issuer"] ??
+    builder.Configuration["Jwt:Issuer"] ??
     builder.Configuration["Jwt__Issuer"] ??
     "SupermarketAPI";
 var jwtAudience = jwtSettings["Audience"] ??
+    builder.Configuration["JwtSettings:Audience"] ??
     builder.Configuration["JwtSettings__Audience"] ??
+    builder.Configuration["Jwt:Audience"] ??
     builder.Configuration["Jwt__Audience"] ??
     "SupermarketAPIUsers";
 
