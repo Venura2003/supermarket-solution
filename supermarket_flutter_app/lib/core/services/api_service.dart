@@ -1,5 +1,3 @@
-
-
 import 'dart:async'; // Add this import for TimeoutException
 import 'dart:convert';
 import 'dart:io';
@@ -57,16 +55,18 @@ class ApiService {
         ? AppConstants.apiBaseUrl.substring(0, AppConstants.apiBaseUrl.length - 1) 
         : AppConstants.apiBaseUrl;
     final finalEndpoint = endpoint.startsWith('/') ? endpoint : '/$endpoint';
-    
     final url = '$baseUrl$finalEndpoint';
     final headers = _defaultHeaders(token);
     final jsonBody = jsonEncode(body);
     
     if (kDebugMode) print('[ApiService] POST $url');
+    if (kDebugMode) print('[ApiService] Request body: $jsonBody');
     // Using http.post directly
     try {
       final response = await http.post(Uri.parse(url), headers: headers, body: jsonBody)
           .timeout(const Duration(seconds: 90)); // Increased timeout for Render cold start
+      if (kDebugMode) print('[ApiService] Response status: ${response.statusCode}');
+      if (kDebugMode) print('[ApiService] Response body: ${response.body}');
       return response;
     } on TimeoutException catch (_) {
       throw const SocketException('Connection timed out. The server might be waking up (Render free tier). Please try again in a minute.');

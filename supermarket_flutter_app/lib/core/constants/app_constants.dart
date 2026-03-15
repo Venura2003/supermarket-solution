@@ -5,6 +5,6 @@ class AppConstants {
   // Use --dart-define=API_URL=https://your-api.com/api when building for production
   static const String apiBaseUrl = String.fromEnvironment(
     'API_URL',
-    defaultValue: 'http://localhost:5000/api',
+    defaultValue: 'https://supermarket-api-2lx7.onrender.com/api',
   );
 }
