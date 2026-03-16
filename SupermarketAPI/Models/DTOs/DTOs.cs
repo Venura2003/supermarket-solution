@@ -37,6 +37,7 @@ namespace SupermarketAPI.Models.DTOs
 
     public class LoginRequest
     {
+        // The frontend must send the identifier (email or username) in the 'Email' field for compatibility.
         [Required(ErrorMessage = "Identifier (email or username) is required")]
         public string Email { get; set; } = string.Empty;
 

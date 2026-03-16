@@ -5,20 +5,14 @@ class LoginRequest {
 
   LoginRequest({required this.email, required this.password, this.username});
 
-  /// Create a login request from an identifier which may be an email or a
-  /// username. If [identifier] contains an '@' it will be sent as 'email',
-  /// otherwise as 'username'.
+  /// Always send identifier in the 'email' field for backend compatibility.
   factory LoginRequest.fromIdentifier(String identifier, String password) {
-    if (identifier.contains('@')) {
-      return LoginRequest(email: identifier, password: password);
-    }
-    return LoginRequest(email: '', password: password, username: identifier);
+    return LoginRequest(email: identifier, password: password);
   }
 
   Map<String, dynamic> toJson() {
-    // Always send the identifier in the 'email' field — the API accepts
-    // either an email address or a username in this property.
-    return {'email': email.isNotEmpty ? email : (username ?? ''), 'password': password};
+    // Always send identifier in the 'email' field for backend compatibility.
+    return {'email': email, 'password': password};
   }
 
   /// Build a login payload using either an email or a username as the

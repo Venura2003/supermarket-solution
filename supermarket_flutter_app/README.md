@@ -12,6 +12,29 @@ A few resources to get you started if this is your first Flutter project:
 - [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
 - [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Production Deployment (Netlify + Render)
+
+1. **Set API URL for Netlify**
+	- In `lib/core/constants/app_constants.dart`, set `apiBaseUrl` to your Render backend URL (ending with `/api`).
+	- Example: `https://supermarket-api-2lx7.onrender.com/api`
+	- You can also use `--dart-define=API_URL=...` for custom builds.
+
+2. **Build for Web**
+	- Run:
+	  ```sh
+	  flutter build web --release
+	  ```
+
+3. **Deploy to Netlify**
+	- Upload the `build/web` folder to Netlify.
+
+4. **Backend (Render) Setup**
+	- Set environment variables:
+	  - `ConnectionStrings__DefaultConnection` (Azure SQL connection string)
+	  - `JwtSettings__SecretKey` (long, random string)
+	- Ensure CORS allows your Netlify frontend URL.
+
+5. **Login Troubleshooting**
+	- The login identifier (email or username) is always sent in the `email` field.
+	- Backend must accept this for both email and username logins.

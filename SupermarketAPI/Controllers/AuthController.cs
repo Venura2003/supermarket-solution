@@ -26,6 +26,7 @@ namespace SupermarketAPI.Controllers
         /// <param name="request">Email and password</param>
         /// <returns>JWT token response (200 OK) or authentication error</returns>
         [HttpPost("login")]
+            // NOTE: The frontend must send the identifier (email or username) in the 'email' field for compatibility.
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

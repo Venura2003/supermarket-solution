@@ -8,6 +8,7 @@
       "sslPort": 0
     }
   },
+  // NOTE: For production, set ASPNETCORE_URLS and connection string via Render environment variables, not here.
   "profiles": {
     "Development": {
       "commandName": "Project",

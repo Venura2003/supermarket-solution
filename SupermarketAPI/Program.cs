@@ -57,12 +57,13 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+// WARNING: For production, set JwtSettings__SecretKey as an environment variable on Render.
 var secretKey = jwtSettings["SecretKey"] ??
     builder.Configuration["JwtSettings:SecretKey"] ??
     builder.Configuration["JwtSettings__SecretKey"] ??
     builder.Configuration["Jwt:Key"] ??
     builder.Configuration["Jwt__Key"] ??
-    throw new InvalidOperationException("JWT secret key not configured.");
+    throw new InvalidOperationException("JWT secret key not configured. Set JwtSettings__SecretKey as an environment variable on Render.");
 var jwtIssuer = jwtSettings["Issuer"] ??
     builder.Configuration["JwtSettings:Issuer"] ??
     builder.Configuration["JwtSettings__Issuer"] ??
@@ -78,7 +79,11 @@ var jwtAudience = jwtSettings["Audience"] ??
 
 // Database
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer(connectionString, sqlOptions =>
+    {
+        sqlOptions.EnableRetryOnFailure(); // Enable transient error resiliency
+    })
+);
 
 // Authentication - JWT
 builder.Services.AddAuthentication(options =>
@@ -110,12 +115,19 @@ builder.Services.AddAuthorization(options =>
 // Services
 
 // CORS Configuration - Allow All Origins (for development/deployment ease)
+// CORS Configuration - Allow only Netlify and local dev origins in production
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll",
+    options.AddPolicy("AllowFrontend",
         policy =>
         {
-            policy.AllowAnyOrigin()
+            var allowedOrigins = new[] {
+                "https://supermarket-frontend.netlify.app", // CHANGE to your Netlify frontend URL
+                "http://localhost:3000", // Local dev (if using React or similar)
+                "http://localhost:5000", // Local Flutter web
+                "http://127.0.0.1:5000"
+            };
+            policy.WithOrigins(allowedOrigins)
                   .AllowAnyMethod()
                   .AllowAnyHeader();
         });
@@ -235,10 +247,11 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+// Render terminates SSL at the proxy, so HTTPS redirection is safe and recommended.
 app.UseHttpsRedirection();
 
 // Use CORS before Authorization
-app.UseCors("AllowAll");
+app.UseCors("AllowFrontend");
 
 app.UseAuthentication(); // ⚠️ Must be before Authorization
 app.UseAuthorization();
