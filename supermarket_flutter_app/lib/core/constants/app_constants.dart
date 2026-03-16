@@ -7,7 +7,6 @@ class AppConstants {
   /// For local dev, use --dart-define=API_URL=http://localhost:5000/api
   static const String apiBaseUrl = String.fromEnvironment(
     'API_URL',
-    // CHANGE THIS to your Render backend URL for production:
     defaultValue: 'https://supermarket-api-2lx7.onrender.com/api',
   );
 }

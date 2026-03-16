@@ -122,7 +122,7 @@ builder.Services.AddCors(options =>
         policy =>
         {
             var allowedOrigins = new[] {
-                "https://supermarket-frontend.netlify.app", // CHANGE to your Netlify frontend URL
+                "https://incredible-kataifi-a63f72.netlify.app", // Your actual Netlify frontend URL
                 "http://localhost:3000", // Local dev (if using React or similar)
                 "http://localhost:5000", // Local Flutter web
                 "http://127.0.0.1:5000"
@@ -233,7 +233,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger(options =>
     {
         options.SerializeAsV2 = false;
-        options.RouteTemplate = "swagger/{documentName}/swagger.json";
+        options.RouteTemplate = "swag        flutter build web --releaseger/{documentName}/swagger.json";
     });
     
     app.UseSwaggerUI(options =>
