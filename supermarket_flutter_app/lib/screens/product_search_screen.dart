@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -194,21 +193,13 @@ class _ProductSearchScreenState extends State<ProductSearchScreen> {
                   leading: (product.imageUrl != null && product.imageUrl!.isNotEmpty)
                       ? ClipRRect(
                           borderRadius: BorderRadius.circular(6),
-                          child: product.imageUrl!.toLowerCase().startsWith('http')
-                              ? Image.network(
-                                  product.imageUrl!,
-                                  width: 50,
-                                  height: 50,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (context, error, stack) => const Icon(Icons.broken_image, size: 36, color: Colors.grey),
-                                )
-                              : Image.file(
-                                  File(product.imageUrl!),
-                                  width: 50,
-                                  height: 50,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (context, error, stack) => const Icon(Icons.broken_image, size: 36, color: Colors.grey),
-                                ),
+                          child: Image.network(
+                            product.imageUrl!,
+                            width: 50,
+                            height: 50,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stack) => const Icon(Icons.broken_image, size: 36, color: Colors.grey),
+                          ),
                         )
                       : const Icon(Icons.image),
                   title: Text(product.name),
