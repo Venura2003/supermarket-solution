@@ -16,6 +16,15 @@ using SupermarketAPI.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Disable file watching for appsettings.json to avoid inotify/file descriptor limit crash on Render
+builder.Host.ConfigureAppConfiguration((hostingContext, config) =>
+{
+    config.Sources.Clear();
+    config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: false);
+    config.AddJsonFile($"appsettings.{hostingContext.HostingEnvironment.EnvironmentName}.json", optional: true, reloadOnChange: false);
+    config.AddEnvironmentVariables();
+});
+
 // Configure Serilog (sinks defined in configuration to avoid duplicate outputs)
 Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
