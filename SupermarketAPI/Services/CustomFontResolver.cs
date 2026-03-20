@@ -4,8 +4,7 @@ using PdfSharpCore.Fonts;
 
 public class CustomFontResolver : IFontResolver
 {
-    private static readonly string FontFolder = Path.Combine(Directory.GetCurrentDirectory(), "Fonts");
-    private static readonly string FontFile = Path.Combine(FontFolder, "Arial.ttf"); // Change to your font file name
+    private static readonly string FontFile = Path.Combine(AppContext.BaseDirectory, "Fonts", "Arial.ttf"); // Use AppContext.BaseDirectory for serverless
 
     public byte[] GetFont(string faceName)
     {
