@@ -49,119 +49,122 @@ namespace SupermarketAPI.Services
 
         public async Task<SaleDto> CreateAsync(CreateSaleDto dto, int employeeId)
         {
-            await _unitOfWork.BeginTransactionAsync();
-
-            try
+            var strategy = _context.Database.CreateExecutionStrategy();
+            return await strategy.ExecuteAsync(async () =>
             {
-                // Generate unique sale number
-                var saleNo = GenerateSaleNo();
-
-                // Create sale
-                var sale = new Sale
+                await _unitOfWork.BeginTransactionAsync();
+                try
                 {
-                    SaleNo = saleNo,
-                    EmployeeId = employeeId,
-                    SaleDate = DateTime.UtcNow,
-                    TotalAmount = dto.TotalAmount,
-                    DiscountAmount = dto.DiscountAmount,
-                    PaymentMethod = dto.PaymentMethod,
-                    Status = "Completed",
-                    Notes = dto.Notes,
-                    SaleItems = new List<SaleItem>()
-                };
+                    // Generate unique sale number
+                    var saleNo = GenerateSaleNo();
 
-                _context.Sales.Add(sale);
-                await _unitOfWork.SaveChangesAsync();
-
-                // Create sale items and update inventory
-                foreach (var itemDto in dto.Items)
-                {
-                    var product = await _context.Products.FindAsync(itemDto.ProductId);
-                    if (product == null)
-                        throw new Exception($"Product {itemDto.ProductId} not found");
-
-                    if (product.Stock < itemDto.Quantity)
-                        throw new Exception($"Insufficient stock for product {product.Name}");
-
-                    var saleItem = new SaleItem
+                    // Create sale
+                    var sale = new Sale
                     {
-                        SaleId = sale.Id,
-                        ProductId = itemDto.ProductId,
-                        Quantity = itemDto.Quantity,
-                        UnitPrice = itemDto.UnitPrice,
-                        Discount = itemDto.Discount,
-                        LineTotal = itemDto.LineTotal
-                    };
-
-                    _context.SaleItems.Add(saleItem);
-
-                    // Update product stock
-                    product.Stock -= itemDto.Quantity;
-
-                    // Log inventory change
-                    var inventoryLog = new InventoryLog
-                    {
-                        ProductId = itemDto.ProductId,
-                        Action = InventoryAction.StockOut.ToString(),
-                        Quantity = itemDto.Quantity,
-                        Reason = "Sale",
+                        SaleNo = saleNo,
                         EmployeeId = employeeId,
-                        Notes = $"Sale #{sale.SaleNo}"
+                        SaleDate = DateTime.UtcNow,
+                        TotalAmount = dto.TotalAmount,
+                        DiscountAmount = dto.DiscountAmount,
+                        PaymentMethod = dto.PaymentMethod,
+                        Status = "Completed",
+                        Notes = dto.Notes,
+                        SaleItems = new List<SaleItem>()
                     };
 
-                    _context.InventoryLogs.Add(inventoryLog);
-                }
+                    _context.Sales.Add(sale);
+                    await _unitOfWork.SaveChangesAsync();
 
-                await _unitOfWork.SaveChangesAsync();
-                await _unitOfWork.CommitTransactionAsync();
-
-                _logger.LogInformation("Sale {SaleNo} created successfully by employee {EmployeeId}", saleNo, employeeId);
-
-                // Check for low stock alerts
-                await CheckLowStockAlertsAsync();
-
-                // Pragmatic: avoid EF navigation that may fail on schema-mismatched Employee columns.
-                // Build a minimal SaleDto without including Employee navigation to prevent Invalid column exceptions.
-                var saleDto = new SaleDto
-                {
-                    Id = sale.Id,
-                    SaleNo = sale.SaleNo,
-                    EmployeeId = sale.EmployeeId,
-                    EmployeeName = null,
-                    SaleDate = sale.SaleDate,
-                    TotalAmount = sale.TotalAmount,
-                    DiscountAmount = sale.DiscountAmount,
-                    PaymentMethod = sale.PaymentMethod,
-                    Status = sale.Status,
-                    Notes = sale.Notes,
-                    Items = new List<SaleItemDto>(),
-                    CreatedAt = sale.CreatedAt
-                };
-
-                var items = await _context.SaleItems.Where(si => si.SaleId == sale.Id).ToListAsync();
-                foreach (var si in items)
-                {
-                    var product = await _context.Products.FindAsync(si.ProductId);
-                    saleDto.Items.Add(new SaleItemDto
+                    // Create sale items and update inventory
+                    foreach (var itemDto in dto.Items)
                     {
-                        Id = si.Id,
-                        ProductId = si.ProductId,
-                        ProductName = product?.Name,
-                        Quantity = si.Quantity,
-                        UnitPrice = si.UnitPrice,
-                        Discount = si.Discount,
-                        LineTotal = si.LineTotal
-                    });
-                }
+                        var product = await _context.Products.FindAsync(itemDto.ProductId);
+                        if (product == null)
+                            throw new Exception($"Product {itemDto.ProductId} not found");
 
-                return saleDto;
-            }
-            catch (Exception ex)
-            {
-                await _unitOfWork.RollbackTransactionAsync();
-                _logger.LogError(ex, "Failed to create sale for employee {EmployeeId}", employeeId);
-                throw;
-            }
+                        if (product.Stock < itemDto.Quantity)
+                            throw new Exception($"Insufficient stock for product {product.Name}");
+
+                        var saleItem = new SaleItem
+                        {
+                            SaleId = sale.Id,
+                            ProductId = itemDto.ProductId,
+                            Quantity = itemDto.Quantity,
+                            UnitPrice = itemDto.UnitPrice,
+                            Discount = itemDto.Discount,
+                            LineTotal = itemDto.LineTotal
+                        };
+
+                        _context.SaleItems.Add(saleItem);
+
+                        // Update product stock
+                        product.Stock -= itemDto.Quantity;
+
+                        // Log inventory change
+                        var inventoryLog = new InventoryLog
+                        {
+                            ProductId = itemDto.ProductId,
+                            Action = InventoryAction.StockOut.ToString(),
+                            Quantity = itemDto.Quantity,
+                            Reason = "Sale",
+                            EmployeeId = employeeId,
+                            Notes = $"Sale #{sale.SaleNo}"
+                        };
+
+                        _context.InventoryLogs.Add(inventoryLog);
+                    }
+
+                    await _unitOfWork.SaveChangesAsync();
+                    await _unitOfWork.CommitTransactionAsync();
+
+                    _logger.LogInformation("Sale {SaleNo} created successfully by employee {EmployeeId}", saleNo, employeeId);
+
+                    // Check for low stock alerts
+                    await CheckLowStockAlertsAsync();
+
+                    // Pragmatic: avoid EF navigation that may fail on schema-mismatched Employee columns.
+                    // Build a minimal SaleDto without including Employee navigation to prevent Invalid column exceptions.
+                    var saleDto = new SaleDto
+                    {
+                        Id = sale.Id,
+                        SaleNo = sale.SaleNo,
+                        EmployeeId = sale.EmployeeId,
+                        EmployeeName = null,
+                        SaleDate = sale.SaleDate,
+                        TotalAmount = sale.TotalAmount,
+                        DiscountAmount = sale.DiscountAmount,
+                        PaymentMethod = sale.PaymentMethod,
+                        Status = sale.Status,
+                        Notes = sale.Notes,
+                        Items = new List<SaleItemDto>(),
+                        CreatedAt = sale.CreatedAt
+                    };
+
+                    var items = await _context.SaleItems.Where(si => si.SaleId == sale.Id).ToListAsync();
+                    foreach (var si in items)
+                    {
+                        var product = await _context.Products.FindAsync(si.ProductId);
+                        saleDto.Items.Add(new SaleItemDto
+                        {
+                            Id = si.Id,
+                            ProductId = si.ProductId,
+                            ProductName = product?.Name,
+                            Quantity = si.Quantity,
+                            UnitPrice = si.UnitPrice,
+                            Discount = si.Discount,
+                            LineTotal = si.LineTotal
+                        });
+                    }
+
+                    return saleDto;
+                }
+                catch (Exception ex)
+                {
+                    await _unitOfWork.RollbackTransactionAsync();
+                    _logger.LogError(ex, "Failed to create sale for employee {EmployeeId}", employeeId);
+                    throw;
+                }
+            });
         }
 
         public async Task<bool> UpdateStatusAsync(int id, string status)

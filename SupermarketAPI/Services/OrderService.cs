@@ -22,121 +22,120 @@ namespace SupermarketAPI.Services
 
         public async Task<OrderDto> CreateOrderAsync(CreateOrderDto dto, int employeeId)
         {
-            using var transaction = await _db.Database.BeginTransactionAsync();
-            try
+            var strategy = _db.Database.CreateExecutionStrategy();
+            return await strategy.ExecuteAsync(async () =>
             {
-                // Validate items exist and have stock
-                var productIds = dto.Items.Select(i => i.ProductId).Distinct().ToList();
-                var products = await _db.Products
-                    .Where(p => productIds.Contains(p.Id))
-                    .ToDictionaryAsync(p => p.Id);
-
-                if (products.Count != productIds.Count)
+                using var transaction = await _db.Database.BeginTransactionAsync();
+                try
                 {
-                    throw new InvalidProductException("One or more products not found");
-                }
+                    // Validate items exist and have stock
+                    var productIds = dto.Items.Select(i => i.ProductId).Distinct().ToList();
+                    var products = await _db.Products
+                        .Where(p => productIds.Contains(p.Id))
+                        .ToDictionaryAsync(p => p.Id);
 
-                decimal orderTotal = 0;
-                var orderItems = new List<OrderItem>();
-
-                // Create order items and validate stock
-                foreach (var item in dto.Items)
-                {
-                    var product = products[item.ProductId];
-
-                    if (product.Stock < item.Quantity)
+                    if (products.Count != productIds.Count)
                     {
-                        throw new InsufficientStockException(
-                            item.ProductId,
-                            item.Quantity,
-                            product.Stock
-                        );
+                        throw new InvalidProductException("One or more products not found");
                     }
 
-                    var unitPrice = item.CustomDiscount.HasValue 
-                        ? product.Price * (1 - (item.CustomDiscount.Value / 100)) 
-                        : product.Price;
+                    decimal orderTotal = 0;
+                    var orderItems = new List<OrderItem>();
 
-                    var lineTotal = unitPrice * item.Quantity;
-
-                    var orderItem = new OrderItem
+                    // Create order items and validate stock
+                    foreach (var item in dto.Items)
                     {
-                        ProductId = item.ProductId,
-                        Quantity = item.Quantity,
-                        UnitPrice = unitPrice,
-                        Discount = item.CustomDiscount ?? 0,
-                        LineTotal = lineTotal
-                    };
+                        var product = products[item.ProductId];
 
-                    orderItems.Add(orderItem);
-                    orderTotal += lineTotal;
-                }
+                        if (product.Stock < item.Quantity)
+                        {
+                            throw new InsufficientStockException(
+                                item.ProductId,
+                                item.Quantity,
+                                product.Stock
+                            );
+                        }
 
-                // Calculate Totals with VAT (12%)
-                // User requirement: Price should include VAT and Discount.
-                // Assuming the 'orderTotal' is the Net Amount before tax for now.
-                // Or if unitPrice includes tax, then just add it.
-                // Let's assume standard behavior: SubTotal + Tax - Discount = Total
-                
-                decimal subTotal = orderTotal;
-                decimal taxRate = 0.12m; // 12% VAT
-                decimal taxAmount = subTotal * taxRate;
-                decimal discountAmount = dto.Discount; // Expected as Amount from Frontend (converted from %)
+                        var unitPrice = item.CustomDiscount.HasValue 
+                            ? product.Price * (1 - (item.CustomDiscount.Value / 100)) 
+                            : product.Price;
 
-                decimal finalTotal = subTotal + taxAmount - discountAmount;
-                if (finalTotal < 0) finalTotal = 0;
+                        var lineTotal = unitPrice * item.Quantity;
 
-                // Create order
-                var order = new Order
-                {
-                    OrderNo = GenerateOrderNo(),
-                    EmployeeId = employeeId,
-                    OrderDate = DateTime.UtcNow,
-                    PaymentMethod = dto.PaymentMethod,
-                    Status = OrderStatus.Completed.ToString(),
-                    DiscountAmount = discountAmount,
-                    TotalAmount = finalTotal,
-                    Notes = dto.Notes,
-                    OrderItems = orderItems
-                };
+                        var orderItem = new OrderItem
+                        {
+                            ProductId = item.ProductId,
+                            Quantity = item.Quantity,
+                            UnitPrice = unitPrice,
+                            Discount = item.CustomDiscount ?? 0,
+                            LineTotal = lineTotal
+                        };
 
-                // Deduct stock from products and log inventory
-                foreach (var item in dto.Items)
-                {
-                    var product = products[item.ProductId];
-                    product.Stock -= item.Quantity;
+                        orderItems.Add(orderItem);
+                        orderTotal += lineTotal;
+                    }
 
-                    var inventoryLog = new InventoryLog
+                    // Calculate Totals with VAT (12%)
+                    decimal subTotal = orderTotal;
+                    decimal taxRate = 0.12m; // 12% VAT
+                    decimal taxAmount = subTotal * taxRate;
+                    decimal discountAmount = dto.Discount; // Expected as Amount from Frontend (converted from %)
+
+                    decimal finalTotal = subTotal + taxAmount - discountAmount;
+                    if (finalTotal < 0) finalTotal = 0;
+
+                    // Create order
+                    var order = new Order
                     {
-                        ProductId = item.ProductId,
-                        Action = InventoryAction.StockOut.ToString(),
-                        Quantity = item.Quantity,
-                        Reason = "Sale",
+                        OrderNo = GenerateOrderNo(),
                         EmployeeId = employeeId,
-                        Notes = $"Order #{order.OrderNo}"
+                        OrderDate = DateTime.UtcNow,
+                        PaymentMethod = dto.PaymentMethod,
+                        Status = OrderStatus.Completed.ToString(),
+                        DiscountAmount = discountAmount,
+                        TotalAmount = finalTotal,
+                        Notes = dto.Notes,
+                        OrderItems = orderItems
                     };
-                    _db.InventoryLogs.Add(inventoryLog);
+
+                    // Deduct stock from products and log inventory
+                    foreach (var item in dto.Items)
+                    {
+                        var product = products[item.ProductId];
+                        product.Stock -= item.Quantity;
+
+                        var inventoryLog = new InventoryLog
+                        {
+                            ProductId = item.ProductId,
+                            Action = InventoryAction.StockOut.ToString(),
+                            Quantity = item.Quantity,
+                            Reason = "Sale",
+                            EmployeeId = employeeId,
+                            Notes = $"Order #{order.OrderNo}"
+                        };
+                        _db.InventoryLogs.Add(inventoryLog);
+                    }
+
+                    await _db.Orders.AddAsync(order);
+                    await _db.SaveChangesAsync();
+                    await transaction.CommitAsync();
+
+                    _logger.LogInformation(
+                        $"Order {order.OrderNo} created. Items: {order.OrderItems.Count}, Total: {order.TotalAmount}, Employee: {employeeId}"
+                    );
+                    
+                    // Check for low stock alerts
+                    await CheckLowStockAlertsAsync();
+
+                    return (await GetOrderByIdAsync(order.Id))!;
                 }
-
-                await _db.Orders.AddAsync(order);
-                await _db.SaveChangesAsync();
-                await transaction.CommitAsync();
-
-                _logger.LogInformation(
-                    $"Order {order.OrderNo} created. Items: {order.OrderItems.Count}, Total: {order.TotalAmount}, Employee: {employeeId}"
-                );
-                
-                // Check for low stock alerts
-                await CheckLowStockAlertsAsync();
-
-                return (await GetOrderByIdAsync(order.Id))!;
-            }
-            catch (Exception ex)
-            {
-                await transaction.RollbackAsync();
-                _logger.LogError(ex, "Error creating order");
-                throw;
-            }
+                catch (Exception ex)
+                {
+                    await transaction.RollbackAsync();
+                    _logger.LogError(ex, "Error creating order");
+                    throw;
+                }
+            });
         }
 
         public async Task<OrderDto?> GetOrderByIdAsync(int id)
@@ -185,152 +184,166 @@ namespace SupermarketAPI.Services
 
         public async Task<bool> CancelOrderAsync(int id)
         {
-            using var transaction = await _db.Database.BeginTransactionAsync();
-            try
+            var strategy = _db.Database.CreateExecutionStrategy();
+            return await strategy.ExecuteAsync(async () =>
             {
-                var order = await _db.Orders
-                    .Include(o => o.OrderItems)
-                    .FirstOrDefaultAsync(o => o.Id == id);
-
-                if (order == null) return false;
-
-                if (order.Status == OrderStatus.Cancelled.ToString())
-                    return false;
-
-                // Restore stock
-                foreach (var item in order.OrderItems)
+                using var transaction = await _db.Database.BeginTransactionAsync();
+                try
                 {
-                    var product = await _db.Products.FirstOrDefaultAsync(p => p.Id == item.ProductId);
-                    if (product != null)
+                    var order = await _db.Orders
+                        .Include(o => o.OrderItems)
+                        .FirstOrDefaultAsync(o => o.Id == id);
+
+                    if (order == null) return false;
+
+                    if (order.Status == OrderStatus.Cancelled.ToString())
+                        return false;
+
+                    // Restore stock
+                    foreach (var item in order.OrderItems)
                     {
-                        product.Stock += item.Quantity;
+                        var product = await _db.Products.FirstOrDefaultAsync(p => p.Id == item.ProductId);
+                        if (product != null)
+                        {
+                            product.Stock += item.Quantity;
+                        }
                     }
+
+                    order.Status = OrderStatus.Cancelled.ToString();
+                    order.UpdatedAt = DateTime.UtcNow;
+
+                    await _db.SaveChangesAsync();
+                    await transaction.CommitAsync();
+
+                    _logger.LogInformation($"Order {order.OrderNo} cancelled");
+                    return true;
                 }
-
-                order.Status = OrderStatus.Cancelled.ToString();
-                order.UpdatedAt = DateTime.UtcNow;
-
-                await _db.SaveChangesAsync();
-                await transaction.CommitAsync();
-
-                _logger.LogInformation($"Order {order.OrderNo} cancelled");
-                return true;
-            }
-            catch (Exception ex)
-            {
-                await transaction.RollbackAsync();
-                _logger.LogError(ex, "Error cancelling order");
-                throw;
-            }
+                catch (Exception ex)
+                {
+                    await transaction.RollbackAsync();
+                    _logger.LogError(ex, "Error cancelling order");
+                    throw;
+                }
+            });
         }
 
         public async Task<bool> RefundOrderAsync(int id)
         {
-            using var transaction = await _db.Database.BeginTransactionAsync();
-            try
+            var strategy = _db.Database.CreateExecutionStrategy();
+            return await strategy.ExecuteAsync(async () =>
             {
-                var order = await _db.Orders
-                    .Include(o => o.OrderItems)
-                    .FirstOrDefaultAsync(o => o.Id == id);
-
-                if (order == null) return false;
-
-                if (order.Status != OrderStatus.Completed.ToString())
-                    throw new InvalidOperationException("Only completed orders can be refunded.");
-
-                // Restore stock
-                foreach (var item in order.OrderItems)
+                using var transaction = await _db.Database.BeginTransactionAsync();
+                try
                 {
-                    var product = await _db.Products.FirstOrDefaultAsync(p => p.Id == item.ProductId);
-                    if (product != null)
+                    var order = await _db.Orders
+                        .Include(o => o.OrderItems)
+                        .FirstOrDefaultAsync(o => o.Id == id);
+
+                    if (order == null) return false;
+
+                    if (order.Status != OrderStatus.Completed.ToString())
+                        throw new InvalidOperationException("Only completed orders can be refunded.");
+
+                    // Restore stock
+                    foreach (var item in order.OrderItems)
                     {
-                        product.Stock += item.Quantity;
+                        var product = await _db.Products.FirstOrDefaultAsync(p => p.Id == item.ProductId);
+                        if (product != null)
+                        {
+                            product.Stock += item.Quantity;
+                        }
                     }
+
+                    order.Status = OrderStatus.Refunded.ToString();
+                    order.UpdatedAt = DateTime.UtcNow;
+
+                    await _db.SaveChangesAsync();
+                    await transaction.CommitAsync();
+
+                    _logger.LogInformation($"Order {order.OrderNo} refunded");
+                    return true;
                 }
-
-                order.Status = OrderStatus.Refunded.ToString();
-                order.UpdatedAt = DateTime.UtcNow;
-
-                await _db.SaveChangesAsync();
-                await transaction.CommitAsync();
-
-                _logger.LogInformation($"Order {order.OrderNo} refunded");
-                return true;
-            }
-            catch (Exception ex)
-            {
-                await transaction.RollbackAsync();
-                _logger.LogError(ex, "Error refunding order");
-                throw;
-            }
+                catch (Exception ex)
+                {
+                    await transaction.RollbackAsync();
+                    _logger.LogError(ex, "Error refunding order");
+                    throw;
+                }
+            });
         }
+
         public async Task<bool> RefundOrderItemsAsync(int orderId, RefundRequestDto request)
         {
-            using var transaction = await _db.Database.BeginTransactionAsync();
-            try
+            var strategy = _db.Database.CreateExecutionStrategy();
+            return await strategy.ExecuteAsync(async () =>
             {
-                var order = await _db.Orders
-                    .Include(o => o.OrderItems)
-                    .FirstOrDefaultAsync(o => o.Id == orderId);
-
-                if (order == null) return false;
-
-                if (order.Status == OrderStatus.Refunded.ToString())
-                     throw new InvalidOperationException("Order is already fully refunded.");
-
-                bool allRefunded = true;
-
-                foreach (var refItem in request.Items)
+                using var transaction = await _db.Database.BeginTransactionAsync();
+                try
                 {
-                    var orderItem = order.OrderItems.FirstOrDefault(oi => oi.Id == refItem.OrderItemId);
-                    if (orderItem == null) continue; // Skip if not found, or throw?
+                    var order = await _db.Orders
+                        .Include(o => o.OrderItems)
+                        .FirstOrDefaultAsync(o => o.Id == orderId);
 
-                    if (refItem.Quantity <= 0) continue;
+                    if (order == null) return false;
+
+                    if (order.Status == OrderStatus.Refunded.ToString())
+                        throw new InvalidOperationException("Order is already fully refunded.");
+
+                    bool allRefunded = true;
+
+                    foreach (var refItem in request.Items)
+                    {
+                        var orderItem = order.OrderItems.FirstOrDefault(oi => oi.Id == refItem.OrderItemId);
+                        if (orderItem == null) continue; // Skip if not found, or throw?
+
+                        if (refItem.Quantity <= 0) continue;
+                        
+                        if (orderItem.RefundedQuantity + refItem.Quantity > orderItem.Quantity)
+                        {
+                            throw new InvalidOperationException($"Cannot refund {refItem.Quantity} for item {orderItem.ProductId}. Max refundable: {orderItem.Quantity - orderItem.RefundedQuantity}");
+                        }
+
+                        // Update Refunded Qty
+                        orderItem.RefundedQuantity += refItem.Quantity;
+
+                        // Restore Stock
+                        var product = await _db.Products.FirstOrDefaultAsync(p => p.Id == orderItem.ProductId);
+                        if (product != null)
+                        {
+                            product.Stock += refItem.Quantity;
+                        }
+                    }
+
+                    // Check if totally refunded
+                    foreach(var item in order.OrderItems)
+                    {
+                        if (item.RefundedQuantity < item.Quantity)
+                        {
+                            allRefunded = false;
+                            break;
+                        } 
+                    }
+
+                    if (allRefunded)
+                    {
+                        order.Status = OrderStatus.Refunded.ToString();
+                    }
+
+                    order.UpdatedAt = DateTime.UtcNow;
+                    await _db.SaveChangesAsync();
+                    await transaction.CommitAsync();
                     
-                    if (orderItem.RefundedQuantity + refItem.Quantity > orderItem.Quantity)
-                    {
-                        throw new InvalidOperationException($"Cannot refund {refItem.Quantity} for item {orderItem.ProductId}. Max refundable: {orderItem.Quantity - orderItem.RefundedQuantity}");
-                    }
-
-                    // Update Refunded Qty
-                    orderItem.RefundedQuantity += refItem.Quantity;
-
-                    // Restore Stock
-                    var product = await _db.Products.FirstOrDefaultAsync(p => p.Id == orderItem.ProductId);
-                    if (product != null)
-                    {
-                        product.Stock += refItem.Quantity;
-                    }
+                    return true;
                 }
-
-                // Check if totally refunded
-                foreach(var item in order.OrderItems)
+                catch (Exception ex)
                 {
-                    if (item.RefundedQuantity < item.Quantity)
-                    {
-                        allRefunded = false;
-                        break;
-                    } 
+                    await transaction.RollbackAsync();
+                    _logger.LogError(ex, "Error partial refunding order");
+                    throw;
                 }
-
-                if (allRefunded)
-                {
-                    order.Status = OrderStatus.Refunded.ToString();
-                }
-
-                order.UpdatedAt = DateTime.UtcNow;
-                await _db.SaveChangesAsync();
-                await transaction.CommitAsync();
-                
-                return true;
-            }
-            catch (Exception ex)
-            {
-                await transaction.RollbackAsync();
-                _logger.LogError(ex, "Error partial refunding order");
-                throw;
-            }
+            });
         }
+
         public async Task<decimal> GetTotalSalesAsync(DateTime from, DateTime to)
         {
             return await _db.Orders

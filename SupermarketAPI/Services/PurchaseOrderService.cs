@@ -104,59 +104,42 @@ namespace SupermarketAPI.Services
             if (po == null) throw new Exception("Purchase Order not found");
             if (po.Status == "Received") throw new Exception("Purchase Order already received");
 
-            using var transaction = await _db.Database.BeginTransactionAsync();
-            try
+            var strategy = _db.Database.CreateExecutionStrategy();
+            return await strategy.ExecuteAsync(async () =>
             {
-                po.Status = "Received";
-
-                // Create GRN
-                var grn = new GoodsReceivedNote
+                using var transaction = await _db.Database.BeginTransactionAsync();
+                try
                 {
-                    SupplierId = po.SupplierId,
-                    ReceivedDate = DateTime.UtcNow,
-                    TotalAmount = po.TotalAmount,
-                    Notes = $"Purchase Order #{po.Id}",
-                    Items = po.Items.Select(i => new GoodsReceivedNoteItem
-                    {
-                        ProductId = i.ProductId,
-                        Quantity = i.Quantity,
-                        UnitCost = i.UnitCost,
-                        TotalCost = i.Quantity * i.UnitCost
-                    }).ToList()
-                };
+                    po.Status = "Received";
 
-                _db.GoodsReceivedNotes.Add(grn);
-
-                // Update Stock
-                foreach (var item in po.Items)
-                {
-                    var product = await _db.Products.FindAsync(item.ProductId);
-                    if (product != null)
+                    // Create GRN
+                    var grn = new GoodsReceivedNote
                     {
-                        product.Stock += item.Quantity;
-                        product.CostPrice = item.UnitCost; // Update current cost price
-                        _db.InventoryLogs.Add(new InventoryLog
+                        SupplierId = po.SupplierId,
+                        ReceivedDate = DateTime.UtcNow,
+                        TotalAmount = po.TotalAmount,
+                        Notes = $"Purchase Order #{po.Id}",
+                        Items = po.Items.Select(i => new GoodsReceivedNoteItem
                         {
-                            ProductId = item.ProductId,
-                            Quantity = item.Quantity,
-                            Action = "StockIn",
-                            Reason = $"PO Received #{po.Id}",
-                            Timestamp = DateTime.UtcNow,
-                            Notes = $"Updated via PO #{po.Id}"
-                        });
-                    }
+                            ProductId = i.ProductId,
+                            Quantity = i.Quantity,
+                            UnitCost = i.UnitCost,
+                            TotalCost = i.Quantity * i.UnitCost
+                        }).ToList()
+                    };
+
+                    _db.GoodsReceivedNotes.Add(grn);
+                    await _db.SaveChangesAsync();
+                    await transaction.CommitAsync();
+
+                    return await GetByIdAsync(po.Id);
                 }
-
-                await _db.SaveChangesAsync();
-                await transaction.CommitAsync();
-
-                return await GetByIdAsync(id);
-            }
-            catch
-            {
-                await transaction.RollbackAsync();
-                throw;
-            }
+                catch (Exception)
+                {
+                    await transaction.RollbackAsync();
+                    throw;
+                }
+            });
         }
     }
 }

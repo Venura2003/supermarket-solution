@@ -71,61 +71,65 @@ namespace SupermarketAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<GoodsReceivedNote>> PostGrn(CreateGRNDto dto)
         {
-            using var transaction = await _context.Database.BeginTransactionAsync();
-            try
+            var strategy = _context.Database.CreateExecutionStrategy();
+            return await strategy.ExecuteAsync(async () =>
             {
-                var grn = new GoodsReceivedNote
+                using var transaction = await _context.Database.BeginTransactionAsync();
+                try
                 {
-                    SupplierId = dto.SupplierId,
-                    ReceivedDate = DateTime.UtcNow,
-                    Notes = dto.Notes,
-                    Items = new List<GoodsReceivedNoteItem>()
-                };
-
-                decimal totalGrnAmount = 0;
-
-                foreach (var itemDto in dto.Items)
-                {
-                    var product = await _context.Products.FindAsync(itemDto.ProductId);
-                    if (product == null) continue;
-
-                    var itemTotalCost = itemDto.Quantity * itemDto.UnitCost;
-                    totalGrnAmount += itemTotalCost;
-
-                    var grnItem = new GoodsReceivedNoteItem
+                    var grn = new GoodsReceivedNote
                     {
-                        ProductId = itemDto.ProductId,
-                        Quantity = itemDto.Quantity,
-                        UnitCost = itemDto.UnitCost,
-                        TotalCost = itemTotalCost
+                        SupplierId = dto.SupplierId,
+                        ReceivedDate = DateTime.UtcNow,
+                        Notes = dto.Notes,
+                        Items = new List<GoodsReceivedNoteItem>()
                     };
-                    grn.Items.Add(grnItem);
 
-                    // Update Stock
-                    product.Stock += itemDto.Quantity;
-                    
-                    // Allow updating selling price if provided
-                    if (itemDto.NewSellingPrice.HasValue && itemDto.NewSellingPrice.Value > 0)
+                    decimal totalGrnAmount = 0;
+
+                    foreach (var itemDto in dto.Items)
                     {
-                        product.Price = itemDto.NewSellingPrice.Value;
+                        var product = await _context.Products.FindAsync(itemDto.ProductId);
+                        if (product == null) continue;
+
+                        var itemTotalCost = itemDto.Quantity * itemDto.UnitCost;
+                        totalGrnAmount += itemTotalCost;
+
+                        var grnItem = new GoodsReceivedNoteItem
+                        {
+                            ProductId = itemDto.ProductId,
+                            Quantity = itemDto.Quantity,
+                            UnitCost = itemDto.UnitCost,
+                            TotalCost = itemTotalCost
+                        };
+                        grn.Items.Add(grnItem);
+
+                        // Update Stock
+                        product.Stock += itemDto.Quantity;
+                        
+                        // Allow updating selling price if provided
+                        if (itemDto.NewSellingPrice.HasValue && itemDto.NewSellingPrice.Value > 0)
+                        {
+                            product.Price = itemDto.NewSellingPrice.Value;
+                        }
+
+                        _context.Products.Update(product);
                     }
 
-                    _context.Products.Update(product);
+                    grn.TotalAmount = totalGrnAmount;
+
+                    _context.GoodsReceivedNotes.Add(grn);
+                    await _context.SaveChangesAsync();
+                    await transaction.CommitAsync();
+
+                    return CreatedAtAction("GetGrn", new { id = grn.Id }, grn);
                 }
-
-                grn.TotalAmount = totalGrnAmount;
-
-                _context.GoodsReceivedNotes.Add(grn);
-                await _context.SaveChangesAsync();
-                await transaction.CommitAsync();
-
-                return CreatedAtAction("GetGrn", new { id = grn.Id }, grn);
-            }
-            catch (Exception)
-            {
-                await transaction.RollbackAsync();
-                throw;
-            }
+                catch (Exception)
+                {
+                    await transaction.RollbackAsync();
+                    throw;
+                }
+            });
         }
     }
 }
