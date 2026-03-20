@@ -378,7 +378,7 @@ namespace SupermarketAPI.Services
             var fullPath = Path.Combine(receiptsDir, fileName);
 
             // Set up custom font resolver for PDFSharpCore
-            GlobalFontSettings.FontResolver = new CustomFontResolver();
+            // Font resolver is now set once at startup in Program.cs
 
             try
             {

@@ -202,6 +202,9 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
+// Set up custom font resolver for PDFSharpCore (only once at startup)
+PdfSharpCore.Fonts.GlobalFontSettings.FontResolver = new CustomFontResolver();
+
 // Apply migrations and seed data
 using (var scope = app.Services.CreateScope())
 {
