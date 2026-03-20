@@ -6,6 +6,7 @@ using SupermarketAPI.DTOs;
 using SupermarketAPI.Models;
 using PdfSharpCore.Pdf;
 using PdfSharpCore.Drawing;
+using PdfSharpCore.Fonts;
 
 namespace SupermarketAPI.Services
 {
@@ -376,6 +377,9 @@ namespace SupermarketAPI.Services
             var fileName = $"receipt_{order.OrderNo}.pdf";
             var fullPath = Path.Combine(receiptsDir, fileName);
 
+            // Set up custom font resolver for PDFSharpCore
+            GlobalFontSettings.FontResolver = new CustomFontResolver();
+
             try
             {
                 // Create a PDF document for thermal printer (approx 80mm width)
@@ -391,10 +395,11 @@ namespace SupermarketAPI.Services
 
                     var gfx = PdfSharpCore.Drawing.XGraphics.FromPdfPage(page);
                     
-                    var fontRegular = new PdfSharpCore.Drawing.XFont("Courier New", 8);
-                    var fontBold = new PdfSharpCore.Drawing.XFont("Courier New", 8, PdfSharpCore.Drawing.XFontStyle.Bold);
-                    var fontHeader = new PdfSharpCore.Drawing.XFont("Courier New", 12, PdfSharpCore.Drawing.XFontStyle.Bold);
-                    var fontSmall = new PdfSharpCore.Drawing.XFont("Courier New", 7);
+                    // Use the custom font name (must match CustomFontResolver)
+                    var fontRegular = new PdfSharpCore.Drawing.XFont("CustomFont", 8);
+                    var fontBold = new PdfSharpCore.Drawing.XFont("CustomFont", 8, PdfSharpCore.Drawing.XFontStyle.Bold);
+                    var fontHeader = new PdfSharpCore.Drawing.XFont("CustomFont", 12, PdfSharpCore.Drawing.XFontStyle.Bold);
+                    var fontSmall = new PdfSharpCore.Drawing.XFont("CustomFont", 7);
 
                     double y = 10;
                     double pageWidth = page.Width.Point;
