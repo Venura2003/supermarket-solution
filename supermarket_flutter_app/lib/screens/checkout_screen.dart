@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:open_file/open_file.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:printing/printing.dart'; // Added
 import 'package:pdf/pdf.dart'; // Added
 import '../../core/providers/cart_provider.dart';
@@ -454,13 +454,11 @@ class _ReceiptDialogState extends State<_ReceiptDialog> {
   }
 
   Future<void> _openReceipt() async {
-    try {
-      final path = await ApiService.downloadReceipt(widget.receiptPath, 'receipt.pdf');
-      if (path != null) {
-        await OpenFile.open(path);
-      }
-    } catch (e) {
-      debugPrint('Error opening receipt: $e');
+    final pdfUrl = widget.receiptPath; // This should be the full URL to the PDF file
+    if (await canLaunchUrl(Uri.parse(pdfUrl))) {
+      await launchUrl(Uri.parse(pdfUrl), mode: LaunchMode.externalApplication);
+    } else {
+      debugPrint('Could not launch $pdfUrl');
     }
   }
 
