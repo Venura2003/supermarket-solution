@@ -124,7 +124,10 @@ class ProductProvider with ChangeNotifier {
 
     final categoryId = core.categories.isNotEmpty ? int.tryParse(core.categories.first.id) : null;
     final barcode = core.skus.isNotEmpty ? core.skus.first.barcode : null;
-    final imageUrl = core.images.isNotEmpty ? core.images.first.url : null;
+    String? imageUrl = core.images.isNotEmpty ? core.images.first.url : null;
+    if (imageUrl != null && imageUrl.startsWith('/images/')) {
+      imageUrl = 'https://supermarket-api-2lx7.onrender.com$imageUrl';
+    }
 
     return legacy_models.Product(
       id: id,
