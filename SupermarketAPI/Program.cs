@@ -261,8 +261,15 @@ if (app.Environment.IsDevelopment())
 
 // Render terminates SSL at the proxy, so HTTPS redirection is safe and recommended.
 
-// Serve static files (images, css, js, etc.)
-app.UseStaticFiles();
+
+// Serve static files (images, css, js, etc.) with CORS headers for images
+app.UseStaticFiles(new StaticFileOptions
+{
+    OnPrepareResponse = ctx =>
+    {
+        ctx.Context.Response.Headers.Append("Access-Control-Allow-Origin", "*");
+    }
+});
 
 app.UseHttpsRedirection();
 
