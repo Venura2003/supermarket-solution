@@ -3,8 +3,11 @@ import 'package:provider/provider.dart';
 import '../../../core/models/category.dart';
 import '../../../features/products/providers/category_provider.dart';
 import '../../../features/products/providers/product_provider.dart';
+import '../../../core/services/api_service.dart';
 import 'product_list_screen.dart'; // Added by Copilot
 import 'dart:math' as math;
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 class CategoryManagementScreen extends StatefulWidget {
   const CategoryManagementScreen({super.key});
@@ -19,6 +22,8 @@ class _CategoryManagementScreenState extends State<CategoryManagementScreen> {
   final _descriptionController = TextEditingController();
   final _searchController = TextEditingController();
   Category? _editingCategory;
+  String? _imageUrl;
+  XFile? _pickedImage;
 
   @override
   void initState() {
@@ -42,6 +47,8 @@ class _CategoryManagementScreenState extends State<CategoryManagementScreen> {
     _editingCategory = category;
     _nameController.text = category?.name ?? '';
     _descriptionController.text = category?.description ?? '';
+    _imageUrl = category?.imageUrl;
+    _pickedImage = null;
 
     showDialog(
       context: context,
@@ -52,6 +59,45 @@ class _CategoryManagementScreenState extends State<CategoryManagementScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              GestureDetector(
+                onTap: () async {
+                  final picker = ImagePicker();
+                  final picked = await picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
+                  if (picked != null) {
+                    setState(() {
+                      _pickedImage = picked;
+                      _imageUrl = picked.path;
+                    });
+                  }
+                },
+                child: _pickedImage != null
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image.file(
+                          File(_pickedImage!.path),
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.cover,
+                        ),
+                      )
+                    : (_imageUrl != null && _imageUrl!.isNotEmpty)
+                        ? ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: _imageUrl!.startsWith('http')
+                                ? Image.network(_imageUrl!, width: 100, height: 100, fit: BoxFit.cover)
+                                : Image.file(File(_imageUrl!), width: 100, height: 100, fit: BoxFit.cover),
+                          )
+                        : Container(
+                            width: 100,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Icon(Icons.add_a_photo, size: 32, color: Colors.grey),
+                          ),
+              ),
+              const SizedBox(height: 12),
               TextFormField(
                 controller: _nameController,
                 decoration: const InputDecoration(labelText: 'Category Name'),
@@ -79,8 +125,21 @@ class _CategoryManagementScreenState extends State<CategoryManagementScreen> {
     );
   }
 
-  void _saveCategory() {
+  Future<void> _saveCategory() async {
     if (!_formKey.currentState!.validate()) return;
+
+    String? imageUrl = _imageUrl;
+    // If image is a local file (not a URL), upload it
+    if (imageUrl != null && !imageUrl.startsWith('http') && File(imageUrl).existsSync()) {
+      try {
+        imageUrl = await ApiService.uploadImage(File(imageUrl));
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Image upload failed: $e')));
+        }
+        return;
+      }
+    }
 
     final category = Category(
       id: _editingCategory?.id,
@@ -88,6 +147,7 @@ class _CategoryManagementScreenState extends State<CategoryManagementScreen> {
       description: _descriptionController.text.trim().isEmpty
           ? null
           : _descriptionController.text.trim(),
+      imageUrl: imageUrl,
     );
 
     final provider = context.read<CategoryProvider>();
@@ -305,11 +365,21 @@ class _CategoryManagementScreenState extends State<CategoryManagementScreen> {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center, 
                             children: [
-                              CircleAvatar(
-                                radius: 30, 
-                                backgroundColor: color.shade200, 
-                                child: Text(initials, style: const TextStyle(fontWeight: FontWeight.bold))
-                              ),
+                              (category.imageUrl != null && category.imageUrl!.isNotEmpty)
+                                  ? CircleAvatar(
+                                      radius: 30,
+                                      backgroundColor: color.shade200,
+                                      backgroundImage: NetworkImage(
+                                        category.imageUrl!.startsWith('/images/')
+                                            ? 'https://supermarket-api-2lx7.onrender.com${category.imageUrl}'
+                                            : category.imageUrl!,
+                                      ),
+                                    )
+                                  : CircleAvatar(
+                                      radius: 30,
+                                      backgroundColor: color.shade200,
+                                      child: Text(initials, style: const TextStyle(fontWeight: FontWeight.bold)),
+                                    ),
                               const SizedBox(width: 16),
                               // Ensure title is single-line and flexible
                               Expanded(

@@ -8,6 +8,7 @@ import 'package:path/path.dart' as path_pkg;
 import 'package:path_provider/path_provider.dart';
 
 import '../providers/product_provider.dart';
+import '../../../core/services/api_service.dart';
 import '../providers/category_provider.dart';
 import '../../../core/models/product.dart';
 import '../../../core/models/category.dart';
@@ -69,12 +70,25 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
     final stock = int.tryParse(_stockController.text) ?? 0;
     final lowStockThreshold = int.tryParse(_lowStockThresholdController.text) ?? 5;
 
+    String? imageUrl = _imagePath;
+    // If image is a local file (not a URL), upload it
+    if (imageUrl != null && !imageUrl.startsWith('http') && File(imageUrl).existsSync()) {
+      try {
+        imageUrl = await ApiService.uploadImage(File(imageUrl));
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Image upload failed: $e')));
+        }
+        return;
+      }
+    }
+
     final product = Product(
       id: widget.product?.id,
       name: name,
       categoryId: _selectedCategoryId,
       barcode: barcode,
-      imageUrl: _imagePath,
+      imageUrl: imageUrl,
       price: price,
       costPrice: costPrice, // Added
       stock: stock,

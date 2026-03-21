@@ -7,6 +7,23 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supermarket_flutter_app/core/constants/app_constants.dart';
 
 class ApiService {
+    /// Uploads an image file to the backend and returns the public URL (e.g., /images/xxx.jpg)
+    static Future<String> uploadImage(File file) async {
+      final token = await getToken();
+      final uri = Uri.parse('${AppConstants.apiBaseUrl}/api/ImageUpload');
+      final request = http.MultipartRequest('POST', uri);
+      if (token != null) request.headers['Authorization'] = 'Bearer $token';
+      request.files.add(await http.MultipartFile.fromPath('file', file.path));
+      final streamed = await request.send();
+      final response = await http.Response.fromStream(streamed);
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        if (data['url'] != null) return data['url'];
+        throw Exception('No URL returned from upload');
+      } else {
+        throw HttpException('Image upload failed: ${response.statusCode} ${response.body}');
+      }
+    }
   static const _tokenKey = 'jwt_token';
 
   /// Returns a user-friendly error message for network errors
