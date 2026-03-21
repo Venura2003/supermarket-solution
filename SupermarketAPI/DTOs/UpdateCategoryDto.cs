@@ -1,6 +1,7 @@
 namespace SupermarketAPI.DTOs
 {
     public record UpdateCategoryDto(
-        string Name
+        string Name,
+        string? ImageUrl
     );
 }

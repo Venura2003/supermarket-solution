@@ -23,7 +23,7 @@ namespace SupermarketAPI.Services
                 .OrderBy(c => c.Name)
                 .ToListAsync();
 
-            return categories.Select(c => new CategoryDto(c.Id, c.Name));
+            return categories.Select(c => new CategoryDto(c.Id, c.Name, c.ImageUrl));
         }
 
         public async Task<CategoryDto?> GetByIdAsync(int id)
@@ -33,7 +33,7 @@ namespace SupermarketAPI.Services
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             if (c == null) return null;
-            return new CategoryDto(c.Id, c.Name);
+            return new CategoryDto(c.Id, c.Name, c.ImageUrl);
         }
 
         public async Task<CategoryDto> CreateAsync(CreateCategoryDto dto)
@@ -47,11 +47,11 @@ namespace SupermarketAPI.Services
                 throw new InvalidOperationException("Category with the same name already exists.");
             }
 
-            var category = new Category { Name = name };
+            var category = new Category { Name = name, ImageUrl = dto.ImageUrl };
             await _db.Categories.AddAsync(category);
             await _db.SaveChangesAsync();
 
-            return new CategoryDto(category.Id, category.Name);
+            return new CategoryDto(category.Id, category.Name, category.ImageUrl);
         }
 
         public async Task<bool> UpdateAsync(int id, UpdateCategoryDto dto)
@@ -68,6 +68,10 @@ namespace SupermarketAPI.Services
             }
 
             c.Name = name;
+            if (dto.ImageUrl != null)
+            {
+                c.ImageUrl = dto.ImageUrl;
+            }
             _db.Categories.Update(c);
             await _db.SaveChangesAsync();
             return true;

@@ -1,6 +1,7 @@
 namespace SupermarketAPI.DTOs
 {
     public record CreateCategoryDto(
-        string Name
+        string Name,
+        string? ImageUrl
     );
 }

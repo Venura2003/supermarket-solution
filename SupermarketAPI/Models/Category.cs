@@ -9,5 +9,8 @@ namespace SupermarketAPI.Models
         [Required]
         [StringLength(128)]
         public string Name { get; set; } = string.Empty;
+
+        [StringLength(1024)]
+        public string? ImageUrl { get; set; }
     }
 }
