@@ -5,9 +5,9 @@ import '../theme/app_theme.dart';
 class ThemeModeProvider with ChangeNotifier {
   ThemeMode _themeMode = ThemeMode.light;
   int _selectedThemeIndex = 0;
-  Color? _customPrimaryColor;
+  Color? _customPrimaryColor = const Color(0xFF1976D2); // Force blue
   double _sidebarTint = 0.12;
-  bool _headerFullColor = false;
+  bool _headerFullColor = true; // Always use full color header
 
   final List<ThemeData> _themePresets = [
     AppTheme.lightTheme,
@@ -59,18 +59,14 @@ class ThemeModeProvider with ChangeNotifier {
   // Load preferences on startup
   Future<void> _loadPrefs() async {
     final idx = await ThemePrefs.loadSelectedTheme();
-    final customPrimary = await ThemePrefs.loadCustomPrimary();
     final tint = await ThemePrefs.loadSidebarTint();
-    final headerFull = await ThemePrefs.loadHeaderFullColor();
-
     if (idx != null) _selectedThemeIndex = idx;
-    _customPrimaryColor = customPrimary;
     if (tint != null) _sidebarTint = tint;
-    if (headerFull != null) _headerFullColor = headerFull;
-
+    // Force header color and blue for all platforms
+    _headerFullColor = true;
+    _customPrimaryColor = const Color(0xFF1976D2);
     // Determine ThemeMode based on selected preset (Index 4 is dark)
     _themeMode = (_selectedThemeIndex == 4) ? ThemeMode.dark : ThemeMode.light;
-
     notifyListeners();
   }
 
