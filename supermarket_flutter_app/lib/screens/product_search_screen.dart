@@ -189,12 +189,17 @@ class _ProductSearchScreenState extends State<ProductSearchScreen> {
               itemCount: displayedProducts.length,
               itemBuilder: (context, index) {
                 final product = displayedProducts[index];
+                // Prepend API base URL if imageUrl starts with /images/
+                String? imageUrl = product.imageUrl;
+                if (imageUrl != null && imageUrl.startsWith('/images/')) {
+                  imageUrl = 'https://supermarket-api-2lx7.onrender.com$imageUrl';
+                }
                 return ListTile(
-                  leading: (product.imageUrl != null && product.imageUrl!.isNotEmpty)
+                  leading: (imageUrl != null && imageUrl.isNotEmpty)
                       ? ClipRRect(
                           borderRadius: BorderRadius.circular(6),
                           child: Image.network(
-                            product.imageUrl!,
+                            imageUrl,
                             width: 50,
                             height: 50,
                             fit: BoxFit.cover,

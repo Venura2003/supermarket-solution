@@ -467,11 +467,21 @@ class _ProductCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                       child: AspectRatio(
                         aspectRatio: 1.0,
-                        child: product.imageUrl != null && product.imageUrl!.isNotEmpty
-                            ? (product.imageUrl!.toLowerCase().startsWith('http')
-                                ? Image.network(product.imageUrl!, fit: BoxFit.cover, errorBuilder: (c, e, s) => const Icon(Icons.broken_image, size: 48, color: Colors.grey))
-                                : Image.file(File(product.imageUrl!), fit: BoxFit.cover))
-                            : Container(color: Colors.grey[100], child: const Icon(Icons.image_not_supported, color: Colors.grey, size: 28)),
+                        child: (() {
+                          String? imageUrl = product.imageUrl;
+                          if (imageUrl != null && imageUrl.startsWith('/images/')) {
+                            imageUrl = 'https://supermarket-api-2lx7.onrender.com$imageUrl';
+                          }
+                          if (imageUrl != null && imageUrl.isNotEmpty) {
+                            if (imageUrl.toLowerCase().startsWith('http')) {
+                              return Image.network(imageUrl, fit: BoxFit.cover, errorBuilder: (c, e, s) => const Icon(Icons.broken_image, size: 48, color: Colors.grey));
+                            } else {
+                              return Image.file(File(imageUrl), fit: BoxFit.cover);
+                            }
+                          } else {
+                            return Container(color: Colors.grey[100], child: const Icon(Icons.image_not_supported, color: Colors.grey, size: 28));
+                          }
+                        })(),
                       ),
                     ),
                   ),
@@ -502,11 +512,21 @@ class _ProductCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                   child: AspectRatio(
                     aspectRatio: 1.0,
-                    child: product.imageUrl != null && product.imageUrl!.isNotEmpty
-                        ? (product.imageUrl!.toLowerCase().startsWith('http')
-                            ? Image.network(product.imageUrl!, fit: BoxFit.cover, errorBuilder: (c, e, s) => const Icon(Icons.broken_image, size: 64, color: Colors.grey))
-                            : Image.file(File(product.imageUrl!), fit: BoxFit.cover))
-                        : Container(color: Colors.grey[100], child: const Icon(Icons.image_not_supported, color: Colors.grey, size: 40)),
+                    child: (() {
+                      String? imageUrl = product.imageUrl;
+                      if (imageUrl != null && imageUrl.startsWith('/images/')) {
+                        imageUrl = 'https://supermarket-api-2lx7.onrender.com$imageUrl';
+                      }
+                      if (imageUrl != null && imageUrl.isNotEmpty) {
+                        if (imageUrl.toLowerCase().startsWith('http')) {
+                          return Image.network(imageUrl, fit: BoxFit.cover, errorBuilder: (c, e, s) => const Icon(Icons.broken_image, size: 64, color: Colors.grey));
+                        } else {
+                          return Image.file(File(imageUrl), fit: BoxFit.cover);
+                        }
+                      } else {
+                        return Container(color: Colors.grey[100], child: const Icon(Icons.image_not_supported, color: Colors.grey, size: 40));
+                      }
+                    })(),
                   ),
                 ),
               ),
