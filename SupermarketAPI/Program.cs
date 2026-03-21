@@ -132,13 +132,15 @@ builder.Services.AddCors(options =>
         {
             var allowedOrigins = new[] {
                 "https://incredible-kataifi-a63f72.netlify.app", // Your actual Netlify frontend URL
+                "https://supermarkrt-solution.vercel.app", // Vercel deployed Flutter web
                 "http://localhost:3000", // Local dev (if using React or similar)
                 "http://localhost:5000", // Local Flutter web
                 "http://127.0.0.1:5000"
             };
             policy.WithOrigins(allowedOrigins)
                   .AllowAnyMethod()
-                  .AllowAnyHeader();
+                  .AllowAnyHeader()
+                  .AllowCredentials();
         });
 });
 
