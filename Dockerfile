@@ -12,7 +12,8 @@ WORKDIR "/src/SupermarketAPI"
 RUN dotnet build "SupermarketAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "SupermarketAPI.csproj" -c Release -o /app/publish
+RUN dotnet publish "SupermarketAPI.csproj" -c Release -o /app/publish \
+	&& cp -r /src/SupermarketAPI/wwwroot /app/publish/wwwroot
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
 WORKDIR /app
