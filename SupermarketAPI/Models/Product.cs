@@ -17,6 +17,7 @@ namespace SupermarketAPI.Models
         public string? Barcode { get; set; }
 
         [StringLength(1024)]
+        [System.Text.Json.Serialization.JsonPropertyName("imageUrl")]
         public string? ImageUrl { get; set; }
 
         [Range(0.01, 999999.99, ErrorMessage = "Price must be between 0.01 and 999999.99")]

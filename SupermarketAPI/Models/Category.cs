@@ -11,6 +11,7 @@ namespace SupermarketAPI.Models
         public string Name { get; set; } = string.Empty;
 
         [StringLength(1024)]
+        [System.Text.Json.Serialization.JsonPropertyName("imageUrl")]
         public string? ImageUrl { get; set; }
     }
 }
