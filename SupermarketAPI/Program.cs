@@ -131,9 +131,10 @@ builder.Services.AddCors(options =>
         policy =>
         {
             var allowedOrigins = new[] {
-                "https://incredible-kataifi-a63f72.netlify.app", // Your actual Netlify frontend URL
-                "https://supermarkrt-solution.vercel.app", // Vercel deployed Flutter web
-                "http://localhost:3000", // Local dev (if using React or similar)
+                "https://incredible-kataifi-a63f72.netlify.app", // Netlify
+                "https://supermarkrt-solution.vercel.app", // Vercel old
+                "https://supermarket-green-phi.vercel.app", // Vercel new
+                "http://localhost:3000", // Local dev
                 "http://localhost:5000", // Local Flutter web
                 "http://127.0.0.1:5000"
             };
