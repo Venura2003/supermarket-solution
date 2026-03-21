@@ -1,4 +1,5 @@
-import 'dart:io';
+import 'dart:io' show File;
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../features/dashboard/providers/dashboard_provider.dart';
@@ -71,7 +72,7 @@ class _LowStockItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isCritical = product.stock <= (product.lowStockThreshold / 2);
-    final hasImage = product.imageUrl != null && product.imageUrl!.isNotEmpty && File(product.imageUrl!).existsSync();
+    final hasImage = product.imageUrl != null && product.imageUrl!.isNotEmpty;
 
     return Card(
       color: isCritical ? Colors.red.shade50 : Colors.orange.shade50,
@@ -80,12 +81,19 @@ class _LowStockItem extends StatelessWidget {
         leading: hasImage
             ? ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.file(
-                  File(product.imageUrl!),
-                  width: 52,
-                  height: 52,
-                  fit: BoxFit.cover,
-                ),
+                child: kIsWeb
+                    ? Image.network(
+                        product.imageUrl!,
+                        width: 52,
+                        height: 52,
+                        fit: BoxFit.cover,
+                      )
+                    : Image.file(
+                        File(product.imageUrl!),
+                        width: 52,
+                        height: 52,
+                        fit: BoxFit.cover,
+                      ),
               )
             : Icon(
                 Icons.warning,
