@@ -85,7 +85,8 @@ namespace SupermarketAPI.Migrations
 
                     b.Property<string>("ImageUrl")
                         .HasMaxLength(1024)
-                        .HasColumnType("nvarchar(1024)");
+                        .HasColumnType("nvarchar(1024)")
+                        .HasJsonPropertyName("imageUrl");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -533,7 +534,8 @@ namespace SupermarketAPI.Migrations
 
                     b.Property<string>("ImageUrl")
                         .HasMaxLength(1024)
-                        .HasColumnType("nvarchar(1024)");
+                        .HasColumnType("nvarchar(1024)")
+                        .HasJsonPropertyName("imageUrl");
 
                     b.Property<int>("LowStockThreshold")
                         .ValueGeneratedOnAdd()

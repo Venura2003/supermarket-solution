@@ -12,8 +12,8 @@ using SupermarketAPI.Data;
 namespace SupermarketAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260226061745_FixPendingChanges")]
-    partial class FixPendingChanges
+    [Migration("20260321095022_AddCategoryImageUrlOnly")]
+    partial class AddCategoryImageUrlOnly
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -86,6 +86,11 @@ namespace SupermarketAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ImageUrl")
+                        .HasMaxLength(1024)
+                        .HasColumnType("nvarchar(1024)")
+                        .HasJsonPropertyName("imageUrl");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(128)
@@ -112,7 +117,7 @@ namespace SupermarketAPI.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<DateTime>("HireDate")
+                    b.Property<DateTime?>("HireDate")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsActive")
@@ -133,14 +138,14 @@ namespace SupermarketAPI.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<decimal>("Salary")
+                    b.Property<decimal?>("Salary")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -151,6 +156,99 @@ namespace SupermarketAPI.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("SupermarketAPI.Models.Expense", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Amount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("SYSUTCDATETIME()");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Expenses");
+                });
+
+            modelBuilder.Entity("SupermarketAPI.Models.GoodsReceivedNote", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Notes")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime>("ReceivedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SupplierId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SupplierId");
+
+                    b.ToTable("GoodsReceivedNotes");
+                });
+
+            modelBuilder.Entity("SupermarketAPI.Models.GoodsReceivedNoteItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("GoodsReceivedNoteId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalCost")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("UnitCost")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GoodsReceivedNoteId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("GoodsReceivedNoteItems");
                 });
 
             modelBuilder.Entity("SupermarketAPI.Models.InventoryLog", b =>
@@ -327,6 +425,9 @@ namespace SupermarketAPI.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
+                    b.Property<int>("RefundedQuantity")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("UnitPrice")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
@@ -338,6 +439,76 @@ namespace SupermarketAPI.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("OrderItems");
+                });
+
+            modelBuilder.Entity("SupermarketAPI.Models.Payroll", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Advances")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("BasicSalary")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Bonuses")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Epf12")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Epf8")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Etf3")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("GeneratedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MonthYear")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("NetSalary")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("OtherDeductions")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<double>("OvertimeHours")
+                        .HasColumnType("float");
+
+                    b.Property<decimal>("OvertimeRate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("PeriodEnd")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("PeriodStart")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Tax")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("WorkedDays")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("Payrolls");
                 });
 
             modelBuilder.Entity("SupermarketAPI.Models.Product", b =>
@@ -355,6 +526,10 @@ namespace SupermarketAPI.Migrations
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("CostPrice")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
@@ -362,7 +537,8 @@ namespace SupermarketAPI.Migrations
 
                     b.Property<string>("ImageUrl")
                         .HasMaxLength(1024)
-                        .HasColumnType("nvarchar(1024)");
+                        .HasColumnType("nvarchar(1024)")
+                        .HasJsonPropertyName("imageUrl");
 
                     b.Property<int>("LowStockThreshold")
                         .ValueGeneratedOnAdd()
@@ -392,6 +568,103 @@ namespace SupermarketAPI.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("SupermarketAPI.Models.PurchaseOrder", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("SupplierId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SupplierId");
+
+                    b.ToTable("PurchaseOrders");
+                });
+
+            modelBuilder.Entity("SupermarketAPI.Models.PurchaseOrderItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PurchaseOrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("UnitCost")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("PurchaseOrderId");
+
+                    b.ToTable("PurchaseOrderItems");
+                });
+
+            modelBuilder.Entity("SupermarketAPI.Models.SalaryAdvance", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeducted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Note")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int?>("PayrollId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("PayrollId");
+
+                    b.ToTable("SalaryAdvances");
                 });
 
             modelBuilder.Entity("SupermarketAPI.Models.Sale", b =>
@@ -482,6 +755,10 @@ namespace SupermarketAPI.Migrations
                     b.Property<int>("SaleId")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("UnitCost")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<decimal>("UnitPrice")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
@@ -493,6 +770,38 @@ namespace SupermarketAPI.Migrations
                     b.HasIndex("SaleId");
 
                     b.ToTable("SaleItems");
+                });
+
+            modelBuilder.Entity("SupermarketAPI.Models.Supplier", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("ContactNo")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Suppliers");
                 });
 
             modelBuilder.Entity("SupermarketAPI.Models.User", b =>
@@ -525,6 +834,10 @@ namespace SupermarketAPI.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasDefaultValue("Employee");
 
+                    b.Property<string>("Username")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Email")
@@ -547,10 +860,39 @@ namespace SupermarketAPI.Migrations
                     b.HasOne("SupermarketAPI.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("SupermarketAPI.Models.GoodsReceivedNote", b =>
+                {
+                    b.HasOne("SupermarketAPI.Models.Supplier", "Supplier")
+                        .WithMany()
+                        .HasForeignKey("SupplierId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Supplier");
+                });
+
+            modelBuilder.Entity("SupermarketAPI.Models.GoodsReceivedNoteItem", b =>
+                {
+                    b.HasOne("SupermarketAPI.Models.GoodsReceivedNote", "GoodsReceivedNote")
+                        .WithMany("Items")
+                        .HasForeignKey("GoodsReceivedNoteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SupermarketAPI.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GoodsReceivedNote");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("SupermarketAPI.Models.InventoryLog", b =>
@@ -611,6 +953,17 @@ namespace SupermarketAPI.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("SupermarketAPI.Models.Payroll", b =>
+                {
+                    b.HasOne("SupermarketAPI.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
             modelBuilder.Entity("SupermarketAPI.Models.Product", b =>
                 {
                     b.HasOne("SupermarketAPI.Models.Category", "Category")
@@ -619,6 +972,53 @@ namespace SupermarketAPI.Migrations
                         .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("SupermarketAPI.Models.PurchaseOrder", b =>
+                {
+                    b.HasOne("SupermarketAPI.Models.Supplier", "Supplier")
+                        .WithMany()
+                        .HasForeignKey("SupplierId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Supplier");
+                });
+
+            modelBuilder.Entity("SupermarketAPI.Models.PurchaseOrderItem", b =>
+                {
+                    b.HasOne("SupermarketAPI.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SupermarketAPI.Models.PurchaseOrder", "PurchaseOrder")
+                        .WithMany("Items")
+                        .HasForeignKey("PurchaseOrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("PurchaseOrder");
+                });
+
+            modelBuilder.Entity("SupermarketAPI.Models.SalaryAdvance", b =>
+                {
+                    b.HasOne("SupermarketAPI.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SupermarketAPI.Models.Payroll", "Payroll")
+                        .WithMany()
+                        .HasForeignKey("PayrollId");
+
+                    b.Navigation("Employee");
+
+                    b.Navigation("Payroll");
                 });
 
             modelBuilder.Entity("SupermarketAPI.Models.Sale", b =>
@@ -661,9 +1061,19 @@ namespace SupermarketAPI.Migrations
                     b.Navigation("Orders");
                 });
 
+            modelBuilder.Entity("SupermarketAPI.Models.GoodsReceivedNote", b =>
+                {
+                    b.Navigation("Items");
+                });
+
             modelBuilder.Entity("SupermarketAPI.Models.Order", b =>
                 {
                     b.Navigation("OrderItems");
+                });
+
+            modelBuilder.Entity("SupermarketAPI.Models.PurchaseOrder", b =>
+                {
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("SupermarketAPI.Models.Sale", b =>
