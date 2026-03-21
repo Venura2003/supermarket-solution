@@ -1,9 +1,12 @@
-import 'dart:io';
+
+import 'dart:io' as io;
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'package:flutter/foundation.dart' as fnd;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:path/path.dart' as path_pkg;
 import 'package:path_provider/path_provider.dart';
 
@@ -72,9 +75,9 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
 
     String? imageUrl = _imagePath;
     // If image is a local file (not a URL), upload it
-    if (imageUrl != null && !imageUrl.startsWith('http') && File(imageUrl).existsSync()) {
+    if (!kIsWeb && imageUrl != null && !imageUrl.startsWith('http') && io.File(imageUrl).existsSync()) {
       try {
-        imageUrl = await ApiService.uploadImage(File(imageUrl));
+        imageUrl = await ApiService.uploadImage(io.File(imageUrl));
       } catch (e) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Image upload failed: $e')));
@@ -108,22 +111,37 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
   }
 
   Future<void> _pickImage() async {
-    final picker = ImagePicker();
-    final picked = await picker.pickImage(source: ImageSource.gallery);
-    if (picked == null) return;
+    if (fnd.kIsWeb) {
+      // Web: Use file_picker
+      FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.image);
+      if (result != null && result.files.single.bytes != null) {
+        // Store bytes in memory, or upload directly
+        setState(() {
+          _imagePath = null; // No local path on web
+        });
+        // You may want to upload the image here or store bytes for later upload
+        // For now, just keep bytes in memory (result.files.single.bytes)
+        // You can pass bytes to your upload API
+      }
+    } else {
+      // Mobile/Desktop: Use image_picker
+      final picker = ImagePicker();
+      final picked = await picker.pickImage(source: ImageSource.gallery);
+      if (picked == null) return;
 
-    final appDir = await getApplicationDocumentsDirectory();
-    final imagesDir = Directory('${appDir.path}/product_images');
-    if (!await imagesDir.exists()) await imagesDir.create(recursive: true);
-    final filename = path_pkg.basename(picked.path);
-    final destPath = '${imagesDir.path}/$filename';
-    try {
-      await File(picked.path).copy(destPath);
-      setState(() {
-        _imagePath = destPath;
-      });
-    } catch (e) {
-      if (fnd.kDebugMode) print('Image copy failed: $e');
+      final appDir = await getApplicationDocumentsDirectory();
+      final imagesDir = io.Directory('${appDir.path}/product_images');
+      if (!await imagesDir.exists()) await imagesDir.create(recursive: true);
+      final filename = path_pkg.basename(picked.path);
+      final destPath = '${imagesDir.path}/$filename';
+      try {
+        await io.File(picked.path).copy(destPath);
+        setState(() {
+          _imagePath = destPath;
+        });
+      } catch (e) {
+        if (fnd.kDebugMode) print('Image copy failed: $e');
+      }
     }
   }
 
@@ -202,8 +220,8 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
                               ),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(12),
-                                child: _imagePath != null && File(_imagePath!).existsSync()
-                                    ? Image.file(File(_imagePath!), fit: BoxFit.cover)
+                                child: _imagePath != null && !kIsWeb && io.File(_imagePath!).existsSync()
+                                  ? Image.file(io.File(_imagePath!), fit: BoxFit.cover)
                                     : Center(child: Icon(Icons.photo_library, size: 48, color: Colors.grey[500])),
                               ),
                             ),

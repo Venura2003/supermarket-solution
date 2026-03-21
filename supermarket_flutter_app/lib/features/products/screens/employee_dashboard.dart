@@ -191,14 +191,26 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
                     items: [
                       SidebarItem(
                         icon: Icons.point_of_sale,
-                        label: 'New Sale',
-                        isActive: _selectedIndex == 0,
-                        onTap: () => setState(() => _selectedIndex = 0),
+                        label: 'Sales & POS',
+                        children: [
+                          SidebarItem(
+                            icon: Icons.search,
+                            label: 'POS Terminal',
+                            isActive: _selectedIndex == 0,
+                            onTap: () => setState(() => _selectedIndex = 0),
+                          ),
+                          SidebarItem(
+                            icon: Icons.shopping_cart,
+                            label: 'Active Cart',
+                            isActive: _selectedIndex == 2,
+                            onTap: () => setState(() => _selectedIndex = 2),
+                          ),
+                        ],
                       ),
                       SidebarItem(
                         icon: Icons.receipt_long,
                         label: 'Order History',
-                        isActive: _selectedIndex == 1, // Map to index 1 manually for Sidebar
+                        isActive: _selectedIndex == 1,
                         onTap: () => setState(() => _selectedIndex = 1),
                       ),
                     ],

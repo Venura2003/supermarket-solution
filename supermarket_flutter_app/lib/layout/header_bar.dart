@@ -13,11 +13,15 @@ class HeaderBar extends StatelessWidget {
     final themeProvider = Provider.of<ThemeModeProvider>(context);
     final isDark = themeProvider.themeMode == ThemeMode.dark;
 
+    final Color headerColor = themeProvider.headerFullColor
+        ? (themeProvider.customPrimaryColor ?? Theme.of(context).primaryColor)
+        : Theme.of(context).scaffoldBackgroundColor;
+
     return Container(
       height: 64,
       padding: const EdgeInsets.symmetric(horizontal: 24),
       decoration: BoxDecoration(
-        color: Theme.of(context).scaffoldBackgroundColor, // Use theme color
+        color: headerColor, // Use theme color or full color
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.04),

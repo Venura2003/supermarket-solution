@@ -42,21 +42,18 @@ class ProductProvider with ChangeNotifier {
       // FORCE backend fetch by default so page is always fresh.
       // The core repo handles persistence (upsert) automatically.
       final data = await _productRepository.fetchProducts();
-      
-      // If we got fewer products than expected (e.g. cached/offline set is small),
-      // we might want to try a direct API call if we suspect the core repo
-      // returned a stale local cache. But core repo's fetchProducts() *does* try API first.
-      
+
       // Convert core models to legacy Product for UI compatibility
       _products = data.map((core) => _toLegacy(core)).toList();
-      
+
+      // Debug print for imageUrl
+      for (var p in _products) {
+        if (kDebugMode) print('[ProductProvider] Product: \'${p.name}\', imageUrl: \'${p.imageUrl}\'');
+      }
+
       // Sort products by name for better UX
       _products.sort((a, b) => a.name.compareTo(b.name));
 
-      // normal fetch does not clear injected sets; injected results are stored separately
-      // BUT if we are explicitly loading products (e.g. on page load), we should probably
-      // respect that this is the "source of truth".
-      
       _errorMessage = null;
       if (kDebugMode) print('[ProductProvider] fetched ${data.length} products');
     } catch (e) {
