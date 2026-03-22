@@ -117,10 +117,10 @@ class _AdminDashboardState extends State<AdminDashboard> {
     Widget mainContent;
     switch (_selectedIndex) {
       case 0:
-        mainContent = DashboardPage(onSwitchTab: _onSidebarTap);
+          mainContent = DashboardPage(onSwitchTab: _onSidebarTap); // Restored: shows KPI, analytics, low stock, etc.
         break;
-      case 1:
-        mainContent = ProductListScreen();
+      case 0:
+        mainContent = DashboardPage(onSwitchTab: _onSidebarTap);
         break;
       case 2:
         mainContent = CategoryManagementScreen();

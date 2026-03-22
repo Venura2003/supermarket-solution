@@ -1,5 +1,3 @@
-import 'dart:io' show File;
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../features/dashboard/providers/dashboard_provider.dart';
@@ -31,7 +29,7 @@ class LowStockAlertsPanel extends StatelessWidget {
                   Text(
                     '${dashboardProvider.lowStockProducts.length} items',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.red,
+                      color: Colors.black87,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -71,51 +69,31 @@ class _LowStockItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isCritical = product.stock <= (product.lowStockThreshold / 2);
-    final hasImage = product.imageUrl != null && product.imageUrl!.isNotEmpty;
-
     return Card(
-      color: isCritical ? Colors.red.shade50 : Colors.orange.shade50,
+      color: Colors.orange.shade50,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: ListTile(
-        leading: hasImage
-            ? ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: kIsWeb
-                    ? Image.network(
-                        product.imageUrl!,
-                        width: 52,
-                        height: 52,
-                        fit: BoxFit.cover,
-                      )
-                    : Image.file(
-                        File(product.imageUrl!),
-                        width: 52,
-                        height: 52,
-                        fit: BoxFit.cover,
-                      ),
-              )
-            : Icon(
-                Icons.warning,
-                color: isCritical ? Colors.red : Colors.orange,
-              ),
+        leading: Icon(
+          Icons.warning,
+          color: Colors.orange,
+        ),
         title: Text(
           product.name,
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
-            color: isCritical ? Colors.red.shade900 : Colors.orange.shade900,
+            color: Colors.black87,
           ),
         ),
         subtitle: Text(
           'Stock: ${product.stock}  •  Threshold: ${product.lowStockThreshold}',
-          style: TextStyle(
-            color: isCritical ? Colors.red.shade700 : Colors.orange.shade700,
+          style: const TextStyle(
+            color: Colors.black54,
           ),
         ),
         trailing: ElevatedButton(
           onPressed: () => _openRestockDialog(context),
           style: ElevatedButton.styleFrom(
-            backgroundColor: isCritical ? Colors.red : Colors.orange,
+            backgroundColor: Colors.orange,
             foregroundColor: Colors.white,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           ),

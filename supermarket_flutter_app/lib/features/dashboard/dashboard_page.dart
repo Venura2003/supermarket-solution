@@ -47,6 +47,7 @@ class _DashboardPageState extends State<DashboardPage> {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -58,11 +59,13 @@ class _DashboardPageState extends State<DashboardPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Header: title + quick actions
-              Row(
-                children: [
-                  Expanded(
-                    child: Column(
+
+              // Header: title + quick actions (responsive)
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  final isMobile = constraints.maxWidth < 600;
+                  if (isMobile) {
+                    return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -73,41 +76,87 @@ class _DashboardPageState extends State<DashboardPage> {
                         ),
                         const SizedBox(height: 6),
                         Text(
-                          'Overview',
+                          'Dashboard',
                           style: theme.textTheme.headlineSmall?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                  // Quick actions
-                  Row(
-                    children: [
-                      _QuickAction(icon: Icons.add_box_outlined, label: 'Add Product', onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AddEditProductScreen()))),
-                      const SizedBox(width: 8),
-                      // Inventory Screen index is 7
-                      _QuickAction(icon: Icons.inventory_2_outlined, label: 'Inventory', onTap: () {
-                        if (widget.onSwitchTab != null) widget.onSwitchTab!(7);
-                      }),
-                      const SizedBox(width: 8),
-                      // Reports Screen index is 4
-                      _QuickAction(icon: Icons.pie_chart_outline, label: 'Reports', onTap: () {
-                        if (widget.onSwitchTab != null) widget.onSwitchTab!(4);
-                      }),
-                      const SizedBox(width: 8),
-                      Tooltip(
-                        message: _saving ? 'Saving...' : 'Save screenshot',
-                        child: ElevatedButton.icon(
-                          onPressed: _saving ? null : _captureAndSave,
-                          icon: const Icon(Icons.camera_alt_outlined),
-                          label: Text(_saving ? 'Saving' : 'Save'),
-                          style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10)),
+                        const SizedBox(height: 12),
+                        Wrap(
+                          spacing: 8,
+                          runSpacing: 8,
+                          children: [
+                            _QuickAction(icon: Icons.add_box_outlined, label: 'Add Product', onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AddEditProductScreen()))),
+                            _QuickAction(icon: Icons.inventory_2_outlined, label: 'Inventory', onTap: () {
+                              if (widget.onSwitchTab != null) widget.onSwitchTab!(7);
+                            }),
+                            _QuickAction(icon: Icons.pie_chart_outline, label: 'Reports', onTap: () {
+                              if (widget.onSwitchTab != null) widget.onSwitchTab!(4);
+                            }),
+                            Tooltip(
+                              message: _saving ? 'Saving...' : 'Save a screenshot',
+                              child: ElevatedButton.icon(
+                                onPressed: _saving ? null : _captureAndSave,
+                                icon: const Icon(Icons.camera_alt_outlined),
+                                label: Text(_saving ? 'Saving' : 'Save'),
+                                style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10)),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    );
+                  } else {
+                    return Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Good day, Manager',
+                                style: theme.textTheme.titleMedium?.copyWith(
+                                  color: theme.colorScheme.onBackground.withOpacity(0.7),
+                                ),
+                              ),
+                              const SizedBox(height: 6),
+                              Text(
+                                'Dashboard',
+                                style: theme.textTheme.headlineSmall?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        // Quick actions
+                        Row(
+                          children: [
+                            _QuickAction(icon: Icons.add_box_outlined, label: 'Add Product', onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AddEditProductScreen()))),
+                            const SizedBox(width: 8),
+                            _QuickAction(icon: Icons.inventory_2_outlined, label: 'Inventory', onTap: () {
+                              if (widget.onSwitchTab != null) widget.onSwitchTab!(7);
+                            }),
+                            const SizedBox(width: 8),
+                            _QuickAction(icon: Icons.pie_chart_outline, label: 'Reports', onTap: () {
+                              if (widget.onSwitchTab != null) widget.onSwitchTab!(4);
+                            }),
+                            const SizedBox(width: 8),
+                            Tooltip(
+                              message: _saving ? 'Saving...' : 'Save a screenshot',
+                              child: ElevatedButton.icon(
+                                onPressed: _saving ? null : _captureAndSave,
+                                icon: const Icon(Icons.camera_alt_outlined),
+                                label: Text(_saving ? 'Saving' : 'Save'),
+                                style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10)),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    );
+                  }
+                },
               ),
               const SizedBox(height: 18),
 
@@ -117,7 +166,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   Expanded(
                     child: TextField(
                       decoration: InputDecoration(
-                        hintText: 'Search products, orders or customers...',
+                        hintText: 'Search product, order, or customer...',
                         prefixIcon: const Icon(Icons.search),
                         filled: true,
                         fillColor: theme.colorScheme.surface,
@@ -245,7 +294,7 @@ class _RecentActivityPanel extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('Recent Activity', style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600)),
-                TextButton(onPressed: () => provider.refreshData(), child: const Text('View all')),
+                TextButton(onPressed: () => provider.refreshData(), child: const Text('View All')),
               ],
             ),
             const SizedBox(height: 8),
