@@ -211,7 +211,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: const [
-                            KpiCards(),
+                            SizedBox(height: 220, child: KpiCards()),
                             SizedBox(height: 28),
                             SalesAnalyticsChart(),
                           ],
