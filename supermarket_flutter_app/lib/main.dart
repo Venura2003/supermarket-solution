@@ -33,6 +33,7 @@ import 'core/theme/app_theme.dart';
 import 'core/providers/theme_provider.dart';
 
 import 'features/auth/screens/settings_screen.dart'; // Import Settings Screen
+import 'core/api_config.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -146,3 +147,6 @@ class _AuthWrapperState extends State<AuthWrapper> {
     return const LoginScreen();
   }
 }
+
+// Example usage:
+// final apiUrl = ApiConfig.baseUrl;

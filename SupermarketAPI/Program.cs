@@ -131,22 +131,17 @@ builder.Services.AddCors(options =>
         policy =>
         {
             var allowedOrigins = new[] {
-                "https://incredible-kataifi-a63f72.netlify.app",
-                "https://supermarkrt-solution.vercel.app",
-                "https://supermarket-green-phi.vercel.app",
-                "https://supermarket-flutter-app.vercel.app",
-                "https://supermarket-flutter-3zfzo8keh-venura2003s-projects.vercel.app",
-                "http://localhost:3000",
-                "http://localhost:5000",
+                "https://incredible-kataifi-a63f72.netlify.app", // Netlify
+                "https://supermarkrt-solution.vercel.app", // Vercel old
+                "https://supermarket-green-phi.vercel.app", // Vercel new
+                "http://localhost:3000", // Local dev
+                "http://localhost:5000", // Local Flutter web
                 "http://127.0.0.1:5000"
             };
-            policy
-                .SetIsOriginAllowed(origin =>
-                    allowedOrigins.Contains(origin) ||
-                    (origin != null && origin.EndsWith(".vercel.app")))
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowCredentials();
+            policy.WithOrigins(allowedOrigins)
+                  .AllowAnyMethod()
+                  .AllowAnyHeader()
+                  .AllowCredentials();
         });
 });
 

@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:printing/printing.dart'; // Added
-import 'package:pdf/pdf.dart'; // Added
+
 import '../../core/providers/cart_provider.dart';
+import 'package:supermarket_flutter_app/core/constants/app_constants.dart';
 import 'package:supermarket_flutter_app/core/services/api_service.dart';
 import '../features/auth/providers/auth_provider.dart';
 import '../features/products/providers/product_provider.dart';
@@ -433,14 +434,12 @@ class _ReceiptDialogState extends State<_ReceiptDialog> {
     setState(() => _isPrinting = true);
     try {
       final path = await ApiService.downloadReceipt(widget.receiptPath, 'receipt.pdf');
-      if (path != null) {
-        final file = File(path);
-        final bytes = await file.readAsBytes();
-        await Printing.layoutPdf(
-          onLayout: (_) => bytes,
-          name: 'Receipt - ${DateTime.now().millisecondsSinceEpoch}',
-        );
-      }
+      final file = File(path);
+      final bytes = await file.readAsBytes();
+      await Printing.layoutPdf(
+        onLayout: (_) => bytes,
+        name: 'Receipt - ${DateTime.now().millisecondsSinceEpoch}',
+      );
     } catch (e) {
       debugPrint('Error printing receipt: $e');
       if (mounted) {
@@ -454,7 +453,17 @@ class _ReceiptDialogState extends State<_ReceiptDialog> {
   }
 
   Future<void> _openReceipt() async {
-    final pdfUrl = widget.receiptPath; // This should be the full URL to the PDF file
+    String pdfUrl = widget.receiptPath;
+    // If not a full URL, prepend the backend base URL
+    if (!pdfUrl.startsWith('http')) {
+      // Remove trailing slash from base URL if present
+      String baseUrl = AppConstants.apiBaseUrl;
+      if (baseUrl.endsWith('/')) baseUrl = baseUrl.substring(0, baseUrl.length - 1);
+      // Remove leading slash from pdfUrl if present
+      if (pdfUrl.startsWith('/')) pdfUrl = pdfUrl.substring(1);
+      pdfUrl = baseUrl + '/' + pdfUrl;
+    }
+    debugPrint('Opening PDF URL: $pdfUrl');
     if (await canLaunchUrl(Uri.parse(pdfUrl))) {
       await launchUrl(Uri.parse(pdfUrl), mode: LaunchMode.externalApplication);
     } else {

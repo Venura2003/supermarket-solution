@@ -1,0 +1,7 @@
+{
+  "name": "supermarket_flutter_app",
+  "version": "1.0.0",
+  "scripts": {
+    "postbuild": "node scripts/inject-api-url.js"
+  }
+}
