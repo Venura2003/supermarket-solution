@@ -12,40 +12,57 @@ class KpiCards extends StatelessWidget {
     final theme = Theme.of(context);
 
     return LayoutBuilder(builder: (context, constraints) {
-      final crossAxisCount = constraints.maxWidth > 800 ? 4 : 2;
-      return GridView.count(
-        crossAxisCount: crossAxisCount,
-        crossAxisSpacing: 16,
-        mainAxisSpacing: 16,
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        childAspectRatio: 1.6,
-        children: [
-          _KpiCard(
-            title: 'Total Sales Today',
-            value: 'LKR ${NumberFormat('#,##0.00').format(dashboardProvider.totalRevenue)}',
-            icon: Icons.attach_money,
-            color: Colors.green.shade700,
+      final isMobile = constraints.maxWidth < 600;
+      final crossAxisCount = isMobile ? 1 : (constraints.maxWidth > 800 ? 4 : 2);
+      final aspectRatio = isMobile ? 2.6 : (constraints.maxWidth > 800 ? 1.6 : 1.3);
+      final horizontalPadding = isMobile ? 0.0 : 8.0;
+      return SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minWidth: constraints.maxWidth,
+            maxWidth: isMobile ? constraints.maxWidth : double.infinity,
           ),
-          _KpiCard(
-            title: 'Monthly Revenue',
-            value: 'LKR ${NumberFormat('#,##0.00').format(dashboardProvider.monthlyRevenue)}',
-            icon: Icons.calendar_month,
-            color: Colors.blue.shade700,
+          child: GridView.count(
+            crossAxisCount: crossAxisCount,
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            childAspectRatio: aspectRatio,
+            padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+            children: [
+              _KpiCard(
+                title: 'Total Sales Today',
+                value: 'LKR ${NumberFormat('#,##0.00').format(dashboardProvider.totalRevenue)}',
+                icon: Icons.attach_money,
+                color: Colors.green.shade700,
+                isMobile: isMobile,
+              ),
+              _KpiCard(
+                title: 'Monthly Revenue',
+                value: 'LKR ${NumberFormat('#,##0.00').format(dashboardProvider.monthlyRevenue)}',
+                icon: Icons.calendar_month,
+                color: Colors.blue.shade700,
+                isMobile: isMobile,
+              ),
+              _KpiCard(
+                title: 'Total Orders',
+                value: dashboardProvider.totalOrders.toString(),
+                icon: Icons.shopping_cart,
+                color: Colors.orange.shade700,
+                isMobile: isMobile,
+              ),
+              _KpiCard(
+                title: 'Low Stock Items',
+                value: dashboardProvider.lowStockCount.toString(),
+                icon: Icons.warning,
+                color: Colors.red.shade700,
+                isMobile: isMobile,
+              ),
+            ],
           ),
-          _KpiCard(
-            title: 'Total Orders',
-            value: dashboardProvider.totalOrders.toString(),
-            icon: Icons.shopping_cart,
-            color: Colors.orange.shade700,
-          ),
-          _KpiCard(
-            title: 'Low Stock Items',
-            value: dashboardProvider.lowStockCount.toString(),
-            icon: Icons.warning,
-            color: Colors.red.shade700,
-          ),
-        ],
+        ),
       );
     });
   }
@@ -56,12 +73,14 @@ class _KpiCard extends StatefulWidget {
   final String value;
   final IconData icon;
   final Color color;
+  final bool isMobile;
 
   const _KpiCard({
     required this.title,
     required this.value,
     required this.icon,
     required this.color,
+    this.isMobile = false,
   });
 
   @override
@@ -75,6 +94,10 @@ class _KpiCardState extends State<_KpiCard> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final double iconSize = widget.isMobile ? 22 : 28;
+    final double titleFont = widget.isMobile ? 13 : 15;
+    final double valueFont = widget.isMobile ? 16 : 20;
+    final double updatedFont = widget.isMobile ? 10 : 12;
     return MouseRegion(
       onEnter: (_) => setState(() => _hovering = true),
       onExit: (_) => setState(() {
@@ -107,7 +130,10 @@ class _KpiCardState extends State<_KpiCard> {
               width: 1.5,
             ),
           ),
-          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 14),
+          padding: EdgeInsets.symmetric(
+            vertical: widget.isMobile ? 10 : 12,
+            horizontal: widget.isMobile ? 10 : 14,
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -122,10 +148,10 @@ class _KpiCardState extends State<_KpiCard> {
                   ),
                   shape: BoxShape.circle,
                 ),
-                padding: const EdgeInsets.all(12),
-                child: Icon(widget.icon, size: 28, color: Colors.white),
+                padding: EdgeInsets.all(widget.isMobile ? 8 : 12),
+                child: Icon(widget.icon, size: iconSize, color: Colors.white),
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: widget.isMobile ? 7 : 10),
               Flexible(
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
@@ -134,12 +160,15 @@ class _KpiCardState extends State<_KpiCard> {
                     style: theme.textTheme.titleMedium?.copyWith(
                       color: theme.colorScheme.onSurface.withOpacity(0.8),
                       fontWeight: FontWeight.w600,
+                      fontSize: titleFont,
                     ),
                     textAlign: TextAlign.center,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ),
-              const SizedBox(height: 6),
+              SizedBox(height: widget.isMobile ? 4 : 6),
               Flexible(
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
@@ -148,18 +177,24 @@ class _KpiCardState extends State<_KpiCard> {
                     style: theme.textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: theme.colorScheme.onSurface,
+                      fontSize: valueFont,
                     ),
                     textAlign: TextAlign.center,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ),
-              const SizedBox(height: 4),
+              SizedBox(height: widget.isMobile ? 2 : 4),
               Flexible(
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
                   child: Text(
                     'Updated just now',
-                    style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurface.withOpacity(0.55)),
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: theme.colorScheme.onSurface.withOpacity(0.55),
+                      fontSize: updatedFont,
+                    ),
                   ),
                 ),
               ),
