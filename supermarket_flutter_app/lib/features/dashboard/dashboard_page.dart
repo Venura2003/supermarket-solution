@@ -214,7 +214,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: const [
                             SizedBox(height: 220, child: KpiCards()),
-                            SizedBox(height: 96),
+                            SizedBox(height: 144),
                             SalesAnalyticsChart(),
                           ],
                         ),
@@ -255,7 +255,7 @@ class _DashboardPageState extends State<DashboardPage> {
         if (isMobile) {
           return SingleChildScrollView(child: mainContent);
         } else {
-          return mainContent;
+          return SingleChildScrollView(child: mainContent);
         }
       },
     );
