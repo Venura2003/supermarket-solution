@@ -18,6 +18,15 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
+    @override
+    void initState() {
+      super.initState();
+      // Ensure dashboard data is loaded when the page is opened
+      Future.microtask(() {
+        final provider = Provider.of<DashboardProvider>(context, listen: false);
+        provider.loadDashboardData();
+      });
+    }
   final GlobalKey _repaintKey = GlobalKey();
   bool _saving = false;
 
