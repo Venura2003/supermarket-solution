@@ -11,6 +11,8 @@ class KpiCards extends StatelessWidget {
     final dashboardProvider = Provider.of<DashboardProvider>(context);
     final theme = Theme.of(context);
 
+    // Debug print for KPI values
+    debugPrint('[KPI] totalRevenue: 	{dashboardProvider.totalRevenue}, monthlyRevenue: 	{dashboardProvider.monthlyRevenue}, totalOrders: 	{dashboardProvider.totalOrders}, lowStockCount: 	{dashboardProvider.lowStockCount}');
     return LayoutBuilder(builder: (context, constraints) {
       final isMobile = constraints.maxWidth < 600;
       final crossAxisCount = isMobile ? 1 : (constraints.maxWidth > 800 ? 4 : 2);
@@ -34,28 +36,36 @@ class KpiCards extends StatelessWidget {
             children: [
               _KpiCard(
                 title: 'Total Sales Today',
-                value: 'LKR ${NumberFormat('#,##0.00').format(dashboardProvider.totalRevenue)}',
+                value: dashboardProvider.totalRevenue > 0
+                    ? 'LKR ${NumberFormat('#,##0.00').format(dashboardProvider.totalRevenue)}'
+                    : 'No data',
                 icon: Icons.attach_money,
                 color: Colors.green.shade700,
                 isMobile: isMobile,
               ),
               _KpiCard(
                 title: 'Monthly Revenue',
-                value: 'LKR ${NumberFormat('#,##0.00').format(dashboardProvider.monthlyRevenue)}',
+                value: dashboardProvider.monthlyRevenue > 0
+                    ? 'LKR ${NumberFormat('#,##0.00').format(dashboardProvider.monthlyRevenue)}'
+                    : 'No data',
                 icon: Icons.calendar_month,
                 color: Colors.blue.shade700,
                 isMobile: isMobile,
               ),
               _KpiCard(
                 title: 'Total Orders',
-                value: dashboardProvider.totalOrders.toString(),
+                value: dashboardProvider.totalOrders > 0
+                    ? dashboardProvider.totalOrders.toString()
+                    : 'No data',
                 icon: Icons.shopping_cart,
                 color: Colors.orange.shade700,
                 isMobile: isMobile,
               ),
               _KpiCard(
                 title: 'Low Stock Items',
-                value: dashboardProvider.lowStockCount.toString(),
+                value: dashboardProvider.lowStockCount >= 0
+                    ? dashboardProvider.lowStockCount.toString()
+                    : 'No data',
                 icon: Icons.warning,
                 color: Colors.red.shade700,
                 isMobile: isMobile,
