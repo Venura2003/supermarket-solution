@@ -15,63 +15,55 @@ class KpiCards extends StatelessWidget {
     debugPrint('[KPI] totalRevenue: 	{dashboardProvider.totalRevenue}, monthlyRevenue: 	{dashboardProvider.monthlyRevenue}, totalOrders: 	{dashboardProvider.totalOrders}, lowStockCount: 	{dashboardProvider.lowStockCount}');
     return LayoutBuilder(builder: (context, constraints) {
       final isMobile = constraints.maxWidth < 600;
-      final crossAxisCount = isMobile ? 1 : (constraints.maxWidth > 800 ? 4 : 2);
-      final aspectRatio = isMobile ? 2.6 : (constraints.maxWidth > 800 ? 1.6 : 1.3);
+      final cardWidth = isMobile ? constraints.maxWidth : 260.0;
       final horizontalPadding = isMobile ? 0.0 : 8.0;
-      return SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minWidth: constraints.maxWidth,
-            maxWidth: isMobile ? constraints.maxWidth : double.infinity,
-          ),
-          child: GridView.count(
-            crossAxisCount: crossAxisCount,
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 16,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            childAspectRatio: aspectRatio,
-            padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-            children: [
-              _KpiCard(
-                title: 'Total Sales Today',
-                value: dashboardProvider.totalRevenue > 0
-                    ? 'LKR ${NumberFormat('#,##0.00').format(dashboardProvider.totalRevenue)}'
-                    : 'No data',
-                icon: Icons.attach_money,
-                color: Colors.green.shade700,
-                isMobile: isMobile,
-              ),
-              _KpiCard(
-                title: 'Monthly Revenue',
-                value: dashboardProvider.monthlyRevenue > 0
-                    ? 'LKR ${NumberFormat('#,##0.00').format(dashboardProvider.monthlyRevenue)}'
-                    : 'No data',
-                icon: Icons.calendar_month,
-                color: Colors.blue.shade700,
-                isMobile: isMobile,
-              ),
-              _KpiCard(
-                title: 'Total Orders',
-                value: dashboardProvider.totalOrders > 0
-                    ? dashboardProvider.totalOrders.toString()
-                    : 'No data',
-                icon: Icons.shopping_cart,
-                color: Colors.orange.shade700,
-                isMobile: isMobile,
-              ),
-              _KpiCard(
-                title: 'Low Stock Items',
-                value: dashboardProvider.lowStockCount >= 0
-                    ? dashboardProvider.lowStockCount.toString()
-                    : 'No data',
-                icon: Icons.warning,
-                color: Colors.red.shade700,
-                isMobile: isMobile,
-              ),
-            ],
-          ),
+      return Padding(
+        padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+        child: Wrap(
+          spacing: 16,
+          runSpacing: 16,
+          children: [
+            _KpiCard(
+              title: 'Total Sales Today',
+              value: dashboardProvider.totalRevenue > 0
+                  ? 'LKR ${NumberFormat('#,##0.00').format(dashboardProvider.totalRevenue)}'
+                  : 'No data',
+              icon: Icons.attach_money,
+              color: Colors.green.shade700,
+              isMobile: isMobile,
+              width: cardWidth,
+            ),
+            _KpiCard(
+              title: 'Monthly Revenue',
+              value: dashboardProvider.monthlyRevenue > 0
+                  ? 'LKR ${NumberFormat('#,##0.00').format(dashboardProvider.monthlyRevenue)}'
+                  : 'No data',
+              icon: Icons.calendar_month,
+              color: Colors.blue.shade700,
+              isMobile: isMobile,
+              width: cardWidth,
+            ),
+            _KpiCard(
+              title: 'Total Orders',
+              value: dashboardProvider.totalOrders > 0
+                  ? dashboardProvider.totalOrders.toString()
+                  : 'No data',
+              icon: Icons.shopping_cart,
+              color: Colors.orange.shade700,
+              isMobile: isMobile,
+              width: cardWidth,
+            ),
+            _KpiCard(
+              title: 'Low Stock Items',
+              value: dashboardProvider.lowStockCount >= 0
+                  ? dashboardProvider.lowStockCount.toString()
+                  : 'No data',
+              icon: Icons.warning,
+              color: Colors.red.shade700,
+              isMobile: isMobile,
+              width: cardWidth,
+            ),
+          ],
         ),
       );
     });
@@ -84,6 +76,7 @@ class _KpiCard extends StatefulWidget {
   final IconData icon;
   final Color color;
   final bool isMobile;
+  final double? width;
 
   const _KpiCard({
     required this.title,
@@ -91,6 +84,7 @@ class _KpiCard extends StatefulWidget {
     required this.icon,
     required this.color,
     this.isMobile = false,
+    this.width,
   });
 
   @override
@@ -121,6 +115,7 @@ class _KpiCardState extends State<_KpiCard> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 160),
           curve: Curves.easeOut,
+          width: widget.width,
           decoration: BoxDecoration(
             color: theme.colorScheme.surface,
             borderRadius: BorderRadius.circular(20),
