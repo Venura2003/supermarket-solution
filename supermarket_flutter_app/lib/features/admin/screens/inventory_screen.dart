@@ -27,37 +27,40 @@ class _InventoryScreenState extends State<InventoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<ProductProvider>.value(
-      value: context.read<ProductProvider>(),
-      child: Consumer<ProductProvider>(builder: (context, prov, _) {
-        final list = prov.products;
-        final total = prov.totalCount;
-        final outCount = list.where((p) => p.stock == 0).length;
-        final lowCount = list.where((p) => p.stock <= p.lowStockThreshold && p.stock > 0).length;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isMobile = constraints.maxWidth < 600;
+        final mainContent = ChangeNotifierProvider<ProductProvider>.value(
+          value: context.read<ProductProvider>(),
+          child: Consumer<ProductProvider>(builder: (context, prov, _) {
+            final list = prov.products;
+            final total = prov.totalCount;
+            final outCount = list.where((p) => p.stock == 0).length;
+            final lowCount = list.where((p) => p.stock <= p.lowStockThreshold && p.stock > 0).length;
 
-        List<prod.Product> filtered;
-        switch (_filter) {
-          case _Filter.low:
-            filtered = list.where((p) => p.stock <= p.lowStockThreshold && p.stock > 0).toList();
-            break;
-          case _Filter.out:
-            filtered = list.where((p) => p.stock == 0).toList();
-            break;
-          default:
-            filtered = list;
-        }
+            List<prod.Product> filtered;
+            switch (_filter) {
+              case _Filter.low:
+                filtered = list.where((p) => p.stock <= p.lowStockThreshold && p.stock > 0).toList();
+                break;
+              case _Filter.out:
+                filtered = list.where((p) => p.stock == 0).toList();
+                break;
+              default:
+                filtered = list;
+            }
 
-        return Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text('Inventory', style: Theme.of(context).textTheme.headlineLarge),
-              const SizedBox(height: 12),
+            return Scaffold(
+              backgroundColor: Colors.transparent,
+              body: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Text('Inventory', style: Theme.of(context).textTheme.headlineLarge),
+                  const SizedBox(height: 12),
 
-              // Summary
-              Row(children: [
-                _SummaryCard(label: 'Total products', value: total.toString(), color: Colors.blue),
+                  // Summary
+                  Row(children: [
+                    _SummaryCard(label: 'Total products', value: total.toString(), color: Colors.blue),
                 const SizedBox(width: 12),
                 _SummaryCard(label: 'Low stock', value: lowCount.toString(), color: Colors.orange),
                 const SizedBox(width: 12),
@@ -159,8 +162,15 @@ class _InventoryScreenState extends State<InventoryScreen> {
               ),
             ]),
           ),
+            );
+          }),
         );
-      }),
+        if (isMobile) {
+          return SingleChildScrollView(child: mainContent);
+        } else {
+          return mainContent;
+        }
+      },
     );
   }
 }

@@ -51,12 +51,15 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          final cart = context.watch<CartProvider>();
-          final isNarrow = constraints.maxWidth < 800;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isMobile = constraints.maxWidth < 600;
+        final mainContent = Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final cart = context.watch<CartProvider>();
+              final isNarrow = constraints.maxWidth < 800;
 
           final scannerInput = Row(
             children: [
@@ -281,8 +284,15 @@ class _CartPageState extends State<CartPage> {
               ],
             );
           }
-        },
-      ),
+            },
+          ),
+        );
+        if (isMobile) {
+          return SingleChildScrollView(child: mainContent);
+        } else {
+          return mainContent;
+        }
+      },
     );
   }
 }

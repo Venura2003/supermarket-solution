@@ -60,14 +60,16 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 18.0),
-      child: SingleChildScrollView(
-        child: RepaintBoundary(
-          key: _repaintKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isMobile = constraints.maxWidth < 600;
+        final mainContent = Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 18.0),
+          child: RepaintBoundary(
+            key: _repaintKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
 
               // Header: title + quick actions (responsive)
               LayoutBuilder(
@@ -212,7 +214,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: const [
                             SizedBox(height: 220, child: KpiCards()),
-                            SizedBox(height: 28),
+                            SizedBox(height: 24),
                             SalesAnalyticsChart(),
                           ],
                         ),
@@ -236,7 +238,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
                       KpiCards(),
-                      SizedBox(height: 20),
+                      SizedBox(height: 24),
                       SalesAnalyticsChart(),
                       SizedBox(height: 20),
                       LowStockAlertsPanel(),
@@ -246,10 +248,16 @@ class _DashboardPageState extends State<DashboardPage> {
                   );
                 }
               }),
-            ],
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+        if (isMobile) {
+          return SingleChildScrollView(child: mainContent);
+        } else {
+          return mainContent;
+        }
+      },
     );
   }
 }
