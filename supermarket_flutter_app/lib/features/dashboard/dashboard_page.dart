@@ -211,7 +211,6 @@ class _DashboardPageState extends State<DashboardPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: const [
-                            Text('KPI TEST', style: TextStyle(fontSize: 32, color: Colors.red)),
                             KpiCards(),
                             SizedBox(height: 28),
                             SalesAnalyticsChart(),
@@ -236,7 +235,6 @@ class _DashboardPageState extends State<DashboardPage> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
-                      Text('KPI TEST', style: TextStyle(fontSize: 32, color: Colors.red)),
                       KpiCards(),
                       SizedBox(height: 20),
                       SalesAnalyticsChart(),
