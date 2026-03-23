@@ -1,0 +1,35 @@
+name: Deploy Flutter Web to Vercel
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0' # ඔබේ flutter version එකට අනුව වෙනස් කරන්න
+
+      - name: Install dependencies
+        run: flutter pub get
+        working-directory: supermarket_flutter_app
+
+      - name: Build web
+        run: flutter build web --release
+        working-directory: supermarket_flutter_app
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: vercel --prod --token $VERCEL_TOKEN --cwd supermarket_flutter_app/build/web --confirm
