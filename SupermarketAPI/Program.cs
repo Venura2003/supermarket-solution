@@ -134,6 +134,7 @@ builder.Services.AddCors(options =>
                 "https://incredible-kataifi-a63f72.netlify.app", // Netlify
                 "https://supermarkrt-solution.vercel.app", // Vercel old
                 "https://supermarket-green-phi.vercel.app", // Vercel new
+                "https://supermarket-2fx9gzs3z-venura2003s-projects.vercel.app", // Vercel latest
                 "http://localhost:3000", // Local dev
                 "http://localhost:5000", // Local Flutter web
                 "http://127.0.0.1:5000"
