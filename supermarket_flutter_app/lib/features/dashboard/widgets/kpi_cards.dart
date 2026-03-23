@@ -59,21 +59,30 @@ class KpiCards extends StatelessWidget {
           width: cardWidth,
         ),
       ];
+      // More visible animation: slide from below, fade in, scale in
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
         child: Wrap(
           spacing: 24, // more space between cards
           runSpacing: 24,
           children: List.generate(kpiCards.length, (i) =>
-            AnimatedSlide(
-              offset: const Offset(0, 0.2),
-              duration: Duration(milliseconds: 400 + i * 100),
-              curve: Curves.easeOut,
-              child: AnimatedOpacity(
-                opacity: 1.0,
-                duration: Duration(milliseconds: 400 + i * 100),
-                child: kpiCards[i],
-              ),
+            TweenAnimationBuilder<double>(
+              tween: Tween(begin: 0, end: 1),
+              duration: Duration(milliseconds: 900 + i * 200),
+              curve: Curves.easeOutBack,
+              builder: (context, value, child) {
+                return Transform.translate(
+                  offset: Offset(0, 60 * (1 - value)),
+                  child: Transform.scale(
+                    scale: 0.85 + 0.15 * value,
+                    child: Opacity(
+                      opacity: value,
+                      child: child,
+                    ),
+                  ),
+                );
+              },
+              child: kpiCards[i],
             ),
           ),
         ),
@@ -113,109 +122,96 @@ class _KpiCardState extends State<_KpiCard> {
     final double iconSize = widget.isMobile ? 22 : 28;
     final double titleFont = widget.isMobile ? 13 : 15;
     final double valueFont = widget.isMobile ? 16 : 20;
-    final double updatedFont = widget.isMobile ? 10 : 12;
     return MouseRegion(
       onEnter: (_) => setState(() => _hovering = true),
       onExit: (_) => setState(() {
         _hovering = false;
         _pressed = false;
       }),
-      child: GestureDetector(
-        onTapDown: (_) => setState(() => _pressed = true),
-        onTapUp: (_) => setState(() => _pressed = false),
-        onTapCancel: () => setState(() => _pressed = false),
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 160),
-          curve: Curves.easeOut,
-          width: widget.width,
-          decoration: BoxDecoration(
-            color: theme.colorScheme.surface,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: _pressed
-                    ? Colors.black.withOpacity(0.10)
-                    : _hovering
-                        ? Colors.black.withOpacity(0.13)
-                        : Colors.black.withOpacity(0.07),
-                blurRadius: _hovering ? 18 : 10,
-                offset: const Offset(0, 4),
+      child: Material(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(20),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(20),
+          splashColor: widget.color.withOpacity(0.18),
+          highlightColor: widget.color.withOpacity(0.10),
+          onTap: () {}, // Demo ripple
+          onTapDown: (_) => setState(() => _pressed = true),
+          onTapUp: (_) => setState(() => _pressed = false),
+          onTapCancel: () => setState(() => _pressed = false),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 160),
+            curve: Curves.easeOut,
+            width: widget.width,
+            decoration: BoxDecoration(
+              color: theme.colorScheme.surface,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: _pressed
+                      ? Colors.black.withOpacity(0.13)
+                      : _hovering
+                          ? widget.color.withOpacity(0.22)
+                          : Colors.black.withOpacity(0.09),
+                  blurRadius: _hovering ? 22 : 12,
+                  offset: const Offset(0, 6),
+                ),
+              ],
+              border: Border.all(
+                color: _hovering ? widget.color.withOpacity(0.28) : Colors.transparent,
+                width: 2.0,
               ),
-            ],
-            border: Border.all(
-              color: _hovering ? widget.color.withOpacity(0.18) : Colors.transparent,
-              width: 1.5,
             ),
-          ),
-          padding: EdgeInsets.symmetric(
-            vertical: widget.isMobile ? 10 : 12,
-            horizontal: widget.isMobile ? 10 : 14,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [widget.color.withOpacity(0.95), widget.color.withOpacity(0.75)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  shape: BoxShape.circle,
-                ),
-                padding: EdgeInsets.all(widget.isMobile ? 8 : 12),
-                child: Icon(widget.icon, size: iconSize, color: Colors.white),
-              ),
-              SizedBox(height: widget.isMobile ? 7 : 10),
-              Flexible(
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    widget.title,
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      color: theme.colorScheme.onSurface.withOpacity(0.8),
-                      fontWeight: FontWeight.w600,
-                      fontSize: titleFont,
+            padding: EdgeInsets.symmetric(
+              vertical: widget.isMobile ? 12 : 16,
+              horizontal: widget.isMobile ? 12 : 18,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [widget.color.withOpacity(1.0), widget.color.withOpacity(0.7)],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
                     ),
-                    textAlign: TextAlign.center,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: widget.color.withOpacity(0.25),
+                        blurRadius: 16,
+                        offset: Offset(0, 4),
+                      ),
+                    ],
                   ),
+                  padding: EdgeInsets.all(iconSize * 0.6),
+                  child: Icon(widget.icon, color: Colors.white, size: iconSize),
                 ),
-              ),
-              SizedBox(height: widget.isMobile ? 4 : 6),
-              Flexible(
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    widget.value,
-                    style: theme.textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: theme.colorScheme.onSurface,
-                      fontSize: valueFont,
-                    ),
-                    textAlign: TextAlign.center,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                SizedBox(height: widget.isMobile ? 10 : 16),
+                Text(
+                  widget.title,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    fontSize: titleFont,
+                    color: theme.colorScheme.onSurface.withOpacity(0.85),
                   ),
+                  textAlign: TextAlign.center,
                 ),
-              ),
-              SizedBox(height: widget.isMobile ? 2 : 4),
-              Flexible(
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    'Updated just now',
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: theme.colorScheme.onSurface.withOpacity(0.55),
-                      fontSize: updatedFont,
-                    ),
+                SizedBox(height: 6),
+                Text(
+                  widget.value,
+                  style: theme.textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    fontSize: valueFont,
+                    color: widget.color,
                   ),
+                  textAlign: TextAlign.center,
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
