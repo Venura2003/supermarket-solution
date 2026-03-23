@@ -70,14 +70,7 @@ class HeaderBar extends StatelessWidget {
                 },
               ),
             ),
-            // Theme Toggle
-            IconButton(
-              icon: Icon(isDark ? Icons.light_mode : Icons.dark_mode),
-              tooltip: 'Toggle Theme',
-              onPressed: () {
-                themeProvider.toggleTheme();
-              },
-            ),
+            // Theme Toggle removed (now only in dashboard header)
             // Notifications icon
             Consumer<NotificationProvider>(
               builder: (context, notificationProvider, child) {
