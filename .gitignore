@@ -28,3 +28,5 @@ products.json
 sale.json
 response.json
 check_employees_table.sql
+.vercel
+.env*.local

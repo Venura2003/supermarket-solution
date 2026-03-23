@@ -6,6 +6,7 @@ import 'widgets/sales_analytics_chart.dart';
 import 'widgets/low_stock_alerts_panel.dart';
 import 'package:provider/provider.dart';
 import '../products/screens/add_edit_product_screen.dart';
+import '../../screens/product_search_screen.dart';
 import '../../core/providers/cart_provider.dart';
 import 'providers/dashboard_provider.dart';
 
@@ -205,10 +206,14 @@ class _DashboardPageState extends State<DashboardPage> {
                         ),
                         onSubmitted: (q) {
                           if (q.isNotEmpty) {
-                            Navigator.pushNamed(
-                              context,
-                              '/product-search',
-                              arguments: q,
+                            Navigator.of(context).push(
+                              PageRouteBuilder(
+                                pageBuilder: (context, animation, secondaryAnimation) => ProductSearchScreen(),
+                                settings: RouteSettings(arguments: q),
+                                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                  return FadeTransition(opacity: animation, child: child);
+                                },
+                              ),
                             );
                           }
                         },

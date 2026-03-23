@@ -147,11 +147,14 @@ class _ProductSearchScreenState extends State<ProductSearchScreen> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (_) => Scaffold(
+                        PageRouteBuilder(
+                          pageBuilder: (context, animation, secondaryAnimation) => Scaffold(
                             appBar: AppBar(title: const Text('Active Cart / Checkout')),
                             body: const CartPage(),
                           ),
+                          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                            return FadeTransition(opacity: animation, child: child);
+                          },
                         ),
                       );
                     },
