@@ -1,5 +1,5 @@
 {
-  "outputDirectory": "build/web",
+  "public": "build/web",
   "rewrites": [
     { "source": "/api/(.*)", "destination": "https://your-render-backend-url.onrender.com/api/$1" },
     { "source": "/(.*)", "destination": "/index.html" }
