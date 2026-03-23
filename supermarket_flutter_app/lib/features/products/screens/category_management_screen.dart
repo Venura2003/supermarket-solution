@@ -337,8 +337,8 @@ class _CategoryManagementScreenState extends State<CategoryManagementScreen> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => Scaffold(
+                          PageRouteBuilder(
+                            pageBuilder: (context, animation, secondaryAnimation) => Scaffold(
                               appBar: AppBar(
                                 title: Text('${category.name} Products'),
                                 backgroundColor: Colors.white,
@@ -353,6 +353,9 @@ class _CategoryManagementScreenState extends State<CategoryManagementScreen> {
                                 ),
                               ),
                             ),
+                            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                              return FadeTransition(opacity: animation, child: child);
+                            },
                           ),
                         );
                       },

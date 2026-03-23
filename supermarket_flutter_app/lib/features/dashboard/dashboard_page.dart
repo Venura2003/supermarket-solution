@@ -78,6 +78,58 @@ class _DashboardPageState extends State<DashboardPage> {
                 LayoutBuilder(
                   builder: (context, constraints) {
                     final isMobile = constraints.maxWidth < 600;
+                    final quickActions = [
+                      _QuickAction(
+                        icon: Icons.add_box_outlined,
+                        label: 'Add Product',
+                        onTap: () => Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder: (context, animation, secondaryAnimation) => const AddEditProductScreen(),
+                            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                              const begin = Offset(1.0, 0.0);
+                              const end = Offset.zero;
+                              var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: Curves.ease));
+                              return SlideTransition(position: animation.drive(tween), child: child);
+                            },
+                          ),
+                        ),
+                      ),
+                      _QuickAction(
+                        icon: Icons.inventory_2_outlined,
+                        label: 'Inventory',
+                        onTap: () {
+                          if (widget.onSwitchTab != null)
+                            widget.onSwitchTab!(7);
+                        },
+                      ),
+                      _QuickAction(
+                        icon: Icons.pie_chart_outline,
+                        label: 'Reports',
+                        onTap: () {
+                          if (widget.onSwitchTab != null)
+                            widget.onSwitchTab!(4);
+                        },
+                      ),
+                      Tooltip(
+                        message: _saving
+                            ? 'Saving...'
+                            : 'Save a screenshot',
+                        child: ElevatedButton.icon(
+                          onPressed: _saving ? null : _captureAndSave,
+                          icon: const Icon(Icons.camera_alt_outlined),
+                          label: Text(_saving ? 'Saving' : 'Save'),
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: isMobile ? 16 : 12,
+                              vertical: isMobile ? 14 : 10,
+                            ),
+                            textStyle: TextStyle(fontSize: isMobile ? 16 : 14, fontWeight: FontWeight.bold),
+                            minimumSize: Size(isMobile ? 120 : 80, isMobile ? 48 : 40),
+                          ),
+                        ),
+                      ),
+                    ];
                     if (isMobile) {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,67 +137,23 @@ class _DashboardPageState extends State<DashboardPage> {
                           Text(
                             'Good day, Manager',
                             style: theme.textTheme.titleMedium?.copyWith(
-                              color: theme.colorScheme.onBackground.withOpacity(
-                                0.7,
-                              ),
+                              color: theme.colorScheme.onBackground.withOpacity(0.7),
+                              fontSize: 18,
                             ),
                           ),
-                          const SizedBox(height: 6),
+                          const SizedBox(height: 8),
                           Text(
                             'Dashboard',
                             style: theme.textTheme.headlineSmall?.copyWith(
                               fontWeight: FontWeight.bold,
+                              fontSize: 24,
                             ),
                           ),
-                          const SizedBox(height: 12),
+                          const SizedBox(height: 14),
                           Wrap(
-                            spacing: 8,
-                            runSpacing: 8,
-                            children: [
-                              _QuickAction(
-                                icon: Icons.add_box_outlined,
-                                label: 'Add Product',
-                                onTap: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) =>
-                                        const AddEditProductScreen(),
-                                  ),
-                                ),
-                              ),
-                              _QuickAction(
-                                icon: Icons.inventory_2_outlined,
-                                label: 'Inventory',
-                                onTap: () {
-                                  if (widget.onSwitchTab != null)
-                                    widget.onSwitchTab!(7);
-                                },
-                              ),
-                              _QuickAction(
-                                icon: Icons.pie_chart_outline,
-                                label: 'Reports',
-                                onTap: () {
-                                  if (widget.onSwitchTab != null)
-                                    widget.onSwitchTab!(4);
-                                },
-                              ),
-                              Tooltip(
-                                message: _saving
-                                    ? 'Saving...'
-                                    : 'Save a screenshot',
-                                child: ElevatedButton.icon(
-                                  onPressed: _saving ? null : _captureAndSave,
-                                  icon: const Icon(Icons.camera_alt_outlined),
-                                  label: Text(_saving ? 'Saving' : 'Save'),
-                                  style: ElevatedButton.styleFrom(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 12,
-                                      vertical: 10,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                            spacing: 12,
+                            runSpacing: 12,
+                            children: quickActions,
                           ),
                         ],
                       );
@@ -159,69 +167,19 @@ class _DashboardPageState extends State<DashboardPage> {
                                 Text(
                                   'Good day, Manager',
                                   style: theme.textTheme.titleMedium?.copyWith(
-                                    color: theme.colorScheme.onBackground
-                                        .withOpacity(0.7),
+                                    color: theme.colorScheme.onBackground.withOpacity(0.7),
                                   ),
                                 ),
                                 const SizedBox(height: 6),
                                 Text(
                                   'Dashboard',
-                                  style: theme.textTheme.headlineSmall
-                                      ?.copyWith(fontWeight: FontWeight.bold),
+                                  style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
                           ),
-                          // Quick actions
                           Row(
-                            children: [
-                              _QuickAction(
-                                icon: Icons.add_box_outlined,
-                                label: 'Add Product',
-                                onTap: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) =>
-                                        const AddEditProductScreen(),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-                              _QuickAction(
-                                icon: Icons.inventory_2_outlined,
-                                label: 'Inventory',
-                                onTap: () {
-                                  if (widget.onSwitchTab != null)
-                                    widget.onSwitchTab!(7);
-                                },
-                              ),
-                              const SizedBox(width: 8),
-                              _QuickAction(
-                                icon: Icons.pie_chart_outline,
-                                label: 'Reports',
-                                onTap: () {
-                                  if (widget.onSwitchTab != null)
-                                    widget.onSwitchTab!(4);
-                                },
-                              ),
-                              const SizedBox(width: 8),
-                              Tooltip(
-                                message: _saving
-                                    ? 'Saving...'
-                                    : 'Save a screenshot',
-                                child: ElevatedButton.icon(
-                                  onPressed: _saving ? null : _captureAndSave,
-                                  icon: const Icon(Icons.camera_alt_outlined),
-                                  label: Text(_saving ? 'Saving' : 'Save'),
-                                  style: ElevatedButton.styleFrom(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 12,
-                                      vertical: 10,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                            children: quickActions,
                           ),
                         ],
                       );

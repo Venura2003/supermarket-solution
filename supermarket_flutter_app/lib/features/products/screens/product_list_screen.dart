@@ -46,7 +46,15 @@ class _ProductListScreenState extends State<ProductListScreen> {
 
   Future<void> _addProduct(BuildContext context) async {
     final result = await Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => AddEditProductScreen()),
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => AddEditProductScreen(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const begin = Offset(1.0, 0.0);
+          const end = Offset.zero;
+          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: Curves.ease));
+          return SlideTransition(position: animation.drive(tween), child: child);
+        },
+      ),
     );
     if (result == true) {
          await Provider.of<ProductProvider>(context, listen: false).fetchProducts(force: true);
@@ -55,7 +63,15 @@ class _ProductListScreenState extends State<ProductListScreen> {
 
   Future<void> _editProduct(BuildContext context, product) async {
     final result = await Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => AddEditProductScreen(product: product)),
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => AddEditProductScreen(product: product),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const begin = Offset(1.0, 0.0);
+          const end = Offset.zero;
+          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: Curves.ease));
+          return SlideTransition(position: animation.drive(tween), child: child);
+        },
+      ),
     );
     if (result == true) {
          await Provider.of<ProductProvider>(context, listen: false).fetchProducts(force: true);
@@ -135,35 +151,112 @@ class _ProductListScreenState extends State<ProductListScreen> {
                   spacing: 16,
                 )
               : ListView.separated(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(12),
                   itemCount: products.length,
-                  separatorBuilder: (_, __) => const Divider(),
+                  separatorBuilder: (_, __) => const SizedBox(height: 12),
                   itemBuilder: (ctx, i) {
                     final p = products[i];
-                    return ListTile(
-                      leading: p.imageUrl != null && p.imageUrl!.isNotEmpty
-                          ? CircleAvatar(backgroundImage: NetworkImage(p.imageUrl!))
-                          : const CircleAvatar(child: Icon(Icons.inventory_2_outlined)),
-                      title: Text(p.name),
-                      subtitle: Text('Stock: {p.stock}  |  LKR {p.price.toStringAsFixed(2)}'),
-                      trailing: widget.isReadOnly
-                          ? null
-                          : Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                IconButton(
-                                  icon: const Icon(Icons.edit, color: Colors.blue),
-                                  onPressed: () => _editProduct(context, p),
-                                  tooltip: 'Edit',
-                                ),
-                                IconButton(
-                                  icon: const Icon(Icons.delete, color: Colors.red),
-                                  onPressed: () => _deleteProduct(context, p.id!),
-                                  tooltip: 'Delete',
-                                ),
-                              ],
-                            ),
-                      onTap: widget.isReadOnly ? null : () => _editProduct(context, p),
+                    final isMobile = MediaQuery.of(context).size.width < 500;
+                    return Card(
+                      elevation: 2,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: isMobile
+                            ? Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      p.imageUrl != null && p.imageUrl!.isNotEmpty
+                                          ? CircleAvatar(radius: 28, backgroundImage: NetworkImage(p.imageUrl!))
+                                          : const CircleAvatar(radius: 28, child: Icon(Icons.inventory_2_outlined)),
+                                      const SizedBox(width: 12),
+                                      Expanded(
+                                        child: Text(
+                                          p.name,
+                                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text('LKR ${p.price.toStringAsFixed(2)}', style: const TextStyle(fontSize: 15)),
+                                  const SizedBox(height: 4),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                        decoration: BoxDecoration(
+                                          color: Colors.blue[50],
+                                          borderRadius: BorderRadius.circular(8),
+                                        ),
+                                        child: Text('Stock: ${p.stock}', style: const TextStyle(fontSize: 13)),
+                                      ),
+                                      const Spacer(),
+                                      if (!widget.isReadOnly) ...[
+                                        IconButton(
+                                          icon: const Icon(Icons.edit, color: Colors.blue, size: 20),
+                                          onPressed: () => _editProduct(context, p),
+                                          tooltip: 'Edit',
+                                        ),
+                                        IconButton(
+                                          icon: const Icon(Icons.delete, color: Colors.red, size: 20),
+                                          onPressed: () => _deleteProduct(context, p.id!),
+                                          tooltip: 'Delete',
+                                        ),
+                                      ]
+                                    ],
+                                  ),
+                                ],
+                              )
+                            : Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  p.imageUrl != null && p.imageUrl!.isNotEmpty
+                                      ? CircleAvatar(radius: 32, backgroundImage: NetworkImage(p.imageUrl!))
+                                      : const CircleAvatar(radius: 32, child: Icon(Icons.inventory_2_outlined)),
+                                  const SizedBox(width: 18),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          p.name,
+                                          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        const SizedBox(height: 6),
+                                        Text('LKR ${p.price.toStringAsFixed(2)}', style: const TextStyle(fontSize: 16)),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                                    decoration: BoxDecoration(
+                                      color: Colors.blue[50],
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Text('Stock: ${p.stock}', style: const TextStyle(fontSize: 15)),
+                                  ),
+                                  if (!widget.isReadOnly) ...[
+                                    IconButton(
+                                      icon: const Icon(Icons.edit, color: Colors.blue),
+                                      onPressed: () => _editProduct(context, p),
+                                      tooltip: 'Edit',
+                                    ),
+                                    IconButton(
+                                      icon: const Icon(Icons.delete, color: Colors.red),
+                                      onPressed: () => _deleteProduct(context, p.id!),
+                                      tooltip: 'Delete',
+                                    ),
+                                  ]
+                                ],
+                              ),
+                      ),
                     );
                   },
                 ),

@@ -17,11 +17,12 @@ class HeaderBar extends StatelessWidget {
         ? (themeProvider.customPrimaryColor ?? Theme.of(context).primaryColor)
         : Theme.of(context).scaffoldBackgroundColor;
 
+    final isMobile = MediaQuery.of(context).size.width < 500;
     return Container(
-      height: 64,
-      padding: const EdgeInsets.symmetric(horizontal: 24),
+      height: isMobile ? 56 : 64,
+      padding: EdgeInsets.symmetric(horizontal: isMobile ? 12 : 24),
       decoration: BoxDecoration(
-        color: headerColor, // Use theme color or full color
+        color: headerColor,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.04),
@@ -32,82 +33,92 @@ class HeaderBar extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Text(title, style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
-          const Spacer(),
-          // Search field
-          Container(
-            width: 240,
-            height: 36,
-            margin: const EdgeInsets.symmetric(horizontal: 16),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'Search...',
-                prefixIcon: const Icon(Icons.search),
-                contentPadding: const EdgeInsets.symmetric(vertical: 0),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide.none,
-                ),
-                filled: true,
-                fillColor: isDark ? Colors.grey[800] : const Color(0xFFF3F4F6),
+          Flexible(
+            child: Text(
+              title,
+              style: TextStyle(
+                fontSize: isMobile ? 18 : 28,
+                fontWeight: FontWeight.bold,
+                overflow: TextOverflow.ellipsis,
               ),
-              onSubmitted: (value) {
-                if (value.isNotEmpty) {
-                  Navigator.of(context).pushNamed('/product-search', arguments: value);
-                }
-              },
+              maxLines: 1,
             ),
           ),
-          // Theme Toggle
-          IconButton(
-            icon: Icon(isDark ? Icons.light_mode : Icons.dark_mode),
-            tooltip: 'Toggle Theme',
-            onPressed: () {
-              themeProvider.toggleTheme();
-            },
-          ),
-          // Notifications icon
-          Consumer<NotificationProvider>(
-            builder: (context, notificationProvider, child) {
-              final unreadCount = notificationProvider.notifications.where((n) => !n.isRead).length;
-              return Stack(
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.notifications_outlined),
-                    onPressed: () {
-                      _showNotificationsDialog(context, notificationProvider);
-                    },
+          const Spacer(),
+          if (!isMobile) ...[
+            // Search field
+            Container(
+              width: 240,
+              height: 36,
+              margin: const EdgeInsets.symmetric(horizontal: 16),
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Search...',
+                  prefixIcon: const Icon(Icons.search),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 0),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide.none,
                   ),
-                  if (unreadCount > 0)
-                    Positioned(
-                      right: 8,
-                      top: 8,
-                      child: Container(
-                        padding: const EdgeInsets.all(2),
-                        decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        constraints: const BoxConstraints(
-                          minWidth: 14,
-                          minHeight: 14,
-                        ),
-                        child: Text(
-                          '$unreadCount',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 8,
+                  filled: true,
+                  fillColor: isDark ? Colors.grey[800] : const Color(0xFFF3F4F6),
+                ),
+                onSubmitted: (value) {
+                  if (value.isNotEmpty) {
+                    Navigator.of(context).pushNamed('/product-search', arguments: value);
+                  }
+                },
+              ),
+            ),
+            // Theme Toggle
+            IconButton(
+              icon: Icon(isDark ? Icons.light_mode : Icons.dark_mode),
+              tooltip: 'Toggle Theme',
+              onPressed: () {
+                themeProvider.toggleTheme();
+              },
+            ),
+            // Notifications icon
+            Consumer<NotificationProvider>(
+              builder: (context, notificationProvider, child) {
+                final unreadCount = notificationProvider.notifications.where((n) => !n.isRead).length;
+                return Stack(
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.notifications_outlined),
+                      onPressed: () {
+                        _showNotificationsDialog(context, notificationProvider);
+                      },
+                    ),
+                    if (unreadCount > 0)
+                      Positioned(
+                        right: 8,
+                        top: 8,
+                        child: Container(
+                          padding: const EdgeInsets.all(2),
+                          decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(6),
                           ),
-                          textAlign: TextAlign.center,
+                          constraints: const BoxConstraints(
+                            minWidth: 14,
+                            minHeight: 14,
+                          ),
+                          child: Text(
+                            '$unreadCount',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 8,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                ],
-              );
-            },
-          ),
-          const SizedBox(width: 8),
-          // User avatar and dropdown
+                  ],
+                );
+              },
+            ),
+          ],
+          // Always show user avatar/email on all devices
           Consumer<AuthProvider>(
             builder: (context, authProvider, child) {
               final userInitial = authProvider.email?.isNotEmpty == true
@@ -120,42 +131,44 @@ class HeaderBar extends StatelessWidget {
                     backgroundColor: const Color(0xFF1B5E20),
                     child: Text(userInitial, style: const TextStyle(color: Colors.white)),
                   ),
-                  const SizedBox(width: 8),
-                  Text(authProvider.email ?? 'Guest', style: const TextStyle(fontWeight: FontWeight.w500)),
-                  const SizedBox(width: 8),
-                  PopupMenuButton<int>(
-                    itemBuilder: (context) => [
-                      const PopupMenuItem<int>(
-                        value: 0,
-                        child: Row(children: [Icon(Icons.person, size: 20), SizedBox(width: 8), Text('Profile')]),
-                      ),
-                      const PopupMenuItem<int>(
-                        value: 1,
-                        child: Row(children: [Icon(Icons.settings, size: 20), SizedBox(width: 8), Text('Settings')]),
-                      ),
-                      const PopupMenuDivider(),
-                      const PopupMenuItem<int>(
-                        value: 2,
-                        child: Row(children: [Icon(Icons.logout, size: 20), SizedBox(width: 8), Text('Logout')]),
-                      ),
-                    ],
-                    icon: const Icon(Icons.arrow_drop_down),
-                    onSelected: (value) async {
-                      if (value == 0) {
-                         // Go to Profile
-                         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Profile feature coming soon')));
-                      } else if (value == 1) {
-                         // Go to Settings
-                         Navigator.of(context).pushNamed('/settings'); // Assuming route exists or push logic
-                      } else if (value == 2) {
-                        // Logout logic
-                        await authProvider.logout();
-                        if (context.mounted) {
-                          Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
+                  if (!isMobile) ...[
+                    const SizedBox(width: 8),
+                    Text(authProvider.email ?? 'Guest', style: const TextStyle(fontWeight: FontWeight.w500)),
+                    const SizedBox(width: 8),
+                    PopupMenuButton<int>(
+                      itemBuilder: (context) => [
+                        const PopupMenuItem<int>(
+                          value: 0,
+                          child: Row(children: [Icon(Icons.person, size: 20), SizedBox(width: 8), Text('Profile')]),
+                        ),
+                        const PopupMenuItem<int>(
+                          value: 1,
+                          child: Row(children: [Icon(Icons.settings, size: 20), SizedBox(width: 8), Text('Settings')]),
+                        ),
+                        const PopupMenuDivider(),
+                        const PopupMenuItem<int>(
+                          value: 2,
+                          child: Row(children: [Icon(Icons.logout, size: 20), SizedBox(width: 8), Text('Logout')]),
+                        ),
+                      ],
+                      icon: const Icon(Icons.arrow_drop_down),
+                      onSelected: (value) async {
+                        if (value == 0) {
+                           // Go to Profile
+                           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Profile feature coming soon')));
+                        } else if (value == 1) {
+                           // Go to Settings
+                           Navigator.of(context).pushNamed('/settings'); // Assuming route exists or push logic
+                        } else if (value == 2) {
+                          // Logout logic
+                          await authProvider.logout();
+                          if (context.mounted) {
+                            Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
+                          }
                         }
-                      }
-                    },
-                  ),
+                      },
+                    ),
+                  ]
                 ],
               );
             },
@@ -163,6 +176,7 @@ class HeaderBar extends StatelessWidget {
         ],
       ),
     );
+// Removed duplicate and misplaced block
   }
 
   void _showNotificationsDialog(BuildContext context, NotificationProvider provider) {

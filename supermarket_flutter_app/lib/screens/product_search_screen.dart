@@ -46,7 +46,12 @@ class _ProductSearchScreenState extends State<ProductSearchScreen> {
   void _scanBarcode() async {
     final result = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const BarcodeScannerScreen()),
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => const BarcodeScannerScreen(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return FadeTransition(opacity: animation, child: child);
+        },
+      ),
     );
     if (result != null) {
       _searchController.text = result; // Just set text, the UI filters automatically via Provider

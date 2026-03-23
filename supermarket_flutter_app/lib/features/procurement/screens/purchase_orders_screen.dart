@@ -41,7 +41,12 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => const CreatePurchaseOrderScreen()),
+            PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) => const CreatePurchaseOrderScreen(),
+              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                return FadeTransition(opacity: animation, child: child);
+              },
+            ),
           );
         },
         child: const Icon(Icons.add),
