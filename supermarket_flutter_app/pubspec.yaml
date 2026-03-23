@@ -37,11 +37,11 @@ dependencies:
   provider: ^6.1.5+1
   http: ^1.6.0
   shared_preferences: ^2.5.4
-  mobile_scanner: ^6.0.4
+  mobile_scanner: ^7.2.0
   open_file: ^3.2.1
   path_provider: ^2.0.13
   intl: ^0.20.2
-  fl_chart: ^0.66.2
+  fl_chart: ^1.2.0
   image_picker: ^1.0.4
   pdf: ^3.10.4
   printing: ^5.12.0

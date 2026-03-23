@@ -9,6 +9,7 @@ import '../products/screens/add_edit_product_screen.dart';
 import '../../screens/product_search_screen.dart';
 import '../../core/providers/cart_provider.dart';
 import 'providers/dashboard_provider.dart';
+import '../../core/providers/theme_provider.dart';
 
 class DashboardPage extends StatefulWidget {
   final Function(int)? onSwitchTab;
@@ -129,6 +130,14 @@ class _DashboardPageState extends State<DashboardPage> {
                             minimumSize: Size(isMobile ? 120 : 80, isMobile ? 48 : 40),
                           ),
                         ),
+                      ),
+                      // THEME OPTION BUTTON
+                      _QuickAction(
+                        icon: Icons.palette,
+                        label: 'Theme',
+                        onTap: () {
+                          context.read<ThemeModeProvider>().toggleTheme();
+                        },
                       ),
                     ];
                     if (isMobile) {
