@@ -70,7 +70,10 @@ class _DashboardPageState extends State<DashboardPage> {
       builder: (context, constraints) {
         final isMobile = constraints.maxWidth < 600;
         final mainContent = Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 18.0),
+          padding: EdgeInsets.symmetric(
+            horizontal: isMobile ? 8.0 : 20.0,
+            vertical: isMobile ? 8.0 : 18.0,
+          ),
           child: RepaintBoundary(
             key: _repaintKey,
             child: Column(
@@ -144,25 +147,38 @@ class _DashboardPageState extends State<DashboardPage> {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                            decoration: BoxDecoration(
+                              color: theme.colorScheme.primary.withOpacity(0.07),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(Icons.dashboard, color: theme.colorScheme.primary, size: 22),
+                                const SizedBox(width: 8),
+                                Text(
+                                  'Dashboard',
+                                  style: theme.textTheme.headlineSmall?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 22,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 10),
                           Text(
                             'Good day, Manager',
                             style: theme.textTheme.titleMedium?.copyWith(
                               color: theme.colorScheme.onBackground.withOpacity(0.7),
-                              fontSize: 18,
+                              fontSize: 15,
                             ),
                           ),
-                          const SizedBox(height: 8),
-                          Text(
-                            'Dashboard',
-                            style: theme.textTheme.headlineSmall?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 24,
-                            ),
-                          ),
-                          const SizedBox(height: 14),
+                          const SizedBox(height: 10),
                           Wrap(
-                            spacing: 12,
-                            runSpacing: 12,
+                            spacing: 10,
+                            runSpacing: 10,
                             children: quickActions,
                           ),
                         ],
@@ -199,44 +215,87 @@ class _DashboardPageState extends State<DashboardPage> {
                 const SizedBox(height: 18),
 
                 // Search / filter bar
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Search product, order, or customer...',
-                          prefixIcon: const Icon(Icons.search),
-                          filled: true,
-                          fillColor: theme.colorScheme.surface,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide.none,
-                          ),
-                        ),
-                        onSubmitted: (q) {
-                          if (q.isNotEmpty) {
-                            Navigator.of(context).push(
-                              PageRouteBuilder(
-                                pageBuilder: (context, animation, secondaryAnimation) => ProductSearchScreen(),
-                                settings: RouteSettings(arguments: q),
-                                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                  return FadeTransition(opacity: animation, child: child);
-                                },
+                isMobile
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextField(
+                            decoration: InputDecoration(
+                              hintText: 'Search product, order, or customer...',
+                              prefixIcon: const Icon(Icons.search),
+                              filled: true,
+                              fillColor: theme.colorScheme.surface,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: BorderSide.none,
                               ),
-                            );
-                          }
-                        },
+                            ),
+                            onSubmitted: (q) {
+                              if (q.isNotEmpty) {
+                                Navigator.of(context).push(
+                                  PageRouteBuilder(
+                                    pageBuilder: (context, animation, secondaryAnimation) => ProductSearchScreen(),
+                                    settings: RouteSettings(arguments: q),
+                                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                      return FadeTransition(opacity: animation, child: child);
+                                    },
+                                  ),
+                                );
+                              }
+                            },
+                          ),
+                          const SizedBox(height: 8),
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton.icon(
+                              onPressed: () => context.read<DashboardProvider>().refreshData(),
+                              icon: const Icon(Icons.refresh),
+                              label: const Text('Refresh'),
+                              style: ElevatedButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(vertical: 12),
+                                textStyle: const TextStyle(fontSize: 16),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    : Row(
+                        children: [
+                          Expanded(
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: 'Search product, order, or customer...',
+                                prefixIcon: const Icon(Icons.search),
+                                filled: true,
+                                fillColor: theme.colorScheme.surface,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: BorderSide.none,
+                                ),
+                              ),
+                              onSubmitted: (q) {
+                                if (q.isNotEmpty) {
+                                  Navigator.of(context).push(
+                                    PageRouteBuilder(
+                                      pageBuilder: (context, animation, secondaryAnimation) => ProductSearchScreen(),
+                                      settings: RouteSettings(arguments: q),
+                                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                        return FadeTransition(opacity: animation, child: child);
+                                      },
+                                    ),
+                                  );
+                                }
+                              },
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          ElevatedButton.icon(
+                            onPressed: () => context.read<DashboardProvider>().refreshData(),
+                            icon: const Icon(Icons.refresh),
+                            label: const Text('Refresh'),
+                          ),
+                        ],
                       ),
-                    ),
-                    const SizedBox(width: 12),
-                    ElevatedButton.icon(
-                      onPressed: () =>
-                          context.read<DashboardProvider>().refreshData(),
-                      icon: const Icon(Icons.refresh),
-                      label: const Text('Refresh'),
-                    ),
-                  ],
-                ),
 
                 const SizedBox(height: 22),
 

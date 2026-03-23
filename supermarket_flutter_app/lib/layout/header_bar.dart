@@ -19,8 +19,8 @@ class HeaderBar extends StatelessWidget {
 
     final isMobile = MediaQuery.of(context).size.width < 500;
     return Container(
-      height: isMobile ? 56 : 64,
-      padding: EdgeInsets.symmetric(horizontal: isMobile ? 12 : 24),
+      height: isMobile ? 64 : 72,
+      padding: EdgeInsets.symmetric(horizontal: isMobile ? 8 : 24, vertical: isMobile ? 4 : 0),
       decoration: BoxDecoration(
         color: headerColor,
         boxShadow: [
@@ -31,9 +31,14 @@ class HeaderBar extends StatelessWidget {
           ),
         ],
       ),
-      child: Row(
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        alignment: WrapAlignment.spaceBetween,
+        spacing: 8,
+        runSpacing: 4,
         children: [
-          Flexible(
+          ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: isMobile ? 160 : 320),
             child: Text(
               title,
               style: TextStyle(
@@ -44,13 +49,11 @@ class HeaderBar extends StatelessWidget {
               maxLines: 1,
             ),
           ),
-          const Spacer(),
           if (!isMobile) ...[
-            // Search field
             Container(
-              width: 240,
+              width: 200,
               height: 36,
-              margin: const EdgeInsets.symmetric(horizontal: 16),
+              margin: const EdgeInsets.symmetric(horizontal: 8),
               child: TextField(
                 decoration: InputDecoration(
                   hintText: 'Search...',
@@ -70,8 +73,6 @@ class HeaderBar extends StatelessWidget {
                 },
               ),
             ),
-            // Theme Toggle removed (now only in dashboard header)
-            // Notifications icon
             Consumer<NotificationProvider>(
               builder: (context, notificationProvider, child) {
                 final unreadCount = notificationProvider.notifications.where((n) => !n.isRead).length;
@@ -111,15 +112,15 @@ class HeaderBar extends StatelessWidget {
               },
             ),
           ],
-          // Always show user avatar/email on all devices
           Consumer<AuthProvider>(
             builder: (context, authProvider, child) {
               final userInitial = authProvider.email?.isNotEmpty == true
                   ? authProvider.email![0].toUpperCase()
                   : 'U';
               return Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                   CircleAvatar(
+                  CircleAvatar(
                     radius: 18,
                     backgroundColor: const Color(0xFF1B5E20),
                     child: Text(userInitial, style: const TextStyle(color: Colors.white)),
@@ -138,30 +139,16 @@ class HeaderBar extends StatelessWidget {
                           value: 1,
                           child: Row(children: [Icon(Icons.settings, size: 20), SizedBox(width: 8), Text('Settings')]),
                         ),
-                        const PopupMenuDivider(),
-                        const PopupMenuItem<int>(
-                          value: 2,
-                          child: Row(children: [Icon(Icons.logout, size: 20), SizedBox(width: 8), Text('Logout')]),
-                        ),
                       ],
-                      icon: const Icon(Icons.arrow_drop_down),
-                      onSelected: (value) async {
+                      onSelected: (value) {
                         if (value == 0) {
-                           // Go to Profile
-                           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Profile feature coming soon')));
+                          // Profile
                         } else if (value == 1) {
-                           // Go to Settings
-                           Navigator.of(context).pushNamed('/settings'); // Assuming route exists or push logic
-                        } else if (value == 2) {
-                          // Logout logic
-                          await authProvider.logout();
-                          if (context.mounted) {
-                            Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
-                          }
+                          Navigator.of(context).pushNamed('/settings');
                         }
                       },
                     ),
-                  ]
+                  ],
                 ],
               );
             },
@@ -169,7 +156,6 @@ class HeaderBar extends StatelessWidget {
         ],
       ),
     );
-// Removed duplicate and misplaced block
   }
 
   void _showNotificationsDialog(BuildContext context, NotificationProvider provider) {
