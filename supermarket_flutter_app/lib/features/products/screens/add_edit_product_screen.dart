@@ -1,4 +1,3 @@
-
 import 'dart:io' as io;
 import 'package:flutter/foundation.dart' show kIsWeb;
 
@@ -45,7 +44,8 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
       _priceController.text = widget.product!.price.toString();
       _costPriceController.text = widget.product!.costPrice.toString(); // Added
       _stockController.text = widget.product!.stock.toString();
-      _lowStockThresholdController.text = widget.product!.lowStockThreshold.toString();
+      _lowStockThresholdController.text = widget.product!.lowStockThreshold
+          .toString();
       _selectedCategoryId = widget.product!.categoryId;
       _imagePath = widget.product!.imageUrl;
     }
@@ -67,20 +67,29 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
     if (!_formKey.currentState!.validate()) return;
 
     final name = _nameController.text;
-    final barcode = _barcodeController.text.isEmpty ? null : _barcodeController.text;
+    final barcode = _barcodeController.text.isEmpty
+        ? null
+        : _barcodeController.text;
     final price = double.tryParse(_priceController.text) ?? 0.0;
-    final costPrice = double.tryParse(_costPriceController.text) ?? 0.0; // Added
+    final costPrice =
+        double.tryParse(_costPriceController.text) ?? 0.0; // Added
     final stock = int.tryParse(_stockController.text) ?? 0;
-    final lowStockThreshold = int.tryParse(_lowStockThresholdController.text) ?? 5;
+    final lowStockThreshold =
+        int.tryParse(_lowStockThresholdController.text) ?? 5;
 
     String? imageUrl = _imagePath;
     // If image is a local file (not a URL), upload it
-    if (!kIsWeb && imageUrl != null && !imageUrl.startsWith('http') && io.File(imageUrl).existsSync()) {
+    if (!kIsWeb &&
+        imageUrl != null &&
+        !imageUrl.startsWith('http') &&
+        io.File(imageUrl).existsSync()) {
       try {
         imageUrl = await ApiService.uploadImage(io.File(imageUrl));
       } catch (e) {
         if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Image upload failed: $e')));
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text('Image upload failed: $e')));
         }
         return;
       }
@@ -113,7 +122,9 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
   Future<void> _pickImage() async {
     if (fnd.kIsWeb) {
       // Web: Use file_picker
-      FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.image);
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
+        type: FileType.image,
+      );
       if (result != null && result.files.single.bytes != null) {
         // Store bytes in memory, or upload directly
         setState(() {
@@ -155,17 +166,33 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextField(controller: nameCtrl, decoration: const InputDecoration(labelText: 'Name')),
-            TextField(controller: descCtrl, decoration: const InputDecoration(labelText: 'Description (optional)')),
+            TextField(
+              controller: nameCtrl,
+              decoration: const InputDecoration(labelText: 'Name'),
+            ),
+            TextField(
+              controller: descCtrl,
+              decoration: const InputDecoration(
+                labelText: 'Description (optional)',
+              ),
+            ),
           ],
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.of(ctx).pop(), child: const Text('Cancel')),
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: const Text('Cancel'),
+          ),
           ElevatedButton(
             onPressed: () async {
               final name = nameCtrl.text.trim();
               if (name.isEmpty) return;
-              final newCat = Category(name: name, description: descCtrl.text.trim().isEmpty ? null : descCtrl.text.trim());
+              final newCat = Category(
+                name: name,
+                description: descCtrl.text.trim().isEmpty
+                    ? null
+                    : descCtrl.text.trim(),
+              );
               final provider = context.read<CategoryProvider>();
               await provider.addCategory(newCat);
               await provider.fetchCategories();
@@ -187,16 +214,21 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
         elevation: 0,
         backgroundColor: Colors.transparent,
         foregroundColor: Theme.of(context).colorScheme.onBackground,
-        title: Text(isEditing ? 'Edit Product' : 'Add Product', style: const TextStyle(fontWeight: FontWeight.w700)),
+        title: Text(
+          isEditing ? 'Edit Product' : 'Add Product',
+          style: const TextStyle(fontWeight: FontWeight.w700),
+        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
         child: Center(
-            child: ConstrainedBox(
+          child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 1100),
             child: Card(
               elevation: 6,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
               child: Padding(
                 padding: const EdgeInsets.all(28.0),
                 child: Form(
@@ -216,13 +248,32 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
                               decoration: BoxDecoration(
                                 color: Colors.grey[100],
                                 borderRadius: BorderRadius.circular(12),
-                                boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 8, offset: Offset(0, 3))],
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black12,
+                                    blurRadius: 8,
+                                    offset: Offset(0, 3),
+                                  ),
+                                ],
                               ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(12),
-                                child: _imagePath != null && !kIsWeb && io.File(_imagePath!).existsSync()
-                                  ? Image.file(io.File(_imagePath!), fit: BoxFit.cover)
-                                    : Center(child: Icon(Icons.photo_library, size: 48, color: Colors.grey[500])),
+                              child: Hero(
+                                tag:
+                                    'product-image-[0m${widget.product?.id ?? _imagePath ?? 'new'}',
+                                child:
+                                    _imagePath != null &&
+                                        !kIsWeb &&
+                                        io.File(_imagePath!).existsSync()
+                                    ? Image.file(
+                                        io.File(_imagePath!),
+                                        fit: BoxFit.cover,
+                                      )
+                                    : Center(
+                                        child: Icon(
+                                          Icons.photo_library,
+                                          size: 48,
+                                          color: Colors.grey[500],
+                                        ),
+                                      ),
                               ),
                             ),
                           ),
@@ -234,41 +285,86 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
                               children: [
                                 TextFormField(
                                   controller: _nameController,
-                                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
                                   decoration: InputDecoration(
                                     labelText: 'Product name *',
                                     filled: true,
                                     fillColor: Colors.grey[50],
-                                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                      borderSide: BorderSide.none,
+                                    ),
                                   ),
-                                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-                                  validator: (value) => value!.isEmpty ? 'Enter name' : null,
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                  validator: (value) =>
+                                      value!.isEmpty ? 'Enter name' : null,
                                 ),
                                 const SizedBox(height: 10),
-                                Consumer<CategoryProvider>(builder: (ctx, catProv, _) {
-                                  final cat = catProv.categories.firstWhere((c) => c.id == _selectedCategoryId, orElse: () => Category(id: null, name: 'None'));
-                                  return Wrap(
-                                    spacing: 8,
-                                    runSpacing: 6,
-                                    children: [
-                                      ActionChip(
-                                        label: Text(cat.name),
-                                        onPressed: () async {
-                                          // open category selector
-                                          final v = await showDialog<int?>(context: context, builder: (dctx) => SimpleDialog(
-                                            title: const Text('Select Category'),
-                                            children: [
-                                              SimpleDialogOption(onPressed: () => Navigator.of(dctx).pop(null), child: const Text('None')),
-                                              ...catProv.categories.map((c) => SimpleDialogOption(onPressed: () => Navigator.of(dctx).pop(c.id), child: Text(c.name))).toList(),
-                                            ],
-                                          ));
-                                          if (v != null || v == null) setState(() => _selectedCategoryId = v);
-                                        },
-                                      ),
-                                      OutlinedButton.icon(onPressed: _showAddCategoryDialog, icon: const Icon(Icons.add), label: const Text('New category')),
-                                    ],
-                                  );
-                                }),
+                                Consumer<CategoryProvider>(
+                                  builder: (ctx, catProv, _) {
+                                    final cat = catProv.categories.firstWhere(
+                                      (c) => c.id == _selectedCategoryId,
+                                      orElse: () =>
+                                          Category(id: null, name: 'None'),
+                                    );
+                                    return Wrap(
+                                      spacing: 8,
+                                      runSpacing: 6,
+                                      children: [
+                                        ActionChip(
+                                          label: Text(cat.name),
+                                          onPressed: () async {
+                                            // open category selector
+                                            final v = await showDialog<int?>(
+                                              context: context,
+                                              builder: (dctx) => SimpleDialog(
+                                                title: const Text(
+                                                  'Select Category',
+                                                ),
+                                                children: [
+                                                  SimpleDialogOption(
+                                                    onPressed: () =>
+                                                        Navigator.of(
+                                                          dctx,
+                                                        ).pop(null),
+                                                    child: const Text('None'),
+                                                  ),
+                                                  ...catProv.categories
+                                                      .map(
+                                                        (c) =>
+                                                            SimpleDialogOption(
+                                                              onPressed: () =>
+                                                                  Navigator.of(
+                                                                    dctx,
+                                                                  ).pop(c.id),
+                                                              child: Text(
+                                                                c.name,
+                                                              ),
+                                                            ),
+                                                      )
+                                                      .toList(),
+                                                ],
+                                              ),
+                                            );
+                                            if (v != null || v == null)
+                                              setState(
+                                                () => _selectedCategoryId = v,
+                                              );
+                                          },
+                                        ),
+                                        OutlinedButton.icon(
+                                          onPressed: _showAddCategoryDialog,
+                                          icon: const Icon(Icons.add),
+                                          label: const Text('New category'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                ),
                               ],
                             ),
                           ),
@@ -280,33 +376,54 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
                       const SizedBox(height: 12),
 
                       // Two-column responsive form
-                      LayoutBuilder(builder: (ctx, cons) {
-                        final twoCol = cons.maxWidth > 600;
-                        return twoCol
-                            ? Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Expanded(child: _leftColumn()),
-                                  const SizedBox(width: 16),
-                                  Expanded(child: _rightColumn()),
-                                ],
-                              )
-                            : Column(children: [_leftColumn(), const SizedBox(height: 12), _rightColumn()]);
-                      }),
+                      LayoutBuilder(
+                        builder: (ctx, cons) {
+                          final twoCol = cons.maxWidth > 600;
+                          return twoCol
+                              ? Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(child: _leftColumn()),
+                                    const SizedBox(width: 16),
+                                    Expanded(child: _rightColumn()),
+                                  ],
+                                )
+                              : Column(
+                                  children: [
+                                    _leftColumn(),
+                                    const SizedBox(height: 12),
+                                    _rightColumn(),
+                                  ],
+                                );
+                        },
+                      ),
 
                       const SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Cancel')),
+                          TextButton(
+                            onPressed: () => Navigator.of(context).pop(),
+                            child: const Text('Cancel'),
+                          ),
                           const SizedBox(width: 12),
                           ElevatedButton(
                             onPressed: _saveProduct,
-                            style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
-                            child: Text(isEditing ? 'Update product' : 'Add product'),
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 28,
+                                vertical: 14,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                            child: Text(
+                              isEditing ? 'Update product' : 'Add product',
+                            ),
                           ),
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -325,13 +442,29 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
         TextFormField(
           controller: _barcodeController,
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          decoration: InputDecoration(labelText: 'Barcode (optional)', filled: true, fillColor: Colors.grey[50], border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none)),
+          decoration: InputDecoration(
+            labelText: 'Barcode (optional)',
+            filled: true,
+            fillColor: Colors.grey[50],
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide.none,
+            ),
+          ),
         ),
         const SizedBox(height: 12),
         TextFormField(
           controller: _priceController,
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          decoration: InputDecoration(labelText: 'Price *', filled: true, fillColor: Colors.grey[50], border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none)),
+          decoration: InputDecoration(
+            labelText: 'Price *',
+            filled: true,
+            fillColor: Colors.grey[50],
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide.none,
+            ),
+          ),
           keyboardType: TextInputType.number,
           validator: (value) {
             if (value!.isEmpty) return 'Enter price';
@@ -343,10 +476,19 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
         TextFormField(
           controller: _costPriceController, // Added
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          decoration: InputDecoration(labelText: 'Cost Price (Optional)', filled: true, fillColor: Colors.grey[50], border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none)),
+          decoration: InputDecoration(
+            labelText: 'Cost Price (Optional)',
+            filled: true,
+            fillColor: Colors.grey[50],
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide.none,
+            ),
+          ),
           keyboardType: TextInputType.number,
           validator: (value) {
-            if (value!.isNotEmpty && double.tryParse(value) == null) return 'Enter valid cost';
+            if (value!.isNotEmpty && double.tryParse(value) == null)
+              return 'Enter valid cost';
             return null;
           },
         ),
@@ -354,7 +496,15 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
         TextFormField(
           controller: _stockController,
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          decoration: InputDecoration(labelText: 'Stock *', filled: true, fillColor: Colors.grey[50], border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none)),
+          decoration: InputDecoration(
+            labelText: 'Stock *',
+            filled: true,
+            fillColor: Colors.grey[50],
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide.none,
+            ),
+          ),
           keyboardType: TextInputType.number,
           validator: (value) {
             if (value!.isEmpty) return 'Enter stock';
@@ -372,7 +522,15 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
       children: [
         TextFormField(
           controller: _lowStockThresholdController,
-          decoration: InputDecoration(labelText: 'Low Stock Threshold', filled: true, fillColor: Colors.grey[50], border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none)),
+          decoration: InputDecoration(
+            labelText: 'Low Stock Threshold',
+            filled: true,
+            fillColor: Colors.grey[50],
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide.none,
+            ),
+          ),
           keyboardType: TextInputType.number,
           validator: (value) {
             if (value!.isEmpty) return 'Enter threshold';
@@ -388,7 +546,12 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
                 onPressed: _pickImage,
                 icon: const Icon(Icons.photo_library),
                 label: const Text('Choose Image'),
-                style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
               ),
             ),
           ],

@@ -41,133 +41,193 @@ class SalesAnalyticsChart extends StatelessWidget {
     }
 
     final theme = Theme.of(context);
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 200),
+    return AnimatedSlide(
+      offset: const Offset(0, 0.15),
+      duration: const Duration(milliseconds: 500),
       curve: Curves.easeOut,
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.07),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(Icons.bar_chart_rounded, color: theme.colorScheme.primary, size: 28),
-              const SizedBox(width: 10),
-              Text(
-                'Sales Analytics',
-                style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+      child: AnimatedOpacity(
+        opacity: 1.0,
+        duration: const Duration(milliseconds: 500),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.easeOut,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                theme.colorScheme.surface,
+                theme.colorScheme.primary.withOpacity(0.04),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(24),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.08),
+                blurRadius: 14,
+                offset: const Offset(0, 6),
               ),
             ],
           ),
-          const SizedBox(height: 18),
-          SizedBox(
-            height: 200,
-            child: BarChart(
-              BarChartData(
-                alignment: BarChartAlignment.spaceAround,
-                maxY: [dailyRevenue, monthlyRevenue].reduce((a, b) => a > b ? a : b) * 1.2,
-                barTouchData: BarTouchData(enabled: false),
-                titlesData: FlTitlesData(
-                  show: true,
-                  bottomTitles: AxisTitles(
-                    sideTitles: SideTitles(
-                      showTitles: true,
-                      getTitlesWidget: (value, meta) {
-                        switch (value.toInt()) {
-                          case 0:
-                            return Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
-                              child: Text(dailyLabel, style: theme.textTheme.labelLarge),
-                            );
-                          case 1:
-                            return Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
-                              child: Text(monthlyLabel, style: theme.textTheme.labelLarge),
-                            );
-                          default:
-                            return const SizedBox.shrink();
-                        }
-                      },
+          padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(
+                    Icons.bar_chart_rounded,
+                    color: theme.colorScheme.primary,
+                    size: 32,
+                  ),
+                  const SizedBox(width: 14),
+                  Text(
+                    'Sales Analytics',
+                    style: theme.textTheme.headlineMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
                     ),
-                  ),
-                  leftTitles: AxisTitles(
-                    sideTitles: SideTitles(
-                      showTitles: true,
-                      getTitlesWidget: (value, meta) {
-                        return Text(
-                          'LKR ${NumberFormat.compact().format(value)}',
-                          style: theme.textTheme.labelSmall?.copyWith(fontSize: 11),
-                        );
-                      },
-                    ),
-                  ),
-                  topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                  rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                ),
-                gridData: FlGridData(show: false),
-                borderData: FlBorderData(show: false),
-                barGroups: [
-                  BarChartGroupData(
-                    x: 0,
-                    barRods: [
-                      BarChartRodData(
-                        toY: dailyRevenue,
-                        color: theme.colorScheme.primary,
-                        width: 32,
-                        borderRadius: BorderRadius.circular(8),
-                        backDrawRodData: BackgroundBarChartRodData(
-                          show: true,
-                          toY: [dailyRevenue, monthlyRevenue].reduce((a, b) => a > b ? a : b) * 1.2,
-                          color: theme.colorScheme.primary.withOpacity(0.08),
-                        ),
-                      ),
-                    ],
-                  ),
-                  BarChartGroupData(
-                    x: 1,
-                    barRods: [
-                      BarChartRodData(
-                        toY: monthlyRevenue,
-                        color: Colors.green.shade600,
-                        width: 32,
-                        borderRadius: BorderRadius.circular(8),
-                        backDrawRodData: BackgroundBarChartRodData(
-                          show: true,
-                          toY: [dailyRevenue, monthlyRevenue].reduce((a, b) => a > b ? a : b) * 1.2,
-                          color: Colors.green.withOpacity(0.08),
-                        ),
-                      ),
-                    ],
                   ),
                 ],
               ),
-            ),
-          ),
-          const SizedBox(height: 18),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              _LegendItem(color: theme.colorScheme.primary, label: dailyLabel ?? 'Today'),
-              const SizedBox(width: 18),
-              _LegendItem(color: Colors.green, label: monthlyLabel ?? 'This Month'),
+              const SizedBox(height: 24),
+              SizedBox(
+                height: 220,
+                child: BarChart(
+                  BarChartData(
+                    alignment: BarChartAlignment.spaceAround,
+                    maxY:
+                        [
+                          dailyRevenue,
+                          monthlyRevenue,
+                        ].reduce((a, b) => a > b ? a : b) *
+                        1.2,
+                    barTouchData: BarTouchData(enabled: false),
+                    titlesData: FlTitlesData(
+                      show: true,
+                      bottomTitles: AxisTitles(
+                        sideTitles: SideTitles(
+                          showTitles: true,
+                          getTitlesWidget: (value, meta) {
+                            switch (value.toInt()) {
+                              case 0:
+                                return Padding(
+                                  padding: const EdgeInsets.only(top: 10.0),
+                                  child: Text(
+                                    dailyLabel,
+                                    style: theme.textTheme.bodyLarge?.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                );
+                              case 1:
+                                return Padding(
+                                  padding: const EdgeInsets.only(top: 10.0),
+                                  child: Text(
+                                    monthlyLabel,
+                                    style: theme.textTheme.bodyLarge?.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                );
+                              default:
+                                return const SizedBox.shrink();
+                            }
+                          },
+                        ),
+                      ),
+                      leftTitles: AxisTitles(
+                        sideTitles: SideTitles(
+                          showTitles: true,
+                          getTitlesWidget: (value, meta) {
+                            return Text(
+                              'LKR ${NumberFormat.compact().format(value)}',
+                              style: theme.textTheme.labelMedium?.copyWith(
+                                fontSize: 13,
+                                color: theme.colorScheme.primary,
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      topTitles: AxisTitles(
+                        sideTitles: SideTitles(showTitles: false),
+                      ),
+                      rightTitles: AxisTitles(
+                        sideTitles: SideTitles(showTitles: false),
+                      ),
+                    ),
+                    gridData: FlGridData(show: false),
+                    borderData: FlBorderData(show: false),
+                    barGroups: [
+                      BarChartGroupData(
+                        x: 0,
+                        barRods: [
+                          BarChartRodData(
+                            toY: dailyRevenue,
+                            color: theme.colorScheme.primary,
+                            width: 36,
+                            borderRadius: BorderRadius.circular(10),
+                            backDrawRodData: BackgroundBarChartRodData(
+                              show: true,
+                              toY:
+                                  [
+                                    dailyRevenue,
+                                    monthlyRevenue,
+                                  ].reduce((a, b) => a > b ? a : b) *
+                                  1.2,
+                              color: theme.colorScheme.primary.withOpacity(
+                                0.10,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      BarChartGroupData(
+                        x: 1,
+                        barRods: [
+                          BarChartRodData(
+                            toY: monthlyRevenue,
+                            color: Colors.green.shade600,
+                            width: 32,
+                            borderRadius: BorderRadius.circular(8),
+                            backDrawRodData: BackgroundBarChartRodData(
+                              show: true,
+                              toY:
+                                  [
+                                    dailyRevenue,
+                                    monthlyRevenue,
+                                  ].reduce((a, b) => a > b ? a : b) *
+                                  1.2,
+                              color: Colors.green.withOpacity(0.08),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 18),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  _LegendItem(
+                    color: theme.colorScheme.primary,
+                    label: dailyLabel,
+                  ),
+                  const SizedBox(width: 18),
+                  _LegendItem(color: Colors.green, label: monthlyLabel),
+                ],
+              ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }
 }
 
+// Top-level _LegendItem widget for chart legends
 class _LegendItem extends StatelessWidget {
   final Color color;
   final String label;
@@ -181,7 +241,10 @@ class _LegendItem extends StatelessWidget {
         Container(
           width: 12,
           height: 12,
-          color: color,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(3),
+          ),
         ),
         const SizedBox(width: 4),
         Text(label, style: Theme.of(context).textTheme.bodySmall),

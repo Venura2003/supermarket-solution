@@ -17,53 +17,65 @@ class KpiCards extends StatelessWidget {
       final isMobile = constraints.maxWidth < 600;
       final cardWidth = isMobile ? constraints.maxWidth : 260.0;
       final horizontalPadding = isMobile ? 0.0 : 8.0;
+      final kpiCards = [
+        _KpiCard(
+          title: 'Total Sales Today',
+          value: dashboardProvider.totalRevenue > 0
+              ? 'LKR ${NumberFormat('#,##0.00').format(dashboardProvider.totalRevenue)}'
+              : 'No data',
+          icon: Icons.attach_money,
+          color: Colors.green.shade700,
+          isMobile: isMobile,
+          width: cardWidth,
+        ),
+        _KpiCard(
+          title: 'Monthly Revenue',
+          value: dashboardProvider.monthlyRevenue > 0
+              ? 'LKR ${NumberFormat('#,##0.00').format(dashboardProvider.monthlyRevenue)}'
+              : 'No data',
+          icon: Icons.calendar_month,
+          color: Colors.blue.shade700,
+          isMobile: isMobile,
+          width: cardWidth,
+        ),
+        _KpiCard(
+          title: 'Total Orders',
+          value: dashboardProvider.totalOrders > 0
+              ? dashboardProvider.totalOrders.toString()
+              : 'No data',
+          icon: Icons.shopping_cart,
+          color: Colors.orange.shade700,
+          isMobile: isMobile,
+          width: cardWidth,
+        ),
+        _KpiCard(
+          title: 'Low Stock Items',
+          value: dashboardProvider.lowStockCount >= 0
+              ? dashboardProvider.lowStockCount.toString()
+              : 'No data',
+          icon: Icons.warning,
+          color: Colors.red.shade700,
+          isMobile: isMobile,
+          width: cardWidth,
+        ),
+      ];
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
         child: Wrap(
-          spacing: 16,
-          runSpacing: 16,
-          children: [
-            _KpiCard(
-              title: 'Total Sales Today',
-              value: dashboardProvider.totalRevenue > 0
-                  ? 'LKR ${NumberFormat('#,##0.00').format(dashboardProvider.totalRevenue)}'
-                  : 'No data',
-              icon: Icons.attach_money,
-              color: Colors.green.shade700,
-              isMobile: isMobile,
-              width: cardWidth,
+          spacing: 24, // more space between cards
+          runSpacing: 24,
+          children: List.generate(kpiCards.length, (i) =>
+            AnimatedSlide(
+              offset: const Offset(0, 0.2),
+              duration: Duration(milliseconds: 400 + i * 100),
+              curve: Curves.easeOut,
+              child: AnimatedOpacity(
+                opacity: 1.0,
+                duration: Duration(milliseconds: 400 + i * 100),
+                child: kpiCards[i],
+              ),
             ),
-            _KpiCard(
-              title: 'Monthly Revenue',
-              value: dashboardProvider.monthlyRevenue > 0
-                  ? 'LKR ${NumberFormat('#,##0.00').format(dashboardProvider.monthlyRevenue)}'
-                  : 'No data',
-              icon: Icons.calendar_month,
-              color: Colors.blue.shade700,
-              isMobile: isMobile,
-              width: cardWidth,
-            ),
-            _KpiCard(
-              title: 'Total Orders',
-              value: dashboardProvider.totalOrders > 0
-                  ? dashboardProvider.totalOrders.toString()
-                  : 'No data',
-              icon: Icons.shopping_cart,
-              color: Colors.orange.shade700,
-              isMobile: isMobile,
-              width: cardWidth,
-            ),
-            _KpiCard(
-              title: 'Low Stock Items',
-              value: dashboardProvider.lowStockCount >= 0
-                  ? dashboardProvider.lowStockCount.toString()
-                  : 'No data',
-              icon: Icons.warning,
-              color: Colors.red.shade700,
-              isMobile: isMobile,
-              width: cardWidth,
-            ),
-          ],
+          ),
         ),
       );
     });
