@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:ui';
 
 class SidebarItem {
   final IconData icon;
@@ -54,121 +55,175 @@ class _SidebarState extends State<Sidebar> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isMobile = MediaQuery.of(context).size.width < 700;
+    // Auto-collapse on mobile
+    if (isMobile && !_collapsed) {
+      Future.microtask(() => setState(() => _collapsed = true));
+    }
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      // Wider when expanded to accommodate hierarchy
-      width: _collapsed ? 88 : 320, 
-      padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 12),
-      decoration: BoxDecoration(
-        color: const Color(0xFF1E293B), // Dark Slate Blue for ERP feel
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.15), blurRadius: 10, offset: const Offset(4, 0))],
+      duration: const Duration(milliseconds: 350),
+      curve: Curves.easeInOutCubic,
+      width: _collapsed ? (isMobile ? 0 : 72) : (isMobile ? 220 : 300),
+      margin: isMobile ? const EdgeInsets.only(left: 0, top: 0, bottom: 0) : null,
+      padding: EdgeInsets.symmetric(
+        vertical: isMobile ? 8 : 18,
+        horizontal: isMobile ? 4 : 12,
       ),
-      child: Column(
-        children: [
-          // Header
-          Row(
-            mainAxisAlignment: _collapsed ? MainAxisAlignment.center : MainAxisAlignment.start,
-            children: [
-            if (!_collapsed) ...[
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(colors: [Colors.blue.shade600, Colors.indigo.shade800]),
-                  borderRadius: BorderRadius.circular(8)
-                ),
-                child: const Icon(Icons.business, color: Colors.white, size: 24),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text('FRESHMART', style: theme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold, 
-                      color: Colors.white, 
-                      fontSize: 18, 
-                      letterSpacing: 1.1,
-                      overflow: TextOverflow.ellipsis
-                    )),
-                    Text('ERP Suite', style: theme.textTheme.bodySmall?.copyWith(color: Colors.white54)),
-                  ],
-                ),
-              ),
-              IconButton(
-                icon: const Icon(Icons.menu_open, color: Colors.white70),
-                onPressed: _toggleCollapse,
-              )
-            ] else ...[
-              // Collapsed: Just show the toggle button (centered by Row)
-               IconButton(
-                 icon: const Icon(Icons.menu, color: Colors.white70, size: 24), 
-                 onPressed: _toggleCollapse
-               ),
-            ]
-          ]),
-
-          const SizedBox(height: 24),
-
-          // Menu Items
-          Expanded(
-            child: Scrollbar(
-              controller: _scrollController,
-              thumbVisibility: true,
-              child: ListView.builder(
-                controller: _scrollController,
-                itemCount: widget.items.length,
-                itemBuilder: (context, index) {
-                  final item = widget.items[index];
-                  // If group (has children)
-                  if (item.children != null && item.children!.isNotEmpty) {
-                    return _SidebarGroup(
-                      item: item, 
-                      collapsed: _collapsed,
-                      isExpanded: _expandedGroups.contains(item.label) || item.isActive, // Auto expand if active child
-                      onToggle: () {
-                         setState(() {
-                           if (_expandedGroups.contains(item.label)) {
-                             _expandedGroups.remove(item.label);
-                           } else {
-                             _expandedGroups.add(item.label);
-                           }
-                         });
-                      },
-                    );
-                  }
-                  // Single item
-                  return _SidebarTile(item: item, collapsed: _collapsed);
-                },
-              ),
-            ),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.10),
+        borderRadius: isMobile ? const BorderRadius.only(
+          topRight: Radius.circular(24),
+          bottomRight: Radius.circular(24),
+        ) : BorderRadius.circular(18),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.18),
+            blurRadius: 18,
+            offset: const Offset(6, 0),
           ),
-
-          // User Profile
-          const Divider(color: Colors.white12),
-          if (!_collapsed) ...[
-            ListTile(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 4),
-              leading: CircleAvatar(
-                backgroundColor: theme.colorScheme.primary,
-                radius: 18,
-                child: Text(widget.userName.isNotEmpty ? widget.userName[0].toUpperCase() : 'U', style: const TextStyle(color: Colors.white)),
-              ),
-              title: Text(widget.userName, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
-              subtitle: Text(widget.userRole, style: const TextStyle(color: Colors.white54, fontSize: 12)),
-              trailing: IconButton(
-                icon: const Icon(Icons.logout, size: 20, color: Colors.white70),
-                onPressed: widget.onLogout ?? () {},
-              ),
-            ),
-          ] else ...[
-             IconButton(
-                icon: const Icon(Icons.logout, size: 20, color: Colors.white70),
-                onPressed: widget.onLogout ?? () {},
-                tooltip: 'Logout',
-              ),
-          ]
         ],
+        // Glass effect
+        backgroundBlendMode: BlendMode.overlay,
+      ),
+      foregroundDecoration: BoxDecoration(
+        borderRadius: isMobile ? const BorderRadius.only(
+          topRight: Radius.circular(24),
+          bottomRight: Radius.circular(24),
+        ) : BorderRadius.circular(18),
+        // Glassmorphism blur
+        color: Colors.transparent,
+        backgroundBlendMode: BlendMode.overlay,
+      ),
+      child: ClipRRect(
+        borderRadius: isMobile ? const BorderRadius.only(
+          topRight: Radius.circular(24),
+          bottomRight: Radius.circular(24),
+        ) : BorderRadius.circular(18),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
+          child: Column(
+            children: [
+              // Header
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 400),
+                child: _collapsed
+                  ? IconButton(
+                      key: const ValueKey('collapsed'),
+                      icon: const Icon(Icons.menu, color: Colors.white70, size: 26),
+                      onPressed: _toggleCollapse,
+                      tooltip: 'Expand',
+                    )
+                  : Row(
+                      key: const ValueKey('expanded'),
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.blue.shade400,
+                                Colors.indigo.shade700,
+                                Colors.cyan.shade400
+                              ],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.blueAccent.withOpacity(0.18),
+                                blurRadius: 12,
+                                offset: const Offset(0, 2),
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: const Icon(Icons.shopping_bag_rounded, color: Colors.white, size: 28),
+                        ),
+                        const SizedBox(width: 14),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text('FRESHMART', style: theme.textTheme.titleMedium?.copyWith(
+                                fontWeight: FontWeight.bold, 
+                                color: Colors.white, 
+                                fontSize: 19, 
+                                letterSpacing: 1.2,
+                                overflow: TextOverflow.ellipsis
+                              )),
+                              Text('ERP Suite', style: theme.textTheme.bodySmall?.copyWith(color: Colors.white54)),
+                            ],
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.menu_open, color: Colors.white70),
+                          onPressed: _toggleCollapse,
+                          tooltip: 'Collapse',
+                        )
+                      ],
+                    ),
+              ),
+              const SizedBox(height: 18),
+              // Menu Items
+              Expanded(
+                child: Scrollbar(
+                  controller: _scrollController,
+                  thumbVisibility: !isMobile,
+                  child: ListView.builder(
+                    controller: _scrollController,
+                    itemCount: widget.items.length,
+                    itemBuilder: (context, index) {
+                      final item = widget.items[index];
+                      if (item.children != null && item.children!.isNotEmpty) {
+                        return _SidebarGroup(
+                          item: item, 
+                          collapsed: _collapsed,
+                          isExpanded: _expandedGroups.contains(item.label) || item.isActive,
+                          onToggle: () {
+                            setState(() {
+                              if (_expandedGroups.contains(item.label)) {
+                                _expandedGroups.remove(item.label);
+                              } else {
+                                _expandedGroups.add(item.label);
+                              }
+                            });
+                          },
+                        );
+                      }
+                      return _SidebarTile(item: item, collapsed: _collapsed);
+                    },
+                  ),
+                ),
+              ),
+              // User Profile
+              const Divider(color: Colors.white12, thickness: 1, height: 18),
+              if (!_collapsed) ...[
+                ListTile(
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 4),
+                  leading: CircleAvatar(
+                    backgroundColor: theme.colorScheme.primary.withOpacity(0.85),
+                    radius: 18,
+                    child: Text(widget.userName.isNotEmpty ? widget.userName[0].toUpperCase() : 'U', style: const TextStyle(color: Colors.white)),
+                  ),
+                  title: Text(widget.userName, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+                  subtitle: Text(widget.userRole, style: const TextStyle(color: Colors.white54, fontSize: 12)),
+                  trailing: IconButton(
+                    icon: const Icon(Icons.logout, size: 20, color: Colors.white70),
+                    onPressed: widget.onLogout ?? () {},
+                  ),
+                ),
+              ] else ...[
+                IconButton(
+                  icon: const Icon(Icons.logout, size: 20, color: Colors.white70),
+                  onPressed: widget.onLogout ?? () {},
+                  tooltip: 'Logout',
+                ),
+              ]
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -219,42 +274,55 @@ class _SidebarGroupState extends State<_SidebarGroup> with SingleTickerProviderS
     if (widget.collapsed) {
       return _SidebarTile(item: widget.item, collapsed: true);
     }
-
     final headerActive = widget.item.children!.any((c) => c.isActive);
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        InkWell(
-          onTap: widget.onToggle,
-          borderRadius: BorderRadius.circular(8),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            child: Row(
-              children: [
-                 Icon(widget.item.icon, color: headerActive ? Colors.blueAccent : Colors.white70, size: 22),
-                 const SizedBox(width: 14),
-                 Expanded(
-                   child: Text(
-                     widget.item.label.toUpperCase(),
-                     style: TextStyle(
-                       color: headerActive ? Colors.blueAccent : Colors.white60,
-                       fontWeight: FontWeight.bold,
-                       fontSize: 12,
-                       letterSpacing: 1.2
-                     ),
-                   ),
-                 ),
-                 Icon(
-                   widget.isExpanded ? Icons.expand_less : Icons.expand_more,
-                   color: Colors.white38,
-                   size: 18,
-                 )
-              ],
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 250),
+      curve: Curves.easeInOut,
+      margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 0),
+      decoration: BoxDecoration(
+        color: headerActive ? Colors.blue.withOpacity(0.10) : Colors.transparent,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          InkWell(
+            onTap: widget.onToggle,
+            borderRadius: BorderRadius.circular(10),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              child: Row(
+                children: [
+                  Icon(widget.item.icon, color: headerActive ? Colors.cyanAccent : Colors.white70, size: 22),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: Text(
+                      widget.item.label.toUpperCase(),
+                      style: TextStyle(
+                        color: headerActive ? Colors.cyanAccent : Colors.white60,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13,
+                        letterSpacing: 1.2,
+                        shadows: headerActive
+                            ? [Shadow(color: Colors.cyanAccent.withOpacity(0.2), blurRadius: 8)]
+                            : null,
+                      ),
+                    ),
+                  ),
+                  AnimatedRotation(
+                    turns: widget.isExpanded ? 0.5 : 0.0,
+                    duration: const Duration(milliseconds: 250),
+                    child: Icon(
+                      widget.isExpanded ? Icons.expand_less : Icons.expand_more,
+                      color: Colors.white38,
+                      size: 18,
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
-        ),
-        SizeTransition(
+          SizeTransition(
             sizeFactor: _heightFactor,
             axisAlignment: -1.0,
             child: Column(
@@ -262,8 +330,9 @@ class _SidebarGroupState extends State<_SidebarGroup> with SingleTickerProviderS
                 return _SidebarTile(item: child, collapsed: false, isChild: true);
               }).toList(),
             ),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 }
@@ -284,43 +353,72 @@ class _SidebarTileState extends State<_SidebarTile> {
   @override
   Widget build(BuildContext context) {
     final bool isActive = widget.item.isActive;
+    final isMobile = MediaQuery.of(context).size.width < 700;
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       onEnter: (_) => setState(() => _hovering = true),
       onExit: (_) => setState(() => _hovering = false),
       child: GestureDetector(
         onTap: widget.item.onTap,
-        child: Container(
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 180),
+          curve: Curves.easeInOut,
           margin: EdgeInsets.symmetric(
-             vertical: 2, 
-             horizontal: widget.collapsed ? 8 : (widget.isChild ? 12 : 8)
+            vertical: isMobile ? 1 : 2,
+            horizontal: widget.collapsed ? 4 : (widget.isChild ? 16 : 8),
           ),
           padding: EdgeInsets.symmetric(
-            vertical: 10, 
-            horizontal: widget.collapsed ? 0 : (widget.isChild ? 20 : 12)
+            vertical: isMobile ? 12 : 10,
+            horizontal: widget.collapsed ? 0 : (widget.isChild ? 24 : 14),
           ),
           decoration: BoxDecoration(
-            color: isActive 
-               ? const Color(0xFF334155) // Active Slate
-               : (_hovering ? const Color(0xFF1E293B).withOpacity(0.5) : Colors.transparent),
-            borderRadius: BorderRadius.circular(8),
-            border: isActive ? Border.all(color: Colors.blueAccent.withOpacity(0.5)) : null,
+            color: isActive
+                ? const Color(0xFF2563EB).withOpacity(0.85)
+                : (_hovering ? Colors.white.withOpacity(0.08) : Colors.transparent),
+            borderRadius: BorderRadius.circular(widget.isChild ? 7 : 10),
+            border: isActive
+                ? Border.all(color: Colors.cyanAccent.withOpacity(0.5), width: 1.2)
+                : null,
+            boxShadow: isActive
+                ? [
+                    BoxShadow(
+                      color: Colors.cyanAccent.withOpacity(0.13),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
+                  ]
+                : null,
           ),
           child: widget.collapsed
-              ? Center(child: Icon(widget.item.icon, color: isActive ? Colors.blueAccent : Colors.white70))
+              ? Center(
+                  child: Icon(
+                    widget.item.icon,
+                    color: isActive ? Colors.cyanAccent : Colors.white70,
+                    size: widget.isChild ? 20 : 24,
+                  ),
+                )
               : Row(
                   children: [
-                    Icon(widget.item.icon, 
-                      color: isActive ? Colors.blueAccent : (widget.isChild ? Colors.white54 : Colors.white70),
-                      size: widget.isChild ? 18 : 22
+                    Icon(
+                      widget.item.icon,
+                      color: isActive
+                          ? Colors.white
+                          : (widget.isChild ? Colors.white54 : Colors.white70),
+                      size: widget.isChild ? 20 : 24,
                     ),
                     const SizedBox(width: 14),
                     Text(
                       widget.item.label,
                       style: TextStyle(
-                        color: isActive ? Colors.white : (widget.isChild ? Colors.white60 : Colors.white70),
-                        fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
-                        fontSize: 14,
+                        color: isActive
+                            ? Colors.white
+                            : (widget.isChild ? Colors.white60 : Colors.white70),
+                        fontWeight: isActive ? FontWeight.w700 : FontWeight.normal,
+                        fontSize: widget.isChild ? 13 : 15,
+                        letterSpacing: 0.2,
+                        shadows: isActive
+                            ? [Shadow(color: Colors.cyanAccent.withOpacity(0.18), blurRadius: 8)]
+                            : null,
                       ),
                     ),
                   ],

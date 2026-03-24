@@ -18,9 +18,18 @@ class Sidebar extends StatelessWidget {
       _SidebarItem(Icons.settings, 'Settings'),
     ];
 
+    final isMobile = MediaQuery.of(context).size.width < 500;
+    if (isMobile) {
+      // Use Drawer for mobile, but keep this for completeness
+      return const SizedBox.shrink();
+    }
     return Container(
       width: 250,
-      color: const Color(0xFF1B5E20),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1B5E20),
+        borderRadius: const BorderRadius.only(topRight: Radius.circular(32), bottomRight: Radius.circular(32)),
+        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 8, offset: Offset(2, 0))],
+      ),
       child: Column(
         children: [
           const SizedBox(height: 32),
@@ -53,7 +62,6 @@ class Sidebar extends StatelessWidget {
             );
           }),
           const Spacer(),
-          // Logout button removed as requested
         ],
       ),
     );
