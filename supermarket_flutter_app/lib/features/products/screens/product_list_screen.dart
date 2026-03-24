@@ -32,10 +32,37 @@ class _ProductListScreenState extends State<ProductListScreen> {
   Widget build(BuildContext context) {
     return Consumer<ProductProvider>(
       builder: (context, provider, _) {
-        // All widget code should be inside the build method only.
-        // ...existing code for the product list screen UI goes here...
-        // If you need to restore the UI, use the extracted widgets from product_list_screen_widgets.dart
-        return const SizedBox(); // Placeholder to ensure buildability. Replace with actual UI as needed.
+        // Filter products by category if filterCategoryId is provided
+        final products = (widget.filterCategoryId != null)
+            ? provider.products.where((p) => p.categoryId == widget.filterCategoryId).toList()
+            : provider.products;
+
+        if (provider.isLoading) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (provider.errorMessage != null) {
+          return Center(child: Text('Error: \\${provider.errorMessage}'));
+        }
+        if (products.isEmpty) {
+          return const Center(child: Text('No products found for this category.'));
+        }
+
+        return ListView.separated(
+          padding: const EdgeInsets.all(16),
+          itemCount: products.length,
+          separatorBuilder: (_, __) => const Divider(),
+          itemBuilder: (context, index) {
+            final product = products[index];
+            return ListTile(
+              leading: product.imageUrl != null && product.imageUrl!.isNotEmpty
+                  ? CircleAvatar(backgroundImage: NetworkImage(product.imageUrl!))
+                  : const CircleAvatar(child: Icon(Icons.shopping_bag)),
+              title: Text(product.name),
+              subtitle: Text('Rs. \\${product.price.toStringAsFixed(2)}'),
+              // Add more product details as needed
+            );
+          },
+        );
       },
     );
   }
