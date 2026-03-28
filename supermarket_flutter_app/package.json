@@ -2,6 +2,7 @@
   "name": "supermarket_flutter_app",
   "version": "1.0.0",
   "scripts": {
-    "postbuild": "node scripts/inject-api-url.js"
+    "postbuild": "node scripts/inject-api-url.js",
+    "deploy": "powershell ./scripts/one-push-deploy.ps1"
   }
 }

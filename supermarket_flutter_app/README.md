@@ -39,3 +39,9 @@ A few resources to get you started if this is your first Flutter project:
 5. **Login Troubleshooting**
 	- The login identifier (email or username) is always sent in the `email` field.
 	- Backend must accept this for both email and username logins.
+
+## 🌐 Live Demo
+
+You can access the deployed Flutter web app here:
+
+[https://supermarket-solution.vercel.app/](https://supermarket-solution.vercel.app/)
