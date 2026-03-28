@@ -1,7 +1,17 @@
 {
-  "public": "build/web",
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "https://your-render-backend-url.onrender.com/api/$1" },
-    { "source": "/(.*)", "destination": "/index.html" }
-  ]
+  "builds": [
+    {
+      "src": "lib/main.dart",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build/web"
+      }
+    }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "https://your-render-backend-url.onrender.com/api/$1" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ],
+  "outputDirectory": "build/web",
+  "buildCommand": "flutter build web --no-tree-shake-icons"
 }
