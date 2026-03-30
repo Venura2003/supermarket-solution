@@ -36,3 +36,8 @@ A full-stack supermarket management solution with role-based dashboards for Admi
 
 ### 👨‍💻 Employee Dashboard
 ![Employee](./employee-dashboard.png)
+
+## 🎥 Demo Video
+
+Watch the full system demo here:  
+https://drive.google.com/file/d/1g7qnaCdQRpu0GsqcGroVguW94XMg8ABz/view?usp=sharing
