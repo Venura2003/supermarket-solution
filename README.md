@@ -1,13 +1,3 @@
-## 📸 Screenshots
-
-### 🔐 Login Page
-![Login](./login.png)
-
-### 🧑‍💼 Admin Dashboard
-![Admin](./admin-dashboard.png)
-
-### 👨‍💻 Employee Dashboard
-![Employee](./employee-dashboard.png)
 
 # Supermarket ERP System
 
@@ -35,3 +25,14 @@ A full-stack supermarket management solution with role-based dashboards for Admi
 - Backend: .NET
 - Database: MySQL
 - Deployment: Vercel, Render, Azure
+
+## 📸 Screenshots
+
+### 🔐 Login Page
+![Login](./login.png)
+
+### 🧑‍💼 Admin Dashboard
+![Admin](./admin-dashboard.png)
+
+### 👨‍💻 Employee Dashboard
+![Employee](./employee-dashboard.png)
